@@ -2,7 +2,7 @@
 
 # Introduction
 
-Welcome to the DAOstack Hackers Kit! Here you can find all the resources you need to build DAOs using the DAOstack framework in this repository.
+Welcome to the DAOstack Hackers Kit! You can find all the resources you need to build DAOs using the DAOstack framework in this repository.
 
 # Table of contents
 

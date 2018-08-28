@@ -40,4 +40,9 @@ rm -rf build
 truffle migrate
 ```
 
+To compile the Node files use this command:
+```
+npx webpack --config webpack.config.js
+```
+
 Now you can go ahead and open your `index.html` file in a web browser and start using your dapp.
