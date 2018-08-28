@@ -1,0 +1,29 @@
+{
+  "name": "YOUR_PROJECT_NAME",
+  "version": "1.0.0",
+  "description": "YOUR_PROJECT_DESCRIPTION",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "keywords": [
+    "DAO",
+    "DAOStack",
+    "Ethereum",
+    "Blockchain"
+  ],
+  "author": "YOUR_NAME",
+  "license": "YOUR_LICENSE",
+  "dependencies": {
+    "@daostack/arc": "0.0.0-alpha.52",
+    "@daostack/arc.js": "0.0.0-alpha.79",
+    "truffle": "^4.1.14"
+  },
+  "devDependencies": {
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
