@@ -41,6 +41,7 @@ truffle migrate
 ```
 
 To compile the Node files use this command:
+
 ```
 npx webpack --config webpack.config.js
 ```

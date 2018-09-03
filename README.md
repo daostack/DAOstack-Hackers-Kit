@@ -1,4 +1,4 @@
-# DAOstack Hackers Kit
+<img src="./daostack-hk.svg">
 
 # Introduction
 
