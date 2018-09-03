@@ -89,4 +89,4 @@ The Arc framework has a built-in support for the Holographic Consensus voting, w
 # Contact and Help
 
 The DAOstack team members will be available to assist you with your projects in the Hackathon.
-For any technical questions please reach out to us at the event or via Discord [at this link](ADD_LINK).
+For any technical questions please reach out to us at the event or via Discord [at this link](https://discord.gg/WCYEvGA).
