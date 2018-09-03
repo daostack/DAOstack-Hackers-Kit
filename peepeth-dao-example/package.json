@@ -1,0 +1,33 @@
+{
+  "name": "peepdao",
+  "version": "1.0.0",
+  "description": "DAO for peeping on Peepeth",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "keywords": [
+    "DAO",
+    "DAOStack",
+    "Peepeth",
+    "Ethereum",
+    "Blockchain"
+  ],
+  "author": "Ben Kaufman",
+  "license": "ISC",
+  "dependencies": {
+    "@daostack/arc": "0.0.0-alpha.52",
+    "@daostack/arc.js": "0.0.0-alpha.79",
+    "express": "^4.16.3",
+    "ipfs-mini": "^1.1.2",
+    "truffle-hdwallet-provider": "0.0.6",
+    "web3-eth-abi": "^1.0.0-beta.36"
+  },
+  "devDependencies": {
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
