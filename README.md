@@ -1,4 +1,4 @@
-<img src="./daostack-hk.svg">
+<img src="./daostack-hk.png">
 
 # Introduction
 
@@ -13,7 +13,7 @@ Welcome to the DAOstack Hackers Kit! You can find all the resources you need to 
 - [Getting Started](#getting-started)
 - [The Stack](#the-stack)
   - [Arc](#arc)
-  - [Arc.js](#arc.js)
+  - [Arc.js](#arcjs)
   - [Collaborative Dapps](#collaborative-dapps)
   - [DAOs](#daos)
 - [Contact and Help](#contact-and-help)
