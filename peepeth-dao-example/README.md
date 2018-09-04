@@ -4,7 +4,7 @@ This project is dapp for interacting with a DAO which has its own social media a
 This project is an educational example demonstraiting the use of the DAOstack framework to build collaborative dapps and DAOs.
 You can use the code here to deploy and interact with a new DAO, or integrate in your own DAO project.
 
-**Notice: the code here was not profesionally audited and was written for the porpuse of education and demostration, please use the code with caution and don't use with real money (unless you are willing to take the assosiated risks)**
+**Notice: the code here was not profesionally audited and was written for the purpose of education and demostration, please use the code with caution and don't use with real money (unless you are willing to take the assosiated risks)**
 
 ## How to use?
 
