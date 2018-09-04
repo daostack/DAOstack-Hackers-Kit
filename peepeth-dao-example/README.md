@@ -11,6 +11,7 @@ You can use the code here to deploy and interact with a new DAO, or integrate in
 Enter the project folder from the terminal and type the following:
 
 After downloading the project:
+
 ```
 npm install
 npm install -g nps
@@ -21,11 +22,19 @@ npm install -g nps
 ```
 npm explore @daostack/arc.js -- npm start ganache
 ```
+
 Then on a different terminal window (but still in your project folder):
+
 ```
 npm explore @daostack/arc.js -- npm start migrateContracts
 rm -rf build
 truffle migrate
+```
+
+Open `src/index.js` and make sure the `avatarAddress` and `votingMachineAddress` are identical to the ones found in the end of the `truffle migrate` logs output. If not, paste the correct addresses and enter the following terminal command:
+
+```
+npx webpack --config webpack.config.js
 ```
 
 ### Deploy and use on Kovan network:
@@ -34,9 +43,17 @@ truffle migrate
 2. Open `src/index.js` and uncomment the lines to configure Kovan (as instructed there).
 3. Open terminal at the project folder
 4. Run the following commands:
+
 ```
 rm -rf build`
 truffle migrate --network kovan-infura
+```
+
+5. Copy the Avatar and Voting Machine addresses from the end of the `truffle migrate` logs.
+6. Open `src/index.js` and pasted the copied addresses in the `avatarAddress` and `votingMachineAddress`.
+7. On the terminal window, run the following command:
+
+```
 npx webpack --config webpack.config.js
 ```
 
@@ -49,6 +66,7 @@ npx webpack --config webpack.config.js
 
 _Note:
 After making changes in the src js files use the following command:_
+
 ```
 npx webpack --config webpack.config.js
 ```
