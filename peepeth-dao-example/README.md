@@ -15,6 +15,7 @@ After downloading the project:
 ```
 npm install
 npm install -g nps
+npm install -g npx
 ```
 
 - _Note: to configure different founder accounts or any other change to the DAO, go to `migrations/2_deploy_dao.js` and follow the instructions in the comments._
