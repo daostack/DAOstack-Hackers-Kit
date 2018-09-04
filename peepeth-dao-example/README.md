@@ -17,6 +17,8 @@ npm install
 npm install -g nps
 ```
 
+- _Note: to configure different founder accounts or any other change to the DAO, go to `migrations/2_deploy_dao.js` and follow the instructions in the comments._
+
 ### Run on a local testnet:
 
 ```
@@ -59,10 +61,17 @@ npx webpack --config webpack.config.js
 
 ### Use the web interface:
 
+#### Using directly with Ganache:
+
+To use directly with Ganache simply go to the dist folder and open index.html in your web browser.
+
+#### Using with MetaMask:
+
 1. Open terminal at the project folder
 2. Run `node dist/app.js`
-3. Open your web browser with MetaMask open and connected to Kovan
+3. Open your web browser with MetaMask open _and connected to your configured network_
 4. In your browser enter: `http://localhost:3000/`
+5. Please note that here you'll need to refresh the page after submitting transactions in order to view the new state in the UI.
 
 _Note:
 After making changes in the src js files use the following command:_
