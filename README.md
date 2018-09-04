@@ -37,17 +37,17 @@ The DAOstack stack components:
 ## [Arc](https://github.com/daostack/arc):
 
 The Arc framework is a smart contracts library for building DAOs written in Solidity. To get a good understanding of how the Arc framework is built you can go to [this blog post](https://medium.com/daostack/the-arc-platform-2353229a32fc).
-Arc's architecture is built on a few a few building blocks:
+Arc's architecture is built on a few building blocks:
 
 - Avatar - The "account" of the DAO. This contract represents the address of the DAO and holds its assets.
-- Reputation - Voting in Arc is done mainly by using reputation. The reputation is non-transferable and is given to an agent according to his performance and contribution to the DAO.
+- Reputation - Voting in Arc is done mainly by using reputation. Reputation is non-transferable, reductable and is given to an agent according to his performance and contribution to the DAO.
 - Token - Each DAO may have its own token, which can be used in any way the DAO would like.
 - Controller - The controller is the "Access Control" of the DAO, managing who can interact with which functionality in the DAO and enforces the DAO's constraints.
-- Schemes - Schemes are the "actions" in the DAO, anything the DAO should act upon needs to be written and authorized by the controller as scheme. Some schemes are called "Universal Schemes", these are schemes which multiple DAOs can subscribe to and interact with at the same time, saving the deployment costs of reusing code. A scheme might be used for example to: propose and make investments, give reputation to agents, upgrade the DAO's contracts and register new schemes and constraints.
-- Global Constraints - The constraints are the limitations a DAO have on its actions. When executing a scheme, the controller checks the constraints to see if the action violates them, and block the execution if so. Global constraints have the same idea of Universal Schemes, it's possible for multiple DAOs to use the same contract as a constraint. Some examples for constraints might be: the token supply can't be increased over 1M tokens, the organization won't use more than 60% of its funds at once etc.
+- Schemes - Schemes are the "actions" in the DAO, anything the DAO should act upon needs to be written and authorized by the controller as scheme. Some schemes are called "Universal Schemes", these are schemes which multiple DAOs can subscribe to and interact with at the same time, saving the deployment costs and reusing code. A scheme might be used for example to: propose and make investments, give reputation to agents, upgrade the DAO's contracts and register new schemes and constraints.
+- Global Constraints - The constraints are the limitations a DAO has on its actions. When executing a scheme, the controller checks the constraints to see if the action violates them, and block the execution if so. Global constraints have the same idea of Universal Schemes, it's possible for multiple DAOs to use the same contract as a constraint. Some examples for constraints might be: the token supply can't be increased over 1M tokens, the organization won't use more than 60% of its funds at once etc.
 - Voting Machines - Votings on a DAO's decisions is done using "Voting Machines". These contracts are used to start, manage, and trigger the execution of a decision of a voting in a DAO. These are contracts which follow the same pattern as Universal Schemes and Global Constraints. Voting Machines can have many different properties and decision-making processes, and like schemes and constraints, you can use one of the existing Voting Machines right out of the box or you can create your own by implementing the interface.
 
-Using the Arc framework, you have access to the base layer of the stack allowing you to create any complex functionalities for your DAOs with a little effort.
+Using the Arc framework, you have access to the base layer of the stack allowing you to create any complex functionalities for your DAOs with little effort.
 
 ### Should I work at this level?
 
