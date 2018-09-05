@@ -64,7 +64,8 @@ npx webpack --config webpack.config.js
 
 #### Using directly with Ganache:
 
-To use directly with Ganache simply go to the dist folder and open index.html in your web browser.
+- Go to `dist/index.html` and follow the instructions in the comments
+- After saving the changes, just open index.html in your web browser.
 
 #### Using with MetaMask:
 

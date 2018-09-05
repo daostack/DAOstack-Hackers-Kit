@@ -5,7 +5,8 @@ import {
   DAO,
   ConfigService,
   AccountService,
-  WrapperService
+  WrapperService,
+  BinaryVoteResult
 } from "@daostack/arc.js";
 
 // Import the JSON file of our PeepScheme
@@ -38,11 +39,10 @@ var totalRep;
 async function initialize() {
   // Initialize the ArcJS library
   ConfigService.set("estimateGas", true);
-  ConfigService.set("txDepthRequiredForConfirmation", {
-    kovan: 0
-  });
+  ConfigService.set("txDepthRequiredForConfirmation.kovan", 0);
 
-  ConfigService.set("network", "kovan"); // Set the network used to Kovan
+  // TODO: If you use Kovan uncomment this line
+  // ConfigService.set("network", "kovan"); // Set the network used to Kovan
 
   await InitializeArcJs({
     watchForAccountChanges: true,
@@ -55,6 +55,8 @@ async function initialize() {
       Controller: true
     }
   });
+
+  console.log("BinaryVoteResult " + BinaryVoteResult.No);
 
   LoggingService.logLevel = LogLevel.all; // Remove or modify to change ArcJS logging
 
@@ -172,14 +174,14 @@ function addPeepToList(proposalId, peepContent, votes) {
 function upvotePeep(proposalId) {
   // Votes in favor of a proposal using the Absolute Voting Machine
   votingMachine
-    .vote({ proposalId: proposalId, vote: 1 })
+    .vote({ proposalId: proposalId, vote: BinaryVoteResult.Yes })
     .then(getPeepProposalsList);
 }
 
 function downvotePeep(proposalId) {
   // Votes against a proposal using the Absolute Voting Machine
   votingMachine
-    .vote({ proposalId: proposalId, vote: 2 })
+    .vote({ proposalId: proposalId, vote: BinaryVoteResult.No })
     .then(getPeepProposalsList());
 }
 

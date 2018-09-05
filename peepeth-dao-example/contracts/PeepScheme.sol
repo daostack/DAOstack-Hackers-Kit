@@ -135,7 +135,7 @@ contract PeepScheme is UniversalScheme, ExecutableInterface {
         Parameters memory controllerParams = parameters[getParametersFromController(_avatar)];
 
         bytes32 peepId = controllerParams.intVote.propose(
-            2,
+            3,
             controllerParams.voteApproveParams,
            _avatar,
            ExecutableInterface(this),
