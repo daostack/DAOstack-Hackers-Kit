@@ -23,7 +23,7 @@ Welcome to the DAOstack Hackers Kit! You can find all the resources you need to 
 
 This repository was created to help you get started with the DAOstack platform and use it to build your own projects.
 [DAOstack](https://daostack.io) is a multi-layered platform for building DAOs and Collaborative Dapps.
-Our platform provides all needed infrastructure including Ethereum smart contracts library named Arc, a JS framework named Arc.js and collaborative Dapps like [Alchemy](https://alchemy.daostack.io/).
+Our platform provides all needed infrastructure including Ethereum smart contracts library named Arc, a JavaScript framework named Arc.js and collaborative Dapps like [Alchemy](https://alchemy.daostack.io/).
 Here you can find examples and details on how to use DAOstack as well as links to documentation and other helpful resources.
 
 # Getting Started
@@ -34,7 +34,7 @@ This repository includes multiple examples for DAOs, which shows how to use the 
 
 The DAOstack stack components:
 
-## [Arc](https://github.com/daostack/arc):
+## [Arc](https://github.com/daostack/arc)
 
 The Arc framework is a smart contracts library for building DAOs written in Solidity. To get a good understanding of how the Arc framework is built you can go to [this blog post](https://medium.com/daostack/the-arc-platform-2353229a32fc).
 Arc's architecture is built on a few building blocks:
@@ -55,33 +55,34 @@ While for most of the DAOs, there is no need to work directly with the Arc frame
 
 You can find the complete Arc docs here: [https://daostack.github.io/arc](https://daostack.github.io/arc)
 
-## [Arc.js](https://github.com/daostack/arc.js):
+## [Arc.js](https://github.com/daostack/arc.js)
 
-Arc.js is a JS library for building collaborative Dapps and DAOs interfaces, written in TypeScript. Much like the Web3.js library serves as the connection for JS developers to the Ethereum network, the Arc.js library is used as the connecting layer between Arc and regular web development. When writing a Dapp, either specifically for your organization or for interaction with multiple organizations. Arc.js should be used to interact with the smart contracts empowering your DAO and is capable of doing any action supported by Arc or by an Arc compatible contract. Using Arc.js, JS developers can easily write Dapps which can deploy DAOs, interact with existing DAOs, make votings in organizations, execute decisions made by a DAO, manage agent reputations and basically do anything the DAO is capable of.
-You can find a detailed explanation about the architecture of Arc.js in [this document](https://github.com/daostack/arc.js/blob/devDocs/docs/DeveloperDocs.md).
-[Here](https://github.com/daostack/arc.js-scripts) you can find multiple examples of how to use the Arc.js framework.
+Arc.js is a JavaScript library that facilitates JavaScript application access to the Arc contracts. Much like the Web3.js library serves as the connection for JavaScript developers to the Ethereum network, the Arc.js library is used as the connecting layer between Arc and applications including scripts, collaborative Dapps and DAO interfaces, specifically for your organization or in interaction with multiple organizations, any application that knows how to work with JavaScript/TypeScript coming from an NPM module in ES6 CommonJs module format.
+
+Using Arc.js, JavaScript developers can easily write scripts or applications which can deploy DAOs, interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations and basically do anything of which a DAO is capable.
+
+Should you chose to leverage Arc.js in your application, you can find helpful documentation in the [complete Arc.js documentation](https://daostack.github.io/arc.js/).
+
+Should you choose to develop inside Arc.js itself, you can find helpful information in the [documentation for Arc.js developers](https://github.com/daostack/arc.js/blob/devDocs/docs/DeveloperDocs.md).
+
+You can find NodeJs scripts that use Arc.js to perform a variety of functions in the [Arc.js-scripts Github repository](https://github.com/daostack/arc.js-scripts).
 
 ### Should I work at this level?
 
-The Arc.js Library should be used from creating any web-based Dapps for DAO interaction. In most cases, you won't need to work on this layer of the stack directly, however, you'll most likely need to use it as a library in your project.
+You should use Arc.js whenever you want to use JavaScript or TypeScript to interact with Arc contracts and obtain other functionality particularly helpful to interactive Dapps that leverage Arc.
 
-**Please note** If you're not comfortable with TypeScript you can still use Arc.js easily as TypeScript is 100% compatible with JavaScript. However, to integrate custom smart contracts you should have some TypeScript knowledge. If you are not familiar with TypeScript, you can use Web3.js directly for your custom smart contracts.
+## Collaborative Dapps
 
-You can find the complete Arc docs here: [https://daostack.github.io/arc.js](https://daostack.github.io/arc.js)
-
-## Collaborative Dapps:
-
-Using the Arc.js framework, it is possible to easily write and use "Collaborative Dapps".
-Collaborative Dapps are Dapps (Decentralized applications) which allows global collaborations using DAOs.
+The Arc.js framework facilitates development of "Collaborative Dapps" (Decentralized applications) that enable collaboration within and across DAOs.
 DAOstack has built its own collaborative Dapp called ["Alchemy"](https://alchemy.daostack.io/). The Alchemy Dapp is a collaborative Dapp for budget management in decentralized organizations. Alchemy can be used by any DAO willing to operate on the basis of fund management.
 
 You can find the Alchemy repo here: [https://github.com/daostack/alchemy](https://github.com/daostack/alchemy)
 
-Another Dapp created by the DAOstack team is called ["Vanille"](http://daostack.azurewebsites.net). Vanille is the like a direct interface for using the Arc.js framework, allowing to create and interact with DAOs before creating a dedicated interface for them.
+Another Dapp created by the DAOstack team is called ["Vanille"](http://daostack.azurewebsites.net). Vanille is like a direct interface to the Arc.js framework, enabling you to create and interact with DAOs before creating a dedicated interface for them.
 
 You can find the Vanille repo here: [https://github.com/daostack/vanille](https://github.com/daostack/vanille)
 
-## DAOs:
+## DAOs
 
 The Collaborative Dapps can be used to deploy new DAOs and interact with existing ones. DAOs can be used for many purposes, with the common goal of creating decentralized global collaboration and collective intelligence. The goal of DAOstack is to make it as easy as possible to create and manage DAOs and use them to drive the new decentralized global economy.
 DAOstack has its own DAO called the Genesis DAO. We use Alchemy to manage and interact with the DAO, which can be seen through ["Alchemy"](https://alchemy.daostack.io/) and is live on the Ethereum mainnet! The Genesis DAO is a fund management DAO utilizing the Holographic Consensus voting mechanism, which is DAOstack's solution for scaling the decision-making capabilities of a DAO indefinitely, allowing smarter and more accurate use of the collective attention of a DAO's agents. [Here](https://www.youtube.com/watch?v=1De0MoStSkY) is a video of Matan Field, DAOstack's CEO, explaining the concept of Holographic Consensus and the game theory which it is based upon.
