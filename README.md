@@ -57,7 +57,7 @@ You can find the complete Arc docs here: [https://daostack.github.io/arc](https:
 
 ## [Arc.js](https://github.com/daostack/arc.js)
 
-Arc.js is a JavaScript library that facilitates JavaScript application access to the Arc contracts. Much like the Web3.js library serves as the connection for JavaScript/TypeScript developers to the Ethereum network, the Arc.js library is used as the connecting layer between Arc and applications including scripts, collaborative Dapps and DAO interfaces, specifically for your organization or in interaction with multiple organizations -- any application that knows how to work with JavaScript/TypeScript coming from an NPM module in ES6 CommonJs module format.
+Arc.js is a JavaScript library that facilitates JavaScript application access to the Arc contracts. Much like the Web3.js library serves as the connection for JavaScript/TypeScript developers to the Ethereum network, the Arc.js library is used as the connecting layer between Arc and applications including scripts, collaborative Dapps and DAO interfaces, specifically for your DAO or in interaction with multiple DAOs -- more broadly, any application that knows how to work with JavaScript/TypeScript coming from an NPM module in ES6 CommonJs module format.
 
 Using Arc.js, JavaScript/TypeScript developers can easily write scripts or applications which can deploy DAOs, interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations and basically do anything of which a DAO is capable.
 
