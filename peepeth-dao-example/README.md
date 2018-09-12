@@ -48,7 +48,7 @@ npx webpack --config webpack.config.js
 4. Run the following commands:
 
 ```
-rm -rf build`
+rm -rf build
 truffle migrate --network kovan-infura
 ```
 
