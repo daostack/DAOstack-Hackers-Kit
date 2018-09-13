@@ -12,6 +12,7 @@ Welcome to the DAOstack Hackers Kit! You can find all the resources you need to 
 - [Table of contents](#table-of-contents)
 - [Getting Started](#getting-started)
 - [The Stack](#the-stack)
+  - [Infra](#infra)
   - [Arc](#arc)
   - [Arc.js](#arcjs)
   - [Collaborative Dapps](#collaborative-dapps)
@@ -34,9 +35,19 @@ This repository includes multiple examples for DAOs, which shows how to use the 
 
 The DAOstack stack components:
 
+## [Infra](https://github.com/daostack/infra)
+
+Infra lays the core functionality for decentralized governance. It was created as a lean indipendent component and was designed to allow the integration of decentralized governance mechanism into any application regardless of its architecture.
+Infra is a standalone set of smart contracts with 2 main components:
+
+- Voting Machines - A voting machine is a universal contract which can operate the voting process for all organizations. Each voting machine follows its own predifined rules for the decision making and execution process. Rules for voting machines can be implrmrnted for any voting process, from a simple protocol like an "Absolute Vote" (where 51% of the voting power should approve it in order for the decision to pass), or more sophisticated protocols like the [Holographic Consensus](https://www.youtube.com/watch?v=1De0MoStSkY) voting protocol.
+
+- Voting Rights Management - The most important component for enabling voting is a way to determent how voting rights are distributed. Any voting rights management system must have "balances" which represents the voting power each participant holds. There are 2 main approaches for managing voting rights: token based voting and reputation based voting. The main technical difference between the two is that tokens are transferable (thus tradable) while reputation is non-transferable. Another big difference which might appear (depends on implementation) is that a token is a property in the which cannot be taken while reputation might be reduced by the organization itself. For most cases, we reccomend using the reputation based voting model, however, Infra was built in a manner allowing to use any voting right management system.
+
 ## [Arc](https://github.com/daostack/arc)
 
-The Arc framework is a smart contracts library for building DAOs written in Solidity. To get a good understanding of how the Arc framework is built you can go to [this blog post](https://medium.com/daostack/the-arc-platform-2353229a32fc).
+The Arc framework is a smart contracts library for building DAOs written in Solidity. To get a good understanding of how the Arc framework is built you can go to [this blog post](https://medium.com/daostack/the-arc-platform-2353229a32fc). Arc is using Infra as its voting components and reputation management system for decentralized organizations.
+
 Arc's architecture is built on a few building blocks:
 
 - Avatar - The "account" of the DAO. This contract represents the address of the DAO and holds its assets.
@@ -45,7 +56,6 @@ Arc's architecture is built on a few building blocks:
 - Controller - The controller is the "Access Control" of the DAO, managing who can interact with which functionality in the DAO and enforces the DAO's constraints.
 - Schemes - Schemes are the "actions" in the DAO, anything the DAO should act upon needs to be written and authorized by the controller as scheme. Some schemes are called "Universal Schemes", these are schemes which multiple DAOs can subscribe to and interact with at the same time, saving the deployment costs and reusing code. A scheme might be used for example to: propose and make investments, give reputation to agents, upgrade the DAO's contracts and register new schemes and constraints.
 - Global Constraints - The constraints are the limitations a DAO has on its actions. When executing a scheme, the controller checks the constraints to see if the action violates them, and block the execution if so. Global constraints have the same idea of Universal Schemes, it's possible for multiple DAOs to use the same contract as a constraint. Some examples for constraints might be: the token supply can't be increased over 1M tokens, the organization won't use more than 60% of its funds at once etc.
-- Voting Machines - Votings on a DAO's decisions is done using "Voting Machines". These contracts are used to start, manage, and trigger the execution of a decision of a voting in a DAO. These are contracts which follow the same pattern as Universal Schemes and Global Constraints. Voting Machines can have many different properties and decision-making processes, and like schemes and constraints, you can use one of the existing Voting Machines right out of the box or you can create your own by implementing the interface.
 
 Using the Arc framework, you have access to the base layer of the stack allowing you to create any complex functionalities for your DAOs with little effort.
 
