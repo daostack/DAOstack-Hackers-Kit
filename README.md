@@ -24,7 +24,7 @@ Welcome to the DAOstack Hackers Kit! You can find all the resources you need to 
 
 This repository was created to help you get started with the DAOstack platform and use it to build your own projects.
 [DAOstack](https://daostack.io) is a multi-layered platform for building DAOs and Collaborative Dapps.
-Our platform provides all needed infrastructure including Ethereum smart contracts library named Arc, a JavaScript framework named Arc.js and collaborative Dapps like [Alchemy](https://alchemy.daostack.io/).
+Our platform provides all needed infrastructure which includes: Standalone on-chain governance component named [Infra](https://github.com/daostack/infra), Ethereum smart contracts library named [Arc](https://github.com/daostack/arc), a JavaScript framework named [Arc.js](https://github.com/daostack/arc.js) and collaborative Dapps like [Alchemy](https://alchemy.daostack.io/).
 Here you can find examples and details on how to use DAOstack as well as links to documentation and other helpful resources.
 
 # Getting Started
