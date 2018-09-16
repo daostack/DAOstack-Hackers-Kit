@@ -23,13 +23,13 @@ npm install -g npx
 ### Run on a local testnet:
 
 ```
-npm explore @daostack/arc.js -- npm start ganache
+npm run ganache
 ```
 
 Then on a different terminal window (but still in your project folder):
 
 ```
-npm explore @daostack/arc.js -- npm start migrateContracts
+npm run migrate-daostack
 rm -rf build
 truffle migrate
 ```
@@ -37,7 +37,7 @@ truffle migrate
 Open `src/index.js` and make sure the `avatarAddress` and `votingMachineAddress` are identical to the ones found in the end of the `truffle migrate` logs output. If not, paste the correct addresses and enter the following terminal command:
 
 ```
-npx webpack --config webpack.config.js
+npm run webpack
 ```
 
 ### Deploy and use on Kovan network:
@@ -57,7 +57,7 @@ truffle migrate --network kovan-infura
 7. On the terminal window, run the following command:
 
 ```
-npx webpack --config webpack.config.js
+npm run webpack
 ```
 
 ### Use the web interface:
@@ -79,5 +79,7 @@ _Note:
 After making changes in the src js files use the following command:_
 
 ```
-npx webpack --config webpack.config.js
+npm run webpack
 ```
+
+_Please note that the command might take a couple of minutes so be patient._
