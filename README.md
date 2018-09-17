@@ -47,6 +47,10 @@ Arc's architecture is built on a few building blocks:
 - Global Constraints - The constraints are the limitations a DAO has on its actions. When executing a scheme, the controller checks the constraints to see if the action violates them, and block the execution if so. Global constraints have the same idea of Universal Schemes, it's possible for multiple DAOs to use the same contract as a constraint. Some examples for constraints might be: the token supply can't be increased over 1M tokens, the organization won't use more than 60% of its funds at once etc.
 - Voting Machines - Votings on a DAO's decisions is done using "Voting Machines". These contracts are used to start, manage, and trigger the execution of a decision of a voting in a DAO. These are contracts which follow the same pattern as Universal Schemes and Global Constraints. Voting Machines can have many different properties and decision-making processes, and like schemes and constraints, you can use one of the existing Voting Machines right out of the box or you can create your own by implementing the interface.
 
+As detailed above, Arc utilizes the concept of "Universal" contracts, contracts which are deployed once and then used by all organizations, to save gas costs and deployment complexity. To use the already deployed contracts you can either use Arc.js which maintains easy access to all universal Arc contracts, or you can use [this table](https://docs.google.com/spreadsheets/d/1hfR-fnnqXEn3Go3x3qoiXJcKSIAYQalSOi52vV2PCTA/edit?usp=sharing) to view the addresses of the universal contracts on the mainnet, Kovan, and Ganache\*
+
+_\* Please note that the Ganache addresses are based on the DAOstack commands for running and deploying Arc to a local Ganache network, this means those addresses might change if you are using a different way for running Ganache or deploying Arc)._
+
 Using the Arc framework, you have access to the base layer of the stack allowing you to create any complex functionalities for your DAOs with little effort.
 
 ### Should I work at this level?
