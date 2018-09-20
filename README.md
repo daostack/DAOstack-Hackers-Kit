@@ -48,6 +48,7 @@ Arc's architecture is built on a few building blocks:
 - Voting Machines - Votings on a DAO's decisions is done using "Voting Machines". These contracts are used to start, manage, and trigger the execution of a decision of a voting in a DAO. These are contracts which follow the same pattern as Universal Schemes and Global Constraints. Voting Machines can have many different properties and decision-making processes, and like schemes and constraints, you can use one of the existing Voting Machines right out of the box or you can create your own by implementing the interface.
 
 As detailed above, Arc utilizes the concept of "Universal" contracts, contracts which are deployed once and then used by all organizations, to save gas costs and deployment complexity. To use the already deployed contracts you can either use Arc.js which maintains easy access to all universal Arc contracts, or you can use [this table](https://docs.google.com/spreadsheets/d/1hfR-fnnqXEn3Go3x3qoiXJcKSIAYQalSOi52vV2PCTA/edit?usp=sharing) to view the addresses of the universal contracts on the mainnet, Kovan, and Ganache\*
+All contracts listed on the table are universal, meaning that use should use them when needed and not redeploy them.
 
 _\* Please note that the Ganache addresses are based on the DAOstack commands for running and deploying Arc to a local Ganache network, this means those addresses might change if you are using a different way for running Ganache or deploying Arc)._
 
