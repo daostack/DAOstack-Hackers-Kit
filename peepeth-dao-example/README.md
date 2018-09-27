@@ -41,7 +41,7 @@ Then on a different terminal window (but still in your project folder):
 ```
 npm run migrate-daostack
 rm -rf build
-truffle migrate
+npm run truffle-migrate
 ```
 
 Open `src/index.js` and make sure the `avatarAddress` and `votingMachineAddress` are identical to the ones found in the end of the `truffle migrate` logs output. If not, paste the correct addresses and enter the following terminal command:
