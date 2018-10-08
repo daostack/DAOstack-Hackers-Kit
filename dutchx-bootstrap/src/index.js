@@ -14,6 +14,7 @@ const lockingToken4ReputationAddress = "SHCEME_ADDRESS";
 const standardTokenAddress = "TOKEN_ADDRESS";
 const genTokenAddress = "GEN_TOKEN_ADDRESS";
 const auction4ReputationAddress = "SHCEME_ADDRESS";
+const fixReputationAllocationAddress = "SHCEME_ADDRESS";
 
 var externalLocking4ReputationScheme;
 var lockingEth4Reputation;
@@ -21,6 +22,7 @@ var lockingToken4Reputation;
 var standardToken;
 var auction4Reputation;
 var genToken;
+var fixReputationAllocation;
 
 var userAccount;
 
@@ -65,6 +67,10 @@ async function initialize() {
 
   var Auction4Reputation = await Utils.requireContract("Auction4Reputation");
 
+  var FixReputationAllocation = await Utils.requireContract(
+    "FixReputationAllocation"
+  );
+
   externalLocking4ReputationScheme = await ExternalLocking4ReputationScheme.at(
     externalLocking4ReputationSchemeAddress
   );
@@ -82,6 +88,10 @@ async function initialize() {
   auction4Reputation = await Auction4Reputation.at(auction4ReputationAddress);
 
   genToken = await StandardToken.at(genTokenAddress);
+
+  fixReputationAllocation = await FixReputationAllocation.at(
+    fixReputationAllocationAddress
+  );
 
   $("#elfrLockButton").click(async function() {
     await elfrLock();
@@ -130,6 +140,10 @@ async function initialize() {
   $("#auctionRedeemButton").click(async function() {
     await auctionRedeem();
   });
+
+  $("#fixRepRedeemButton").click(async function() {
+    await fixRepRedeem();
+  });
 }
 
 async function elfrLock() {
@@ -148,10 +162,7 @@ async function elfrLock() {
 
 async function elfrRedeem() {
   console.log(
-    await externalLocking4ReputationScheme.redeem(
-      $("#elfrBeneficiary").val(),
-      $("#elfrLockingId").val()
-    )
+    await externalLocking4ReputationScheme.redeem($("#elfrBeneficiary").val())
   );
 }
 
@@ -181,12 +192,7 @@ async function lefrRelease() {
 }
 
 async function lefrRedeem() {
-  console.log(
-    await lockingEth4Reputation.redeem(
-      $("#lefrBeneficiary").val(),
-      $("#lefrLockingId").val()
-    )
-  );
+  console.log(await lockingEth4Reputation.redeem($("#lefrBeneficiary").val()));
 }
 
 async function ltfrApproveToken() {
@@ -226,10 +232,7 @@ async function ltfrRelease() {
 
 async function ltfrRedeem() {
   console.log(
-    await lockingToken4Reputation.redeem(
-      $("#ltfrBeneficiary").val(),
-      $("#ltfrLockingId").val()
-    )
+    await lockingToken4Reputation.redeem($("#ltfrBeneficiary").val())
   );
 }
 
@@ -273,6 +276,12 @@ async function auctionRedeem() {
       $("#auctionBeneficiary").val(),
       $("#auctionAuctionId").val()
     )
+  );
+}
+
+async function fixRepRedeem() {
+  console.log(
+    await fixReputationAllocation.redeem($("#fixRepBeneficiary").val())
   );
 }
 
