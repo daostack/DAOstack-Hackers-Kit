@@ -1,0 +1,108 @@
+{
+  "arcVersion": "0.0.0-alpha.50",
+  "AbsoluteVote": {
+    "live": "0x9e8252b6db9a604c2e89b01b1573b4fc26ed0110",
+    "kovan": "0x5b6ed3021732ac7c5b7c0f259296a7869ef23574"
+  },
+  "ActionMock": {},
+  "Auction4Reputation": {},
+  "Avatar": {},
+  "BasicToken": {},
+  "BurnableToken": {},
+  "ContributionReward": {
+    "live": "0xc282f494a0619592a2410166dcc749155804f548",
+    "kovan": "0xbd61eec69161db1010b704eeb1684e44c00d81a3"
+  },
+  "Controller": {},
+  "ControllerCreator": {
+    "live": "0x4b637cc57be0082fb19f9814ab628955ece36339",
+    "kovan": "0x01ae8525cfadb4e4d7271d9ec05e5491e5e5fcda"
+  },
+  "ControllerInterface": {},
+  "DaoCreator": {
+    "live": "0x87ac6d6874c998f0f645f7db76b500d265c1856d",
+    "kovan": "0xfa4676d94c012a77514953e083a454e44cf9b186"
+  },
+  "DAOToken": {},
+  "Debug": {},
+  "Destructible": {},
+  "ECRecovery": {},
+  "ERC20": {},
+  "ERC20Basic": {},
+  "ERC827": {},
+  "ERC827Token": {},
+  "ERC827TokenMock": {},
+  "ExecutableInterface": {},
+  "ExecutableTest": { "kovan": "0x0811119189e6dc72ef9ebc074c2d6b136530f562" },
+  "ExternalLocking4Reputation": {},
+  "ExternalTokenLockerMock": {},
+  "GenericScheme": {},
+  "GenesisProtocol": {
+    "live": "0x8940442e7f54e875c8c1c80213a4aee7eee4781c",
+    "kovan": "0xf1c387685175581179e23cc9c777bc1e1969f1e2"
+  },
+  "GlobalConstraintInterface": {},
+  "GlobalConstraintMock": {},
+  "GlobalConstraintRegistrar": {
+    "live": "0xe000e03d1f4eaa3f7eb33d3473e720ca1b44f145",
+    "kovan": "0xfbcbcdcc6ae09e66cfc855deff6cdb65d8836c53"
+  },
+  "IntVoteInterface": {},
+  "Locking4Reputation": {},
+  "LockingEth4Reputation": {},
+  "LockingToken4Reputation": {},
+  "Migrations": {},
+  "MintableToken": {},
+  "MirrorContractICO": {},
+  "OrderStatisticTree": {},
+  "OrderStatisticTreeMock": {},
+  "OrganizationRegister": {
+    "live": "0xb7695707714e6b483eb0385eda02eeb71a6384b0",
+    "kovan": "0xb2455772da622ae143177f75f127a4f0ff9e8b71"
+  },
+  "Ownable": {},
+  "QuorumVote": {
+    "live": "0x491759aa609d1b2f42cc13b34f0215759f111013",
+    "kovan": "0xd7cdfc425055c01e1de1bd541e6411416bfa2277"
+  },
+  "RealMath": {},
+  "Redeemer": {
+    "live": "0x67b13f159ca093325554aac6ee104fce36f3f9dd",
+    "kovan": "0x2e6f7be4e5b8c0a3ee043da0b43cef2f519617d5"
+  },
+  "Reputation": {},
+  "SafeMath": {},
+  "SchemeRegistrar": {
+    "live": "0xf7122bb9f34c1ffbdc961940ed6aa6000fbf3ec7",
+    "kovan": "0xd678c72807d347356ed146b701e64d2949864143"
+  },
+  "SimpleICO": {
+    "live": "0x294806b1d6a9c801bba87ea9331a0bcd13029ae0",
+    "kovan": "0x294d07e04ffec48ffa7350ae9c9d39a83d9de8a6"
+  },
+  "StandardToken": {},
+  "StandardTokenMock": {},
+  "TokenCapGC": {
+    "live": "0x956ff2521610573df2ccf31d9ea3630fe7a8669a",
+    "kovan": "0xd73fa857df3cdd6c1873ddb74b74e54fb9371fde"
+  },
+  "UController": {
+    "live": "0xa50c298118e89e0cc465f2a1705c7579f67b6f26",
+    "kovan": "0x3575fef4b13409c2df32710af7cbc730b3463a59"
+  },
+  "UniversalScheme": {},
+  "UniversalSchemeInterface": {},
+  "UniversalSchemeMock": {},
+  "UpgradeScheme": {
+    "live": "0xd96e541d8559a45bb226dc5488fd38bdc15e9c84",
+    "kovan": "0xa328d9da24b0c6c7534f838af0cd5ef2e065595d"
+  },
+  "VestingScheme": {
+    "live": "0xd7fc733f111c7c72e7ea976a834cf4d1ef0dcd42",
+    "kovan": "0x0f3bd1821716687fe5f792f17c7010a84b06341f"
+  },
+  "VoteInOrganizationScheme": {
+    "live": "0x9969a3dee92b3b8615207c03d65870c2f4df7d91",
+    "kovan": "0x6558fb69e670d0c9dfad8c1dad464fb55dd16c57"
+  }
+}

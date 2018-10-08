@@ -39,4 +39,6 @@ async function initialize() {
 }
 
 // Calls the initialize function to initialize your project.
-initialize();
+(async () => {
+  await initialize();
+})();

@@ -7,7 +7,11 @@
     "test": "test"
   },
   "scripts": {
-    "test": "truffle test"
+    "test": "./node_modules/.bin/truffle test",
+    "ganache": "npm explore @daostack/arc.js -- npm start ganache",
+    "migrate-daostack": "npm explore @daostack/arc.js -- npm start migrateContracts",
+    "webpack": "npx webpack --config webpack.config.js",
+    "truffle-migrate": "./node_modules/.bin/truffle migrate"
   },
   "keywords": [
     "DAO",
@@ -20,10 +24,12 @@
   "dependencies": {
     "@daostack/arc": "0.0.0-alpha.52",
     "@daostack/arc.js": "0.0.0-alpha.79",
-    "truffle": "^4.1.14"
+    "express": "^4.16.3",
+    "truffle-hdwallet-provider": "0.0.6",
+    "truffle": "^4.1.11"
   },
   "devDependencies": {
     "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0"
+    "webpack-cli": "^3.1.2"
   }
 }
