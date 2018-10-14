@@ -1,4 +1,4 @@
-# DutchX - The first DAO on social media
+# DutchX - The first DEX managed by a DAO
 
 This project contains a minimal UI for participating in the bootstrap of the DutchX DAO.
 
@@ -18,23 +18,20 @@ npm install -g npx
 
 - _Note: to configure different founder accounts or any other change to the DAO, go to `migrations/2_deploy_dao.js` and follow the instructions in the comments._
 
-### Getting the Arc contracts addresses:
-
-Use this command to get the addressses of Arc contracts on all networks:
-
-```
-node getArcContracts.js
-```
-
-The command will aslo re-generate `arc.json` file which will be used by the migration script to deploy the DAO.
-
 ### Run on a local testnet:
 
 ```
 npm run ganache
 ```
 
-Then on a different terminal window (but still in your project folder):
+Then on a different terminal window (but still in your project folder) you can choose one of the 2:
+
+1. Run all work with one command:
+```
+npm run launch-local
+```
+
+2. Run the commands one by one as follows:
 
 ```
 npm run migrate-daostack
@@ -47,6 +44,16 @@ Open `src/index.js` and make sure the `avatarAddress` and `votingMachineAddress`
 ```
 npm run webpack
 ```
+
+### Getting the Arc contracts addresses:
+
+Use this command to get the addressses of Arc contracts on all networks:
+
+```
+node getArcContracts.js
+```
+
+The command will aslo re-generate `arc.json` file which will be used by the migration script to deploy the DAO.
 
 ### Deploy and use on Kovan network:
 
