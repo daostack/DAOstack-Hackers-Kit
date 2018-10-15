@@ -1,0 +1,41 @@
+{
+  "name": "dutchx-bootstrap",
+  "version": "1.0.0",
+  "description": "Minimal interface for DutchX bootstrap",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/truffle test",
+    "ganache": "npm explore @daostack/arc.js -- npm start ganache",
+    "migrate-daostack": "npm explore @daostack/arc.js -- npm start migrateContracts",
+    "migrate-dutchx": "npm explore @gnosis.pm/dx-contracts -- npm run migrate",
+    "webpack": "npx webpack --config webpack.config.js",
+    "truffle-migrate": "./node_modules/.bin/truffle migrate",
+    "load-arc": "node getArcContracts.js",
+    "launch-local": "npm run load-arc && npm run webpack && npm run migrate-daostack && rm -rf build && npm run migrate-dutchx && npm run truffle-migrate && node dist/app.js"
+  },
+  "keywords": [
+    "DAO",
+    "DAOStack",
+    "Ethereum",
+    "Blockchain"
+  ],
+  "author": "Ben Kaufman",
+  "license": "ISC",
+  "dependencies": {
+    "@daostack/arc": "0.0.0-alpha.54",
+    "@daostack/arc.js": "0.0.0-alpha.82",
+    "@gnosis.pm/dx-contracts": "^1.0.7",
+    "express": "^4.16.4",
+    "truffle": "^4.1.14",
+    "truffle-contract": "^3.0.6",
+    "truffle-core-migrate-without-compile": "^4.0.7",
+    "truffle-hdwallet-provider": "0.0.6"
+  },
+  "devDependencies": {
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  }
+}
