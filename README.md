@@ -17,6 +17,7 @@ Welcome to the DAOstack Hackers Kit! You can find all the resources you need to 
   - [Arc.js](#arcjs)
   - [Collaborative Dapps](#collaborative-dapps)
   - [DAOs](#daos)
+- [Examples](#examples)
 - [Contact and Help](#contact-and-help)
   <!--te-->
 
@@ -102,6 +103,20 @@ You can find the Vanille repo here: [https://github.com/daostack/vanille](https:
 The Collaborative Dapps can be used to deploy new DAOs and interact with existing ones. DAOs can be used for many purposes, with the common goal of creating decentralized global collaboration and collective intelligence. The goal of DAOstack is to make it as easy as possible to create and manage DAOs and use them to drive the new decentralized global economy.
 DAOstack has its own DAO called the Genesis DAO. We use Alchemy to manage and interact with the DAO, which can be seen through ["Alchemy"](https://alchemy.daostack.io/) and is live on the Ethereum mainnet! The Genesis DAO is a fund management DAO utilizing the Holographic Consensus voting mechanism, which is DAOstack's solution for scaling the decision-making capabilities of a DAO indefinitely, allowing smarter and more accurate use of the collective attention of a DAO's agents. [Here](https://www.youtube.com/watch?v=1De0MoStSkY) is a video of Matan Field, DAOstack's CEO, explaining the concept of Holographic Consensus and the game theory which it is based upon.
 The Arc framework has a built-in support for the Holographic Consensus voting, which is called the Genesis Protocol, which allows you to utilize this concept immediately with your own DAO.
+
+# Examples
+The hackers kit is equipped with several examples and sample projects, which we are constantly working to maintain and expand. The goal for those examples is to help developers easily kickstart a new project, as well as to demonstrate how to use the varaity of feature included in the DAOstack framework and its different layers.
+
+## [Starter Template](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template)
+This is a basic template you can use for kickstarting your project using the DAOstack platform. Here you can find the basic structue for using both Arc and Arc.js to build your project.
+
+## [Peep DAO](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/peepeth-dao-example)
+This project is dapp for interacting with a DAO which has its own social media account on [Peepeth](Peepeth.com), a decentralized microblogging app. The Dapp allows to make decisions on posting Peeps on behalf of the DAO by decentralized voting of its participants.
+
+## [DutchX DAO Bootstrap](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/dutchx-bootstrap)
+This project contains a minimal UI for participating in the bootstrap of the DutchX DAO.
+The bootstrapping process for a DAO is the process of distributing the initial reputation and tokens of a new DAO. The DutchX bootstrap process is a 3 months period during which users can do several actions, like locking tokens for example, to receive reputation in the DutchX DAO.
+You can view the DutchX DAO bootstrapping contracts [here](https://github.com/daostack/arc/tree/master/contracts/schemes).
 
 # Contact and Help
 
