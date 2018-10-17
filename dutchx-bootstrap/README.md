@@ -26,10 +26,12 @@ npm run ganache
 
 Then on a different terminal window (but still in your project folder) you can choose one of the 2:
 
-1. Run all work with one command:
+1. Run all with one command:
 ```
 npm run launch-local
 ```
+
+Then open your web browser and type `http://localhost:3000/`
 
 2. Run the commands one by one as follows:
 
@@ -37,12 +39,6 @@ npm run launch-local
 npm run migrate-daostack
 rm -rf build
 npm run truffle-migrate
-```
-
-Open `src/index.js` and make sure the `avatarAddress` and `votingMachineAddress` are identical to the ones found in the end of the `truffle migrate` logs output. If not, paste the correct addresses and enter the following terminal command:
-
-```
-npm run webpack
 ```
 
 ### Getting the Arc contracts addresses:

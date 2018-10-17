@@ -38,7 +38,16 @@ npm install -g npx
 npm run ganache
 ```
 
-Then on a different terminal window (but still in your project folder):
+Then on a different terminal window (but still in your project folder) you can choose one of the 2:
+
+1. Run all with one command:
+```
+npm run launch-local
+```
+
+Then open your web browser and type `http://localhost:3000/`
+
+2. Run the commands one by one as follows:
 
 ```
 npm run migrate-daostack
@@ -46,11 +55,15 @@ rm -rf build
 npm run truffle-migrate
 ```
 
-Open `src/index.js` and make sure the `avatarAddress` and `votingMachineAddress` are identical to the ones found in the end of the `truffle migrate` logs output. If not, paste the correct addresses and enter the following terminal command:
+### Getting the Arc contracts addresses:
+
+Use this command to get the addressses of Arc contracts on all networks:
 
 ```
-npm run webpack
+node getArcContracts.js
 ```
+
+The command will aslo re-generate `arc.json` file which will be used by the migration script to deploy the DAO.
 
 ### Deploy and use on Kovan network:
 
@@ -71,16 +84,6 @@ truffle migrate --network kovan-infura
 ```
 npm run webpack
 ```
-
-### Getting the Arc contracts addresses:
-
-Use this command to get the addressses of Arc contracts on all networks:
-
-```
-node getArcContracts.js
-```
-
-The command will aslo re-generate `arc.json` file which will be used by the migration script to deploy the DAO.
 
 ### Use the web interface:
 
