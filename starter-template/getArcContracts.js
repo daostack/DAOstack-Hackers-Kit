@@ -14,7 +14,7 @@ var arcJSON = `{ "arcVersion": "${pjson.devDependencies["@daostack/arc"]}"`;
 files.filter(file => {
   const abi = require(`${file}`);
   console.log(`${abi.contractName}:`);
-  arcJSON += ", " + abi.contractName + ": {";
+  arcJSON += ", " + `"${abi.contractName}"` + ": {";
   if (abi.networks["1"]) {
     console.log(`  Live: ${abi.networks["1"].address}`);
     arcJSON += `"live": ` + `"${abi.networks["1"].address}", `;
