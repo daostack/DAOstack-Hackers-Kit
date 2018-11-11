@@ -121,5 +121,5 @@ You can view the DutchX DAO bootstrapping contracts [here](https://github.com/da
 # Contact and Help
 
 The DAOstack team members will be available to assist you with your projects in the Hackathon.
-For any technical questions please reach out to us at the event or via Discord [at this link](https://discord.gg/WCYEvGA).
+For any technical questions please reach out to us at the event or via Discord [at this link](https://discord.gg/cHZ8Ha9).
 If you have any questions or comments about this repository please open an issue and we'll do our best to help.
