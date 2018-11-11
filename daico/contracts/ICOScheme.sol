@@ -2,12 +2,13 @@ pragma solidity ^0.4.25;
 
 import "@daostack/arc/contracts/controller/Avatar.sol";
 import "@daostack/arc/contracts/controller/ControllerInterface.sol";
+import "openzeppelin-solidity/contracts/lifecycle/Pausable.sol";
 
 
 /**
  * @title A scheme (non-universal) for rasing funds for an oganization in an ICO model
  * @dev An organization can start an ICO using this scheme and 
- * offer its tokens and reputaion for sale at a fixed rate.
+ * offer its tokens and reputation for sale at a fixed rate.
  */
 contract ICOScheme is Pausable {
     using SafeMath for uint;
@@ -139,16 +140,16 @@ contract ICOScheme is Pausable {
 
         require(beneficiaryDonation > 0, "Beneficiary did not donated in the ICO");
 
-        uint reputaion = totalRepForDonators.div(totalEthRaised).mul(beneficiaryDonation);
+        uint reputation = totalRepForDonators.div(totalEthRaised).mul(beneficiaryDonation);
 
         beneficiaries[_beneficiary] = 0;
 
         require(
-            ControllerInterface(avatar.owner()).mintReputation(reputaion, _beneficiary, address(avatar)),
+            ControllerInterface(avatar.owner()).mintReputation(reputation, _beneficiary, address(avatar)),
             "Failed to mint reputation"
         );
 
-        emit ReputationRedeemed(_beneficiary, reputaion);
+        emit ReputationRedeemed(_beneficiary, reputation);
 
         return reputation;
     }
