@@ -7,19 +7,19 @@ const GAS_LIMIT = 5900000;
 
 // Organization parameters:
 // The DAO name
-const orgName = "YOUR_DAO";
+const orgName = "FINAL_TEST";
 // The DAO's token name
-const tokenName = "YOUR_DAO_TOKEN_NAME";
+const tokenName = "FINAL_TOKEN";
 // Token symbol
-const tokenSymbol = "YOUR_DAO_TOKEN_SYMBOL";
+const tokenSymbol = "FTT";
 // The ethereum addresses of the "founders"
 // TODO: list your accounts to give initial reputation to
-var founders = [];
+var founders = ["0xb0c908140fe6fd6fbd4990a5c2e35ca6dc12bfb2"];
 // TODO: list the token amount per founder account
 // NOTE: the important thing is to make sure the array length match the number of founders
-var foundersTokens = [];
+var foundersTokens = [100000];
 // TODO: list the reputation amount per founder account
-var foundersRep = [];
+var foundersRep = [5];
 
 module.exports = async function(deployer) {
   deployer.then(async function() {
