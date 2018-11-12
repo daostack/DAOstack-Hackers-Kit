@@ -16,7 +16,7 @@ module.exports = {
           "https://kovan.infura.io/<YOUR-INFURA-KEY>"
         ),
       network_id: 42,
-      gasPrice: 10000000000 // 10 Gwei
+      gasPrice: 1000000000 // 1 Gwei
     }
   }
 };
