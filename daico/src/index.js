@@ -46,6 +46,10 @@ async function initialize() {
   ICOScheme.setProvider(web3.currentProvider);
   icoScheme = await ICOScheme.at(daoSchemeAddress);
 
+    // Gets the user reputation and the total reputation supply
+  var userAccount = web3.eth.accounts[0];
+  userRep = await getUserReputation(userAccount);
+  totalRep = web3.fromWei(await daicoDAO.reputation.getTotalSupply());
 }
 
 (async () => {
