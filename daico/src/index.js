@@ -4,7 +4,6 @@ import {
   LogLevel,
   ConfigService,
   AccountService
-  // Add all your needed Arc.js imports here.
 } from "@daostack/arc.js";
 
 // Default Avatar and Voting Machine addresses when using Ganache cli.
@@ -12,10 +11,6 @@ import {
 const avatarAddress = "0xf81588ecd485cba1e7d27ae149f56767f8a07e30";
 const votingMachineAddress = "0x9de9beb3518afe870e6585f7890751bbabc3c02c";
 var daicoDAO;
-
-
-//var reputation = await Reputation.new();
-//var avatar = await Avatar.new('name', token.address, reputation.address);
 
 /*
 Helper function for initializing ArcJS and your app.
