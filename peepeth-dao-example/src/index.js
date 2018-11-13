@@ -69,8 +69,8 @@ async function initialize() {
   const daoSchemes = await peepDAO.getSchemes(); // Returns all the schemes your DAO is registered to
   const peepSchemeAddress = daoSchemes[0].address; // Since our DAO has only 1 scheme it will be the first one
 
-  PeepScheme.setProvider(web3.currentProvider); // Sets the Web3 Provider for a non-ArcJS contract
-  peepScheme = await PeepScheme.at(peepSchemeAddress); // Initializes a PeepScheme instance with our deployed scheme address
+  ICOScheme.setProvider(web3.currentProvider); // Sets the Web3 Provider for a non-ArcJS contract
+  icoScheme = await PeepScheme.at(peepSchemeAddress); // Initializes a PeepScheme instance with our deployed scheme address
 
   // Using ArcJS to initializes our Absolute Vote contract instance with the deployed contract address
   votingMachine = await WrapperService.factories.AbsoluteVote.at(
@@ -244,6 +244,7 @@ function getPeepContentFromHash(hash) {
   return new Promise(function(resolve, reject) {
     ipfs.catJSON(hash, (err, result) => {
       if (err) {
+
         reject(err);
       } else {
         resolve(result.content);
