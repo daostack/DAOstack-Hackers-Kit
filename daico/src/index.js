@@ -35,26 +35,19 @@ async function initialize() {
   // Learn more about the Arc.js configurations here: https://daostack.github.io/arc.js/Configuration/
 
   ConfigService.set("estimateGas", true);
-  ConfigService.set("txDepthRequiredForConfirmation", {
-    kovan: 0,
-    live: 0
-  });
+  ConfigService.set("txDepthRequiredForConfirmation", {kovan: 0, live: 0});
+  AccountService.subscribeToAccountChanges(() => { window.location.reload(); });
   LoggingService.logLevel = LogLevel.all;
-
-  AccountService.subscribeToAccountChanges(() => {
-    window.location.reload();
-  });
 
   daicoDAO = await DAO.at(avatarAddress);
   const daoSchemes = await daicoDAO.getSchemes();
   const daoSchemeAddress = daoSchemes[0].address; 
 
-  ICOScheme.setProvider(web3.currentProvider); // Sets the Web3 Provider for a non-ArcJS contract
-  icoScheme = await ICOScheme.at(daoSchemeAddress); // Initializes a PeepScheme instance with our deployed scheme address
+  ICOScheme.setProvider(web3.currentProvider);
+  icoScheme = await ICOScheme.at(daoSchemeAddress);
 
 }
 
-// Calls the initialize function to initialize your project.
 (async () => {
   await initialize();
 })();
