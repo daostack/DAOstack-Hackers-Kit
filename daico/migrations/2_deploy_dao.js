@@ -1,6 +1,7 @@
 var arcContracts = require("../arc.json");
 
 var Avatar = artifacts.require("@daostack/arc/Avatar.sol");
+var Controller = artifacts.require("@daostack/arc/Controller.sol");
 var DaoCreator = artifacts.require("@daostack/arc/DaoCreator.sol");
 var AbsoluteVote = artifacts.require("@daostack/arc/AbsoluteVote.sol");
 var DAICOScheme = artifacts.require("./ICOScheme.sol");
@@ -41,12 +42,13 @@ module.exports = async function(deployer) {
       tokenName,
       tokenSymbol,
       founders,
-      foundersTokens, // Founders token amounts
-      foundersRep, // Founders initial reputation
+      foundersTokens,
+      foundersRep,
       0, // 0 because we don't use a UController
-      0, // no token cap
+      1000000,
       { gas: GAS_LIMIT }
     );
+
     var avatarInst = await Avatar.at(returnedParams.logs[0].args._avatar); // Gets the Avatar address
     var controllerInst = await Controller.at(await avatarInst.owner()); // Gets the controller address
     var reputationAddress = await controllerInst.nativeReputation(); // Gets the reputation contract address
