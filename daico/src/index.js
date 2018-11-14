@@ -2,8 +2,11 @@ import {
   InitializeArcJs,
   LoggingService,
   LogLevel,
+  DAO,
   ConfigService,
-  AccountService
+  AccountService,
+  WrapperService,
+  BinaryVoteResult
 } from "@daostack/arc.js";
 
 const ICOSchemeArtifacts = require("../build/contracts/ICOScheme.json");
@@ -43,6 +46,8 @@ async function initialize() {
   const daoSchemes = await daicoDAO.getSchemes();
   const daoSchemeAddress = daoSchemes[0].address; 
 
+  $("#daoAddress").text("The DAO address is: " + avatarAddress);
+
   ICOScheme.setProvider(web3.currentProvider);
   icoScheme = await ICOScheme.at(daoSchemeAddress);
 
@@ -50,8 +55,17 @@ async function initialize() {
   var userAccount = web3.eth.accounts[0];
   userRep = await getUserReputation(userAccount);
   totalRep = web3.fromWei(await daicoDAO.reputation.getTotalSupply());
+
+  $("#userRep").text(
+    "Your Reputation: " + userRep + " rep (" + (userRep / totalRep) * 100 + "%)"
+  );
 }
 
-(async () => {
-  await initialize();
-})();
+$(window).on("load", function() {
+  initialize();
+});
+
+
+// (async () => {
+//   await initialize();
+// })();

@@ -2,28 +2,23 @@ var arcContracts = require("../arc.json");
 
 var Avatar = artifacts.require("@daostack/arc/Avatar.sol");
 var DaoCreator = artifacts.require("@daostack/arc/DaoCreator.sol");
+var AbsoluteVote = artifacts.require("@daostack/arc/AbsoluteVote.sol");
+var DAICOScheme = artifacts.require("./ICOScheme.sol");
 
 const GAS_LIMIT = 5900000;
 
 // Organization parameters:
-// The DAO name
 const orgName = "FINAL_TEST";
-// The DAO's token name
 const tokenName = "FINAL_TOKEN";
-// Token symbol
 const tokenSymbol = "FTT";
-// The ethereum addresses of the "founders"
-// TODO: list your accounts to give initial reputation to
 var founders = ["0xb0c908140fe6fd6fbd4990a5c2e35ca6dc12bfb2"];
-// TODO: list the token amount per founder account
-// NOTE: the important thing is to make sure the array length match the number of founders
 var foundersTokens = [100000];
-// TODO: list the reputation amount per founder account
 var foundersRep = [5];
+const votePrec = 50; 
 
 module.exports = async function(deployer) {
   deployer.then(async function() {
-    // TODO: edit this switch command based on the comments at the variables decleration lines
+    var daicoAddress = "0x0000000000000000000000000000000000000000";
     var networkId;
     switch (deployer.network) {
       case "ganache":
@@ -53,10 +48,38 @@ module.exports = async function(deployer) {
       { gas: GAS_LIMIT }
     );
     var avatarInst = await Avatar.at(returnedParams.logs[0].args._avatar); // Gets the Avatar address
+    var controllerInst = await Controller.at(await avatarInst.owner()); // Gets the controller address
+    var reputationAddress = await controllerInst.nativeReputation(); // Gets the reputation contract address
 
-    var schemesArray = []; // The addresses of the schemes
-    const paramsArray = []; // Defines which parameters should be grannted for each of the schemes
-    const permissionArray = []; // The permissions for the schemes
+    // Load AbsoluteVote Voting Machine:
+    var absoluteVoteInst = await AbsoluteVote.at(
+      arcContracts.AbsoluteVote[networkId]
+    );
+
+    await absoluteVoteInst.setParameters(reputationAddress, votePrec, true);
+
+    var voteParametersHash = await absoluteVoteInst.getParametersHash(
+      reputationAddress,
+      votePrec,
+      true
+    );
+
+    await deployer.deploy(DAICOScheme, daicoAddress);
+    var daicoSchemeInstance = await DAICOScheme.deployed();
+
+    await daicoSchemeInstance.setParameters(
+      voteParametersHash,
+      absoluteVoteInst.address
+    );
+
+    var daicoSchemeParams = await daicoSchemeInstance.getParametersHash(
+      voteParametersHash,
+      absoluteVoteInst.address
+    );
+
+    var schemesArray = [daicoSchemeInstance.address];
+    const paramsArray = [daicoSchemeParams];
+    const permissionArray = ["0x00000010"];
 
     // set the DAO's initial schmes:
     await daoCreatorInst.setSchemes(
@@ -65,5 +88,9 @@ module.exports = async function(deployer) {
       paramsArray,
       permissionArray
     ); // Sets the scheme in our DAO controller by using the DAO Creator we used to forge our DAO
+
+    console.log("Your DAICOO was deployed successfuly!");
+    console.log("Avatar address: " + avatarInst.address);
+    console.log("Absolue Voting Machine address: " + absoluteVoteInst.address);
   });
 };
