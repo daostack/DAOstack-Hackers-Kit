@@ -36,6 +36,8 @@ module.exports = async function(deployer) {
       arcContracts.DaoCreator[networkId]
     );
 
+    console.log("ABC 1");
+
     // Create DAO:
     var returnedParams = await daoCreatorInst.forgeOrg(
       orgName,
@@ -49,6 +51,7 @@ module.exports = async function(deployer) {
       { gas: GAS_LIMIT }
     );
 
+    console.log("ABC 2");
     var avatarInst = await Avatar.at(returnedParams.logs[0].args._avatar); // Gets the Avatar address
     var controllerInst = await Controller.at(await avatarInst.owner()); // Gets the controller address
     var reputationAddress = await controllerInst.nativeReputation(); // Gets the reputation contract address
@@ -57,6 +60,8 @@ module.exports = async function(deployer) {
     var absoluteVoteInst = await AbsoluteVote.at(
       arcContracts.AbsoluteVote[networkId]
     );
+
+    console.log("DEF");
 
     await absoluteVoteInst.setParameters(reputationAddress, votePrec, true);
 
@@ -78,6 +83,8 @@ module.exports = async function(deployer) {
       voteParametersHash,
       absoluteVoteInst.address
     );
+
+    console.log("GHI");
 
     var schemesArray = [daicoSchemeInstance.address];
     const paramsArray = [daicoSchemeParams];

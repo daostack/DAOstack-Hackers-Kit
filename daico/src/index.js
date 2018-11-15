@@ -16,7 +16,7 @@ let ICOScheme = contract(ICOSchemeArtifacts);
 // Default Avatar and Voting Machine addresses when using Ganache cli.
 // TODO: Paste here your own instances addresses which can be found in the logs at the end of the migration script.
 const avatarAddress = "0xf81588ecd485cba1e7d27ae149f56767f8a07e30";
-const votingMachineAddress = "0x9de9beb3518afe870e6585f7890751bbabc3c02c";
+const votingMachineAddress = "0xd73cb80a89b7b46ecb035dbbd03bac86ad416af2";
 var daicoDAO;
 var icoScheme;
 
