@@ -26,6 +26,7 @@
   "dependencies": {
     "@daostack/arc": "0.0.0-alpha.54",
     "@daostack/arc.js": "0.0.0-alpha.82",
+    "ipfs-mini": "^1.1.2",
     "express": "^4.16.4",
     "truffle": "^4.1.14",
     "truffle-contract": "^3.0.6",
