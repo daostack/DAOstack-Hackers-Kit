@@ -1,7 +1,7 @@
-var ArcJS = require("@daostack/arc.js");
+const ArcJS = require("@daostack/arc.js");
 
-var PeepScheme = artifacts.require("./PeepScheme.sol");
-var Peepeth = artifacts.require("./Peepeth.sol");
+const PeepScheme = artifacts.require("./PeepScheme.sol");
+const Peepeth = artifacts.require("./Peepeth.sol");
 
 // Organization parameters:
 // The DAO name
@@ -20,7 +20,7 @@ var foundersTokens;
 // TODO: list the reputation amount per founder account
 var foundersRep;
 
-const votePrec = 50; // The quorum (percentage) needed to pass a vote in the voting machine
+const votePercentage = 50; // The quorum (percentage) needed to pass a vote in the voting machine
 
 // IPFS initialization:
 const IPFS = require("ipfs-mini");
@@ -41,7 +41,7 @@ module.exports = async function(deployer) {
     await web3.eth.getAccounts(function(err, res) { accounts = res; });
 
     // TODO: edit this switch command based on the comments at the variables decleration lines
-    var absoluteVote = ArcJS.ContractWrappers.AbsoluteVote;
+    const absoluteVote = ArcJS.ContractWrappers.AbsoluteVote;
     
     switch (deployer.network) {
       case "ganache":
@@ -62,10 +62,10 @@ module.exports = async function(deployer) {
     }
 
     // Set the voting parameters for the Absolute Vote Voting Machine
-    await absoluteVote.setParameters(votePrec, true);
+    await absoluteVote.setParameters(votePercentage, true);
 
     // Voting parameters and schemes params:
-    var voteParametersHash = await absoluteVote.getParametersHash(votePrec, true);
+    var voteParametersHash = await absoluteVote.getParametersHash(votePercentage, true);
 
     // Deploy the Universal Peep Scheme
     await deployer.deploy(PeepScheme, peepethAddress);
@@ -101,7 +101,7 @@ module.exports = async function(deployer) {
         { 
           address: peepSchemeInstance.address, 
           parametersHash: peepSchemeParams, 
-          permissions: "0x00000010" 
+          permissions: ArcJS.SchemePermissions.CanCallDelegateCall
         }
       ] 
     });
@@ -139,7 +139,7 @@ module.exports = async function(deployer) {
       console.log("Your Peep DAO was deployed successfuly!");
       console.log("Avatar address: " + peepethDao.avatar.address.address);
       console.log(
-        "Absolue Voting Machine address: " + absoluteVote.address
+        "Absolute Voting Machine address: " + absoluteVote.address
       );
     });
   });
