@@ -41,6 +41,7 @@ npm run ganache
 Then on a different terminal window (but still in your project folder) you can choose one of the 2:
 
 1. Run all with one command:
+
 ```
 npm run launch-local
 ```
@@ -54,16 +55,6 @@ npm run migrate-daostack
 rm -rf build
 npm run truffle-migrate
 ```
-
-### Getting the Arc contracts addresses:
-
-Use this command to get the addressses of Arc contracts on all networks:
-
-```
-node getArcContracts.js
-```
-
-The command will aslo re-generate `arc.json` file which will be used by the migration script to deploy the DAO.
 
 ### Deploy and use on Kovan network:
 

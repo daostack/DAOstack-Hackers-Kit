@@ -35,14 +35,16 @@ module.exports = async function(deployer) {
     await ArcJS.InitializeArcJs();
 
     var peepethAddress = "0x0000000000000000000000000000000000000000";
-    
+
     // Get web3 accounts
     var accounts = [];
-    await web3.eth.getAccounts(function(err, res) { accounts = res; });
+    await web3.eth.getAccounts(function(err, res) {
+      accounts = res;
+    });
 
     // TODO: edit this switch command based on the comments at the variables decleration lines
     const absoluteVote = ArcJS.ContractWrappers.AbsoluteVote;
-    
+
     switch (deployer.network) {
       case "ganache":
       case "development":
@@ -65,7 +67,10 @@ module.exports = async function(deployer) {
     await absoluteVote.setParameters(votePercentage, true);
 
     // Voting parameters and schemes params:
-    var voteParametersHash = await absoluteVote.getParametersHash(votePercentage, true);
+    var voteParametersHash = await absoluteVote.getParametersHash(
+      votePercentage,
+      true
+    );
 
     // Deploy the Universal Peep Scheme
     await deployer.deploy(PeepScheme, peepethAddress);
@@ -95,15 +100,15 @@ module.exports = async function(deployer) {
         }
         // TODO: If you add more founders don't forget to add them here as well
       ],
-      // Set the DAO's initial schmes:
+      // Set the DAO's initial schemes:
       schemes: [
         // Set the scheme in our DAO controller by using the DAO Creator we used to forge our DAO
-        { 
-          address: peepSchemeInstance.address, 
-          parametersHash: peepSchemeParams, 
+        {
+          address: peepSchemeInstance.address,
+          parametersHash: peepSchemeParams,
           permissions: ArcJS.SchemePermissions.CanCallDelegateCall
         }
-      ] 
+      ]
     });
 
     await new Promise(function(resolve, reject) {
@@ -138,9 +143,7 @@ module.exports = async function(deployer) {
       // @note: You will need your Avatar and Voting Machine addresses to interact with them from the JS files
       console.log("Your Peep DAO was deployed successfuly!");
       console.log("Avatar address: " + peepethDao.avatar.address.address);
-      console.log(
-        "Absolute Voting Machine address: " + absoluteVote.address
-      );
+      console.log("Absolute Voting Machine address: " + absoluteVote.address);
     });
   });
 };
