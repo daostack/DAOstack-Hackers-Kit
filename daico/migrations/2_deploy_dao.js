@@ -3,9 +3,9 @@ var ArcJS = require("@daostack/arc.js");
 var DAICOScheme = artifacts.require("./ICOScheme.sol");
 
 // Organization parameters:
-const orgName = "FINAL_TEST3";
-const tokenName = "FINAL_TOKEN3";
-const tokenSymbol = "FTT3";
+const orgName = "FINAL_TEST4";
+const tokenName = "FINAL_TOKEN4";
+const tokenSymbol = "FP";
 var founders = ["0xb0c908140fe6fd6fbd4990a5c2e35ca6dc12bfb2"];
 var foundersTokens = [100000];
 var foundersRep = [5];
@@ -27,9 +27,7 @@ module.exports = async function(deployer) {
     switch (deployer.network) {
       case "ganache":
       case "development":
-        founders = [accounts[0]];
-        foundersTokens = [5];//[web3.utils.toWei("0")];
-        foundersRep = [5];//[web3.utils.toWei("10")];
+        networkId = "ganache";
         break;
       case "kovan":
       case "kovan-infura":
@@ -41,29 +39,11 @@ module.exports = async function(deployer) {
 
     var voteParametersHash = await absoluteVote.getParametersHash(votePrec, true);
 
-    //await deployer.deploy(DAICOScheme, daicoAddress);
-    await deployer.deploy(DAICOScheme, 100000, 1, 0, 500, 5);
+    await deployer.deploy(DAICOScheme, "0xcB4e66eCA663FDB61818d52A152601cA6aFEf74F", 100000, 1, 0, 500, 5);
         
     daicoAddress = (await DAICOScheme.deployed()).address;
 
     var daicoSchemeInstance = await DAICOScheme.deployed();
-
-    console.log("G");
-    //console.log("G1: " + daicoSchemeInstance.address);
-
-    // await daicoSchemeInstance.setParameters(
-    //   voteParametersHash,
-    //   absoluteVote.address
-    // );
-
-    // console.log("H");
-
-    // var daicoSchemeParams = await daicoSchemeInstance.getParametersHash(
-    //   voteParametersHash,
-    //   absoluteVote.address
-    // );
-
-    console.log("I");
 
     const daico = await ArcJS.DAO.new({
       name: orgName,
@@ -77,16 +57,16 @@ module.exports = async function(deployer) {
         }
       ],
       schemes: [
-        // { 
-        //   // address: daicoSchemeInstance.address, 
-        //   // //parametersHash: [], 
-        //   // permissions: "0x00000001" 
-        // }
+        { 
+          address: daicoSchemeInstance.address, 
+          parametersHash: [], 
+          permissions: "0x00000001" 
+        }
       ] 
     });
 
     console.log("Your DAICO was deployed successfuly!");
-    //console.log("Avatar address: " + avatarInst.address);
+    //console.log("Avatar address: " + daicoSchemeInstance.avatar.address);
     console.log("Absolue Voting Machine address: " + absoluteVote.address);
 
   });
