@@ -24,10 +24,10 @@
   "author": "Ben Kaufman",
   "license": "ISC",
   "dependencies": {
-    "@daostack/arc": "0.0.0-alpha.54",
-    "@daostack/arc.js": "0.0.0-alpha.82",
-    "ipfs-mini": "^1.1.2",
+    "@daostack/arc": "0.0.0-alpha.56",
+    "@daostack/arc.js": "0.0.0-alpha.89",
     "express": "^4.16.4",
+    "ipfs-mini": "^1.1.2",
     "truffle": "^4.1.14",
     "truffle-contract": "^3.0.6",
     "truffle-hdwallet-provider": "0.0.6"
