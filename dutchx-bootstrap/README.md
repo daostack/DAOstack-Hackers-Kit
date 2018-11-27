@@ -41,16 +41,6 @@ rm -rf build
 npm run truffle-migrate
 ```
 
-### Getting the Arc contracts addresses:
-
-Use this command to get the addressses of Arc contracts on all networks:
-
-```
-node getArcContracts.js
-```
-
-The command will aslo re-generate `arc.json` file which will be used by the migration script to deploy the DAO.
-
 ### Deploy and use on Kovan network:
 
 1. Enter the `truffle.js` file and make the changes as instructed there.
