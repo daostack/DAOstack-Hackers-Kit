@@ -17,9 +17,9 @@ module.exports = async function(deployer) {
 
     var daicoAddress = "0x0000000000000000000000000000000000000000";
 
-    var accounts = [];
-    await web3.eth.getAccounts(function(err, res) { accounts = res; });
-    var absoluteVote = ArcJS.ContractWrappers.AbsoluteVote;
+    //var accounts = [];
+    //await web3.eth.getAccounts(function(err, res) { accounts = res; });
+    //var absoluteVote = ArcJS.ContractWrappers.AbsoluteVote;
 
     console.log("A");
 
@@ -35,9 +35,9 @@ module.exports = async function(deployer) {
         break;
     }
 
-    await absoluteVote.setParameters(votePrec, true);
+    //await absoluteVote.setParameters(votePrec, true);
 
-    var voteParametersHash = await absoluteVote.getParametersHash(votePrec, true);
+    //var voteParametersHash = await absoluteVote.getParametersHash(votePrec, true);
 
     await deployer.deploy(DAICOScheme, "0xcB4e66eCA663FDB61818d52A152601cA6aFEf74F", 100000, 1, 0, 500, 5);
         
@@ -67,7 +67,7 @@ module.exports = async function(deployer) {
 
     console.log("Your DAICO was deployed successfuly!");
     //console.log("Avatar address: " + daicoSchemeInstance.avatar.address);
-    console.log("Absolue Voting Machine address: " + absoluteVote.address);
+    //console.log("Absolue Voting Machine address: " + absoluteVote.address);
 
   });
 };

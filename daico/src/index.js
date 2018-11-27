@@ -23,24 +23,32 @@ var icoScheme;
 /*
 Helper function for initializing ArcJS and your app.
 */
+console.log("AA1");
 async function initialize() {
   await InitializeArcJs({
     watchForAccountChanges: true
-    /*
-    Edit this to filter imported contracts
-    , filter: {
-      
+      filter: {
+        AbsoluteVote: true,
+        DaoCreator: true,
+        ControllerCreator: true,
+        Avatar: true,
+        Controller: true
     }
-    */
   });
+
+  console.log("AA2");
 
   // These are some basic configurations, feel free to edit as you need.
   // Learn more about the Arc.js configurations here: https://daostack.github.io/arc.js/Configuration/
 
+  await web3.eth.getAccounts(function(err, res) { accounts = res; });
+
+  console.log("AA3");
+
   ConfigService.set("estimateGas", true);
   ConfigService.set("txDepthRequiredForConfirmation", {kovan: 0, live: 0});
   AccountService.subscribeToAccountChanges(() => { window.location.reload(); });
-  LoggingService.logLevel = LogLevel.all;
+  //LoggingService.logLevel = LogLevel.all;
 
   daicoDAO = await DAO.at(avatarAddress);
   const daoSchemes = await daicoDAO.getSchemes();
@@ -52,7 +60,7 @@ async function initialize() {
   icoScheme = await ICOScheme.at(daoSchemeAddress);
 
     // Gets the user reputation and the total reputation supply
-  var userAccount = web3.eth.accounts[0];
+  var userAccount = "0xb0c908140fe6fd6fbd4990a5c2e35ca6dc12bfb2"; //web3.eth.accounts[0];
   userRep = await getUserReputation(userAccount);
   totalRep = web3.fromWei(await daicoDAO.reputation.getTotalSupply());
 
