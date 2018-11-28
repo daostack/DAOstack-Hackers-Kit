@@ -6,7 +6,7 @@ var DAICOScheme = artifacts.require("./ICOScheme.sol");
 const orgName = "FINAL_TEST4";
 const tokenName = "FINAL_TOKEN4";
 const tokenSymbol = "FP";
-var founders = ["0xb0c908140fe6fd6fbd4990a5c2e35ca6dc12bfb2"];
+var founders;
 var foundersTokens = [100000];
 var foundersRep = [5];
 const votePrec = 50; 
@@ -17,16 +17,11 @@ module.exports = async function(deployer) {
 
     var daicoAddress = "0x0000000000000000000000000000000000000000";
 
-    //var accounts = [];
-    //await web3.eth.getAccounts(function(err, res) { accounts = res; });
-    //var absoluteVote = ArcJS.ContractWrappers.AbsoluteVote;
-
-    console.log("A");
-
     var networkId;
     switch (deployer.network) {
       case "ganache":
       case "development":
+        founders = [web3.eth.accounts[0]];
         networkId = "ganache";
         break;
       case "kovan":
@@ -34,10 +29,6 @@ module.exports = async function(deployer) {
         networkId = "kovan";
         break;
     }
-
-    //await absoluteVote.setParameters(votePrec, true);
-
-    //var voteParametersHash = await absoluteVote.getParametersHash(votePrec, true);
 
     await deployer.deploy(DAICOScheme, "0xcB4e66eCA663FDB61818d52A152601cA6aFEf74F", 100000, 1, 0, 500, 5);
         
@@ -66,8 +57,5 @@ module.exports = async function(deployer) {
     });
 
     console.log("Your DAICO was deployed successfuly!");
-    //console.log("Avatar address: " + daicoSchemeInstance.avatar.address);
-    //console.log("Absolue Voting Machine address: " + absoluteVote.address);
-
   });
 };
