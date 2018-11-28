@@ -3,9 +3,9 @@ var ArcJS = require("@daostack/arc.js");
 var DAICOScheme = artifacts.require("./ICOScheme.sol");
 
 // Organization parameters:
-const orgName = "FINAL_TEST4";
-const tokenName = "FINAL_TOKEN4";
-const tokenSymbol = "FP";
+const orgName = "DAICO TEMP";
+const tokenName = "DAICOIN";
+const tokenSymbol = "DCOI";
 var founders;
 var foundersTokens = [100000];
 var foundersRep = [5];
