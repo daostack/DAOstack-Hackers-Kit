@@ -1,0 +1,39 @@
+{
+  "name": "aragon-scheme",
+  "version": "1.0.0",
+  "description": "DAOStack Scheme to allow DAOStack DAO to participate as a member of an Aragon DAO",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/truffle test",
+    "ganache": "npm explore @daostack/arc.js -- npm start ganache",
+    "migrate-daostack": "npm explore @daostack/arc.js -- npm start migrateContracts",
+    "webpack": "npx webpack --config webpack.config.js",
+    "truffle-migrate": "./node_modules/.bin/truffle migrate",
+    "launch-local": "npm run webpack && npm run migrate-daostack && rm -rf build && npm run truffle-migrate && node dist/app.js"
+  },
+  "keywords": [
+    "DAO",
+    "DAOStack",
+    "Ethereum",
+    "Blockchain",
+    "Aragon"
+  ],
+  "author": "James McGihon",
+  "license": "ISC",
+  "dependencies": {
+    "@daostack/arc": "^0.0.0-alpha.56",
+    "@daostack/arc.js": "^0.0.0-alpha.89",
+    "@daostack/infra": "0.0.0-alpha.09",
+    "express": "^4.16.3",
+    "openzeppelin-solidity": "1.12.0",
+    "truffle": "^5.0.0-beta.1",
+    "truffle-hdwallet-provider": "^1.0.0-web3one.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
