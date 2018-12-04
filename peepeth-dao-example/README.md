@@ -20,16 +20,6 @@ npm install -g npx
 
 - _Note: to configure different founder accounts or any other change to the DAO, go to `migrations/2_deploy_dao.js` and follow the instructions in the comments._
 
-### Getting the Arc contracts addresses:
-
-Use this command to get the addressses of Arc contracts on all networks:
-
-```
-node getArcContracts.js
-```
-
-The command will aslo re-generate `arc.json` file which will be used by the migration script to deploy the DAO.
-
 ### Run on a local testnet:
 
 ```
