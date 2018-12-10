@@ -23,16 +23,16 @@
   "author": "Ben Kaufman",
   "license": "ISC",
   "dependencies": {
-    "@daostack/arc": "^0.0.0-alpha.56",
-    "@daostack/arc.js": "^0.0.0-alpha.89",
+    "@daostack/arc": "0.0.0-alpha.58",
+    "@daostack/arc.js": "0.0.0-alpha.95",
     "express": "^4.16.3",
     "ipfs-mini": "^1.1.2",
     "truffle": "5.0.0-beta.1",
     "truffle-hdwallet-provider": "0.0.6",
-    "web3-eth-abi": "^1.0.0-beta.36"
+    "web3-eth-abi": "^1.0.0-beta.37"
   },
   "devDependencies": {
-    "webpack": "^4.26.0",
+    "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
   }
 }

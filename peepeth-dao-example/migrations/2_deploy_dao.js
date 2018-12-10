@@ -42,9 +42,9 @@ module.exports = async function(deployer) {
       accounts = res;
     });
 
-    // TODO: edit this switch command based on the comments at the variables decleration lines
     const absoluteVote = ArcJS.ContractWrappers.AbsoluteVote;
 
+    // TODO: edit this switch command based on the comments at the variables decleration lines
     switch (deployer.network) {
       case "ganache":
       case "development":
