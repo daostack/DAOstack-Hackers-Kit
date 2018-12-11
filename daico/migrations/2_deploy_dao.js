@@ -17,11 +17,16 @@ module.exports = async function(deployer) {
 
     var daicoAddress = "0x0000000000000000000000000000000000000000";
 
+    var accounts = [];
+    await web3.eth.getAccounts(function(err, res) {
+      accounts = res;
+    });
+
     var networkId;
     switch (deployer.network) {
       case "ganache":
       case "development":
-        founders = [web3.eth.accounts[0]];
+        founders = [accounts[0]];
         networkId = "ganache";
         break;
       case "kovan":

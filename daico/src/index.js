@@ -26,7 +26,7 @@ Helper function for initializing ArcJS and your app.
 console.log("AA1");
 async function initialize() {
   await InitializeArcJs({
-    watchForAccountChanges: true
+    watchForAccountChanges: true,
       filter: {
         AbsoluteVote: true,
         DaoCreator: true,
