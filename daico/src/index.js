@@ -24,7 +24,6 @@ var accounts = [];
 /*
 Helper function for initializing ArcJS and your app.
 */
-console.log("A1");
 async function initialize() {
   await InitializeArcJs({
     watchForAccountChanges: true,
@@ -37,36 +36,27 @@ async function initialize() {
     }
   });
 
-  console.log("A2");
-
   // These are some basic configurations, feel free to edit as you need.
   // Learn more about the Arc.js configurations here: https://daostack.github.io/arc.js/Configuration/
 
   await web3.eth.getAccounts(function(err, res) { 
-      console.log("A21");
     accounts = res; 
-    console.log("A22");
   });
-
-  console.log("A3");
 
   ConfigService.set("estimateGas", true);
   ConfigService.set("txDepthRequiredForConfirmation", {kovan: 0, live: 0});
   AccountService.subscribeToAccountChanges(() => { window.location.reload(); });
-  //LoggingService.logLevel = LogLevel.all;
-
-    console.log("A4");
 
   daicoDAO = await DAO.at(avatarAddress);
   const daoSchemes = await daicoDAO.getSchemes();
   const daoSchemeAddress = daoSchemes[0].address; 
 
   $("#daoAddress").text("The DAO address is: " + avatarAddress);
+  $("#donateButton").click(donateFunc);
+  $("#redeemButton").click(redeemFunc);
 
   ICOScheme.setProvider(web3.currentProvider);
   icoScheme = await ICOScheme.at(daoSchemeAddress);
-
-  console.log("A5");
 
     // Gets the user reputation and the total reputation supply
   //var userAccount = "0xb0c908140fe6fd6fbd4990a5c2e35ca6dc12bfb2"; //web3.eth.accounts[0];
@@ -78,11 +68,19 @@ async function initialize() {
   // );
 }
 
+async function donateFunc() {
+  console.log("--> donate 1");
+  console.log(accounts[0]);
+  console.log(await icoScheme.isActive());
+  var donation = await icoScheme.donate(accounts[0]);
+  console.log("--> donate 2");
+}
+
+function redeemFunc() {
+  console.log("--> redeem");
+}
+
+
 $(window).on("load", function() {
   initialize();
 });
-
-
-// (async () => {
-//   await initialize();
-// })();
