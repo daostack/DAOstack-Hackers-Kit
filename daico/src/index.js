@@ -52,32 +52,28 @@ async function initialize() {
   const daoSchemeAddress = daoSchemes[0].address; 
 
   $("#daoAddress").text("The DAO address is: " + avatarAddress);
-  $("#donateButton").click(donateFunc);
-  $("#redeemButton").click(redeemFunc);
+  $("#donateButton").click(donateFunction);
+  $("#redeemButton").click(redeemFunction);
 
   ICOScheme.setProvider(web3.currentProvider);
+  console.log(daoSchemeAddress);
   icoScheme = await ICOScheme.at(daoSchemeAddress);
-
-    // Gets the user reputation and the total reputation supply
-  //var userAccount = "0xb0c908140fe6fd6fbd4990a5c2e35ca6dc12bfb2"; //web3.eth.accounts[0];
-  //userRep = await getUserReputation(userAccount);
-  //totalRep = web3.fromWei(await daicoDAO.reputation.getTotalSupply());
-
-  // $("#userRep").text(
-  //   "Your Reputation: " + userRep + " rep (" + (userRep / totalRep) * 100 + "%)"
-  // );
 }
 
-async function donateFunc() {
-  console.log("--> donate 1");
-  console.log(accounts[0]);
-  console.log(await icoScheme.isActive());
-  var donation = await icoScheme.donate(accounts[0]);
-  console.log("--> donate 2");
+//configure function either to ask user to enter their ETH and amount in the fields or load MetaMask
+async function donateFunction() {
+  console.log("donateFunction");
+  var active = await icoScheme.isActive();
+  if (active == true ) {
+    console.log("redeemFunction enabled");
+    $('#redeemButton').removeAttr('disabled');
+    var donation = await icoScheme.donate(accounts[0]);
+  }
 }
 
-function redeemFunc() {
-  console.log("--> redeem");
+async function redeemFunction() {
+  console.log("redeemFunction");
+  var redeem = await icoScheme.redeemReputation(accounts[0]);
 }
 
 

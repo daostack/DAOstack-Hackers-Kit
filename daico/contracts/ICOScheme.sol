@@ -29,6 +29,7 @@ contract ICOScheme is Pausable {
     event DonationReceived(address indexed _beneficiary, uint _incomingEther, uint _tokensAmount);
     event ReputationRedeemed(address indexed _beneficiary, uint _reputationAmount);
 
+
     constructor (
         Avatar _avatar,
         uint _cap,
@@ -63,15 +64,15 @@ contract ICOScheme is Pausable {
      * @return bool which represents a successful of the function
      */
     function isActive() public view returns(bool) {
-        if (totalEthRaised >= cap) {
-            return false;
-        }
-        if (block.number >= endBlock) {
-            return false;
-        }
-        if (block.number <= startBlock) {
-            return false;
-        }
+        // if (totalEthRaised >= cap) {
+        //     return false;
+        // }
+        // if (block.number >= endBlock) {
+        //     return false;
+        // }
+        // if (block.number <= startBlock) {
+        //     return false;
+        // }
 
         return true;
     }
