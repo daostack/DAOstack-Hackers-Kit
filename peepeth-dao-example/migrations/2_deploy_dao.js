@@ -142,7 +142,7 @@ module.exports = async function(deployer) {
 
       // @note: You will need your Avatar and Voting Machine addresses to interact with them from the JS files
       console.log("Your Peep DAO was deployed successfuly!");
-      console.log("Avatar address: " + peepethDao.avatar.address.address);
+      console.log("Avatar address: " + peepethDao.avatar.address);
       console.log("Absolute Voting Machine address: " + absoluteVote.address);
     });
   });

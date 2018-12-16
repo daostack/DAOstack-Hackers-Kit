@@ -11,7 +11,8 @@
     "ganache": "npm explore @daostack/arc.js -- npm start ganache",
     "migrate-daostack": "npm explore @daostack/arc.js -- npm run migrateContracts",
     "webpack": "npx webpack --config webpack.config.js",
-    "truffle-migrate": "./node_modules/.bin/truffle migrate"
+    "truffle-migrate": "./node_modules/.bin/truffle migrate",
+    "launch-local": "npm run webpack && npm run migrate-daostack && rm -rf build && npm run truffle-migrate && node dist/app.js"
   },
   "keywords": [
     "DAO",

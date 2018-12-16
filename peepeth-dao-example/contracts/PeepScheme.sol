@@ -2,7 +2,6 @@ pragma solidity ^0.4.24;
 
 import "@daostack/infra/contracts/votingMachines/ProposalExecuteInterface.sol";
 import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol";
-import "@daostack/arc/contracts/universalSchemes/ExecutableInterface.sol";
 import "@daostack/arc/contracts/controller/ControllerInterface.sol";
 import "@daostack/arc/contracts/votingMachines/VotingMachineCallbacks.sol";
 import "./PeepethInterface.sol";
