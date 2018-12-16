@@ -15,6 +15,7 @@ var foundersTokens = [10000];
 var foundersRep = [5];
 const votePrec = 50; 
 const GAS_LIMIT = 5900000;
+const NULL_HASH = '0x0000000000000000000000000000000000000000000000000000000000000000';
 
 module.exports = async function(deployer) {
   deployer.then(async function() {
@@ -64,6 +65,13 @@ module.exports = async function(deployer) {
 
     var daicoSchemeInstance = await DAICOScheme.deployed();
 
+    console.log(orgName)
+    console.log(tokenName)
+    console.log(tokenSymbol)
+    console.log(founders[0])
+    console.log(foundersRep[0])
+    console.log(foundersTokens[0])
+    console.log(daicoSchemeInstance.address)
     const daico = await ArcJS.DAO.new({
       name: orgName,
       tokenName: tokenName,
@@ -78,8 +86,8 @@ module.exports = async function(deployer) {
       schemes: [
         { 
           address: daicoSchemeInstance.address, 
-          parametersHash: [], 
-          permissions: "0x00000001" 
+          parametersHash: NULL_HASH, 
+          permissions: ArcJS.SchemePermissions.IsRegistered 
         }
       ] 
     });

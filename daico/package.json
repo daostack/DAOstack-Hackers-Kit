@@ -12,7 +12,8 @@
     "migrate-daostack": "npm explore @daostack/arc.js -- npm start migrateContracts",
     "webpack": "npx webpack --config webpack.config.js",
     "truffle-migrate": "./node_modules/.bin/truffle migrate",
-    "launch-local": "npm run webpack && npm run migrate-daostack && rm -rf build && npm run truffle-migrate && node dist/app.js"
+    "truffle-compile": "./node_modules/.bin/truffle compile",
+    "launch-local": "npm run truffle-compile && npm run webpack && npm run migrate-daostack && rm -rf build && npm run truffle-migrate && node dist/app.js"
   },
   "keywords": [
     "DAO",
@@ -24,7 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "@daostack/arc": "0.0.0-alpha.58",
-    "@daostack/arc.js": "0.0.0-alpha.96",
+    "@daostack/arc.js": "0.0.0-alpha.100",
     "express": "^4.16.4",
     "ipfs-mini": "^1.1.2",
     "truffle": "5.0.0-beta.1",

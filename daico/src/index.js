@@ -44,12 +44,11 @@ async function initialize() {
   });
 
   ConfigService.set("estimateGas", true);
-  ConfigService.set("txDepthRequiredForConfirmation", {kovan: 0, live: 0});
+  ConfigService.set("txDepthRequiredForConfirmation", {kovan: 0});
   AccountService.subscribeToAccountChanges(() => { window.location.reload(); });
 
   daicoDAO = await DAO.at(avatarAddress);
-  const daoSchemes = await daicoDAO.getSchemes();
-  const daoSchemeAddress = daoSchemes[0].address; 
+  const daoSchemeAddress = "0xb09bCc172050fBd4562da8b229Cf3E45Dc3045A6"; 
 
   $("#daoAddress").text("The DAO address is: " + avatarAddress);
   $("#donateButton").click(donateFunction);
@@ -64,10 +63,13 @@ async function initialize() {
 async function donateFunction() {
   console.log("donateFunction");
   var active = await icoScheme.isActive();
-  if (active == true ) {
+  if (active == true) {
     console.log("redeemFunction enabled");
     $('#redeemButton').removeAttr('disabled');
-    var donation = await icoScheme.donate(accounts[0]);
+    web3.eth.defaultAccount = web3.eth.accounts[0]
+    await web3.personal.unlockAccount(web3.eth.defaultAccount, async function(err, res) { 
+      var donation = await icoScheme.donate($("#ethAdddress").val());
+    })
   }
 }
 
