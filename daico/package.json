@@ -13,7 +13,7 @@
     "webpack": "npx webpack --config webpack.config.js",
     "truffle-migrate": "./node_modules/.bin/truffle migrate",
     "truffle-compile": "./node_modules/.bin/truffle compile",
-    "launch-local": "npm run truffle-compile && npm run webpack && npm run migrate-daostack && rm -rf build && npm run truffle-migrate && node dist/app.js"
+    "launch-local": "npm run truffle-compile && npm run webpack && npm run migrate-daostack && rm -rf build && npm run truffle-migrate"
   },
   "keywords": [
     "DAO",
@@ -26,8 +26,6 @@
   "dependencies": {
     "@daostack/arc": "0.0.0-alpha.58",
     "@daostack/arc.js": "0.0.0-alpha.100",
-    "express": "^4.16.4",
-    "ipfs-mini": "^1.1.2",
     "truffle": "5.0.0-beta.1",
     "truffle-contract": "^3.0.6",
     "truffle-hdwallet-provider": "0.0.6"

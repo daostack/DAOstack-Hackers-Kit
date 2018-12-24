@@ -1,10 +1,10 @@
 var ArcJS = require("@daostack/arc.js");
+var Migration = require("@daostack/arc.js/migration.json");
 
 var Avatar = artifacts.require("@daostack/arc/Avatar.sol");
 var Controller = artifacts.require("@daostack/arc/Controller.sol");
 var DaoCreator = artifacts.require("@daostack/arc/DaoCreator.sol");
 var DAICOScheme = artifacts.require("./ICOScheme.sol");
-
 
 // Organization parameters:
 const orgName = "DAICO TEMP";
@@ -13,15 +13,13 @@ const tokenSymbol = "DCOI";
 var founders;
 var foundersTokens = [10000];
 var foundersRep = [5];
-const votePrec = 50; 
 const GAS_LIMIT = 5900000;
-const NULL_HASH = '0x0000000000000000000000000000000000000000000000000000000000000000';
+const NULL_HASH =
+  "0x0000000000000000000000000000000000000000000000000000000000000000";
 
 module.exports = async function(deployer) {
   deployer.then(async function() {
     await ArcJS.InitializeArcJs();
-
-    var daicoAddress = "0x0000000000000000000000000000000000000000";
 
     var accounts = [];
     await web3.eth.getAccounts(function(err, res) {
@@ -33,7 +31,7 @@ module.exports = async function(deployer) {
       case "ganache":
       case "development":
         founders = [accounts[0]];
-        networkId = "ganache";
+        networkId = "private";
         break;
       case "kovan":
       case "kovan-infura":
@@ -41,8 +39,9 @@ module.exports = async function(deployer) {
         break;
     }
 
-
-    var daoCreatorInst = await DaoCreator.at("0xCfEB869F69431e42cdB54A4F4f105C19C080A601");
+    var daoCreatorInst = await DaoCreator.at(
+      ArcJS.ContractWrappers.DaoCreator.address
+    );
 
     // Create DAO:
     var returnedParams = await daoCreatorInst.forgeOrg(
@@ -52,45 +51,41 @@ module.exports = async function(deployer) {
       founders,
       foundersTokens, // Founders token amounts
       foundersRep, // Founders initial reputation
-      0, // 0 because we don't use a UController
+      Migration[networkId].base.UController,
       0, // no token cap
       { gas: GAS_LIMIT }
     );
+
     var avatarInst = await Avatar.at(returnedParams.logs[0].args._avatar);
 
+    await deployer.deploy(
+      DAICOScheme,
+      avatarInst.address,
+      100000,
+      1,
+      0,
+      500,
+      50
+    );
 
-    await deployer.deploy(DAICOScheme, "0xcB4e66eCA663FDB61818d52A152601cA6aFEf74F", 100000, 1, 0, 500, 50);
-        
     daicoAddress = (await DAICOScheme.deployed()).address;
 
     var daicoSchemeInstance = await DAICOScheme.deployed();
 
-    console.log(orgName)
-    console.log(tokenName)
-    console.log(tokenSymbol)
-    console.log(founders[0])
-    console.log(foundersRep[0])
-    console.log(foundersTokens[0])
-    console.log(daicoSchemeInstance.address)
-    const daico = await ArcJS.DAO.new({
-      name: orgName,
-      tokenName: tokenName,
-      tokenSymbol: tokenSymbol,
-      founders: [
-        {
-          address: founders[0],
-          reputation: foundersRep[0],
-          tokens: foundersTokens[0]
-        }
-      ],
-      schemes: [
-        { 
-          address: daicoSchemeInstance.address, 
-          parametersHash: NULL_HASH, 
-          permissions: ArcJS.SchemePermissions.IsRegistered 
-        }
-      ] 
-    });
+    var schemesArray = [daicoSchemeInstance.address];
+    const paramsArray = [NULL_HASH];
+    const permissionArray = ["0x00000001"];
+
+    console.log("OWNER " + (await avatarInst.owner.call()));
+
+    // set the DAO's initial schmes:
+    await daoCreatorInst.setSchemes(
+      avatarInst.address,
+      schemesArray,
+      paramsArray,
+      permissionArray
+    );
+
     console.log("Avatar address: " + avatarInst.address);
     console.log("Your DAICO was deployed successfuly!");
   });
