@@ -1,4 +1,4 @@
-pragma solidity ^0.4.25;
+pragma solidity ^0.4.24;
 
 import "@daostack/arc/contracts/controller/Avatar.sol";
 import "@daostack/arc/contracts/controller/ControllerInterface.sol";
@@ -29,6 +29,7 @@ contract ICOScheme is Pausable {
     event DonationReceived(address indexed _beneficiary, uint _incomingEther, uint _tokensAmount);
     event ReputationRedeemed(address indexed _beneficiary, uint _reputationAmount);
 
+
     constructor (
         Avatar _avatar,
         uint _cap,
@@ -39,7 +40,6 @@ contract ICOScheme is Pausable {
     ) public
     {
         require(_cap != 0, "cap must be greater than zero");
-
         avatar = _avatar;
         cap = _cap;
         price = _price;
@@ -89,7 +89,7 @@ contract ICOScheme is Pausable {
         // Check ICO is active:
         require(isActive(), "ICO is not active");
 
-        require(msg.value != 0, "No Ether were sent in the contribution");
+        require(msg.value > 0, "No Ether were sent in the contribution");
 
         uint incomingEther;
         uint change;
@@ -112,17 +112,17 @@ contract ICOScheme is Pausable {
         // Send ether to the defined address, mint, and send change to beneficiary:
         address(avatar).transfer(incomingEther);
 
-        require(
-            ControllerInterface(avatar.owner()).mintTokens(tokens, _beneficiary, address(avatar)),
-            "Failed to mint tokens"
-        );
+        // require(
+        //     ControllerInterface(avatar.owner()).mintTokens(tokens, _beneficiary, address(avatar)),
+        //     "Failed to mint tokens"
+        // );
         
         if (change != 0) {
             _beneficiary.transfer(change);
         }
 
         emit DonationReceived(_beneficiary, incomingEther, tokens);
-
+        
         return tokens;
     }
 
@@ -144,10 +144,10 @@ contract ICOScheme is Pausable {
 
         beneficiaries[_beneficiary] = 0;
 
-        require(
-            ControllerInterface(avatar.owner()).mintReputation(reputation, _beneficiary, address(avatar)),
-            "Failed to mint reputation"
-        );
+        // require(
+        //     ControllerInterface(avatar.owner()).mintReputation(reputation, _beneficiary, address(avatar)),
+        //     "Failed to mint reputation"
+        // );
 
         emit ReputationRedeemed(_beneficiary, reputation);
 

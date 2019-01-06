@@ -45,16 +45,6 @@ Open `src/index.js` and make sure the `avatarAddress` and `votingMachineAddress`
 npm run webpack
 ```
 
-### Getting the Arc contracts addresses:
-
-Use this command to get the addressses of Arc contracts on all networks:
-
-```
-node getArcContracts.js
-```
-
-The command will aslo re-generate `arc.json` file which will be used by the migration script to deploy the DAO.
-
 ### Deploy and use on Kovan network:
 
 1. Enter the `truffle.js` file and make the changes as instructed there.
@@ -81,14 +71,6 @@ npm run webpack
 
 - Go to `dist/index.html` and follow the instructions in the comments
 - After saving the changes, just open index.html in your web browser.
-
-#### Using with MetaMask:
-
-1. Open terminal at the project folder
-2. Run `node dist/app.js`
-3. Open your web browser with MetaMask open _and connected to your configured network_
-4. In your browser enter: `http://localhost:3000/`
-5. Please note that here you'll need to refresh the page after submitting transactions in order to view the new state in the UI.
 
 _Note:
 After making changes in the src js files use the following command:_

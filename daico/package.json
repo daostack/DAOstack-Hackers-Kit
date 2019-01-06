@@ -12,8 +12,8 @@
     "migrate-daostack": "npm explore @daostack/arc.js -- npm start migrateContracts",
     "webpack": "npx webpack --config webpack.config.js",
     "truffle-migrate": "./node_modules/.bin/truffle migrate",
-    "load-arc": "node getArcContracts.js",
-    "launch-local": "npm run load-arc && npm run webpack && npm run migrate-daostack && rm -rf build && npm run truffle-migrate && node dist/app.js"
+    "truffle-compile": "./node_modules/.bin/truffle compile",
+    "launch-local": "npm run truffle-compile && npm run webpack && npm run migrate-daostack && rm -rf build && npm run truffle-migrate"
   },
   "keywords": [
     "DAO",
@@ -24,15 +24,14 @@
   "author": "Ben Kaufman",
   "license": "ISC",
   "dependencies": {
-    "@daostack/arc": "0.0.0-alpha.54",
-    "@daostack/arc.js": "0.0.0-alpha.82",
-    "express": "^4.16.4",
-    "truffle": "^4.1.14",
+    "@daostack/arc": "0.0.0-alpha.58",
+    "@daostack/arc.js": "0.0.0-alpha.100",
+    "truffle": "5.0.0-beta.1",
     "truffle-contract": "^3.0.6",
     "truffle-hdwallet-provider": "0.0.6"
   },
   "devDependencies": {
-    "webpack": "^4.20.2",
+    "webpack": "^4.27.1",
     "webpack-cli": "^3.1.1"
   }
 }
