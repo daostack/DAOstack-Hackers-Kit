@@ -1,81 +1,82 @@
 <img src="./daostack-hk.png">
 
-# Introduction
-
-Welcome to the DAOstack Hackers Kit! You can find all the resources you need to build DAOs using the DAOstack framework in this repository.
-
 # Table of contents
 
 <!--ts-->
 
 - [Introduction](#introduction)
-- [Table of contents](#table-of-contents)
-- [Getting Started](#getting-started)
 - [The Stack](#the-stack)
   - [Infra](#infra)
   - [Arc](#arc)
   - [Arc.js](#arcjs)
-  - [Collaborative Dapps](#collaborative-dapps)
+  - [Dapps](#dapps)
   - [DAOs](#daos)
 - [Examples](#examples)
 - [Contact and Help](#contact-and-help)
   <!--te-->
 
-#### TL;DR
+# Introduction
 
-This repository was created to help you get started with the DAOstack platform and use it to build your own projects.
-[DAOstack](https://daostack.io) is a multi-layered platform for building DAOs and Collaborative Dapps.
-Our platform provides all needed infrastructure which includes: Standalone on-chain governance component named [Infra](https://github.com/daostack/infra), Ethereum smart contracts library named [Arc](https://github.com/daostack/arc), a JavaScript framework named [Arc.js](https://github.com/daostack/arc.js) and collaborative Dapps like [Alchemy](https://alchemy.daostack.io/).
-Here you can find examples and details on how to use DAOstack as well as links to documentation and other helpful resources.
+Welcome to the DAOstack Hackers Kit! This repository was created to help you get started building on the DAOstack platform.
 
-# Getting Started
+[DAOstack](https://daostack.io) is a software stack for building Dapps (decentralized apps), DAOs (Decentralized Autonomous Organizations), and DAO tools.
 
-This repository includes multiple examples for DAOs, which shows how to use the different layers and build utilizing the stack. You can use any of the examples or here or any other repository of DAOstack to build your own ideas and applications. We have also created here a template for starting a new project which you can find under the starter-template folder.
+The DAO stack provides all infrastructure needed to build such projects, including: 
+ - [Infra](https://github.com/daostack/infra), an Ethereum library of fundamental decentralized decision-making components 
+ - [Arc](https://github.com/daostack/arc), an Ethereum library containing everything needed to deploy DAOs
+ - [Arc.js](https://github.com/daostack/arc.js), a JavaScript framework for interacting with Arc smart contracts 
+ - [Alchemy](https://alchemy.daostack.io/) and other collaborative Dapps for end users to interact with
+ - [Genesis](https://alchemy.daostack.io/), DAOstack's own community DAO, which exists to help promote and fund the DAO ecosystem
+
+Here in the Hackers Kit you can find examples and details on how to use the DAO stack as well as links to documentation and other helpful resources. This repo, as well as code from any other [DAOstack repo](https://www.github.com/daostack), may be used to build your own ideas and applications.
+
+If you need a more general primer on the DAOstack project, read [here](https://medium.com/daostack/an-explanation-of-daostack-in-fairly-simple-terms-d0e034739c5a) before continuing.
 
 # The Stack
 
-The DAOstack stack components:
-
 ## [Infra](https://github.com/daostack/infra)
 
-Infra lays the core functionality for decentralized governance. It was created as a lean indipendent component and was designed to allow the integration of decentralized governance mechanism into any application regardless of its architecture.
-Infra is a standalone set of smart contracts with 2 main components:
+**Infra is a Solidity smart contract library containing the core building blocks of decentralized governance.** Infra contracts can be integrated into any application regardless of its architecture.
 
-- Voting Machines - A voting machine is a universal contract which can operate the voting process for all organizations. Each voting machine follows its own predifined rules for the decision making and execution process. Rules for voting machines can be implemented for any voting process, from a simple protocol like an "Absolute Vote" (where 51% of the voting power should approve it in order for the decision to pass), or more sophisticated protocols like the [Holographic Consensus](https://www.youtube.com/watch?v=1De0MoStSkY) voting protocol.
+Infra has two main components:
 
-- Voting Rights Management - The most important component for enabling voting is a way to determent how voting rights are distributed. Any voting rights management system must have "balances" which represents the voting power each participant holds. There are 2 main approaches for managing voting rights: token based voting and reputation based voting. The main technical difference between the two is that tokens are transferable (thus tradable) while reputation is non-transferable. Another big difference which might appear (depends on implementation) is that a token is a property which cannot be taken while reputation might be reduced by the organization itself. For most cases, we reccomend using the reputation based voting model, however, Infra was built in a manner allowing to use any voting right management system.
+- **Voting Machines** - A voting machine is a universal contract which can operate the voting process for any organization. Each voting machine follows its own predifined rules for the decision making and execution process. Rules for voting machines can be implemented for any voting process, from a simple protocol like an "Absolute Vote" (where 51% of the voting power should approve it in order for the decision to pass), or more sophisticated protocols like the [Holographic Consensus](https://www.youtube.com/watch?v=1De0MoStSkY) voting protocol.
 
-## [Arc](https://github.com/daostack/arc)
-
-The Arc framework is a smart contracts library for building DAOs written in Solidity. To get a good understanding of how the Arc framework is built you can go to [this blog post](https://medium.com/daostack/the-arc-platform-2353229a32fc). Arc is using Infra as its voting components and reputation management system for decentralized organizations.
-
-Arc's architecture is built on a few building blocks:
-
-- Avatar - The "account" of the DAO. This contract represents the address of the DAO and holds its assets.
-- Reputation - Voting in Arc is done mainly by using reputation. Reputation is non-transferable, reductable and is given to an agent according to his performance and contribution to the DAO.
-- Token - Each DAO may have its own token, which can be used in any way the DAO would like.
-- Controller - The controller is the "Access Control" of the DAO, managing who can interact with which functionality in the DAO and enforces the DAO's constraints.
-- Schemes - Schemes are the "actions" in the DAO, anything the DAO should act upon needs to be written and authorized by the controller as scheme. Some schemes are called "Universal Schemes", these are schemes which multiple DAOs can subscribe to and interact with at the same time, saving the deployment costs and reusing code. A scheme might be used for example to: propose and make investments, give reputation to agents, upgrade the DAO's contracts and register new schemes and constraints.
-- Global Constraints - The constraints are the limitations a DAO has on its actions. When executing a scheme, the controller checks the constraints to see if the action violates them, and block the execution if so. Global constraints have the same idea of Universal Schemes, it's possible for multiple DAOs to use the same contract as a constraint. Some examples for constraints might be: the token supply can't be increased over 1M tokens, the organization won't use more than 60% of its funds at once etc.
-
-As detailed above, Arc utilizes the concept of "Universal" contracts, contracts which are deployed once and then used by all organizations, to save gas costs and deployment complexity. To use the already deployed contracts you can either use Arc.js which maintains easy access to all universal Arc contracts, or you can use [this table](https://docs.google.com/spreadsheets/d/1hfR-fnnqXEn3Go3x3qoiXJcKSIAYQalSOi52vV2PCTA/edit?usp=sharing) to view the addresses of the universal contracts on the mainnet, Kovan, and Ganache\*
-All contracts listed on the table are universal, meaning that users should use them when needed and not redeploy them.
-
-_\* Please note that the Ganache addresses are based on the DAOstack commands for running and deploying Arc to a local Ganache network, this means those addresses might change if you are using a different way for running Ganache or deploying Arc)._
-
-Using the Arc framework, you have access to the base layer of the stack allowing you to create any complex functionalities for your DAOs with little effort.
+- **Voting Rights Management** - A voting rights management system determines how voting rights are distributed. Any voting rights management system must have "balances" which represents the voting power each participant holds. There are 2 main approaches for managing voting rights: token-based voting and reputation-based voting. The main technical difference between the two is that tokens are transferable (i.e. tradable) while reputation is non-transferable. Another big difference which may appear (depending on implementation) is that a token is a property which cannot be taken while reputation may be redistributed by the organization itself. For most cases, we reccomend using the reputation-based voting model, however, Infra allows any voting right management system to be built.
 
 ### Should I work at this level?
 
-While for most of the DAOs, there is no need to work directly with the Arc framework nor with Solidity code, you might want to work on this layer if you need your DAO to have a unique action, constraint or voting process which were not implemented on Arc yet.
+Build on Infra if you need new or modified decentralized governance primitives, such as voting machines and voting rights management systems.
+
+## [Arc](https://github.com/daostack/arc)
+
+**Arc is a Solidity smart contract library for building DAOs.** To get a good understanding of how the Arc framework is built, you can go to [this blog post](https://medium.com/daostack/the-arc-platform-2353229a32fc). Arc uses Infra to provide decentralized organizations with voting machines and voting rights management systems.
+
+DAOs built with Arc have a few basic contract components:
+
+- **Avatar** - The DAO's "account." This contract represents the address of the DAO and holds its assets.
+- **Reputation** - Voting in Arc is done mainly using Reputation. Reputation cna be distributed and redistributed only by DAO decision, and it is generally given (via vote) to an agent according to their performance and contribution to a DAO.
+- Token - Each DAO may have its own token, which can be used in any way the DAO would like.
+- **Controller** - The controller is the "Access Control" of the DAO, managing who can interact with which DAO functions and enforcing the DAO's constraints.
+- **Schemes** - Schemes are a DAO's "actions": anything a DAO should act upon needs to be written and authorized by the controller as a scheme. Schemes might be used to help a DAO: propose and make investments, give reputation to agents, upgrade the DAO's contracts, register new schemes and constraints, etc.
+- **Global Constraints** - Global constraints are limitations on a DAO's actions. When executing a scheme, the controller checks the constraints to see if the action violates them, and blocks the execution if it does. Some examples for constraints might be: the token supply can't be increased over 1M tokens, the organization won't use more than 60% of its funds at once, etc.
+
+**Arc utilizes the concept of "Universal" contracts**: contracts which are deployed once, and then can be used by any number of DAOs simultaneously, saving gas and deployment costs. Schemes and constraints can both be used in this way. To use the already deployed contracts, you can either use Arc.js, which maintains easy access to all universal Arc contracts, or you can use [this table](https://docs.google.com/spreadsheets/d/1hfR-fnnqXEn3Go3x3qoiXJcKSIAYQalSOi52vV2PCTA/edit?usp=sharing) to view the addresses of the universal contracts on the mainnet, Kovan, and Ganache\*
+All contracts listed on the table are universal, meaning that users should use them when needed and not redeploy them.
+
+_\* Please note that the Ganache addresses are based on the DAOstack commands for running and deploying Arc to a local Ganache network, which means those addresses might change if you are using a different method to run Ganache or deploy Arc._
+
+### Should I work at this level?
+
+Using Arc is not necessary to deploy a DAO (you can do this with Arc.js currently and in the future as an end user of Dapps), but you might want to work on this layer if you need your DAO to have a unique action, constraint, or voting process that is not yet implemented on Arc.
 
 You can find the complete Arc docs here: [https://daostack.github.io/arc](https://daostack.github.io/arc)
 
 ## [Arc.js](https://github.com/daostack/arc.js)
 
-Arc.js is a JavaScript library that facilitates JavaScript application access to the Arc contracts. Much like the Web3.js library serves as the connection for JavaScript/TypeScript developers to the Ethereum network, the Arc.js library is used as the connecting layer between Arc and applications including scripts, collaborative Dapps and DAO interfaces, specifically for your DAO or in interaction with multiple DAOs -- more broadly, any application that knows how to work with JavaScript/TypeScript coming from an NPM module in ES6 CommonJs module format.
+**Arc.js is a JavaScript library that facilitates access to Arc contracts without having to directly interact with the Ethereum blockchain.** Much like the Web3.js library serves as the connection for JavaScript/TypeScript developers to the Ethereum network, the Arc.js library connects Arc with scripts, applications, DAO interfaces, or any other program that knows how to work with JavaScript/TypeScript coming from an NPM module in ES6 CommonJs module format.
 
-Using Arc.js, JavaScript/TypeScript developers can easily write scripts or applications which can deploy DAOs, interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations and basically do anything of which a DAO is capable.
+Using Arc.js, JavaScript/TypeScript developers can easily write scripts or applications which can deploy DAOs, interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations, and basically do anything a DAO is capable of doing.
 
 Should you chose to leverage Arc.js in your application, you can find helpful documentation in the [complete Arc.js documentation](https://daostack.github.io/arc.js/).
 
@@ -85,41 +86,46 @@ You can find NodeJs scripts that use Arc.js to perform a variety of functions in
 
 ### Should I work at this level?
 
-You should use Arc.js whenever you want to use JavaScript or TypeScript to interact with Arc contracts and obtain other functionality particularly helpful to interactive Dapps that leverage Arc.
+You should use Arc.js whenever you want to use JavaScript or TypeScript to interact with Arc contracts. This is particularly helpful for developers who want to get the advantages of decentralized governance on the blockchain without dealing directly with a smart contract language.
 
-## Collaborative Dapps
+## Dapps
 
-The Arc.js framework facilitates development of "Collaborative Dapps" (Decentralized applications) that enable collaboration within and across DAOs.
-DAOstack has built its own collaborative Dapp called ["Alchemy"](https://alchemy.daostack.io/). The Alchemy Dapp is a collaborative Dapp for budget management in decentralized organizations. Alchemy can be used by any DAO willing to operate on the basis of fund management.
+The Arc.js framework facilitates development of "Dapps" (Decentralized applications) for interacting with DAOs.
 
-You can find the Alchemy repo here: [https://github.com/daostack/alchemy](https://github.com/daostack/alchemy)
+**DAOstack has built its own Dapp called [Alchemy](https://alchemy.daostack.io/), a front-end interface for DAOs**, or more specifically, for budget management in decentralized organizations. Alchemy allows end users to make collaborative budgeting decisions and allocations using the [Holographic Consensus protocol](https://www.youtube.com/watch?v=1De0MoStSkY&feature=youtu.be&t=11m50s).
 
-Another Dapp created by the DAOstack team is called ["Vanille"](http://daostack.azurewebsites.net). Vanille is like a direct interface to the Arc.js framework, enabling you to create and interact with DAOs before creating a dedicated interface for them.
+You can find the Alchemy repo at [github.com/daostack/alchemy](https://github.com/daostack/alchemy).
 
-You can find the Vanille repo here: [https://github.com/daostack/vanille](https://github.com/daostack/vanille)
+A second Dapp built by DAOstack is [Vanille](http://daostack.azurewebsites.net) (enable MetaMask). Vanille is a direct interface for the Arc.js framework, enabling users to create and interact with DAOs before moving to a dedicated interface like Alchemy.
+
+You can find the Vanille repo here: [https://github.com/daostack/vanille](https://github.com/daostack/vanille).
+
+### Should I work at this level?
+
+Build at the Dapp level if you want to create new ways to interact with existing DAOs and DAOstack smart contracts, e.g. a multi-DAO explorer for GEN predictors or a new DAO creation app.
 
 ## DAOs
 
-The Collaborative Dapps can be used to deploy new DAOs and interact with existing ones. DAOs can be used for many purposes, with the common goal of creating decentralized global collaboration and collective intelligence. The goal of DAOstack is to make it as easy as possible to create and manage DAOs and use them to drive the new decentralized global economy.
-DAOstack has its own DAO called the Genesis DAO. We use Alchemy to manage and interact with the DAO, which can be seen through ["Alchemy"](https://alchemy.daostack.io/) and is live on the Ethereum mainnet! The Genesis DAO is a fund management DAO utilizing the Holographic Consensus voting mechanism, which is DAOstack's solution for scaling the decision-making capabilities of a DAO indefinitely, allowing smarter and more accurate use of the collective attention of a DAO's agents. [Here](https://www.youtube.com/watch?v=1De0MoStSkY) is a video of Matan Field, DAOstack's CEO, explaining the concept of Holographic Consensus and the game theory which it is based upon.
-The Arc framework has a built-in support for the Holographic Consensus voting, which is called the Genesis Protocol, which allows you to utilize this concept immediately with your own DAO.
+**DAOs can be created for any conceivable collaborative purpose, from local political action to distributed manufacturing and sales.** The goal of DAOstack is to make it as easy as possible to create and manage DAOs, and to use them to drive a new decentralized global economy (specifically, an economy that uses [GEN, our collective attention token](https://medium.com/daostack/on-the-utility-of-the-gen-token-eb4f341d770e)).
+
+**DAOstack Technologies has created an initial DAO called "Genesis" with the purpose of promoting the GEN/DAO ecosystem.** Genesis is currently live on the Ethereum mainnet, has over 100 Reputation-holders who have executed over 120 proposals since August 2018, and can be accessed through ["Alchemy"](https://alchemy.daostack.io/).
 
 # Examples
-The hackers kit is equipped with several examples and sample projects, which we are constantly working to maintain and expand. The goal for those examples is to help developers easily kickstart a new project, as well as to demonstrate how to use the varaity of feature included in the DAOstack framework and its different layers.
+The hackers kit is equipped with several examples and sample projects, which we are working to maintain and expand. The goal for these examples is to help developers easily kickstart a new project, as well as to demonstrate some of the features included in each layer of the DAO stack.
 
 ## [Starter Template](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template)
 This is a basic template you can use for kickstarting your project using the DAOstack platform. Here you can find the basic structue for using both Arc and Arc.js to build your project.
 
 ## [Peep DAO](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/peepeth-dao-example)
-This project is dapp for interacting with a DAO which has its own social media account on [Peepeth](Peepeth.com), a decentralized microblogging app. The Dapp allows to make decisions on posting Peeps on behalf of the DAO by decentralized voting of its participants.
+This project is a Dapp for interacting with a DAO which has its own DAO social media account on [Peepeth](Peepeth.com), a decentralized microblogging app. The Dapp allows a DAO post Peeps via a decentralized voting mechanism.
 
 ## [DutchX DAO Bootstrap](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/dutchx-bootstrap)
 This project contains a minimal UI for participating in the bootstrap of the DutchX DAO.
-The bootstrapping process for a DAO is the process of distributing the initial reputation and tokens of a new DAO. The DutchX bootstrap process is a 3 months period during which users can do several actions, like locking tokens for example, to receive reputation in the DutchX DAO.
+The bootstrapping process for a DAO is the process of distributing its initial reputation and tokens. The DutchX bootstrap process is a 3 months period during which users can do several actions, like locking tokens, in order to receive Reputation in the DutchX DAO.
 You can view the DutchX DAO bootstrapping contracts [here](https://github.com/daostack/arc/tree/master/contracts/schemes).
 
 # Contact and Help
 
-The DAOstack team members will be available to assist you with your projects in the Hackathon.
-For any technical questions please reach out to us at the event or via Discord [at this link](https://discord.gg/cHZ8Ha9).
-If you have any questions or comments about this repository please open an issue and we'll do our best to help.
+DAOstack team members and open-source community members always make an effort to assist new projects.
+For any technical questions, please reach out to us via Discord [at this link](https://discord.gg/cHZ8Ha9).
+If you have any questions or comments about this repository, please open an issue, and we'll do our best to help.
