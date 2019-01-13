@@ -55,7 +55,7 @@ Build on Infra if you need new or modified decentralized governance primitives, 
 DAOs built with Arc have a few basic contract components:
 
 - **Avatar** - The DAO's "account." This contract represents the address of the DAO and holds its assets.
-- **Reputation** - Voting in Arc is done mainly using Reputation. Reputation cna be distributed and redistributed only by DAO decision, and it is generally given (via vote) to an agent according to their performance and contribution to a DAO.
+- **Reputation** - Voting in Arc is done mainly using Reputation. Reputation can be distributed and redistributed only by DAO decision, and it is generally given (via vote) to an agent according to their performance and contribution to a DAO.
 - Token - Each DAO may have its own token, which can be used in any way the DAO would like.
 - **Controller** - The controller is the "Access Control" of the DAO, managing who can interact with which DAO functions and enforcing the DAO's constraints.
 - **Schemes** - Schemes are a DAO's "actions": anything a DAO should act upon needs to be written and authorized by the controller as a scheme. Schemes might be used to help a DAO: propose and make investments, give reputation to agents, upgrade the DAO's contracts, register new schemes and constraints, etc.
