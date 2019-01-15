@@ -1,9 +1,4 @@
-var arcContracts = require("../arc.json");
-
-var Avatar = artifacts.require("@daostack/arc/Avatar.sol");
-var DaoCreator = artifacts.require("@daostack/arc/DaoCreator.sol");
-
-const GAS_LIMIT = 5900000;
+const ArcJS = require("@daostack/arc.js");
 
 // Organization parameters:
 // The DAO name
@@ -23,6 +18,8 @@ var foundersRep = [];
 
 module.exports = async function(deployer) {
   deployer.then(async function() {
+    await ArcJS.InitializeArcJs();
+
     // TODO: edit this switch command based on the comments at the variables decleration lines
     var networkId;
     switch (deployer.network) {
@@ -36,34 +33,22 @@ module.exports = async function(deployer) {
         break;
     }
 
-    var daoCreatorInst = await DaoCreator.at(
-      arcContracts.DaoCreator[networkId]
-    );
-
-    // Create DAO:
-    var returnedParams = await daoCreatorInst.forgeOrg(
-      orgName,
-      tokenName,
-      tokenSymbol,
-      founders,
-      foundersTokens, // Founders token amounts
-      foundersRep, // Founders initial reputation
-      0, // 0 because we don't use a UController
-      0, // no token cap
-      { gas: GAS_LIMIT }
-    );
-    var avatarInst = await Avatar.at(returnedParams.logs[0].args._avatar); // Gets the Avatar address
-
-    var schemesArray = []; // The addresses of the schemes
-    const paramsArray = []; // Defines which parameters should be grannted for each of the schemes
-    const permissionArray = []; // The permissions for the schemes
-
-    // set the DAO's initial schmes:
-    await daoCreatorInst.setSchemes(
-      avatarInst.address,
-      schemesArray,
-      paramsArray,
-      permissionArray
-    ); // Sets the scheme in our DAO controller by using the DAO Creator we used to forge our DAO
+    // Create a new DAO:
+    const dao = await ArcJS.DAO.new({
+      name: orgName,
+      tokenName: tokenName,
+      tokenSymbol: tokenSymbol,
+      founders: [
+        {
+          address: founders[0],
+          reputation: foundersRep[0],
+          tokens: foundersTokens[0]
+        }
+        // TODO: If you add more founders don't forget to add them here as well
+        // TODO: Don't forget to add at least 1 founder to the `founders`, foundersRep` and `foundersTokens` arrays
+      ],
+      // Set the DAO's initial schemes:
+      schemes: []
+    });
   });
 };

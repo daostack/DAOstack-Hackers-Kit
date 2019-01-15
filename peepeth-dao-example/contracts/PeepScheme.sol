@@ -1,9 +1,9 @@
 pragma solidity ^0.4.24;
 
+import "@daostack/infra/contracts/votingMachines/ProposalExecuteInterface.sol";
 import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol";
-import "@daostack/arc/contracts/universalSchemes/ExecutableInterface.sol";
-import "@daostack/arc/contracts/VotingMachines/IntVoteInterface.sol";
 import "@daostack/arc/contracts/controller/ControllerInterface.sol";
+import "@daostack/arc/contracts/votingMachines/VotingMachineCallbacks.sol";
 import "./PeepethInterface.sol";
 
 
@@ -13,7 +13,7 @@ import "./PeepethInterface.sol";
  * if accepted the peep will be posted by the organization
  * and the proposer will receive reputation.
  */
-contract PeepScheme is UniversalScheme, ExecutableInterface {
+contract PeepScheme is UniversalScheme, VotingMachineCallbacks, ProposalExecuteInterface {
 
     // Peepeth contract address on the Ethereum mainnet
     address public constant PEEPETH = 0xfa28eC7198028438514b49a3CF353BcA5541ce1d;
@@ -137,9 +137,8 @@ contract PeepScheme is UniversalScheme, ExecutableInterface {
         bytes32 peepId = controllerParams.intVote.propose(
             3,
             controllerParams.voteApproveParams,
-           _avatar,
-           ExecutableInterface(this),
-           msg.sender
+            msg.sender,
+            _avatar
         );
 
         // Set the struct:
@@ -165,35 +164,37 @@ contract PeepScheme is UniversalScheme, ExecutableInterface {
     /**
     * @dev execution of proposals, can only be called by the voting machine in which the vote is held.
     * @param _proposalId the ID of the voting in the voting machine
-    * @param _avatar address of the controller
     * @param _param a parameter of the voting result, 1 yes and 2 is no.
     */
-    function execute(bytes32 _proposalId, address _avatar, int _param) public returns(bool) {
+    function executeProposal(bytes32 _proposalId, int _param)  public returns(bool) {
+        address avatar = proposalsInfo[_proposalId].avatar;
+
         // Check the caller is indeed the voting machine:
         require(
-            parameters[getParametersFromController(Avatar(_avatar))].intVote == msg.sender, 
+            parameters[getParametersFromController(Avatar(avatar))].intVote == msg.sender, 
             "Only the voting machine can execute proposal"
         );
 
         // Check if vote was successful:
         if (_param == 1) {
-            PeepProposal memory proposal = organizationsProposals[_avatar][_proposalId];
+            PeepProposal memory proposal = organizationsProposals[avatar][_proposalId];
             
-            ControllerInterface controller = ControllerInterface(Avatar(_avatar).owner());
+            ControllerInterface controller = ControllerInterface(Avatar(avatar).owner());
             // Sends a call to the Peepeth contract to post a new peep.
             // The call will be made from the avatar address such that when received by the Peepeth contract, the msg.sender value will be the avatar's address
-            controller.genericCall(peepethContract, abi.encodeWithSelector(PeepethInterface(peepethContract).post.selector, proposal.peepHash), _avatar);
+            controller.genericCall(peepethContract, abi.encodeWithSelector(PeepethInterface(peepethContract).post.selector, proposal.peepHash), avatar);
             
             // Mints reputation for the proposer of the Peep.
             require(
-                ControllerInterface(Avatar(_avatar).owner()).mintReputation(uint(proposal.reputationChange), proposal.proposer, _avatar),
+                ControllerInterface(Avatar(avatar).owner()).mintReputation(uint(proposal.reputationChange), proposal.proposer, avatar),
                 "Failed to mint reputation to proposer"
             );
         } else {
-            delete organizationsProposals[_avatar][_proposalId];
+            delete organizationsProposals[avatar][_proposalId];
         }
 
-        emit ProposalExecuted(_avatar, _proposalId, _param);
+        emit ProposalExecuted(avatar, _proposalId, _param);
+
         return true;
     }
 }
