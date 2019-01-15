@@ -244,6 +244,7 @@ function getPeepContentFromHash(hash) {
   return new Promise(function(resolve, reject) {
     ipfs.catJSON(hash, (err, result) => {
       if (err) {
+        
         reject(err);
       } else {
         resolve(result.content);
