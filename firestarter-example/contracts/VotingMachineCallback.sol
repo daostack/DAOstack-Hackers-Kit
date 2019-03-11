@@ -34,13 +34,6 @@ contract VotingMachineCallback is VotingMachineCallbacksInterface, ProposalExecu
         paramsHash = absoluteVote.setParameters(51, address(this)); 
     }
 
-    function vote(bytes32 _proposalId, bool yes) public {
-
-        absoluteVote.vote(_proposalId, yes ? 1 : 0, 0, msg.sender);
-
-        emit ProposalVote(_proposalId, yes ? 1 : 0, msg.sender);
-    }
-
     function createProposal(uint _ethAmount) public {
         bytes32 proposalId = absoluteVote.propose(2, paramsHash, address(0), address(this));
 
@@ -50,10 +43,26 @@ contract VotingMachineCallback is VotingMachineCallbacksInterface, ProposalExecu
         emit ProposalCreated(proposalId, msg.sender);
     }
 
+    function vote(bytes32 _proposalId, bool yes) public {
+
+        absoluteVote.vote(_proposalId, yes ? 1 : 0, 0, msg.sender);
+
+        emit ProposalVote(_proposalId, yes ? 1 : 0, msg.sender);
+    }
+
     function getTotalReputationSupply(bytes32 _proposalId) external view returns(uint256) {
         uint balance = IFireStarter(firestarter).getBalance(projectId);
 
         return balance;
+    }
+
+    function checkVote(bytes32 _proposalId, address _voter) external view returns(uint vote, uint reputation) {
+        (vote, reputation) = absoluteVote.voteInfo(_proposalId, _voter);
+    }
+
+    function voteStatus(bytes32 _proposalId) external view returns(uint yes, uint no) {
+        yes = absoluteVote.voteStatus(_proposalId, 1);
+        no = absoluteVote.voteStatus(_proposalId, 0);
     }
 
     function reputationOf(address _owner, bytes32 _proposalId) external view returns(uint256) {
@@ -70,5 +79,4 @@ contract VotingMachineCallback is VotingMachineCallbacksInterface, ProposalExecu
 
         emit ProposalFinished(_proposalId, _decision);
     }
-
 }
