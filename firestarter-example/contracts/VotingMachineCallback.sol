@@ -15,49 +15,49 @@ contract VotingMachineCallback is VotingMachineCallbacksInterface, ProposalExecu
 
 //--------------------------------------------------------------------------------------------------------
 
-	address public firestarter;
-	AbsoluteVote public absoluteVote;
-	bytes32 public paramsHash;
-	uint public projectId;
+    address public firestarter;
+    AbsoluteVote public absoluteVote;
+    bytes32 public paramsHash;
+    uint public projectId;
 
     mapping(bytes32 => uint) public ethWanted;
     mapping(bytes32 => address payable) public proposer;
 
-	event ProposalCreated(bytes32 indexed proposalId, address indexed proposer);
-	event ProposalFinished(bytes32 indexed proposalId, int decision);
-	event ProposalVote(bytes32 indexed proposalId, uint vote, address indexed voter);
+    event ProposalCreated(bytes32 indexed proposalId, address indexed proposer);
+    event ProposalFinished(bytes32 indexed proposalId, int decision);
+    event ProposalVote(bytes32 indexed proposalId, uint vote, address indexed voter);
 
-	constructor(uint _projectId) public {
-		projectId = _projectId;
-		firestarter = msg.sender;
-		absoluteVote = new AbsoluteVote();
-		paramsHash = absoluteVote.setParameters(51, address(this)); 
-	}
+    constructor(uint _projectId) public {
+        projectId = _projectId;
+        firestarter = msg.sender;
+        absoluteVote = new AbsoluteVote();
+        paramsHash = absoluteVote.setParameters(51, address(this)); 
+    }
 
-	function vote(bytes32 _proposalId, bool yes) public {
+    function vote(bytes32 _proposalId, bool yes) public {
 
         absoluteVote.vote(_proposalId, yes ? 1 : 0, 0, msg.sender);
 
         emit ProposalVote(_proposalId, yes ? 1 : 0, msg.sender);
-	}
+    }
 
-	function createProposal(uint _ethAmount) public {
-		bytes32 proposalId = absoluteVote.propose(2, paramsHash, address(0), address(this));
+    function createProposal(uint _ethAmount) public {
+        bytes32 proposalId = absoluteVote.propose(2, paramsHash, address(0), address(this));
 
         ethWanted[proposalId] = _ethAmount;
         proposer[proposalId] = msg.sender;
 
-		emit ProposalCreated(proposalId, msg.sender);
-	}
+        emit ProposalCreated(proposalId, msg.sender);
+    }
 
     function getTotalReputationSupply(bytes32 _proposalId) external view returns(uint256) {
-    	uint balance = IFireStarter(firestarter).getBalance(projectId);
+        uint balance = IFireStarter(firestarter).getBalance(projectId);
 
-    	return balance;
+        return balance;
     }
 
     function reputationOf(address _owner, bytes32 _proposalId) external view returns(uint256) {
-    	return IFireStarter(firestarter).userFundedProject(projectId, _owner);
+        return IFireStarter(firestarter).userFundedProject(projectId, _owner);
     }
 
     function executeProposal(bytes32 _proposalId, int _decision) external returns(bool) {
@@ -68,7 +68,7 @@ contract VotingMachineCallback is VotingMachineCallbacksInterface, ProposalExecu
             proposer[_proposalId].transfer(address(this).balance);
         }
 
-    	emit ProposalFinished(_proposalId, _decision);
+        emit ProposalFinished(_proposalId, _decision);
     }
 
 }

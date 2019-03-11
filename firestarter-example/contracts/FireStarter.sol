@@ -11,30 +11,30 @@ contract FireStarter is IFireStarter {
         uint funds;
         address votingMachineCallback;
         mapping (address => uint) balances;
-	}
+    }
 
     Project[] public projects;
 
     event ProjectCreated(uint indexed id, string name, address indexed owner);
-	event ProjectFunded(uint indexed id, uint amount, address from);
-	event ProjectWithdraw(uint indexed id, uint ethAmount, string message);
+    event ProjectFunded(uint indexed id, uint amount, address from);
+    event ProjectWithdraw(uint indexed id, uint ethAmount, string message);
 
     function createProject(string memory _name) public {
         Project memory project;
-		project.owner = msg.sender;
-		project.name = _name;
-		project.votingMachineCallback = address(new VotingMachineCallback(totalProjects()));
+        project.owner = msg.sender;
+        project.name = _name;
+        project.votingMachineCallback = address(new VotingMachineCallback(totalProjects()));
 
-		projects.push(project);
+        projects.push(project);
 
-		emit ProjectCreated(projects.length-1, _name, msg.sender);
+        emit ProjectCreated(projects.length-1, _name, msg.sender);
     }
 
     function supportProject(uint _id) public payable {
         projects[_id].funds += msg.value;
         projects[_id].balances[msg.sender] += msg.value;
 
-		emit ProjectFunded(_id, msg.value, msg.sender);
+        emit ProjectFunded(_id, msg.value, msg.sender);
     }
 
     function getBalance(uint _id) public view returns(uint) {
@@ -60,6 +60,6 @@ contract FireStarter is IFireStarter {
     }
 
     function totalProjects() public view returns(uint) {
-		return projects.length;
-	}
+        return projects.length;
+    }
 }
