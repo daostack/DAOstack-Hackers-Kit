@@ -124,6 +124,10 @@ This project contains a minimal UI for participating in the bootstrap of the Dut
 The bootstrapping process for a DAO is the process of distributing its initial reputation and tokens. The DutchX bootstrap process is a 3 months period during which users can do several actions, like locking tokens, in order to receive Reputation in the DutchX DAO.
 You can view the DutchX DAO bootstrapping contracts [here](https://github.com/daostack/arc/tree/master/contracts/schemes).
 
+## [Firestarter DAO Example](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/firestarter-example)
+Firestarter is a community driven crowdsourcing platform, which utilizes DaoStack for governance of the projects.
+This is a striped down version of the project, which only showcases the DaoStack integration.
+
 # Contact and Help
 
 DAOstack team members and open-source community members always make an effort to assist new projects.
