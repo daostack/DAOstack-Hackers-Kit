@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@daostack/infra": "0.0.1-rc.12",
+    "node": "^8.9.4",
     "openzeppelin-solidity": "^2.1.3"
   }
 }

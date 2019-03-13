@@ -16,8 +16,10 @@ Enter the project folder from the terminal and type the following:
 
 After downloading the project:
 
-```
-npm install
-truffle build
-truffle migrate
-```
+If you don't have truffle, install truffle version 5.0.0 with `npm install -g truffle@5.0.0`
+
+After that run `npm install`
+
+Run `truffle develop` which will start a truffle console, in that console you can run:
+
+`migrate --reset` - This will compile and run the code in a built in truffle test blockchain
