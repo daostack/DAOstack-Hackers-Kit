@@ -24,8 +24,8 @@ Welcome to the DAOstack Hackers Kit! This repository was created to help you get
 The DAO stack provides all infrastructure needed to build such projects, including: 
  - [Infra](https://github.com/daostack/infra), an Ethereum library of fundamental decentralized decision-making components 
  - [Arc](https://github.com/daostack/arc), an Ethereum library containing everything needed to deploy DAOs
- - [Arc.js](https://github.com/daostack/arc.js), a JavaScript framework for interacting with Arc smart contracts 
  - [Alchemy](https://alchemy.daostack.io/) and other collaborative Dapps for end users to interact with
+ - [Client](https://github.com/daostack/client), a JavaScript library for interacting with Arc smart contracts and frontend library for the DAOstack subgraphs
  - [Genesis](https://alchemy.daostack.io/), DAOstack's own community DAO, which exists to help promote and fund the DAO ecosystem
 
 Here in the Hackers Kit you can find examples and details on how to use the DAO stack as well as links to documentation and other helpful resources. This repo, as well as code from any other [DAOstack repo](https://www.github.com/daostack), may be used to build your own ideas and applications.

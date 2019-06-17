@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/truffle test",
-    "ganache": "npm explore @daostack/arc.js -- npm start ganache",
+    "ganache": "npm explore @daostack/migration -- npm run ganache",
     "migrate-daostack": "npm explore @daostack/arc.js -- npm start migrateContracts",
     "webpack": "npx webpack --config webpack.config.js",
     "truffle-migrate": "./node_modules/.bin/truffle migrate",
@@ -23,11 +23,11 @@
   "author": "YOUR_NAME",
   "license": "YOUR_LICENSE",
   "dependencies": {
-    "@daostack/arc": "^0.0.0-alpha.56",
-    "@daostack/arc.js": "^0.0.0-alpha.89",
+    "@daostack/client": "0.1.19",
+    "@daostack/migration": "0.0.1-rc.19-v3",
     "express": "^4.16.3",
-    "truffle-hdwallet-provider": "0.0.6",
-    "truffle": "^5.0.0-beta.1"
+    "truffle": "^5.0.22",
+    "truffle-hdwallet-provider": "0.0.6"
   },
   "devDependencies": {
     "webpack": "^4.17.1",

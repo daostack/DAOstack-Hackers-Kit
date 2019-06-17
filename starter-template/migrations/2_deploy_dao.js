@@ -1,54 +1,29 @@
-const ArcJS = require("@daostack/arc.js");
-
-// Organization parameters:
-// The DAO name
-const orgName = "YOUR_DAO";
-// The DAO's token name
-const tokenName = "YOUR_DAO_TOKEN_NAME";
-// Token symbol
-const tokenSymbol = "YOUR_DAO_TOKEN_SYMBOL";
-// The ethereum addresses of the "founders"
-// TODO: list your accounts to give initial reputation to
-var founders = [];
-// TODO: list the token amount per founder account
-// NOTE: the important thing is to make sure the array length match the number of founders
-var foundersTokens = [];
-// TODO: list the reputation amount per founder account
-var foundersRep = [];
+const DAOstackMigration = require('@daostack/migration');
+const migrationSpec =  require('../data/testDaoSpec.json')
 
 module.exports = async function(deployer) {
-  deployer.then(async function() {
-    await ArcJS.InitializeArcJs();
+  DAOstackMigration.Ganache.server();
+  DAOstackMigration.Ganache.provider();
+  const options = {
 
-    // TODO: edit this switch command based on the comments at the variables decleration lines
-    var networkId;
-    switch (deployer.network) {
-      case "ganache":
-      case "development":
-        networkId = "ganache";
-        break;
-      case "kovan":
-      case "kovan-infura":
-        networkId = "kovan";
-        break;
+    provider: 'http://localhost:8545',
+    quiet: false,
+    force: true,
+    output: 'migration.json',
+    privateKey: '0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d',
+    params: {
+      default: {
+        migrationSpec
+      }
     }
+  };
 
-    // Create a new DAO:
-    const dao = await ArcJS.DAO.new({
-      name: orgName,
-      tokenName: tokenName,
-      tokenSymbol: tokenSymbol,
-      founders: [
-        {
-          address: founders[0],
-          reputation: foundersRep[0],
-          tokens: foundersTokens[0]
-        }
-        // TODO: If you add more founders don't forget to add them here as well
-        // TODO: Don't forget to add at least 1 founder to the `founders`, foundersRep` and `foundersTokens` arrays
-      ],
-      // Set the DAO's initial schemes:
-      schemes: []
-    });
-  });
-};
+  console.log("Here")
+  
+  const migrationDAOResult = await DAOstackMigration.migrateDAO(options);
+  console.log("Here2")
+  const migrationDemoResult = await DAOstackMigration.migrateDemoTest(options);
+  migrationDemoResult.test.Avatar // Test DAO avatar address
+  const migrationResult = await DAOstackMigration.migrate(options); // migrate
+  DAOstackMigration.cli()
+}
