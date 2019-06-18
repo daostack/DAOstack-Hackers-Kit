@@ -25,6 +25,7 @@
   "dependencies": {
     "@daostack/client": "0.1.19",
     "@daostack/migration": "0.0.1-rc.19-v3",
+    "dotenv": "^8.0.0",
     "express": "^4.16.3",
     "truffle": "^5.0.22",
     "truffle-hdwallet-provider": "0.0.6"
