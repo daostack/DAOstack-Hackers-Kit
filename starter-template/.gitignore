@@ -3,3 +3,4 @@ build
 yarn*
 .node*
 *.swp
+.env
