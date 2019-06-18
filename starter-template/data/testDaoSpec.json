@@ -15,8 +15,6 @@
     }
   ],
   "SchemeRegistrar": {
-    "voteRegisterParams": 1,
-    "voteRemoveParams": 1
   },
   "VotingMachinesParams": [
     {
@@ -47,6 +45,6 @@
     "GenericScheme": false,
     "SchemeRegistrar": true,
     "GlobalConstraintRegistrar": false,
-    "UpgradeScheme": true
+    "UpgradeScheme": false
   }
 }
