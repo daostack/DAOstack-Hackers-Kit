@@ -17,6 +17,15 @@ module.exports = {
         ),
       network_id: 42,
       gasPrice: 1000000000 // 1 Gwei
+    },
+    rinkeby: {
+
+      provider: () => new HDWalletProvider(
+        process.env.SEED_PHRASE,
+        "https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2"
+      ),
+      network_id: 4,
+      gas: 4612388 // Gas limit used for deploys
     }
   },
   compilers: {
