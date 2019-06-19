@@ -26,9 +26,10 @@
     "@daostack/client": "0.1.19",
     "@daostack/migration": "0.0.1-rc.19-v3",
     "dotenv": "^8.0.0",
+    "ethereumjs-wallet": "^0.6.3",
     "express": "^4.16.3",
     "truffle": "^5.0.22",
-    "truffle-hdwallet-provider": "0.0.6"
+    "truffle-hdwallet-provider": "^1.0.10"
   },
   "devDependencies": {
     "webpack": "^4.17.1",
