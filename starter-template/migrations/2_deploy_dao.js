@@ -3,20 +3,25 @@ const migrationSpec =  require('../data/testDaoSpec.json')
 
 console.log(process.env.PROVIDER)
 module.exports = async function(deployer) {
-  DAOstackMigration.Ganache.server();
-  DAOstackMigration.Ganache.provider();
 
   const options = {
-    provider: process.env.PROVIDER, 
-    gasPrice: 1,
+    provider: process.env.PROVIDER,
     quiet: false,
     force: true,
     output: process.env.MIGRATION_OUTPUT,
     privateKey: process.env.PRIVATE_KEY,
-    prevmigration: process.env.MIGRATION_OUTPUT,
-    params: {private: migrationSpec}
+    params: {
+      private: migrationSpec,
+      rinkeby: migrationSpec
+    }
   };
 
-  const migrationBaseResult = await DAOstackMigration.migrateBase(options);
+  switch (deployer.network) {
+    case "ganache":
+    case "development":
+      const migrationBaseResult = await DAOstackMigration.migrateBase(options);
+      options.prevmigration = options.output;
+      break;
+  }
   const migrationDAOResult = await DAOstackMigration.migrateDAO(options);
 }
