@@ -7,12 +7,13 @@
     "test": "test"
   },
   "scripts": {
+    "build": "docker build --file Dockerfile --tag daostack_ganache .",
     "test": "./node_modules/.bin/truffle test",
+    "start": "npm run webpack && node dist/app.js",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate-daostack": "npm explore @daostack/arc.js -- npm start migrateContracts",
     "webpack": "npx webpack --config webpack.config.js",
     "truffle-migrate": "./node_modules/.bin/truffle migrate",
-    "launch-local": "npm run webpack && npm run migrate-daostack && rm -rf build && npm run truffle-migrate && node dist/app.js"
+    "launch-local": "npm run start && rm -rf build && npm run truffle-migrate && node dist/app.js"
   },
   "keywords": [
     "DAO",
