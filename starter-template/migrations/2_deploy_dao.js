@@ -1,11 +1,12 @@
 const DAOstackMigration = require('@daostack/migration');
 const migrationSpec =  require('../data/testDaoSpec.json')
 
-console.log(process.env.PROVIDER)
 module.exports = async function(deployer) {
+  const DEFAULT_GAS = 3.0
 
   const options = {
     provider: process.env.PROVIDER,
+    gasPrice: DEFAULT_GAS,
     quiet: false,
     force: true,
     output: process.env.MIGRATION_OUTPUT,
