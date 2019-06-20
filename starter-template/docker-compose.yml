@@ -1,0 +1,48 @@
+# This is for DEVELOPMENT, not production
+
+version: "3"
+services:
+  app:
+    image: daostack_app:latest
+    links:
+      - graph-node
+      - ganache
+    working_dir: /app/
+    ports:
+      - 3000:3000
+
+  ganache:
+    image: daostack_ganache:latest
+    ports:
+      - 8545:8545
+
+  graph-node:
+    image: 'graphprotocol/graph-node:v0.12.0'
+    ports:
+      - 8000:8000
+      - 8001:8001
+      - 8020:8020
+    links:
+      - ipfs
+      - postgres
+      - ganache
+    environment:
+      postgres_host: postgres:5432
+      postgres_user: postgres
+      postgres_pass: 'letmein'
+      postgres_db: postgres
+      ipfs: ipfs:5001
+      ethereum: development:http://ganache:8545
+      GRAPH_LOG: "graph.log"
+
+  ipfs:
+    image: daostack/subgraph-ipfs:ganache-0.0.1-rc.19-v3-0.0.20
+    ports:
+      - 5001:5001
+
+  postgres:
+    image: daostack/subgraph-postgres:ganache-0.0.1-rc.19-v3-0.0.20
+    ports:
+      - 9432:5432
+    environment:
+      POSTGRES_PASSWORD: 'letmein'
