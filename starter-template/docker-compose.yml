@@ -3,7 +3,7 @@
 version: "3"
 services:
   app:
-    image: daostack_app:latest
+    image: starter_template_app:latest
     links:
       - graph-node
       - ganache
@@ -12,7 +12,9 @@ services:
       - 3000:3000
 
   ganache:
-    image: daostack_ganache:latest
+    image: starter_template_ganache:latest
+    volumes:
+      - /Users/shivgupt/Documents/projects/Github/DAOstack-Hackers-Kit/starter-template/migration.json:/app/migration.json
     ports:
       - 8545:8545
 
@@ -27,22 +29,24 @@ services:
       - postgres
       - ganache
     environment:
-      postgres_host: postgres:5432
-      postgres_user: postgres
+      postgres_host: 'postgres:5432'
+      postgres_user: 'postgres'
       postgres_pass: 'letmein'
       postgres_db: postgres
-      ipfs: ipfs:5001
-      ethereum: development:http://ganache:8545
-      GRAPH_LOG: "graph.log"
+      ipfs: 'ipfs:5001'
+      ethereum: 'development:http://ganache:8545'
+      GRAPH_IPFS_TIMEOUT: '2'
+      GRAPH_MAX_IPFS_FILE_BYTES: '102400'
 
   ipfs:
-    image: daostack/subgraph-ipfs:ganache-0.0.1-rc.19-v3-0.0.20
+    image: starter_template_ipfs:latest
     ports:
       - 5001:5001
 
   postgres:
-    image: daostack/subgraph-postgres:ganache-0.0.1-rc.19-v3-0.0.20
+    image: starter_template_postgres:latest
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: 'letmein'
+      POSTGRES_PASSWORD: letmein
+      POSTGRES_USER: postgres
