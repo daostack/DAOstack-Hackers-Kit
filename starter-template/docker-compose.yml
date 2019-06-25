@@ -43,6 +43,6 @@ services:
   postgres:
     image: daostack/subgraph-postgres:ganache-0.0.1-rc.19-v3-0.0.20
     ports:
-      - 9432:5432
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD: 'letmein'
