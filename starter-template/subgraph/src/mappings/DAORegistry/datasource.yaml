@@ -1,0 +1,9 @@
+entities:
+  - Dummy
+eventHandlers:
+  - event: Propose(address)
+    handler: handlePropose
+  - event: Register(address,string)
+    handler: handleRegister
+  - event: UnRegister(address)
+    handler: handleUnRegister

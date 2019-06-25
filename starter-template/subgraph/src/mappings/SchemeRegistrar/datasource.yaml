@@ -1,0 +1,15 @@
+abis:
+  - SchemeRegistrar
+  - GenesisProtocol
+entities:
+  - SchemeRegistrarNewSchemeProposal
+  - SchemeRegistrarRemoveSchemeProposal
+  - SchemeRegistrarProposalExecuted
+
+eventHandlers:
+  - event: NewSchemeProposal(address,bytes32,address,address,bytes32,bytes4,string)
+    handler: handleNewSchemeProposal
+  - event: RemoveSchemeProposal(address,bytes32,address,address,string)
+    handler: handleRemoveSchemeProposal
+  - event: ProposalExecuted(address,bytes32,int256)
+    handler: handleProposalExecuted
