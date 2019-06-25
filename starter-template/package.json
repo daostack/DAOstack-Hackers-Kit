@@ -7,14 +7,16 @@
     "test": "test"
   },
   "scripts": {
-    "build": "docker build --file Dockerfile --tag daostack_ganache .",
-    "run-ganache": "docker run -p 8545:8545 -v `pwd`/migration.json:/app/migration.json daostack_ganache:latest",
+    "build":"npm run build:ganache && npm run build:app && npm run build:ipfs && npm run build:postgres",
+    "build:ganache": "docker build --file Dockerfile --tag starter_template_ganache .",
+    "build:app": "docker build --file starter-app/Dockerfile --tag starter_template_app ./starter-app",
+    "build:ipfs": "docker build --file subgraph/docker/ipfs/Dockerfile --tag starter_template_ipfs ./subgraph/docker/ipfs",
+    "build:postgres": "docker build --file subgraph/docker/postgres/Dockerfile --tag starter_template_postgres ./subgraph/docker/postgres",
+    "launch:docker":"docker-compose up -d",
+    "run-ganache": "docker run -p 8545:8545 -v `pwd`/migration.json:/app/migration.json starter_template_ganache:latest",
     "test": "./node_modules/.bin/truffle test",
-    "start": "npm run webpack && node dist/app.js",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "webpack": "npx webpack --config webpack.config.js",
-    "truffle-migrate": "./node_modules/.bin/truffle migrate",
-    "launch-local": "npm run start && rm -rf build && npm run truffle-migrate && node dist/app.js"
+    "truffle-migrate": "./node_modules/.bin/truffle migrate"
   },
   "keywords": [
     "DAO",
