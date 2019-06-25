@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "docker build --file Dockerfile --tag daostack_ganache .",
+    "run-ganache": "docker run -p 8545:8545 -v `pwd`/migration.json:/app/migration.json daostack_ganache:latest",
     "test": "./node_modules/.bin/truffle test",
     "start": "npm run webpack && node dist/app.js",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
