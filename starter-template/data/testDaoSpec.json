@@ -1,5 +1,5 @@
 {
-  "name": "Dev Test",
+  "orgName": "DevTest",
   "tokenName": "Dev",
   "tokenSymbol": "DEV",
   "unregisterOwner": true,
