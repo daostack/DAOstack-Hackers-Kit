@@ -22,7 +22,10 @@ The structure is basically as follows:
 ## Running your project on local testnet:
 
 After downloading the project and docker:
-Enter the project folder from the terminal (starter-template) and type the following:
+
+- copy the `example.env` from `data` directory as `.env` in the project directory
+- Update the `.env` file with your `SEED_PHRASE` and <TESTNET-NAME>`_INFURA_URL`
+- Enter the project folder from the terminal (starter-template) and type the following:
 
 ```
 npm run launch:docker
@@ -47,9 +50,9 @@ To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com/
 
 ### Deploy and use on test network:
 
-Update the `.env` file with your `SEED_PHRASE` and <TESTNET-NAME>`_INFURA_URL`
-3. Open terminal at the project folder
-4. Run the following commands truffle migrate with testnet name eg:
+- Update the `.env` file with your `SEED_PHRASE` and <TESTNET-NAME>`_INFURA_URL`
+- Open terminal at the project folder
+- Run the following commands truffle migrate with testnet name eg:
 
 ```
 rm -rf build
