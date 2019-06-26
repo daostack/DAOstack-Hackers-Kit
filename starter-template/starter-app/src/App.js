@@ -41,7 +41,8 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          {this.state.daos.map((dao) => (<li key={dao.address}> {dao.address} </li>))}
+          Use client library to create a proposal to your new DAO
+          {this.state.daos.map((dao) => (<li key={dao.address}> DAO address: {dao.address} </li>))}
         </header>
       </div>
     );
