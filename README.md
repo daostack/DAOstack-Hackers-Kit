@@ -80,6 +80,9 @@ Client library is also a wrapper around [DAOstack subgraph](https://github.com/d
 
 Using Client, JavaScript/TypeScript developers can easily write scripts or applications which can interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations
 
+## [Subgraph](https://github.com/daostack/subgraph)
+**Subgraph indexes the blockchain data and stores it in postgres database for easy and quich access.** The data store can be queried by GraphQL endpoints. DAOstack subgraph is based on the graphprotocol checkout [TheGraph](https://thegraph.com/docs/quick-start) for more details.
+
 ### Should I work at this level?
 
 You should use Client whenever you want to use JavaScript or TypeScript to interact with Arc contracts. This is particularly helpful for developers who want to get the advantages of decentralized governance on the blockchain without dealing directly with a smart contract language.
