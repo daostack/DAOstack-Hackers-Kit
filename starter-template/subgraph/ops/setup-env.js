@@ -1,7 +1,7 @@
 const path = require('path')
 const subgraphRepo = path.resolve(`${__dirname}/..`)
 const { migrationFileLocation } = require('./settings')
-const migration = '/Users/shivgupt/Documents/projects/Github/DAOstack-Hackers-Kit/starter-template/migration.json'
+const migration = require('@daostack/migration/migration.json')
 const fs = require('fs')
 
 async function setupenv () {
