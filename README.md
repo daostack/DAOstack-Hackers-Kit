@@ -63,14 +63,14 @@ DAOs built with Arc have a few basic contract components:
 - **Schemes** - Schemes are a DAO's "actions": anything a DAO should act upon needs to be written and authorized by the controller as a scheme. Schemes might be used to help a DAO: propose and make investments, give reputation to agents, upgrade the DAO's contracts, register new schemes and constraints, etc.
 - **Global Constraints** - Global constraints are limitations on a DAO's actions. When executing a scheme, the controller checks the constraints to see if the action violates them, and blocks the execution if it does. Some examples for constraints might be: the token supply can't be increased over 1M tokens, the organization won't use more than 60% of its funds at once, etc.
 
-**Arc utilizes the concept of "Universal" contracts**: contracts which are deployed once, and then can be used by any number of DAOs simultaneously, saving gas and deployment costs. Schemes and constraints can both be used in this way. To use the already deployed contracts, you can either use Client, which maintains easy access to all universal Arc contracts, or you can use [this table](https://docs.google.com/spreadsheets/d/1hfR-fnnqXEn3Go3x3qoiXJcKSIAYQalSOi52vV2PCTA/edit?usp=sharing) to view the addresses of the universal contracts on the mainnet, Kovan, and Ganache\*
-All contracts listed on the table are universal, meaning that users should use them when needed and not redeploy them.
+**Arc utilizes the concept of "Universal" contracts**: contracts which are deployed once, and then can be used by any number of DAOs simultaneously, saving gas and deployment costs. Schemes and constraints can both be used in this way. To use the already deployed contracts, you can either use Client, which maintains easy access to all universal Arc contracts, or you can use [Migration.json](https://github.com/daostack/migration/blob/master/migration.json) to view the addresses of the universal contracts of the latest arc version on the mainnet, Kovan, Rinkeby and Ganache\*
+All contracts listed in the file are universal, meaning that users should use them when needed and not redeploy them.
 
 _\* Please note that the Ganache addresses are based on the DAOstack commands for running and deploying Arc to a local Ganache network, which means those addresses might change if you are using a different method to run Ganache or deploy Arc._
 
 ### Should I work at this level?
 
-Using Arc is not necessary to deploy a DAO (you can do this with Arc.js currently and in the future as an end user of Dapps), but you might want to work on this layer if you need your DAO to have a unique action, constraint, or voting process that is not yet implemented on Arc.
+Using Arc is not necessary to deploy a DAO (you can do this with [Migrations](https://github.com/daostack/migration/blob/master/migration.json) currently and in the future as an end user of Dapps), but you might want to work on this layer if you need your DAO to have a unique action, constraint, or voting process that is not yet implemented on Arc.
 
 You can find the complete Arc docs here: [https://daostack.github.io/arc](https://daostack.github.io/arc)
 
@@ -78,16 +78,20 @@ You can find the complete Arc docs here: [https://daostack.github.io/arc](https:
 
 **Client is a library that facilitates access to Arc contracts without having to directly interact with the Ethereum blockchain.** It provides functions to interact with DAOstack contracts to vote, propose, stake and execute proposals.
 
-Client library is also a wrapper around [DAOstack subgraph](https://github.com/daostack/sugbraph). It enable developers to interact with DAOstack subgraph and execute various generic graph queries to access proposals, daos and other complex entities
+Client library is also a wrapper around [DAOstack subgraph](https://github.com/daostack/sugbraph). It enable developers to interact with subgraph and execute various generic graph queries to access proposals, daos and other complex entities
 
-Using Client, JavaScript/TypeScript developers can easily write scripts or applications which can interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations
+Using Client, JavaScript/TypeScript developers can easily write scripts or applications which can interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations. This is particularly helpful for developers who want to get the advantages of decentralized governance on the blockchain without dealing directly with a smart contract language.
+
+### Should I work at this level?
+
+You should use Client whenever you want to use JavaScript or TypeScript to interact with Arc contracts for voting, proposing etc or to execute generic GraphQL queries on subgraph for accessing blockchain data. If you are interacting with custom Arc contracts or custom subgraph, then you might have to write your own Web3 library to interact with contracts and/or query the subgraph.
 
 ## [Subgraph](https://github.com/daostack/subgraph)
 **Subgraph indexes the blockchain data and stores it in postgres database for easy and quick access.** The subgraph runs on a Graph Node which is a server that developers can run local or remote. The data store can be queried by GraphQL endpoints. [DAOstack subgraph](https://subgraph.daostack.io/) is based on graphprotocol, checkout [TheGraph](https://thegraph.com/docs/quick-start) for more details. TheGraph opens their server to others and you can find daostack subgraph and subgraphs from many other projects at [Graph Explorer](https://thegraph.com/explorer/)
 
 ### Should I work at this level?
 
-You should use Client whenever you want to use JavaScript or TypeScript to interact with Arc contracts. This is particularly helpful for developers who want to get the advantages of decentralized governance on the blockchain without dealing directly with a smart contract language.
+If you are writing new Arc contracts which are not indexed by DAOstack subgraph or want to fetch data of existing Arc contracts in a way other than that specified in [DAOstack subgraph's schema.graphql](https://github.com/daostack/subgraph/blob/master/src), then you should write your own subgraph schema and mappings
 
 ## Dapps
 
