@@ -9,6 +9,7 @@
   - [Infra](#infra)
   - [Arc](#arc)
   - [Client](#client)
+  - [Subgraph](#subgraph)
   - [Dapps](#dapps)
   - [DAOs](#daos)
 - [Examples](#examples)
@@ -24,8 +25,9 @@ Welcome to the DAOstack Hackers Kit! This repository was created to help you get
 The DAO stack provides all infrastructure needed to build such projects, including: 
  - [Infra](https://github.com/daostack/infra), an Ethereum library of fundamental decentralized decision-making components 
  - [Arc](https://github.com/daostack/arc), an Ethereum library containing everything needed to deploy DAOs
- - [Alchemy](https://alchemy.daostack.io/) and other collaborative Dapps for end users to interact with
  - [Client](https://github.com/daostack/client), a JavaScript library for interacting with Arc smart contracts and frontend library for the DAOstack subgraphs
+ - [Subgraph](https://github.com/daostack/subgraph), a Caching layer to index blockchain data that can be queried via GraphQL
+ - [Alchemy](https://alchemy.daostack.io/) and other collaborative Dapps for end users to interact with
  - [Genesis](https://alchemy.daostack.io/), DAOstack's own community DAO, which exists to help promote and fund the DAO ecosystem
 
 Here in the Hackers Kit you can find examples and details on how to use the DAO stack as well as links to documentation and other helpful resources. This repo, as well as code from any other [DAOstack repo](https://www.github.com/daostack), may be used to build your own ideas and applications.
@@ -81,7 +83,7 @@ Client library is also a wrapper around [DAOstack subgraph](https://github.com/d
 Using Client, JavaScript/TypeScript developers can easily write scripts or applications which can interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations
 
 ## [Subgraph](https://github.com/daostack/subgraph)
-**Subgraph indexes the blockchain data and stores it in postgres database for easy and quich access.** The data store can be queried by GraphQL endpoints. DAOstack subgraph is based on the graphprotocol checkout [TheGraph](https://thegraph.com/docs/quick-start) for more details.
+**Subgraph indexes the blockchain data and stores it in postgres database for easy and quick access.** The subgraph runs on a Graph Node which is a server that developers can run local or remote. The data store can be queried by GraphQL endpoints. [DAOstack subgraph](https://subgraph.daostack.io/) is based on graphprotocol, checkout [TheGraph](https://thegraph.com/docs/quick-start) for more details. TheGraph opens their server to others and you can find daostack subgraph and subgraphs from many other projects at [Graph Explorer](https://thegraph.com/explorer/)
 
 ### Should I work at this level?
 
