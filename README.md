@@ -70,7 +70,7 @@ _\* Please note that the Ganache addresses are based on the DAOstack commands fo
 
 ### Should I work at this level?
 
-Using Arc is not necessary to deploy a DAO (you can do this with [Migrations](https://github.com/daostack/migration/blob/master/migration.json) currently and in the future as an end user of Dapps), but you might want to work on this layer if you need your DAO to have a unique action, constraint, or voting process that is not yet implemented on Arc.
+Using Arc is not necessary to deploy a DAO (you can do this with [Migrations](https://github.com/daostack/migration) currently and in the future as an end user of Dapps), but you might want to work on this layer if you need your DAO to have a unique action, constraint, or voting process that is not yet implemented on Arc.
 
 You can find the complete Arc docs here: [https://daostack.github.io/arc](https://daostack.github.io/arc)
 
