@@ -25,6 +25,7 @@ Welcome to the DAOstack Hackers Kit! This repository was created to help you get
 The DAO stack provides all infrastructure needed to build such projects, including: 
  - [Infra](https://github.com/daostack/infra), an Ethereum library of fundamental decentralized decision-making components 
  - [Arc](https://github.com/daostack/arc), an Ethereum library containing everything needed to deploy DAOs
+ - [Migration](https://github.com/daostack/migration), a library of utilities required to migrate DAOstack contracts and DAOs and other tools for migration related tasks
  - [Client](https://github.com/daostack/client), a JavaScript library for interacting with Arc smart contracts and frontend library for the DAOstack subgraphs
  - [Subgraph](https://github.com/daostack/subgraph), a Caching layer to index blockchain data that can be queried via GraphQL
  - [Alchemy](https://alchemy.daostack.io/) and other collaborative Dapps for end users to interact with
@@ -119,7 +120,7 @@ Build at the Dapp level if you want to create new ways to interact with existing
 The hackers kit is equipped with several examples and sample projects, which we are working to maintain and expand. The goal for these examples is to help developers easily kickstart a new project, as well as to demonstrate some of the features included in each layer of the DAO stack.
 
 ## [Starter Template](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template)
-This is a basic template you can use for kickstarting your project using the DAOstack platform. Here you can find the basic structue for using both Arc and Arc.js to build your project.
+This is a basic template you can use for kickstarting your project using the DAOstack platform. Here you can find the basic structure for using Arc, Client and Subgraph to build your project.
 
 ## [Peep DAO](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/peepeth-dao-example)
 This project is a Dapp for interacting with a DAO which has its own DAO social media account on [Peepeth](Peepeth.com), a decentralized microblogging app. The Dapp allows a DAO post Peeps via a decentralized voting mechanism.
