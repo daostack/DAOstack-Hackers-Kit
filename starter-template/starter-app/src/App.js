@@ -3,6 +3,7 @@ import './App.css';
 import { Arc, DAO } from "@daostack/client";
 import { first } from 'rxjs/operators';
 import { ethers as eth } from 'ethers';
+import migration from './data/migration.json';
 
 const settings = {
   dev: {
@@ -37,7 +38,7 @@ class App extends Component {
         dao: "",
         description: "Test",
         title: "No Title",
-        scheme: "0x6eD79Aa1c71FD7BdBC515EfdA3Bd4e26394435cC",
+        scheme: "0x297D631516A2f66216980c37ce2DE9E1F5CF64e5",
         url: "#",
         beneficiary: "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
         nativeTokenReward: "",
@@ -55,7 +56,7 @@ class App extends Component {
 
   async componentWillMount() {
     const arc = await initializeArc()
-    console.log(arc)
+    //console.log(arc)
     const daos = await arc.daos().pipe(first()).toPromise()
     this.setState({
       arcIsInitialized: true,
