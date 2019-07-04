@@ -8,7 +8,8 @@
 - [The Stack](#the-stack)
   - [Infra](#infra)
   - [Arc](#arc)
-  - [Arc.js](#arcjs)
+  - [Client](#client)
+  - [Subgraph](#subgraph)
   - [Dapps](#dapps)
   - [DAOs](#daos)
 - [Examples](#examples)
@@ -24,7 +25,9 @@ Welcome to the DAOstack Hackers Kit! This repository was created to help you get
 The DAO stack provides all infrastructure needed to build such projects, including: 
  - [Infra](https://github.com/daostack/infra), an Ethereum library of fundamental decentralized decision-making components 
  - [Arc](https://github.com/daostack/arc), an Ethereum library containing everything needed to deploy DAOs
- - [Arc.js](https://github.com/daostack/arc.js), a JavaScript framework for interacting with Arc smart contracts 
+ - [Migration](https://github.com/daostack/migration), a library of utilities required to migrate DAOstack contracts and DAOs and other tools for migration related tasks
+ - [Client](https://github.com/daostack/client), a JavaScript library for interacting with Arc smart contracts and frontend library for the DAOstack subgraphs
+ - [Subgraph](https://github.com/daostack/subgraph), a Caching layer to index blockchain data that can be queried via GraphQL
  - [Alchemy](https://alchemy.daostack.io/) and other collaborative Dapps for end users to interact with
  - [Genesis](https://alchemy.daostack.io/), DAOstack's own community DAO, which exists to help promote and fund the DAO ecosystem
 
@@ -61,42 +64,45 @@ DAOs built with Arc have a few basic contract components:
 - **Schemes** - Schemes are a DAO's "actions": anything a DAO should act upon needs to be written and authorized by the controller as a scheme. Schemes might be used to help a DAO: propose and make investments, give reputation to agents, upgrade the DAO's contracts, register new schemes and constraints, etc.
 - **Global Constraints** - Global constraints are limitations on a DAO's actions. When executing a scheme, the controller checks the constraints to see if the action violates them, and blocks the execution if it does. Some examples for constraints might be: the token supply can't be increased over 1M tokens, the organization won't use more than 60% of its funds at once, etc.
 
-**Arc utilizes the concept of "Universal" contracts**: contracts which are deployed once, and then can be used by any number of DAOs simultaneously, saving gas and deployment costs. Schemes and constraints can both be used in this way. To use the already deployed contracts, you can either use Arc.js, which maintains easy access to all universal Arc contracts, or you can use [this table](https://docs.google.com/spreadsheets/d/1hfR-fnnqXEn3Go3x3qoiXJcKSIAYQalSOi52vV2PCTA/edit?usp=sharing) to view the addresses of the universal contracts on the mainnet, Kovan, and Ganache\*
-All contracts listed on the table are universal, meaning that users should use them when needed and not redeploy them.
+**Arc utilizes the concept of "Universal" contracts**: contracts which are deployed once, and then can be used by any number of DAOs simultaneously, saving gas and deployment costs. Schemes and constraints can both be used in this way. To use the already deployed contracts, you can either use Client, which maintains easy access to all universal Arc contracts, or you can use [Migration.json](https://github.com/daostack/migration/blob/master/migration.json) to view the addresses of the universal contracts of the latest arc version on the mainnet, Kovan, Rinkeby and Ganache\*
+All contracts listed in the file are universal, meaning that users should use them when needed and not redeploy them.
 
 _\* Please note that the Ganache addresses are based on the DAOstack commands for running and deploying Arc to a local Ganache network, which means those addresses might change if you are using a different method to run Ganache or deploy Arc._
 
 ### Should I work at this level?
 
-Using Arc is not necessary to deploy a DAO (you can do this with Arc.js currently and in the future as an end user of Dapps), but you might want to work on this layer if you need your DAO to have a unique action, constraint, or voting process that is not yet implemented on Arc.
+Using Arc is not necessary to deploy a DAO (you can do this with [Migrations](https://github.com/daostack/migration) currently and in the future as an end user of Dapps), but you might want to work on this layer if you need your DAO to have a unique action, constraint, or voting process that is not yet implemented on Arc.
 
 You can find the complete Arc docs here: [https://daostack.github.io/arc](https://daostack.github.io/arc)
 
-## [Arc.js](https://github.com/daostack/arc.js)
+## [Client](https://github.com/daostack/client)
 
-**Arc.js is a JavaScript library that facilitates access to Arc contracts without having to directly interact with the Ethereum blockchain.** Much like the Web3.js library serves as the connection for JavaScript/TypeScript developers to the Ethereum network, the Arc.js library connects Arc with scripts, applications, DAO interfaces, or any other program that knows how to work with JavaScript/TypeScript coming from an NPM module in ES6 CommonJs module format.
+**Client is a library that facilitates access to Arc contracts without having to directly interact with the Ethereum blockchain.** It provides functions to interact with DAOstack contracts to vote, propose, stake and execute proposals.
 
-Using Arc.js, JavaScript/TypeScript developers can easily write scripts or applications which can deploy DAOs, interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations, and basically do anything a DAO is capable of doing.
+Client library is also a wrapper around [DAOstack subgraph](https://github.com/daostack/sugbraph). It enable developers to interact with subgraph and execute various generic graph queries to access proposals, daos and other complex entities
 
-Should you chose to leverage Arc.js in your application, you can find helpful documentation in the [complete Arc.js documentation](https://daostack.github.io/arc.js/).
-
-Should you choose to develop inside Arc.js itself, you can find helpful information in the [documentation for Arc.js developers](https://github.com/daostack/arc.js/blob/devDocs/docs/DeveloperDocs.md).
-
-You can find NodeJs scripts that use Arc.js to perform a variety of functions in the [Arc.js-scripts Github repository](https://github.com/daostack/arc.js-scripts).
+Using Client, JavaScript/TypeScript developers can easily write scripts or applications which can interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations. This is particularly helpful for developers who want to get the advantages of decentralized governance on the blockchain without dealing directly with a smart contract language.
 
 ### Should I work at this level?
 
-You should use Arc.js whenever you want to use JavaScript or TypeScript to interact with Arc contracts. This is particularly helpful for developers who want to get the advantages of decentralized governance on the blockchain without dealing directly with a smart contract language.
+You should use Client whenever you want to use JavaScript or TypeScript to interact with Arc contracts for voting, proposing etc or to execute generic GraphQL queries on subgraph for accessing blockchain data. If you are interacting with custom Arc contracts or custom subgraph, then you might have to write your own Web3 library to interact with contracts and/or query the subgraph.
+
+## [Subgraph](https://github.com/daostack/subgraph)
+**Subgraph indexes the blockchain data and stores it in postgres database for easy and quick access.** The subgraph runs on a Graph Node which is a server that developers can run local or remote. The data store can be queried by GraphQL endpoints. [DAOstack subgraph](https://subgraph.daostack.io/) is based on graphprotocol, checkout [TheGraph](https://thegraph.com/docs/quick-start) for more details. TheGraph opens their server to others and you can find daostack subgraph and subgraphs from many other projects at [Graph Explorer](https://thegraph.com/explorer/)
+
+### Should I work at this level?
+
+If you are writing new Arc contracts which are not indexed by DAOstack subgraph or want to fetch data of existing Arc contracts in a way other than that specified in [DAOstack subgraph's schema.graphql](https://github.com/daostack/subgraph/blob/master/src), then you should write your own subgraph schema and mappings
 
 ## Dapps
 
-The Arc.js framework facilitates development of "Dapps" (Decentralized applications) for interacting with DAOs.
+The Client library facilitates development of "Dapps" (Decentralized applications) for interacting with DAOs.
 
 **DAOstack has built its own Dapp called [Alchemy](https://alchemy.daostack.io/), a front-end interface for DAOs**, or more specifically, for budget management in decentralized organizations. Alchemy allows end users to make collaborative budgeting decisions and allocations using the [Holographic Consensus protocol](https://www.youtube.com/watch?v=1De0MoStSkY&feature=youtu.be&t=11m50s).
 
 You can find the Alchemy repo at [github.com/daostack/alchemy](https://github.com/daostack/alchemy).
 
-A second Dapp built by DAOstack is [Vanille](http://daostack.azurewebsites.net) (enable MetaMask). Vanille is a direct interface for the Arc.js framework, enabling users to create and interact with DAOs before moving to a dedicated interface like Alchemy.
+A second Dapp built by DAOstack is [Vanille](http://daostack.azurewebsites.net) (enable MetaMask). Vanille enables users to create and interact with DAOs before moving to a dedicated interface like Alchemy.
 
 You can find the Vanille repo here: [https://github.com/daostack/vanille](https://github.com/daostack/vanille).
 
@@ -114,7 +120,7 @@ Build at the Dapp level if you want to create new ways to interact with existing
 The hackers kit is equipped with several examples and sample projects, which we are working to maintain and expand. The goal for these examples is to help developers easily kickstart a new project, as well as to demonstrate some of the features included in each layer of the DAO stack.
 
 ## [Starter Template](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template)
-This is a basic template you can use for kickstarting your project using the DAOstack platform. Here you can find the basic structue for using both Arc and Arc.js to build your project.
+This is a basic template you can use for kickstarting your project using the DAOstack platform. Here you can find the basic structure for using Arc, Client and Subgraph to build your project.
 
 ## [Peep DAO](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/peepeth-dao-example)
 This project is a Dapp for interacting with a DAO which has its own DAO social media account on [Peepeth](Peepeth.com), a decentralized microblogging app. The Dapp allows a DAO post Peeps via a decentralized voting mechanism.

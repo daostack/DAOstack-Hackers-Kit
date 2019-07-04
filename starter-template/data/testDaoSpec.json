@@ -1,0 +1,53 @@
+{
+  "orgName": "DevTest",
+  "tokenName": "Dev",
+  "tokenSymbol": "DEV",
+  "unregisterOwner": true,
+  "useUController": false,
+  "useDaoCreator": true,
+  "founders": [
+    {
+      "address": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+      "reputation": 3001,
+      "tokens": 1000
+    },
+    {
+      "address": "0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0",
+      "reputation": 1000,
+      "tokens": 1000
+    }
+  ],
+  "SchemeRegistrar": {
+  },
+  "VotingMachinesParams": [
+    {
+      "queuedVoteRequiredPercentage": 50,
+      "queuedVotePeriodLimit": 432000,
+      "boostedVotePeriodLimit": 86400,
+      "preBoostedVotePeriodLimit": 43200,
+      "thresholdConst": 1200,
+      "quietEndingPeriod": 14400,
+      "proposingRepReward": 500,
+      "votersReputationLossRatio": 1,
+      "minimumDaoBounty": 150,
+      "daoBountyConst": 10,
+      "activationTime": 0,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000"
+    }
+  ],
+  "GenesisProtocol": {
+    "queuedVotePeriodLimit": 600,
+    "boostedVotePeriodLimit": 600,
+    "preBoostedVotePeriodLimit": 600,
+    "quietEndingPeriod": 300
+  },
+  "ContributionReward": {
+  },
+  "schemes": {
+    "ContributionReward": true,
+    "GenericScheme": false,
+    "SchemeRegistrar": true,
+    "GlobalConstraintRegistrar": false,
+    "UpgradeScheme": false
+  }
+}

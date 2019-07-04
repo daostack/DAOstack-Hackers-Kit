@@ -1,0 +1,111 @@
+type ControllerOrganization @entity {
+	id: ID!
+	avatarAddress: Bytes!
+	nativeToken: TokenContract!
+	nativeReputation: ReputationContract!
+	controller: Bytes!
+}
+
+type ControllerScheme @entity {
+	id: ID!
+	dao: DAO!
+	paramsHash: Bytes!
+	canRegisterSchemes: Boolean
+	canManageGlobalConstraints: Boolean
+	canUpgradeController: Boolean
+	canDelegateCall: Boolean
+	gpQueue: GPQueue
+	address: Bytes!
+	name: String
+	version: String
+	contributionRewardParams: ContributionRewardParam
+	schemeRegistrarParams: SchemeRegistrarParam
+	genericSchemeParams: GenericSchemeParam
+
+}
+
+type ControllerGlobalConstraint @entity {
+	id: ID!
+	address: Bytes!
+	paramsHash: Bytes!
+	type: String!
+}
+
+type ControllerRegisterScheme @entity {
+	id: ID!
+	txHash: Bytes!
+	controller: Bytes!
+	contract: Bytes!
+	scheme: Bytes!
+}
+
+type ControllerUnregisterScheme @entity {
+	id: ID!
+	txHash: Bytes!
+	controller: Bytes!
+	contract: Bytes!
+	scheme: Bytes!
+}
+
+type ControllerUpgradeController @entity {
+	id: ID!
+	txHash: Bytes!
+	controller: Bytes!
+	newController: Bytes!
+}
+
+type ControllerAddGlobalConstraint @entity {
+	id: ID!
+	txHash: Bytes!
+	controller: Bytes!
+	globalConstraint: Bytes!
+	paramsHash: Bytes!
+	type: String!
+}
+
+type ControllerRemoveGlobalConstraint @entity {
+	id: ID!
+	txHash: Bytes!
+	controller: Bytes!
+	globalConstraint: Bytes!
+	isPre: Boolean
+}
+
+
+type ContributionRewardParam @entity {
+	id: ID!
+	votingMachine : Bytes!
+	voteParams: GenesisProtocolParam!
+}
+
+type SchemeRegistrarParam @entity {
+	id: ID!
+	votingMachine : Bytes!
+	voteRegisterParams : GenesisProtocolParam!
+	voteRemoveParams : GenesisProtocolParam!
+}
+
+type GenericSchemeParam @entity {
+	id: ID!
+	votingMachine : Bytes!
+	voteParams: GenesisProtocolParam!
+	contractToCall: Bytes!
+}
+
+type GenesisProtocolParam @entity {
+	id: ID!
+	# Genesis Protocol params
+	queuedVoteRequiredPercentage: BigInt!
+	queuedVotePeriodLimit: BigInt!
+	boostedVotePeriodLimit: BigInt!
+	preBoostedVotePeriodLimit: BigInt!
+	thresholdConst: BigInt!
+	limitExponentValue: BigInt!
+	quietEndingPeriod: BigInt!
+	proposingRepReward: BigInt!
+	votersReputationLossRatio: BigInt!
+	minimumDaoBounty: BigInt!
+	daoBountyConst: BigInt!
+	activationTime: BigInt!
+	voteOnBehalf: Bytes!
+}

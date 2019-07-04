@@ -1,0 +1,35 @@
+version: '3'
+services:
+  graph-node:
+    image: 'graphprotocol/graph-node:v0.12.0'
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+      - '8020:8020'
+    links:
+      - ipfs
+      - postgres
+      - ganache
+    environment:
+      postgres_host: 'postgres:5432'
+      postgres_user: postgres
+      postgres_pass: letmein
+      postgres_db: postgres
+      ipfs: 'ipfs:5001'
+      ethereum: 'development:http://ganache:8545'
+      GRAPH_IPFS_TIMEOUT: '2'
+      GRAPH_MAX_IPFS_FILE_BYTES: '102400'
+  ipfs:
+    build: docker/ipfs
+    ports:
+      - '5001:5001'
+  postgres:
+    build: docker/postgres
+    ports:
+      - '5434:5432'
+    environment:
+      POSTGRES_PASSWORD: letmein
+  ganache:
+    image: 'daostack/migration:0.0.1-rc.19-v5'
+    ports:
+      - '8545:8545'

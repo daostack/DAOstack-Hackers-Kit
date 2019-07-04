@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+# extract ipfs connection 
+export ipfs=/ip4/$(host $ipfs_host | awk '{print $NF}')/tcp/$ipfs_port
+
+# wait for required containerss
+/wait
+
+npm run "$@"

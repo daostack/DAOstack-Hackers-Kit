@@ -1,0 +1,12 @@
+abis:
+  - Reputation
+entities:
+  - ReputationContract
+  - ReputationHolder
+  - ReputationMint
+  - ReputationBurn
+eventHandlers:
+  - event: Mint(address,uint256)
+    handler: handleMint
+  - event: Burn(address,uint256)
+    handler: handleBurn

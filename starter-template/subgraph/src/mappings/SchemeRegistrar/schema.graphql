@@ -1,0 +1,44 @@
+type SchemeRegistrarNewSchemeProposal @entity {
+	id: ID!
+	txHash: Bytes!
+	contract: Bytes!
+	avatar: Bytes!
+	proposalId: Bytes!
+	votingMachine: Bytes!
+	scheme: Bytes!
+	paramsHash: Bytes!
+	permission: Bytes!
+	descriptionHash: String!
+}
+
+type SchemeRegistrarRemoveSchemeProposal @entity {
+	id: ID!
+	txHash: Bytes!
+	contract: Bytes!
+	avatar: Bytes!
+	proposalId: Bytes!
+	votingMachine: Bytes!
+	scheme: Bytes!
+	descriptionHash: String!
+}
+
+type SchemeRegistrarProposalExecuted @entity {
+	id: ID!
+	txHash: Bytes!
+	contract: Bytes!
+	avatar: Bytes!
+	proposalId: Bytes!
+	decision : BigInt!
+}
+
+type SchemeRegistrarProposal @entity {
+	id: ID!
+	dao: DAO!
+	schemeToRegister: Bytes
+	schemeToRegisterParamsHash: Bytes
+	schemeToRegisterPermission: Bytes
+  schemeToRemove: Bytes
+  decision: BigInt
+  schemeRegistered: Boolean
+  schemeRemoved: Boolean
+}

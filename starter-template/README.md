@@ -1,7 +1,7 @@
 # DAOstack Starter Template
 
 This is a basic template you can use for kickstarting your project using the DAOstack platform.
-Here you can find the basic structue for using both Arc and Arc.js to build your project.
+Here you can find the basic structue for using Arc to build your project.
 
 # How to get started:
 
@@ -10,97 +10,74 @@ You can then go ahead and edit the template to fit your needs.
 
 ## Project Structure:
 
-In this template, we use: `npm`, `truffle` and `webpack`, as well as DAOstack Arc and Arc.js.
+In this template, we use: `npm`, `truffle` and `webpack`, as well as DAOstack Arc, Client and Subgraph.
 The structure is basically as follows:
 
-- `contracts` - Your custom smart contracts should be located under here. You can use any Arc contract simply by importing it. This is an example import `import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol";`.
-- `test` - Your JS test files should be located under this folder. You can add any standard truffle tests under this folder.
-- `migrations` - This is a truffle migration scripts folder. You can write Truffle migration script for deploying your DAO or smart contracts and place the script under that folder. We already created a file for you there wiith some explanation on how to use it with Arc.
-- `src` - This folder is used for JavaScript files which are written in NodeJS. This later use `webpack` to compile them into client side JS files. You can find there a starting file which you can use for your project. If you're willing to add or change files there please review the `webpack.config.js` file and modify it to work with your changes.
+- **contracts** - Your custom smart contracts should be located under here. You can use any Arc contract simply by importing it. This is an example import `import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol"`
+- **migrations** - This is a truffle migration scripts folder. You can write Truffle migration script for deploying your DAO or smart contracts and place the script under that folder. We already created a file for you to deploy a new DAO using @daostack/migration library.
+- **starter-app** - This folder is initialized with React App which uses DAOstack client library `@daostack/client` to interact with contracts and the subgraph. These will be your Dapp front-end files. In development environment we have a `webpack` server running which looks for the changes made in `starter-app/src` folder and compiles them into client side JS files. You can can find the starting file `App.js` which you can use for your project.
+- **subgraph** - This is based on graphprotocol and uses mappings defined in `src/mappings` to index the blockchain events and store them in a `postgres` database as Entities described by `graphQl` schema. The `subgraph` deploy script uses output of migrations in `data/migration.json` to get the contract addresses. You can find mappings for the base contracts here and can add more mappings and schema for your custom contracts
+-**data** - This folder contains the `testDaoSpec.json`, which is file used to specify details for the new DAO to be deployed, feel free to change it according to your project needs. It also contains an `example.env`, which has example environment variables set, copy this file to your project root i.e. `starter-template` folder as `.env` and edit the variables accordingly. Lastly, there is a `migration.json` file which will contain the output after running the migration
 
-- `dist` - Your Dapp front-end files should be placed under this folder. You can see there we already creaated a basic HTML page imorting JQuery and the compiled js file from `src` (named `main.js`).
+## Running your project on local testnet:
 
-## Running your project:
+### Using docker
+After downloading the project and docker:
 
-Enter the project folder from the terminal and type the following:
+- copy the `example.env` from `data` directory as `.env` in the project directory
+- Update the `.env` file with your `SEED_PHRASE` and `<TESTNET-NAME>_INFURA_URL`
+- Enter the project folder from the terminal (starter-template) and type the following:
 
-After downloading the project:
+  ```
+  npm run launch:docker
+  npm run logs:graph
+  ```
 
-```
-npm install
-npm install -g nps
-npm install -g npx
-```
+  This would build the docker images and start the docker container for `ganache`, `starter-app` with webpack server, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
 
-### Run on a local testnet:
+- Wait for the logs screen to say *Starting JSON-RPC admin server at: ....*, then you can either exit the logs or in a different terminal window type
 
-```
-npm run ganache
-```
+  ```
+  npm run deploy-graph
+  ```
 
-Then on a different terminal window (but still in your project folder) you can choose one of the 2:
+  This will deploy the subgraph and if you are still following the graph-node logs you can see it syncing the blockchain events
 
-1. Run all with one command:
+- Open your web browser and type *http://localhost:3000/* This is your react Dapp
 
-```
-npm run launch-local
-```
+- In another browser window/tab type *http://localhost:8000/subgraphs/name/daostack* This is an interface to the subgraph and you can type graphQL queries here to fetch data from the `postgres` database
 
-Then open your web browser and type `http://localhost:3000/`
+_To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com/daostack/subgraph), [TheGraph Project](https://thegraph.com/docs/quick-start)_
 
-2. Run the commands one by one as follows:
+### Deploy and use on test network:
 
-```
-npm run migrate-daostack
-rm -rf build
-npm run truffle-migrate
-```
+- Update the `.env` file with your `SEED_PHRASE` and <TESTNET-NAME>`_INFURA_URL`
+- Open terminal at the project folder
+- Run the following commands with testnet name eg:
 
-### Deploy and use on Kovan network:
+  ```
+  npm i
+  rm -rf build
+  npm run truffle-migrate --network rinkeby
+  ```
 
-1. Enter the `truffle.js` file and make the changes as instructed there.
-2. Open `src/index.js` and uncomment the lines to configure Kovan (as instructed there).
-3. Open terminal at the project folder
-4. Run the following commands:
+- You will have to make appropriate changes in other files:
 
-```
-rm -rf build
-truffle migrate --network kovan-infura
-```
+  **docker-compose.yml**
+    - remove ganache service
+    - update ethereum url in graph-node service to testnet url eg `rinkeby:https://rinkeby.infura.io/<INFURA-KEY>`
 
-5. Copy the Avatar and Voting Machine addresses from the end of the `truffle migrate` logs.
-6. Open `src/index.js` and pasted the copied addresses in the `avatarAddress` and `votingMachineAddress`.
-7. On the terminal window, run the following command:
+  **App.js**
+    - add `settings.<TESTNET>` eg. `settings.rinkeby` with `web3Provider` set to testnet url
+    - initialize Arc with `settings.<TESTNET>` eg. `settings.rinkeby`
 
-```
-npm run webpack
-```
+### Stop the project:
+- From the project directory type:
 
-### Use the web interface:
+  ```
+  npm run stop
+  ```
 
-#### Using directly with Ganache:
-
-- Go to `dist/index.html` and follow the instructions in the comments
-- After saving the changes, just open index.html in your web browser.
-
-#### Using with MetaMask:
-
-1. Open terminal at the project folder
-2. Run
-
-```
-node dist/app.js
-```
-
-3. Open your web browser with MetaMask open _and connected to your configured network_
-4. In your browser enter: `http://localhost:3000/`
-5. Please note that here you'll need to refresh the page after submitting transactions in order to view the new state in the UI.
-
-_Note:
-After making changes in the src js files use the following command:_
-
-```
-npm run webpack
-```
-
-_Please note that the command might take a couple of minutes so be patient._
+#### Using with MetaMask with ganache:
+  - Open metamask and import using private key
+  - You can find the private keys from ganache logs by running `docker container logs starter-template_ganache_1`
