@@ -21,7 +21,7 @@ const getMetaMask = () => {
 async function initializeArc() {
   const metamask = getMetaMask()
   if (metamask) settings.dev.web3Provider = metamask
-  //console.log(settings)
+  //console.log(metamask.selectedAddress)
   const arc = new Arc(settings.dev);
   await arc.initialize();
   return arc;
@@ -33,14 +33,15 @@ class App extends Component {
     this.state = {
       arcIsInitialized: false,
       arc: null,
-      daos: [],
+      dao: null,
+      proposals: [],
       proposalCreateOptionsCR: {
-        dao: "",
-        description: "Test",
-        title: "No Title",
+        description: "Please provide Sample proposal description",
+        title: "Sample Proposal",
+        // Hardcoded the address of CR scheme
         scheme: "0x297D631516A2f66216980c37ce2DE9E1F5CF64e5",
         url: "#",
-        beneficiary: "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+        beneficiary: (window).ethereum.selectedAddress,
         nativeTokenReward: "",
         reputationReward: eth.utils.parseEther('100').toString(),
         ethReward: eth.utils.parseEther('1').toString(),
@@ -58,23 +59,24 @@ class App extends Component {
     const arc = await initializeArc()
     //console.log(arc)
     const daos = await arc.daos().pipe(first()).toPromise()
-    this.setState({
-      arcIsInitialized: true,
-      arc: arc,
-      daos: daos
+    const dao = new DAO(daos[0].address, arc)
+    await dao.proposals().subscribe((proposals) => {
+      this.setState({
+        arcIsInitialized: true,
+        arc,
+        dao,
+        proposals
+      })
     })
   }
 
   async handleCreateProposal(event){
-    const { daos, arc, proposalCreateOptionsCR } = this.state
-    proposalCreateOptionsCR.dao = daos[0].address
-    //console.log("creating proposal ")
-    const dao = new DAO(daos[0].address, arc)
-    console.log(proposalCreateOptionsCR)
+    const { dao, proposalCreateOptionsCR } = this.state
     try {
-      const tx = await dao.createProposal(proposalCreateOptionsCR)
-      console.log(tx)
-      tx.send()
+      await dao.createProposal({...proposalCreateOptionsCR, dao: dao.address})
+        .subscribe((event) => {
+          console.log(event)
+        })
     } catch (e) {
       console.log("Error: ", e)
     }
@@ -87,40 +89,52 @@ class App extends Component {
   }
 
   render() {
+            //{this.state.daos.map((dao) => (<li key={dao.address}> DAO address: {dao.address} </li>))}
+    if (!this.state.arcIsInitialized) return (<div> Loading </div>)
     return (
       <div className="App">
         <header className="App-header">
+           DAO: {this.state.dao.address}
+          <hr />
+           Proposals
           <div>
+            <hr />
+            {this.state.proposals.map((proposal) => (<li key={proposal.id}> ID : {proposal.id} </li>))}
+            <hr />
+          </div>
+          <div>
+            Create Proposal
+            <hr />
             <label>
               Title:
-              <input type="text" name="title" onInput={this.handleChange}/>
+              <input type="text" value={this.state.proposalCreateOptionsCR.title} name="title" onInput={this.handleChange}/>
             </label>
             <label>
               Description:
-              <input type="text" name="description" onInput={this.handleChange}/>
+              <input type="text" value={this.state.proposalCreateOptionsCR.description} name="description" onInput={this.handleChange}/>
             </label>
             <label>
               Url:
-              <input type="text" name="url" onInput={this.handleChange}/>
+              <input type="text" value={this.state.proposalCreateOptionsCR.url} name="url" onInput={this.handleChange}/>
             </label>
             <label>
               Beneficiary:
-              <input type="text" name="beneficiary" onInput={this.handleChange}/>
+              <input type="text" value={this.state.proposalCreateOptionsCR.beneficiary} name="beneficiary" onInput={this.handleChange}/>
             </label>
             <label>
               EthReward:
-              <input type="text" name="ethReward" onInput={this.handleChange}/>
+              <input type="text" value={this.state.proposalCreateOptionsCR.ethReward} name="ethReward" onInput={this.handleChange}/>
             </label>
             <label>
               ReputationReward:
-              <input type="text" name="reputationReward" onInput={this.handleChange}/>
+              <input type="text" value={this.state.proposalCreateOptionsCR.reputationReward} name="reputationReward" onInput={this.handleChange}/>
             </label>
+              <hr />
             <button onClick={this.handleCreateProposal}>
               Create Proposal
             </button>
           </div>
           Use client library to create a proposal to your new DAO
-          {this.state.daos.map((dao) => (<li key={dao.address}> DAO address: {dao.address} </li>))}
         </header>
       </div>
     );
