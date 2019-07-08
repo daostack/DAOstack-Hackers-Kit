@@ -175,34 +175,28 @@ class App extends Component {
           <div>
             Create Proposal
             <hr />
-            <label>
-              Title:
-              <input type="text" value={this.state.proposalCreateOptionsCR.title} name="title" onInput={this.handleChange}/>
-            </label>
-            <label>
-              Description:
-              <input type="text" value={this.state.proposalCreateOptionsCR.description} name="description" onInput={this.handleChange}/>
-            </label>
-            <label>
-              Url:
-              <input type="text" value={this.state.proposalCreateOptionsCR.url} name="url" onInput={this.handleChange}/>
-            </label>
-            <label>
-              Beneficiary:
-              <input type="text" value={this.state.proposalCreateOptionsCR.beneficiary} name="beneficiary" onInput={this.handleChange}/>
-            </label>
-            <label>
-              EthReward:
-              <input type="text" value={this.state.proposalCreateOptionsCR.ethReward} name="ethReward" onInput={this.handleChange}/>
-            </label>
-            <label>
-              ReputationReward:
-              <input type="text" value={this.state.proposalCreateOptionsCR.reputationReward} name="reputationReward" onInput={this.handleChange}/>
-            </label>
-              <hr />
+            Title:
+            <input type="text" value={this.state.proposalCreateOptionsCR.title} name="title" onInput={this.handleChange}/>
+            <br />
+            Description:
+            <input type="text" value={this.state.proposalCreateOptionsCR.description} name="description" onInput={this.handleChange}/>
+            <br />
+            Url:
+            <input type="text" value={this.state.proposalCreateOptionsCR.url} name="url" onInput={this.handleChange}/>
+            <br />
+            Beneficiary:
+            <input type="text" value={this.state.proposalCreateOptionsCR.beneficiary} name="beneficiary" onInput={this.handleChange}/>
+            <br />
+            EthReward:
+            <input type="text" value={this.state.proposalCreateOptionsCR.ethReward} name="ethReward" onInput={this.handleChange}/>
+            <br />
+            ReputationReward:
+            <input type="text" value={this.state.proposalCreateOptionsCR.reputationReward} name="reputationReward" onInput={this.handleChange}/>
+            <br />
             <button onClick={this.handleCreateProposal}>
               Create Proposal
             </button>
+            <hr />
           </div>
         </header>
       </div>
