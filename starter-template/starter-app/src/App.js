@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Arc, DAO } from "@daostack/client";
+import {
+  Arc,
+  DAO,
+  IProposalOutcome,
+  Input,
+} from "@daostack/client";
 import { first } from 'rxjs/operators';
 import { ethers as eth } from 'ethers';
 import migration from './data/migration.json';
+import {
+  Button,
+  Grid,
+  Typography
+} from '@material-ui/core';
 
 const settings = {
   dev: {
@@ -49,10 +59,12 @@ class App extends Component {
         externalTokenAddress: "",
         periodLength: "",
         periods: ""
-      }
+      },
+      stakeAmount: '100',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleCreateProposal = this.handleCreateProposal.bind(this);
+    this.handleStake = this.handleStake.bind(this);
   }
 
   async componentWillMount() {
@@ -88,19 +100,77 @@ class App extends Component {
     this.setState({proposalCreateOptionsCR})
   }
 
+  async handleStake(proposal, outcome) {
+    const stakingToken = await proposal.stakingToken()
+    const amount = eth.utils.parseEther(this.state.stakeAmount)
+    try {
+      console.log(proposal.votingMachine().options.address)
+      await stakingToken.approveForStaking(proposal.votingMachine().options.address, amount).send()
+    } catch (e) {
+      console.log(e)
+    }
+    proposal.stake(outcome, amount).send() 
+  }
+
   render() {
             //{this.state.daos.map((dao) => (<li key={dao.address}> DAO address: {dao.address} </li>))}
     if (!this.state.arcIsInitialized) return (<div> Loading </div>)
     return (
       <div className="App">
         <header className="App-header">
-           DAO: {this.state.dao.address}
+          DAO: {this.state.dao.address}
           <hr />
-           Proposals
+          Proposals
+          <hr />
           <div>
-            <hr />
-            {this.state.proposals.map((proposal) => (<li key={proposal.id}> ID : {proposal.id} </li>))}
-            <hr />
+          <Grid container>
+            {
+              this.state.proposals.map( (proposal) => (
+                <Grid container>
+                  <Grid item xs={7}>
+                    <Typography variant="body1">
+                      {proposal.id}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Typography variant="body1">
+                      <Button color="primary" onClick={() => { proposal.vote(IProposalOutcome.Pass).send() } }>
+                        Vote up
+                      </Button>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Typography variant="body1">
+                      <Button color="primary" onClick={() => { proposal.vote(IProposalOutcome.Fail).send() } }>
+                        Vote down
+                      </Button>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Typography variant="body1">
+                      <Button color="primary" onClick={() => this.handleStake(proposal, IProposalOutcome.Pass) }>
+                        Stake up
+                      </Button>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Typography variant="body1">
+                      <Button color="primary" onClick={() => this.handleStake(proposal, IProposalOutcome.Fail)}>
+                        Stake down
+                      </Button>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <input
+                      type="text"
+                      value={this.state.stakeAmount}
+                      onChange={(event) => this.setState({stakeAmount: event.target.value})}
+                    />
+                  </Grid>
+                </Grid>
+                )
+              )}
+          </Grid>
           </div>
           <div>
             Create Proposal
@@ -134,7 +204,6 @@ class App extends Component {
               Create Proposal
             </button>
           </div>
-          Use client library to create a proposal to your new DAO
         </header>
       </div>
     );
