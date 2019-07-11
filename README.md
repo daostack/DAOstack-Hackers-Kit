@@ -116,6 +116,18 @@ Build at the Dapp level if you want to create new ways to interact with existing
 
 **DAOstack Technologies has created an initial DAO called "Genesis" with the purpose of promoting the GEN/DAO ecosystem.** Genesis is currently live on the Ethereum mainnet, has over 100 Reputation-holders who have executed over 120 proposals since August 2018, and can be accessed through ["Alchemy"](https://alchemy.daostack.io/).
 
+### How to launch a new DAO?
+
+  The core contracts required by a daostack DAO are already deployed by the DAOstack team on mainnet as well as testnet and the addresses are available in [Migration.json](https://github.com/daostack/migration/blob/master/migration.json). What you would need to deploy is a new Avatar, custom schemes (optional), native reputation and native token contract. For details on parts of DAO, checkout [DAO structure](https://github.com/daostack/arc#arc)
+ 
+  DAO can be easily deployed using Migration package either from CLI or using javascript. 
+  - Create a *Dao-spec.json* (use [Genesis-dao-params](https://github.com/daostack/migration/blob/master/daos-params/migration-params-genesis-dao.json) for example). Update the list of `schemes` and the params to suit your organisation's needs.
+ - Update `founders'` address and rep and/or token issuance. The addresses mentioned in founders will be the initial members of the org and more people can get reputation (voting rights) in DAO by submitting proposal.
+ - Deploy your `custom scheme` contracts, if any.
+ - Use migrations to deploy the Avatar, rep & token contracts and registering the scheme and DAO params.
+   - Javascript example: [Starter Template](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template) has an example DAO deployment with instructions that can be used to deploy your own DAO
+   - CLI example and detailed documentation on how to use Migration package is provided in [Migration repo](https://github.com/daostack/migration). 
+
 # Examples
 The hackers kit is equipped with several examples and sample projects, which we are working to maintain and expand. The goal for these examples is to help developers easily kickstart a new project, as well as to demonstrate some of the features included in each layer of the DAO stack.
 
