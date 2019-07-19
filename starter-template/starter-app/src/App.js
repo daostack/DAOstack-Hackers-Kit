@@ -31,9 +31,10 @@ const getMetaMask = () => {
 async function initializeArc() {
   const metamask = getMetaMask()
   if (metamask) settings.dev.web3Provider = metamask
-  //console.log(metamask.selectedAddress)
+  console.log(metamask.selectedAddress)
   const arc = new Arc(settings.dev);
-  await arc.initialize();
+  const contractInfos = await arc.getContractInfos();
+  arc.setContractInfos(contractInfos);
   return arc;
 }
 
@@ -49,7 +50,7 @@ class App extends Component {
         description: "Please provide Sample proposal description",
         title: "Sample Proposal",
         // Hardcoded the address of CR scheme
-        scheme: "0x297D631516A2f66216980c37ce2DE9E1F5CF64e5",
+        scheme: "0xFC628dd79137395F3C9744e33b1c5DE554D94882",
         url: "#",
         beneficiary: (window).ethereum.selectedAddress,
         nativeTokenReward: "",
@@ -83,8 +84,12 @@ class App extends Component {
   }
 
   async handleCreateProposal(event){
+    console.log("Nothing")
     const { dao, proposalCreateOptionsCR } = this.state
+    console.log(this.state.arc.getContractInfo(proposalCreateOptionsCR.scheme).name)
+    console.log(this.state.arc)
     try {
+      console.log(dao)
       await dao.createProposal({...proposalCreateOptionsCR, dao: dao.address})
         .subscribe((event) => {
           console.log(event)
