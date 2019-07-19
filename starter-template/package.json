@@ -34,7 +34,7 @@
   "author": "YOUR_NAME",
   "license": "YOUR_LICENSE",
   "dependencies": {
-    "@daostack/migration": "0.0.1-rc.19-v3",
+    "@daostack/migration": "0.0.1-rc.21-v0",
     "dotenv": "^8.0.0",
     "ethereumjs-wallet": "^0.6.3",
     "express": "^4.16.3",

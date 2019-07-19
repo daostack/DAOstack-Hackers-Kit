@@ -40,7 +40,6 @@ export function insertNewDAO(
   dao.reputationHoldersCount = BigInt.fromI32(0);
   dao.register = 'na';
   saveDAO(dao);
-  decreaseDAOmembersCount(avatarAddress.toHex());
 
   return dao;
 }

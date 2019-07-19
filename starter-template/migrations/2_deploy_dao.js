@@ -10,17 +10,19 @@ module.exports = async function(deployer) {
     quiet: false,
     force: true,
     output: process.env.MIGRATION_OUTPUT,
+    prevmigration: " ",
     privateKey: process.env.PRIVATE_KEY,
     params: {
       private: migrationSpec,
       rinkeby: migrationSpec
-    }
+    },
   };
 
   switch (deployer.network) {
     case "ganache":
     case "development":
       const migrationBaseResult = await DAOstackMigration.migrateBase(options);
+      console.log("deployed base")
       options.prevmigration = options.output;
       break;
   }

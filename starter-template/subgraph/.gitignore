@@ -9,3 +9,4 @@ src/types
 .env
 build/
 src/contractsInfo.ts
+daos/mainnet/testdao.json

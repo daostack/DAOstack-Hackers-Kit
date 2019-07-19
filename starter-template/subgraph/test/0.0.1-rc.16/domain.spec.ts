@@ -69,7 +69,7 @@ describe('Domain Layer', () => {
           id: addresses.Avatar.toLowerCase(),
         },
       },
-      reputationHoldersCount: '5',
+      reputationHoldersCount: '6',
     });
 
     const getMigrationDaoMembers = `{

@@ -5,6 +5,8 @@
   "unregisterOwner": true,
   "useUController": false,
   "useDaoCreator": true,
+  "ContributionReward": {
+  },
   "founders": [
     {
       "address": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
@@ -18,6 +20,8 @@
     }
   ],
   "SchemeRegistrar": {
+      "voteRegisterParams": 0,
+      "voteRemoveParams": 0
   },
   "VotingMachinesParams": [
     {
@@ -35,14 +39,6 @@
       "voteOnBehalf": "0x0000000000000000000000000000000000000000"
     }
   ],
-  "GenesisProtocol": {
-    "queuedVotePeriodLimit": 600,
-    "boostedVotePeriodLimit": 600,
-    "preBoostedVotePeriodLimit": 600,
-    "quietEndingPeriod": 300
-  },
-  "ContributionReward": {
-  },
   "schemes": {
     "ContributionReward": true,
     "GenericScheme": false,

@@ -30,7 +30,7 @@
     "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
-    "@daostack/migration": "0.0.1-rc.19-v5",
+    "@daostack/migration": "0.0.1-rc.21-v0",
     "@types/graphql": "^14.2.0",
     "@types/jest": "^23.3.7",
     "@types/mocha": "^5.2.5",
