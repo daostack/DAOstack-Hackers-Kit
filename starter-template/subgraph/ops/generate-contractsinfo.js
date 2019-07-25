@@ -1,6 +1,7 @@
 const fs = require("fs");
 const yaml = require("js-yaml");
 const { migrationFileLocation, network } = require("./settings");
+const daodir = "./daos/" + network + "/";
 
 /**
  * Generate a `src/contractinfo.js` file from `migration.json`
@@ -24,13 +25,29 @@ async function generateContractInfo() {
         }
     }
   }
-  buffer += "}\n";
-  fs.writeFileSync(
-    "src/contractsInfo.ts",
-    buffer,
-    "utf-8"
-  );
 
+  const daos = require(migrationFileLocation)[network].dao;
+  fs.readdir(daodir, function(err, files) {
+    if (err) {
+      console.error("Could not list the directory.", err);
+      process.exit(1);
+    }
+    files.forEach(function(file) {
+      const dao = JSON.parse(fs.readFileSync(daodir + file, "utf-8"));
+      if (dao.Schemes != undefined) {
+         for(var key in dao.Schemes) {
+           buffer += "    setContractInfo("+"'"+dao.Schemes[key].toLowerCase()+"'"+", " +"'"+key+"'"+", "+"'"+dao.arcVersion+"'"+");\n";
+         }
+      }
+    });
+    buffer += "}\n";
+
+    fs.writeFileSync(
+      "src/contractsInfo.ts",
+      buffer,
+      "utf-8"
+    );
+  });
 }
 
 if (require.main === module) {

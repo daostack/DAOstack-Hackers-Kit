@@ -92,13 +92,6 @@
     {
       "mappings": [
       {
-        "name": "Redeemer",
-        "contractName": "Redeemer",
-        "dao": "base",
-        "mapping": "Redeemer",
-        "arcVersion": "0.0.1-rc.19"
-      },
-      {
         "name": "DAOToken",
         "contractName": "DAOToken",
         "dao": "dao",
@@ -167,13 +160,6 @@
     {
       "mappings": [
       {
-        "name": "Redeemer",
-        "contractName": "Redeemer",
-        "dao": "base",
-        "mapping": "Redeemer",
-        "arcVersion": "0.0.1-rc.19"
-      },
-      {
         "name": "DAOToken",
         "contractName": "DAOToken",
         "dao": "dao",
@@ -237,13 +223,6 @@
         "arcVersion": "0.0.1-rc.19"
       },
       {
-        "name": "Redeemer",
-        "contractName": "Redeemer",
-        "dao": "base",
-        "mapping": "Redeemer",
-        "arcVersion": "0.0.1-rc.16"
-      },
-      {
         "name": "GenesisProtocol",
         "contractName": "GenesisProtocol",
         "dao": "base",
@@ -284,6 +263,13 @@
         "dao": "base",
         "mapping": "DAORegistry",
         "arcVersion": "0.0.1-rc.16"
+      },
+      {
+        "name": "Redeemer",
+        "contractName": "Redeemer",
+        "dao": "base",
+        "mapping": "Redeemer",
+        "arcVersion": "0.0.1-rc.22"
       }
     ]
   },
@@ -291,13 +277,6 @@
   {
     "mappings": [
     {
-      "name": "Redeemer",
-      "contractName": "Redeemer",
-      "dao": "base",
-      "mapping": "Redeemer",
-      "arcVersion": "0.0.1-rc.16"
-    },
-    {
       "name": "GenesisProtocol",
       "contractName": "GenesisProtocol",
       "dao": "base",
@@ -338,13 +317,6 @@
       "dao": "base",
       "mapping": "DAORegistry",
       "arcVersion": "0.0.1-rc.16"
-    },
-    {
-      "name": "Redeemer",
-      "contractName": "Redeemer",
-      "dao": "base",
-      "mapping": "Redeemer",
-      "arcVersion": "0.0.1-rc.19"
     },
     {
       "name": "GenesisProtocol",
@@ -393,14 +365,7 @@
       "contractName": "Redeemer",
       "dao": "base",
       "mapping": "Redeemer",
-      "arcVersion": "0.0.1-rc.21"
-    },
-    {
-      "name": "GenesisProtocol",
-      "contractName": "GenesisProtocol",
-      "dao": "base",
-      "mapping": "GenesisProtocol",
-      "arcVersion": "0.0.1-rc.21"
+      "arcVersion": "0.0.1-rc.22"
     }
   ]
   }
