@@ -3,5 +3,5 @@ set -e
 
 npm run ganache & pid=$!
 ./wait-for-it.sh localhost:8545
-npm run truffle-migrate
+node migrations/deployDao.js
 wait $pid
