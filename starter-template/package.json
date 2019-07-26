@@ -20,7 +20,7 @@
     "logs:ipfs": "docker container logs starter-starter_template_ipfs_1 --follow",
     "logs:postgres": "docker container logs starter-template_postgres_1 --follow",
     "stop": "docker-compose down",
-    "run-ganache": "docker run -p 8545:8545 -v `pwd`/migration.json:/app/migration.json starter_template_ganache:latest",
+    "run-ganache": "docker run -p 8545:8545 -v `pwd`/data/migration.json:/app/migration.json starter_template_ganache:latest",
     "test": "./node_modules/.bin/truffle test",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
     "truffle-migrate": "./node_modules/.bin/truffle migrate"
@@ -35,10 +35,6 @@
   "license": "YOUR_LICENSE",
   "dependencies": {
     "@daostack/migration": "0.0.1-rc.21-v0",
-    "dotenv": "^8.0.0",
-    "ethereumjs-wallet": "^0.6.3",
-    "express": "^4.16.3",
-    "truffle": "^5.0.22",
-    "truffle-hdwallet-provider": "^1.0.10"
+    "dotenv": "^8.0.0"
   }
 }
