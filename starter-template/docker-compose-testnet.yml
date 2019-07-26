@@ -1,0 +1,46 @@
+# This is for DEVELOPMENT, not production
+
+version: "3"
+services:
+  app:
+    image: starter_template_app:latest
+    volumes:
+      - ./starter-app/src:/app/src
+      - ./starter-app/public:/app/public
+    links:
+      - graph-node
+    working_dir: /app/
+    ports:
+      - 3000:3000
+
+  graph-node:
+    image: 'graphprotocol/graph-node:v0.12.0'
+    ports:
+      - 8000:8000
+      - 8001:8001
+      - 8020:8020
+    links:
+      - ipfs
+      - postgres
+    environment:
+      postgres_host: 'postgres:5432'
+      postgres_user: 'postgres'
+      postgres_pass: 'letmein'
+      postgres_db: postgres
+      ipfs: 'ipfs:5001'
+      ethereum: 'rinkeyby:https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2'
+      GRAPH_IPFS_TIMEOUT: '2'
+      GRAPH_MAX_IPFS_FILE_BYTES: '102400'
+
+  ipfs:
+    image: starter_template_ipfs:latest
+    ports:
+      - 5001:5001
+
+  postgres:
+    image: starter_template_postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: letmein
+      POSTGRES_USER: postgres
