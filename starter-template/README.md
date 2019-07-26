@@ -51,14 +51,15 @@ _To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com
 
 ### Deploy and use on test network:
 
-- Update the `.env` file with your `SEED_PHRASE` and <TESTNET-NAME>`_INFURA_URL`
+- Update the `.env` file with your `SEED_PHRASE` and <TESTNET-NAME>`_INFURA_URL` in the project root. Use `data/example.env` for reference
+- Update the `.env` file in `subgraph` directory. Use `subgraph/example.env` or `subgraph/readme.md` for reference
 - Open terminal at the project folder
 - Run the following commands with testnet name eg:
 
   ```
   npm i
   rm -rf build
-  npm run truffle-migrate --network rinkeby
+  npm run truffle-migrate rinkeby
   ```
 
 - You will have to make appropriate changes in other files:
@@ -66,6 +67,7 @@ _To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com
   **docker-compose.yml**
     - remove ganache service
     - update ethereum url in graph-node service to testnet url eg `rinkeby:https://rinkeby.infura.io/<INFURA-KEY>`
+    - remove ganache link from the `app` and `graph-node` service
 
   **App.js**
     - add `settings.<TESTNET>` eg. `settings.rinkeby` with `web3Provider` set to testnet url

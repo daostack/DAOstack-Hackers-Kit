@@ -20,7 +20,14 @@ const settings = {
     graphqlWsProvider: "ws://127.0.0.1:8001/subgraphs/name/daostack",
     web3Provider: "ws://127.0.0.1:8545",
     ipfsProvider: "localhost",
-  }};
+  }, 
+  testnet: {
+    graphqlHttpProvider: "http://127.0.0.1:8000/subgraphs/name/daostack",
+    graphqlWsProvider: "ws://127.0.0.1:8001/subgraphs/name/daostack",
+    web3Provider: "testnet-url",
+    ipfsProvider: "localhost",
+  }
+};
 
 const getMetaMask = () => {
   const ethereum = (window).ethereum;
@@ -29,6 +36,7 @@ const getMetaMask = () => {
 
 async function initializeArc() {
   const metamask = getMetaMask()
+  // TODO: change dev - testnet or mainnet as per your project need
   if (metamask) settings.dev.web3Provider = metamask
   const arc = new Arc(settings.dev);
   const contractInfos = await arc.getContractInfos();
@@ -47,8 +55,6 @@ class App extends Component {
       proposalCreateOptionsCR: {
         description: "Please provide Sample proposal description",
         title: "Sample Proposal",
-        // Hardcoded the address of CR scheme
-        scheme: "0xFC628dd79137395F3C9744e33b1c5DE554D94882",
         url: "#",
         beneficiary: (window).ethereum.selectedAddress,
         nativeTokenReward: "",
@@ -68,7 +74,6 @@ class App extends Component {
 
   async componentWillMount() {
     const arc = await initializeArc()
-    //console.log(arc)
     const daos = await arc.daos().pipe(first()).toPromise()
     const dao = new DAO(daos[0].address, arc)
     await dao.proposals().subscribe((proposals) => {
@@ -82,13 +87,14 @@ class App extends Component {
   }
 
   async handleCreateProposal(event){
-    console.log("Nothing")
     const { dao, proposalCreateOptionsCR } = this.state
-    console.log(this.state.arc.getContractInfo(proposalCreateOptionsCR.scheme).name)
-    console.log(this.state.arc)
     try {
       console.log(dao)
-      await dao.createProposal({...proposalCreateOptionsCR, dao: dao.address})
+      await dao.createProposal({
+        ...proposalCreateOptionsCR,
+        scheme: this.state.arc.getContractInfoByName('ContributionReward', '0.0.1-rc.21').id,
+        dao: dao.address
+      })
         .subscribe((event) => {
           console.log(event)
         })
