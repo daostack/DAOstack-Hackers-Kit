@@ -10,8 +10,7 @@ async function migrate() {
     gasPrice: DEFAULT_GAS,
     quiet: false,
     force: true,
-    output: process.env.MIGRATION_OUTPUT,
-    prevmigration: " ",
+    output: 'data/migration.json',
     privateKey: process.env.PRIVATE_KEY,
     params: {
       private: migrationSpec,
@@ -22,6 +21,7 @@ async function migrate() {
   switch (process.env.NETWORK) {
     case "ganache":
     case "private":
+      options.prevmigration = " ";
       const migrationBaseResult = await DAOstackMigration.migrateBase(options);
       console.log("deployed base")
       options.prevmigration = options.output;

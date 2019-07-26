@@ -2,7 +2,6 @@
   "orgName": "DevTest",
   "tokenName": "Dev",
   "tokenSymbol": "DEV",
-  "unregisterOwner": true,
   "useUController": false,
   "useDaoCreator": true,
   "ContributionReward": {
