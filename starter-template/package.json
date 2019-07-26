@@ -20,10 +20,10 @@
     "logs:ipfs": "docker container logs starter-starter_template_ipfs_1 --follow",
     "logs:postgres": "docker container logs starter-template_postgres_1 --follow",
     "stop": "docker-compose down",
-    "run-ganache": "docker run -p 8545:8545 -v `pwd`/data/migration.json:/app/migration.json starter_template_ganache:latest",
+    "ganache:docker": "docker run -p 8545:8545 -v `pwd`/data/migration.json:/app/migration.json starter_template_ganache:latest",
     "test": "./node_modules/.bin/truffle test",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "truffle-migrate": "./node_modules/.bin/truffle migrate"
+    "migrate":"node migrations/deployDao.js"
   },
   "keywords": [
     "DAO",
