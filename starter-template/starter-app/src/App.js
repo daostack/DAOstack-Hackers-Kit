@@ -8,7 +8,6 @@ import {
 } from "@daostack/client";
 import { first } from 'rxjs/operators';
 import { ethers as eth } from 'ethers';
-import migration from './data/migration.json';
 import {
   Button,
   Grid,
@@ -31,7 +30,6 @@ const getMetaMask = () => {
 async function initializeArc() {
   const metamask = getMetaMask()
   if (metamask) settings.dev.web3Provider = metamask
-  console.log(metamask.selectedAddress)
   const arc = new Arc(settings.dev);
   const contractInfos = await arc.getContractInfos();
   arc.setContractInfos(contractInfos);
@@ -117,8 +115,11 @@ class App extends Component {
     proposal.stake(outcome, amount).send() 
   }
 
+  async handleRedeem(proposal) {
+    proposal.state().subscribe((state) => proposal.claimRewards(state.beneficiary).send())
+  }
+
   render() {
-            //{this.state.daos.map((dao) => (<li key={dao.address}> DAO address: {dao.address} </li>))}
     if (!this.state.arcIsInitialized) return (<div> Loading </div>)
     return (
       <div className="App">
@@ -128,54 +129,62 @@ class App extends Component {
           Proposals
           <hr />
           <div>
-          <Grid container>
-            {
-              this.state.proposals.map( (proposal) => (
-                <Grid container>
-                  <Grid item xs={7}>
-                    <Typography variant="body1">
-                      {proposal.id}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Typography variant="body1">
-                      <Button color="primary" onClick={() => { proposal.vote(IProposalOutcome.Pass).send() } }>
-                        Vote up
-                      </Button>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Typography variant="body1">
-                      <Button color="primary" onClick={() => { proposal.vote(IProposalOutcome.Fail).send() } }>
-                        Vote down
-                      </Button>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Typography variant="body1">
-                      <Button color="primary" onClick={() => this.handleStake(proposal, IProposalOutcome.Pass) }>
-                        Stake up
-                      </Button>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Typography variant="body1">
-                      <Button color="primary" onClick={() => this.handleStake(proposal, IProposalOutcome.Fail)}>
-                        Stake down
-                      </Button>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <input
-                      type="text"
-                      value={this.state.stakeAmount}
-                      onChange={(event) => this.setState({stakeAmount: event.target.value})}
-                    />
-                  </Grid>
-                </Grid>
-                )
-              )}
-          </Grid>
+            <Grid container>
+              {
+                this.state.proposals.map( (proposal) => {
+                  return (
+                    <Grid container>
+                      <Grid item xs={7}>
+                        <Typography variant="body1">
+                          {proposal.id}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={1}>
+                        <Typography variant="body1">
+                          <Button color="primary" onClick={() => { proposal.vote(IProposalOutcome.Pass).send() } }>
+                            Vote up
+                          </Button>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={1}>
+                        <Typography variant="body1">
+                          <Button color="primary" onClick={() => { proposal.vote(IProposalOutcome.Fail).send() } }>
+                            Vote down
+                          </Button>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={1}>
+                        <Typography variant="body1">
+                          <Button color="primary" onClick={() => this.handleStake(proposal, IProposalOutcome.Pass) }>
+                            Stake up
+                          </Button>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={1}>
+                        <Typography variant="body1">
+                          <Button color="primary" onClick={() => this.handleStake(proposal, IProposalOutcome.Fail)}>
+                            Stake down
+                          </Button>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={1}>
+                        <input
+                          type="text"
+                          value={this.state.stakeAmount}
+                          onChange={(event) => this.setState({stakeAmount: event.target.value})}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="body1">
+                          <Button color="primary" onClick={() => this.handleRedeem(proposal) }>
+                            ClaimReward
+                          </Button>
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  )})
+              }
+              </Grid>
           </div>
           <div>
             Create Proposal
@@ -205,8 +214,7 @@ class App extends Component {
           </div>
         </header>
       </div>
-    );
+    )}
   }
-}
 
 export default App;
