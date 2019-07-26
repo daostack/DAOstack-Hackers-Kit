@@ -1,7 +1,8 @@
 const DAOstackMigration = require('@daostack/migration');
 const migrationSpec =  require('../data/testDaoSpec.json')
+require('dotenv').config();
 
-module.exports = async function(deployer) {
+async function migrate() {
   const DEFAULT_GAS = 3.0
 
   const options = {
@@ -18,9 +19,9 @@ module.exports = async function(deployer) {
     },
   };
 
-  switch (deployer.network) {
+  switch (process.env.NETWORK) {
     case "ganache":
-    case "development":
+    case "private":
       const migrationBaseResult = await DAOstackMigration.migrateBase(options);
       console.log("deployed base")
       options.prevmigration = options.output;
@@ -28,3 +29,5 @@ module.exports = async function(deployer) {
   }
   const migrationDAOResult = await DAOstackMigration.migrateDAO(options);
 }
+
+migrate()
