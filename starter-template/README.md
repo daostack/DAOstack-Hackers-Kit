@@ -1,7 +1,7 @@
 # DAOstack Starter Template
 
 This is a basic template you can use for kickstarting your project using the DAOstack platform.
-Here you can find the basic structue for using Arc to build your project.
+Here you can find the basic structure for using Arc to build your project.
 
 # How to get started:
 
