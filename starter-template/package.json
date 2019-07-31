@@ -13,7 +13,7 @@
     "build:ganache": "docker build --file ops/Dockerfile --tag starter_template_ganache .",
     "build:ipfs": "docker build --file subgraph/docker/ipfs/Dockerfile --tag starter_template_ipfs ./subgraph/docker/ipfs",
     "build:postgres": "docker build --file subgraph/docker/postgres/Dockerfile --tag starter_template_postgres ./subgraph/docker/postgres",
-    "deploy-graph": "cd subgraph && npm run deploy",
+    "deploy-graph": "cd subgraph && npm i && npm run deploy",
     "launch:docker": "npm run build && docker-compose up -d",
     "launch-testnet:docker": "npm run build-testnet && docker-compose -f docker-compose-testnet.yml up -d",
     "logs:app": "docker container logs starter-template_app_1 --follow",
