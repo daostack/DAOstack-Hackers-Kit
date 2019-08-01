@@ -259,6 +259,7 @@ export function updateProposalExecution(
 ): void {
   let proposal = getProposal(proposalId.toHex());
   proposal.executedAt = timestamp;
+  proposal.closingAt = timestamp;
   if (totalReputation != null) {
     proposal.totalRepWhenExecuted = totalReputation;
   }

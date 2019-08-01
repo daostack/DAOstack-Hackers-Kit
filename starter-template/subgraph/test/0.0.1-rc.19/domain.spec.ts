@@ -69,7 +69,7 @@ describe('Domain Layer', () => {
           id: addresses.Avatar.toLowerCase(),
         },
       },
-      reputationHoldersCount: '5',
+      reputationHoldersCount: '6',
     });
 
     const getMigrationDaoMembers = `{
@@ -811,6 +811,7 @@ describe('Domain Layer', () => {
       createdAt: p1Creation.toString(),
       boostedAt: v2Timestamp.toString(),
       quietEndingPeriodBeganAt: null,
+      closingAt: v5Timestamp.toString(),
       executedAt: v5Timestamp.toString(),
       totalRepWhenExecuted: totalRep,
       totalRepWhenCreated: totalRep,

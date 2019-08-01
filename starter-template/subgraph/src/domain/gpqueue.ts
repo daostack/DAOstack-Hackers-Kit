@@ -42,27 +42,34 @@ export function create(dao: Address,
    let gpAddress: Address;
    let isGPQue = false;
    let gpParamsHash: Bytes;
+   let addressZero = '0x0000000000000000000000000000000000000000';
    if (equalStrings(contractInfo.name, 'ContributionReward')) {
      let contributionReward =  ContributionReward.bind(scheme);
      let parameters = contributionReward.parameters(paramsHash);
-     gpAddress = parameters.value1;
-     setContributionRewardParams(dao, scheme, gpAddress, parameters.value0);
-     isGPQue = true;
+     if (!equalStrings(parameters.value1.toHex(), addressZero)) {
+       gpAddress = parameters.value1;
+       setContributionRewardParams(dao, scheme, gpAddress, parameters.value0);
+       isGPQue = true;
+     }
 
    }
    if (equalStrings(contractInfo.name, 'SchemeRegistrar')) {
      let schemeRegistrar =  SchemeRegistrar.bind(scheme);
      let parameters = schemeRegistrar.parameters(paramsHash);
-     gpAddress = parameters.value2;
-     setSchemeRegistrarParams(dao, scheme, gpAddress, parameters.value0, parameters.value1);
-     isGPQue = true;
+     if (!equalStrings(parameters.value2.toHex(), addressZero)) {
+         gpAddress = parameters.value2;
+         setSchemeRegistrarParams(dao, scheme, gpAddress, parameters.value0, parameters.value1);
+         isGPQue = true;
+     }
    }
    if (equalStrings(contractInfo.name, 'GenericScheme')) {
      let genericScheme =  GenericScheme.bind(scheme);
      let parameters = genericScheme.parameters(paramsHash);
-     gpAddress = parameters.value0;
-     setGenericSchemeParams(dao, scheme, gpAddress, parameters.value1, parameters.value2);
-     isGPQue = true;
+     if (!equalStrings(parameters.value0.toHex(), addressZero)) {
+         gpAddress = parameters.value0;
+         setGenericSchemeParams(dao, scheme, gpAddress, parameters.value1, parameters.value2);
+         isGPQue = true;
+     }
    }
    if (isGPQue) {
       let bigOne = new ByteArray(6);

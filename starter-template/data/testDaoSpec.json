@@ -2,22 +2,35 @@
   "orgName": "DevTest",
   "tokenName": "Dev",
   "tokenSymbol": "DEV",
-  "unregisterOwner": true,
   "useUController": false,
   "useDaoCreator": true,
+  "ContributionReward": {
+  },
   "founders": [
     {
       "address": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
-      "reputation": 3001,
-      "tokens": 1000
+      "reputation": 250,
+      "tokens": 2000
     },
     {
       "address": "0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0",
-      "reputation": 1000,
+      "reputation": 150,
       "tokens": 1000
+    },
+    {
+      "address": "0x22d491bde2303f2f43325b2108d26f1eaba1e32b",
+      "reputation": 200,
+      "tokens": 1500
+    },
+    {
+      "address": "0xe11ba2b4d45eaed5996cd0823791e0c93114882d",
+      "reputation": 200,
+      "tokens": 1500
     }
   ],
   "SchemeRegistrar": {
+      "voteRegisterParams": 0,
+      "voteRemoveParams": 0
   },
   "VotingMachinesParams": [
     {
@@ -35,14 +48,6 @@
       "voteOnBehalf": "0x0000000000000000000000000000000000000000"
     }
   ],
-  "GenesisProtocol": {
-    "queuedVotePeriodLimit": 600,
-    "boostedVotePeriodLimit": 600,
-    "preBoostedVotePeriodLimit": 600,
-    "quietEndingPeriod": 300
-  },
-  "ContributionReward": {
-  },
   "schemes": {
     "ContributionReward": true,
     "GenericScheme": false,
