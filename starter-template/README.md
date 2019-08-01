@@ -85,7 +85,11 @@ The structure is basically as follows:
 
         // Auto Down-stake size
         "daoBountyConst": 10,
+
+        // Time after which DAO will start accepting proposals
         "activationTime": 0,
+
+        // If set allows only the following address to vote on behalf
         "voteOnBehalf": "0x0000000000000000000000000000000000000000"
       }
     ],
