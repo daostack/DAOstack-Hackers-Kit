@@ -39,8 +39,7 @@ async function initializeArc() {
   // TODO: change dev - testnet or mainnet as per your project need
   if (metamask) settings.dev.web3Provider = metamask
   const arc = new Arc(settings.dev);
-  const contractInfos = await arc.getContractInfos();
-  arc.setContractInfos(contractInfos);
+  await arc.fetchContractInfos();
   return arc;
 }
 
@@ -74,8 +73,10 @@ class App extends Component {
 
   async componentWillMount() {
     const arc = await initializeArc()
+    console.log(DAO.search(arc, {where: {name: 'DevTest'}}))
     const daos = await arc.daos().pipe(first()).toPromise()
-    const dao = new DAO(daos[0].address, arc)
+    console.log(daos)
+    const dao = new DAO(daos[0].id, arc)
     await dao.proposals().subscribe((proposals) => {
       this.setState({
         arcIsInitialized: true,
@@ -113,12 +114,12 @@ class App extends Component {
     const stakingToken = await proposal.stakingToken()
     const amount = eth.utils.parseEther(this.state.stakeAmount)
     try {
-      console.log(proposal.votingMachine().options.address)
-      await stakingToken.approveForStaking(proposal.votingMachine().options.address, amount).send()
+      const votingMachine = await proposal.votingMachine()
+      await stakingToken.approveForStaking(votingMachine.options.address, amount).send()
+      proposal.stake(outcome, amount).send() 
     } catch (e) {
       console.log(e)
     }
-    proposal.stake(outcome, amount).send() 
   }
 
   async handleRedeem(proposal) {
