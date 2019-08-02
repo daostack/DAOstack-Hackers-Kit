@@ -16,8 +16,8 @@ import {
 
 const settings = {
   dev: {
-    graphqlHttpProvider: "http://127.0.0.1:8000/subgraphs/name/daostack",
-    graphqlWsProvider: "ws://127.0.0.1:8001/subgraphs/name/daostack",
+    graphqlHttpProvider: "http://127.0.0.1:8000/subgraphs/name/daostack2",
+    graphqlWsProvider: "ws://127.0.0.1:8001/subgraphs/name/daostack2",
     web3Provider: "ws://127.0.0.1:8545",
     ipfsProvider: "localhost",
   }, 
@@ -55,6 +55,7 @@ class App extends Component {
         description: "Please provide Sample proposal description",
         title: "Sample Proposal",
         url: "#",
+        scheme: "0x466fcbc689d8506d29095745da8b8578e3d9cd33",
         beneficiary: (window).ethereum.selectedAddress,
         nativeTokenReward: "",
         reputationReward: eth.utils.parseEther('100').toString(),
@@ -93,7 +94,6 @@ class App extends Component {
       console.log(dao)
       await dao.createProposal({
         ...proposalCreateOptionsCR,
-        scheme: this.state.arc.getContractInfoByName('ContributionReward', '0.0.1-rc.21').id,
         dao: dao.address
       })
         .subscribe((event) => {

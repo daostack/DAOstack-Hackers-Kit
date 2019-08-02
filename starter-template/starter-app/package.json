@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@daostack/client": "0.2.4",
+    "@daostack/client": "0.2.5",
     "@material-ui/core": "^4.1.3",
     "ethers": "^4.0.32",
     "react": "^16.8.6",
