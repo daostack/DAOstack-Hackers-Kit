@@ -37,6 +37,8 @@ contract FireStarter is IFireStarter, Ownable {
     function supportProject(uint _id) public payable {
         projects[_id].funds += msg.value;
         projects[_id].balances[msg.sender] += msg.value;
+        uint256 reputation = msg.value % 1000;
+        ControllerInterface(avatar.owner()).mintReputation(uint(reputation), msg.sender, address(avatar));
 
         emit ProjectFunded(_id, msg.value, msg.sender);
     }

@@ -2,23 +2,23 @@
   "private": {
     "base": {
       "0.0.1-rc.23": {
-        "GEN": "0xAD99276C293B7c491A8070d5E45EB380fC0f8976",
-        "DAORegistry": "0x28F56A97e4a493762b4507EB41Ca54D3Ae678DEE",
-        "ControllerCreator": "0xC5e29Bb3cfC0daA6e4e1179Ac91c4f07a93D2B3c",
-        "DaoCreator": "0xEAE767D5D670826Bf531c2692335c52c6cA7010B",
-        "UController": "0xf81996Eb82Cf337B31aBBd16FdB283e1cbC360f3",
-        "GenesisProtocol": "0x22c38638aC5007e1De99fEAB20f664046cB42768",
-        "SchemeRegistrar": "0xd5866DBDE071F070C254570d1BBbfE732860221e",
-        "UpgradeScheme": "0xb9e3Dd112BCc6e89546c46ABb1573cf9c62C3241",
-        "GlobalConstraintRegistrar": "0x5431C8eB139B7D7556084aa789e214eD677C5092",
-        "ContributionReward": "0xCb1d79f8E84E807B2aEf5a2dd52acc977798eF75",
-        "AbsoluteVote": "0x3801D67d7feAD049C319C1A2Bcc5b677b1a4612b",
-        "QuorumVote": "0x7B5Bb4f5cdC25C16D8dBB0862fbe25c63C8767Eb",
-        "TokenCapGC": "0x4A6010cf9A8f142034CA14fd802ec7372D498150",
-        "VoteInOrganizationScheme": "0x5654268CB206bF44ffDa905254aaD95fef057545",
-        "OrganizationRegister": "0x49Aec747d48b443aeDC8d70d0f3dFBc6515C7e8A",
-        "Redeemer": "0xC565D008100a9A3d305cD08c3119582e822c88A9",
-        "GenericScheme": "0xBC3676C29C4b67879911B7aAbCD8bcE578e87309"
+        "GEN": "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab",
+        "DAORegistry": "0x67B5656d60a809915323Bf2C40A8bEF15A152e3e",
+        "ControllerCreator": "0x2612Af3A521c2df9EAF28422Ca335b04AdF3ac66",
+        "DaoCreator": "0xA57B8a5584442B467b4689F1144D269d096A3daF",
+        "UController": "0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec",
+        "GenesisProtocol": "0x630589690929E9cdEFDeF0734717a9eF3Ec7Fcfe",
+        "SchemeRegistrar": "0x0E696947A06550DEf604e82C26fd9E493e576337",
+        "UpgradeScheme": "0xDb56f2e9369E0D7bD191099125a3f6C370F8ed15",
+        "GlobalConstraintRegistrar": "0xA94B7f0465E98609391C623d0560C5720a3f2D33",
+        "ContributionReward": "0x6eD79Aa1c71FD7BdBC515EfdA3Bd4e26394435cC",
+        "AbsoluteVote": "0xb09bCc172050fBd4562da8b229Cf3E45Dc3045A6",
+        "QuorumVote": "0xFC628dd79137395F3C9744e33b1c5DE554D94882",
+        "TokenCapGC": "0x5f8e26fAcC23FA4cbd87b8d9Dbbd33D5047abDE1",
+        "VoteInOrganizationScheme": "0x21a59654176f2689d12E828B77a783072CD26680",
+        "OrganizationRegister": "0xD86C8F0327494034F60e25074420BcCF560D5610",
+        "Redeemer": "0x4bf749ec68270027C5910220CEAB30Cc284c7BA2",
+        "GenericScheme": "0xaD888d0Ade988EbEe74B8D4F39BF29a8d0fe8A8D"
       }
     }
   }

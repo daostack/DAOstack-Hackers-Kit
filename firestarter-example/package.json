@@ -11,7 +11,7 @@
   "dependencies": {
     "@daostack/arc": "0.0.1-rc.23",
     "@daostack/infra": "0.0.1-rc.14",
-    "@daostack/migration": "0.0.1-rc.23-v1",
+    "@daostack/migration": "0.0.1-rc.23-v2",
     "node": "^8.9.4",
     "openzeppelin-solidity": "^2.1.3",
     "truffle": "^5.0.30",
