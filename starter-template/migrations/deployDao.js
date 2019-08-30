@@ -21,9 +21,7 @@ async function migrate() {
   switch (process.env.NETWORK) {
     case "ganache":
     case "private":
-      options.prevmigration = " ";
       const migrationBaseResult = await DAOstackMigration.migrateBase(options);
-      console.log("deployed base")
       options.prevmigration = options.output;
       break;
   }
