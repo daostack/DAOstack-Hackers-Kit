@@ -16,8 +16,8 @@ import {
 
 const settings = {
   dev: {
-    graphqlHttpProvider: "http://127.0.0.1:8000/subgraphs/name/daostack2",
-    graphqlWsProvider: "ws://127.0.0.1:8001/subgraphs/name/daostack2",
+    graphqlHttpProvider: "http://127.0.0.1:8000/subgraphs/name/daostack",
+    graphqlWsProvider: "ws://127.0.0.1:8001/subgraphs/name/daostack",
     web3Provider: "ws://127.0.0.1:8545",
     ipfsProvider: "localhost",
   }, 
@@ -50,12 +50,13 @@ class App extends Component {
       arcIsInitialized: false,
       arc: null,
       dao: null,
+      daos: null,
       proposals: [],
       proposalCreateOptionsCR: {
         description: "Please provide Sample proposal description",
         title: "Sample Proposal",
         url: "#",
-        scheme: "0x466fcbc689d8506d29095745da8b8578e3d9cd33",
+        scheme: "0x71e7ec880873af0fe33ad988f862be200fdd85cc",
         beneficiary: (window).ethereum.selectedAddress,
         nativeTokenReward: "",
         reputationReward: eth.utils.parseEther('100').toString(),
@@ -78,11 +79,13 @@ class App extends Component {
     const daos = await arc.daos().pipe(first()).toPromise()
     console.log(daos)
     const dao = new DAO(daos[0].id, arc)
+    console.log(dao)
     await dao.proposals().subscribe((proposals) => {
       this.setState({
         arcIsInitialized: true,
         arc,
         dao,
+        daos,
         proposals
       })
     })
@@ -91,14 +94,10 @@ class App extends Component {
   async handleCreateProposal(event){
     const { dao, proposalCreateOptionsCR } = this.state
     try {
-      console.log(dao)
       await dao.createProposal({
         ...proposalCreateOptionsCR,
         dao: dao.address
-      })
-        .subscribe((event) => {
-          console.log(event)
-        })
+      }).send()
     } catch (e) {
       console.log("Error: ", e)
     }
@@ -131,7 +130,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          DAO: {this.state.dao.address}
+          DAO: {this.state.dao.id}
           <hr />
           Proposals
           <hr />
