@@ -56,7 +56,7 @@ class App extends Component {
         description: "Please provide Sample proposal description",
         title: "Sample Proposal",
         url: "#",
-        scheme: "0x71e7ec880873af0fe33ad988f862be200fdd85cc",
+        scheme: "0xe9846abe8ee7e8f8e371ed17bf3557573ee34069",
         beneficiary: (window).ethereum.selectedAddress,
         nativeTokenReward: "",
         reputationReward: eth.utils.parseEther('100').toString(),
@@ -78,7 +78,7 @@ class App extends Component {
     console.log(DAO.search(arc, {where: {name: 'DevTest'}}))
     const daos = await arc.daos().pipe(first()).toPromise()
     console.log(daos)
-    const dao = new DAO(daos[0].id, arc)
+    const dao = new DAO(daos[3].id, arc)
     console.log(dao)
     await dao.proposals().subscribe((proposals) => {
       this.setState({
