@@ -1,9 +1,13 @@
 pragma solidity ^0.5.0;
 
 import "./IFireStarter.sol";
+import "@daostack/arc/contracts/controller/ControllerInterface.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./VotingMachineCallback.sol";
 
-contract FireStarter is IFireStarter {
+contract FireStarter is IFireStarter, Ownable {
+
+    Avatar public avatar;
 
     struct Project {
         address owner;
@@ -33,6 +37,8 @@ contract FireStarter is IFireStarter {
     function supportProject(uint _id) public payable {
         projects[_id].funds += msg.value;
         projects[_id].balances[msg.sender] += msg.value;
+        uint256 reputation = msg.value % 1000;
+        ControllerInterface(avatar.owner()).mintReputation(uint(reputation), msg.sender, address(avatar));
 
         emit ProjectFunded(_id, msg.value, msg.sender);
     }
@@ -61,5 +67,11 @@ contract FireStarter is IFireStarter {
 
     function totalProjects() public view returns(uint) {
         return projects.length;
+    }
+
+    function initialize(Avatar _avatar) external onlyOwner {
+        require(avatar == Avatar(0), "can be called only one time");
+        require(_avatar != Avatar(0), "avatar cannot be zero");
+        avatar = _avatar;
     }
 }

@@ -4,8 +4,8 @@ DAOstack subgraph for [TheGraph](https://thegraph.com/) project.
 
 ## Getting started
 
-1 `git clone https://github.com/daostack/subgraph.git && cd subgraph`
-1. `npm install`
+1. `git clone https://github.com/daostack/subgraph.git && cd subgraph`
+2. `npm install`
 
 ## Testing
 
@@ -16,12 +16,13 @@ npm run docker:run
 npm run test
 npm run docker:stop
 ```
+
 The tests are run with jest, which takes a number of options that may be useful when developing:
+
 ```sh
 npm run test -- --watch # re-run the tests after each change
 npm run test -- test/integration/Avatar.spec.js # run a single test file
 ```
-
 
 ## Commands
 
@@ -71,12 +72,40 @@ In order to add support for a new contract follow these steps:
          map of solidity event signatures to event handlers in mapping code.
    4. `test/integration/<contract name>.spec.ts`
 
-3. (Optionally) add a deployment step for your contract in `ops/migrate.js` that will run before testing.
+3. Add your contract to `ops/mappings.json`. Under the JSON object for the network your contract is located at, under the `"mappings"` JSON array, add the following.
+
+   1. If your contract information is in the `migration.json` file specified (default is the file under `@daostack/migration` folder, as defined in the `ops/settings.js` file):
+
+      ```json
+      {
+         "name": "<contract name as appears in `abis/arcVersion` folder>",
+         "contractName": "<contract name as appears in migration.json file>",
+         "dao": "<section label where contract is defined in migration.json file (base/ dao/ test/ organs)>",
+         "mapping": "<contract name from step 2>",
+         "arcVersion": "<contract arc version>"
+      },
+      ```
+
+   2. If your contract does not appear in the migration file:
+
+      ```json
+      {
+         "name": "<contract name as appears in `abis/arcVersion` folder>",
+         "dao": "address",
+         "mapping": "<contract name from step 2>",
+         "arcVersion": "<contract arc version under which the abi is located in the `abis` folder>",
+         "address": "<the contract address>"
+      },
+      ```
+
+4. (Optionally) add a deployment step for your contract in `ops/migrate.js` that will run before testing.
 
 ## Add a new dao tracker
-Add <daoname>.json file to daos directory
+
+To index a DAO please follow the instructions here: [https://github.com/daostack/subgraph/blob/master/documentations/Deployment.md#indexing-a-new-dao](https://github.com/daostack/subgraph/blob/master/documentations/Deployment.md#indexing-a-new-dao)
 
 ## Deploy Subgraph
+
 To deploy the subgraph, please follow the instructions below:
 
 1. If you are deploying to The Graph for the first time, start with installing the Graph CLI:
@@ -84,29 +113,30 @@ To deploy the subgraph, please follow the instructions below:
 Then follow this by logging into your Graph Explorer account using:
 `graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>`
 
-It is also recommended to read this guide: https://thegraph.com/docs/deploy-a-subgraph
+   It is also recommended to read this guide: [https://thegraph.com/docs/deploy-a-subgraph](https://thegraph.com/docs/deploy-a-subgraph)
 
 2. Create a `.env` file containing the following:
-```
-network="<TARGET_NETWORK>"
-subgraph="<YOUR_SUBGAPH_NAME>"
 
-# Not necessary for Docker deployment
-graph_node="https://api.thegraph.com/deploy/"
-ipfs_node="https://api.thegraph.com/ipfs/"
-access_token=<YOUR_ACCESS_TOKEN>
+   ```bash
+   network="<TARGET_NETWORK>"
+   subgraph="<YOUR_SUBGAPH_NAME>"
 
-# Not necessary for The Graph server
-postgres_password=<YOUR_PASSWORD>
-ethereum_node="https://<TARGET_NETWORK>.infura.io/<INFURA-KEY>"
-```
+   # Not necessary for Docker deployment
+   graph_node="https://api.thegraph.com/deploy/"
+   ipfs_node="https://api.thegraph.com/ipfs/"
+   access_token=<YOUR_ACCESS_TOKEN>
+
+   # Not necessary for The Graph server
+   postgres_password=<YOUR_PASSWORD>
+   ethereum_node="https://<TARGET_NETWORK>.infura.io/<INFURA-KEY>"
+   ```
 
 3. Run: ``npm run deploy``
 
 ## Release subgraph images on docker hub
 
-
 The repository provides a `release.sh` script that will:
+
 - (re)start the docker containers and deploy the subgraph
 - commit the images for ipfs and postgres and push these to docker hub
 

@@ -101,16 +101,15 @@ describe('DAOToken', () => {
     });
 
     const { tokenTransfers } = await sendQuery(`{
-      tokenTransfers(where: {contract: "${daotoken.options.address.toLowerCase()}"}) {
+      tokenTransfers(where: {txHash: "${txs[6]}"}) {
         txHash
         contract
         from
         to
         value
       }
-    }`);
+    }`, 5000);
 
-    expect(tokenTransfers.length).toBeGreaterThanOrEqual(7);
     expect(tokenTransfers).toContainEqual({
       txHash: txs[6],
       contract: daotoken.options.address.toLowerCase(),
@@ -119,5 +118,5 @@ describe('DAOToken', () => {
       value: '50',
     });
     await daotoken.methods.transferOwnership(tokenOwner).send({from: accounts[1].address});
-  }, 20000);
+  }, 50000);
 });

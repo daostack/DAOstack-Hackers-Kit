@@ -7,7 +7,7 @@ const glob = require('glob')
  */
 async function generateSchema () {
   const files = await new Promise((resolve, reject) =>
-    glob('src/mappings/**/schema.graphql', (err, files) => (err ? reject(err) : resolve(files)))
+    glob(`${__dirname}/../src/mappings/**/schema.graphql`, (err, files) => (err ? reject(err) : resolve(files)))
   )
   const schema = [...files, `${__dirname}/../src/domain/schema.graphql`]
     .map(file => {
@@ -17,7 +17,7 @@ async function generateSchema () {
     })
     .join('\n\n')
 
-  fs.writeFileSync('schema.graphql', schema, 'utf-8')
+  fs.writeFileSync(`${__dirname}/../schema.graphql`, schema, 'utf-8')
 }
 
 if ((require.main === module)) {

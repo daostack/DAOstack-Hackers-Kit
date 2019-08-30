@@ -8,25 +8,25 @@ entities:
   - ExecuteProposal
   - GPExecuteProposal
 eventHandlers:
-  - event: NewProposal(bytes32,address,uint256,address,bytes32)
+  - event: NewProposal(indexed bytes32,indexed address,uint256,address,bytes32)
     handler: handleNewProposal
-  - event: Redeem(bytes32,address,address,uint256)
+  - event: Redeem(indexed bytes32,indexed address,indexed address,uint256)
     handler: handleRedeem
-  - event: RedeemDaoBounty(bytes32,address,address,uint256)
+  - event: RedeemDaoBounty(indexed bytes32,indexed address,indexed address,uint256)
     handler: handleRedeemDaoBounty
-  - event: RedeemReputation(bytes32,address,address,uint256)
+  - event: RedeemReputation(indexed bytes32,indexed address,indexed address,uint256)
     handler: handleRedeemReputation
-  - event: VoteProposal(bytes32,address,address,uint256,uint256)
+  - event: VoteProposal(indexed bytes32,indexed address,indexed address,uint256,uint256)
     handler: handleVoteProposal
-  - event: Stake(bytes32,address,address,uint256,uint256)
+  - event: Stake(indexed bytes32,indexed address,indexed address,uint256,uint256)
     handler: handleStake
-  - event: GPExecuteProposal(bytes32,uint8)
+  - event: GPExecuteProposal(indexed bytes32,uint8)
     handler: handleGPExecuteProposal
-  - event: ExecuteProposal(bytes32,address,uint256,uint256)
+  - event: ExecuteProposal(indexed bytes32,indexed address,uint256,uint256)
     handler: handleExecuteProposal
-  - event: StateChange(bytes32,uint8)
+  - event: StateChange(indexed bytes32,uint8)
     handler: handleStateChange
-  - event: ExpirationCallBounty(bytes32,address,uint256)
+  - event: ExpirationCallBounty(indexed bytes32,indexed address,uint256)
     handler: handleExpirationCallBounty
-  - event: ConfidenceLevelChange(bytes32,uint256)
+  - event: ConfidenceLevelChange(indexed bytes32,uint256)
     handler: handleConfidenceLevelChange

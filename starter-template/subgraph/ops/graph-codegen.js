@@ -1,10 +1,15 @@
-const { runGraphCli, subgraphLocation } = require('./graph-cli.js')
+const path = require("path")
+const { runGraphCli, subgraphLocation: defaultSubgraphLocation} = require('./graph-cli.js')
 
-async function codegen (cwd) {
+async function codegen (opts = {}) {
+  const cwd = path.resolve(`${__dirname}/..`)
+  if (!opts.subgraphLocation) {
+    opts.subgraphLocation = defaultSubgraphLocation
+  }
   const result = await runGraphCli([
     'codegen',
-    '--output-dir src/types/',
-    subgraphLocation
+    `--output-dir ${cwd}/src/types/`,
+    opts.subgraphLocation
   ], cwd)
   if (result[0] === 1) {
     throw Error(`Deployment failed! ${result}`)

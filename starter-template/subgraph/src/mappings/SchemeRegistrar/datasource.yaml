@@ -7,9 +7,9 @@ entities:
   - SchemeRegistrarProposalExecuted
 
 eventHandlers:
-  - event: NewSchemeProposal(address,bytes32,address,address,bytes32,bytes4,string)
+  - event: NewSchemeProposal(indexed address,indexed bytes32,indexed address,address,bytes32,bytes4,string)
     handler: handleNewSchemeProposal
-  - event: RemoveSchemeProposal(address,bytes32,address,address,string)
+  - event: RemoveSchemeProposal(indexed address,indexed bytes32,indexed address,address,string)
     handler: handleRemoveSchemeProposal
-  - event: ProposalExecuted(address,bytes32,int256)
+  - event: ProposalExecuted(indexed address,indexed bytes32,int256)
     handler: handleProposalExecuted

@@ -1,8 +1,9 @@
 {
   "name": "DevTest",
-  "Avatar": "0xa91a06c80b27cffD2CE81af15558681B259714A9",
-  "DAOToken": "0x61d47DA73822B4a77c4a9Bae56Ba25729669b9F1",
-  "Reputation": "0x97c849E6B83d6F9A0D4F10E439053C7Ff6302e36",
-  "Controller": "0xCDB667316ca7A90A4ed2F2E54b26F156bbc0daFd",
-  "arcVersion": "0.0.1-rc.21"
+  "Avatar": "0x5085810B901e0C555AB26bf83c21D39A5CFF25f4",
+  "DAOToken": "0x81Ac48a0fAa9f57c26112469eB56660D4f951f99",
+  "Reputation": "0x4200862E16C59fD6d1d3584805Ff3eC85ebbF253",
+  "Controller": "0x163a5e217386EbD478f564f458d9ab75E733c72c",
+  "Schemes": {},
+  "arcVersion": "0.0.1-rc.23"
 }

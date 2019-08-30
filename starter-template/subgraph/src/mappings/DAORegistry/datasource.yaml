@@ -1,9 +1,9 @@
 entities:
   - Dummy
 eventHandlers:
-  - event: Propose(address)
+  - event: Propose(indexed address)
     handler: handlePropose
-  - event: Register(address,string)
+  - event: Register(indexed address,string)
     handler: handleRegister
-  - event: UnRegister(address)
+  - event: UnRegister(indexed address)
     handler: handleUnRegister

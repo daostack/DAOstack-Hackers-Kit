@@ -5,9 +5,9 @@ entities:
   - TokenTransfer
   - TokenApproval
 eventHandlers:
-  - event: Approval(address,address,uint256)
+  - event: Approval(indexed address,indexed address,uint256)
     handler: handleApproval
-  - event: Transfer(address,address,uint256)
+  - event: Transfer(indexed address,indexed address,uint256)
     handler: handleTransfer
-  - event: OwnershipTransferred(address,address)
+  - event: OwnershipTransferred(indexed address,indexed address)
     handler: handleOwnershipTransferred

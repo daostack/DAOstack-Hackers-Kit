@@ -39,8 +39,7 @@ async function initializeArc() {
   // TODO: change dev - testnet or mainnet as per your project need
   if (metamask) settings.dev.web3Provider = metamask
   const arc = new Arc(settings.dev);
-  const contractInfos = await arc.getContractInfos();
-  arc.setContractInfos(contractInfos);
+  await arc.fetchContractInfos();
   return arc;
 }
 
@@ -51,11 +50,13 @@ class App extends Component {
       arcIsInitialized: false,
       arc: null,
       dao: null,
+      daos: null,
       proposals: [],
       proposalCreateOptionsCR: {
         description: "Please provide Sample proposal description",
         title: "Sample Proposal",
         url: "#",
+        scheme: "0xe9846abe8ee7e8f8e371ed17bf3557573ee34069",
         beneficiary: (window).ethereum.selectedAddress,
         nativeTokenReward: "",
         reputationReward: eth.utils.parseEther('100').toString(),
@@ -74,13 +75,17 @@ class App extends Component {
 
   async componentWillMount() {
     const arc = await initializeArc()
+    console.log(DAO.search(arc, {where: {name: 'DevTest'}}))
     const daos = await arc.daos().pipe(first()).toPromise()
-    const dao = new DAO(daos[0].address, arc)
+    console.log(daos)
+    const dao = new DAO(daos[3].id, arc)
+    console.log(dao)
     await dao.proposals().subscribe((proposals) => {
       this.setState({
         arcIsInitialized: true,
         arc,
         dao,
+        daos,
         proposals
       })
     })
@@ -89,15 +94,10 @@ class App extends Component {
   async handleCreateProposal(event){
     const { dao, proposalCreateOptionsCR } = this.state
     try {
-      console.log(dao)
       await dao.createProposal({
         ...proposalCreateOptionsCR,
-        scheme: this.state.arc.getContractInfoByName('ContributionReward', '0.0.1-rc.21').id,
         dao: dao.address
-      })
-        .subscribe((event) => {
-          console.log(event)
-        })
+      }).send()
     } catch (e) {
       console.log("Error: ", e)
     }
@@ -113,12 +113,12 @@ class App extends Component {
     const stakingToken = await proposal.stakingToken()
     const amount = eth.utils.parseEther(this.state.stakeAmount)
     try {
-      console.log(proposal.votingMachine().options.address)
-      await stakingToken.approveForStaking(proposal.votingMachine().options.address, amount).send()
+      const votingMachine = await proposal.votingMachine()
+      await stakingToken.approveForStaking(votingMachine.options.address, amount).send()
+      proposal.stake(outcome, amount).send() 
     } catch (e) {
       console.log(e)
     }
-    proposal.stake(outcome, amount).send() 
   }
 
   async handleRedeem(proposal) {
@@ -130,7 +130,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          DAO: {this.state.dao.address}
+          DAO: {this.state.dao.id}
           <hr />
           Proposals
           <hr />

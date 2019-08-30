@@ -52,6 +52,11 @@ docker push $image_name:$image_version
 
 
 docker-compose down -v
+# publish npm
+echo "Publishing to npm..."
+npm install
+npm login
+npm publish
 # tag on github
 echo "create tag ${image_version}"
 git tag -a $image_version -m "Release of version $image_name:$image_version"

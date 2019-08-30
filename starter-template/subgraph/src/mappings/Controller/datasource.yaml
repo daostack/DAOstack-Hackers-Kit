@@ -17,13 +17,13 @@ entities:
   - ControllerAddGlobalConstraint
   - ControllerRemoveGlobalConstraint
 eventHandlers:
-  - event: RegisterScheme(address,address)
+  - event: RegisterScheme(indexed address,indexed address)
     handler: handleRegisterScheme
-  - event: UnregisterScheme(address,address)
+  - event: UnregisterScheme(indexed address,indexed address)
     handler: handleUnregisterScheme
-  - event: UpgradeController(address,address)
+  - event: UpgradeController(indexed address,address)
     handler: handleUpgradeController
-  - event: AddGlobalConstraint(address,bytes32,uint8)
+  - event: AddGlobalConstraint(indexed address,bytes32,uint8)
     handler: handleAddGlobalConstraint
-  - event: RemoveGlobalConstraint(address,uint256,bool)
+  - event: RemoveGlobalConstraint(indexed address,uint256,bool)
     handler: handleRemoveGlobalConstraint
