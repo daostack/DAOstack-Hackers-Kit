@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/truffle test",
-    "ganache": "npm explore @daostack/arc.js -- npm start ganache",
-    "migrate-daostack": "npm explore @daostack/arc.js -- npm start migrateContracts",
+    "ganache": "npm explore @daostack/migration -- npm run ganache",
+    "migrate-daostack": "npm explore @daostack/migration -- npm run migrateContracts",
     "migrate-dutchx": "npm explore @gnosis.pm/dx-contracts -- npm run migrate",
     "webpack": "npx webpack --config webpack.config.js",
     "truffle-migrate": "./node_modules/.bin/truffle migrate",
@@ -24,16 +24,14 @@
   "author": "Ben Kaufman",
   "license": "ISC",
   "dependencies": {
-    "@daostack/arc": "^0.0.0-alpha.56",
-    "@daostack/arc.js": "^0.0.0-alpha.89",
-    "@gnosis.pm/dx-contracts": "^2.0.0-SNAPSHOT.5",
+    "@daostack/arc": "0.0.1-rc.23",
+    "@daostack/migration": "0.0.1-rc.23-v2",
+    "@gnosis.pm/dx-contracts": "^2.0.0",
     "express": "^4.16.4",
-    "truffle": "^4.1.14",
-    "truffle-contract": "^3.0.6",
-    "truffle-hdwallet-provider": "0.0.6"
+    "truffle": "^4.1.14"
   },
   "devDependencies": {
-    "webpack": "^4.26.1",
+    "webpack": "^4.39.3",
     "webpack-cli": "^3.1.1"
   }
 }
