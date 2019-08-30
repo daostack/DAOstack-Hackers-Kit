@@ -1,9 +1,9 @@
 {
-  "name": "Feckless Artist",
-  "Avatar": "0xA92A766d62318B9c06Eb548753bD34acbD7C5f3c",
-  "DAOToken": "0xf25e92D6092122bd7190BC8aDaF36FcF26aB1110",
-  "Reputation": "0xBeF75D93f5f25da0896e4623783D685eDc6d2FC5",
-  "Controller": "0x4b38ACFF6A4A3FD2D5A53B02b38654078c0Ba752",
+  "name": "DevTest",
+  "Avatar": "0x5085810B901e0C555AB26bf83c21D39A5CFF25f4",
+  "DAOToken": "0x81Ac48a0fAa9f57c26112469eB56660D4f951f99",
+  "Reputation": "0x4200862E16C59fD6d1d3584805Ff3eC85ebbF253",
+  "Controller": "0x163a5e217386EbD478f564f458d9ab75E733c72c",
   "Schemes": {},
   "arcVersion": "0.0.1-rc.23"
 }
