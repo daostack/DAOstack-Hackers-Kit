@@ -10,9 +10,9 @@ async function migrate() {
     gasPrice: DEFAULT_GAS,
     quiet: false,
     force: true,
-    output: 'data/migration.json',
+    output: process.env.OUTPUT_FILE,
     privateKey: process.env.PRIVATE_KEY,
-    customabislocation: 'build/contracts',
+    customabislocation: process.env.CUSTOM_ABI_LOCATION,
     params: {
       private: migrationSpec,
       rinkeby: migrationSpec
@@ -24,7 +24,6 @@ async function migrate() {
     case "private":
       options.prevmigration = " ";
       const migrationBaseResult = await DAOstackMigration.migrateBase(options);
-      console.log("deployed base")
       options.prevmigration = options.output;
       break;
   }
