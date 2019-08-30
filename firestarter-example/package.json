@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "compile": "truffle compile",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
     "migrate": "node migrations/deployDao.js"
   },
