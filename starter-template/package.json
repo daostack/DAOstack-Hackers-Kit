@@ -36,7 +36,7 @@
   "author": "YOUR_NAME",
   "license": "YOUR_LICENSE",
   "dependencies": {
-    "@daostack/migration": "0.0.1-rc.21-v0",
+    "@daostack/migration": "0.0.1-rc.23-v2",
     "dotenv": "^8.0.0"
   }
 }

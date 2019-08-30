@@ -55,7 +55,7 @@ export function getProposalIPFSData(proposal: Proposal): Proposal {
           return proposal;
         }
         if (descJson.toObject().get('title') != null) {
-          proposal.title = descJson.toObject().get('title').toString();
+           proposal.title = descJson.toObject().get('title').toString();
         }
         if (descJson.toObject().get('description') != null) {
           proposal.description = descJson.toObject().get('description').toString();

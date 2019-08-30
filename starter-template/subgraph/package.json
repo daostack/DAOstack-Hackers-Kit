@@ -1,6 +1,6 @@
 {
   "name": "@daostack/subgraph",
-  "version": "0.0.24",
+  "version": "0.0.27-1",
   "author": "DAOstack (https://www.daostack.io)",
   "license": "GPL-3.0",
   "description": "A caching layer for daostack using The Graph",
@@ -12,12 +12,12 @@
     "node": ">=10.15.0"
   },
   "scripts": {
-    "codegen": "node ops/generate-abis.js && node ops/generate-schema.js && node ops/generate-daos-subgraph.js && node ops/generate-subgraph.js && node ops/graph-codegen.js",
+    "codegen": "node ops/generate-abis.js && node ops/generate-schema.js && node ops/generate-subgraph.js && node ops/generate-daos-subgraph.js && node ops/generate-contractsinfo.js && node ops/graph-codegen.js",
     "codegen:watch": "watch 'npm run codegen' src/mappings src/domain",
     "deploy": "node ops/setup-env.js",
     "deploy:watch": "npm run deploy -- --watch",
     "docker:stop": "docker-compose down -v",
-    "docker:run": "node ops/set-docker-network.js development && docker-compose up -d",
+    "docker:run": "node ops/set-docker-network.js private && docker-compose up -d",
     "docker:run-kovan": "node ops/set-docker-network.js kovan && docker-compose up -d",
     "docker:run-rinkeby": "node ops/set-docker-network.js rinkeby && docker-compose up -d",
     "docker:run-mainnet": "node ops/set-docker-network.js mainnet && docker-compose up -d",
@@ -30,12 +30,12 @@
     "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
-    "@daostack/migration": "0.0.1-rc.23-v0",
+    "@daostack/migration": "0.0.1-rc.23-v2",
     "@types/graphql": "^14.2.0",
     "@types/jest": "^23.3.7",
     "@types/mocha": "^5.2.5",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
+    "eslint": "^6.2.2",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
@@ -46,8 +46,8 @@
     "watch": "^1.0.2"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "^0.12.0",
-    "@graphprotocol/graph-ts": "^0.12.0",
+    "@graphprotocol/graph-cli": "^0.14.0",
+    "@graphprotocol/graph-ts": "^0.14.0",
     "@types/node": "^10.14.4",
     "apollo-client": "^2.4.5",
     "apollo-link-ws": "^1.0.9",

@@ -1,9 +1,9 @@
 entities:
   - AvatarContract
 eventHandlers:
-  - event: SendEther(uint256,address)
+  - event: SendEther(uint256,indexed address)
     handler: handleSendEth
-  - event: ReceiveEther(address,uint256)
+  - event: ReceiveEther(indexed address,uint256)
     handler: handleReceiveEth
-  - event: OwnershipTransferred(address,address)
+  - event: OwnershipTransferred(indexed address,indexed address)
     handler: handleOwnershipTransferred

@@ -1,50 +1,56 @@
 const fs = require("fs");
+const path = require("path")
 const yaml = require("js-yaml");
-const { migrationFileLocation, network } = require("./settings");
+const { migrationFileLocation: defaultMigrationFileLocation,
+network } = require("./settings");
 const mappings = require("./mappings.json")[network].mappings;
+const {   subgraphLocation: defaultSubgraphLocation } = require('./graph-cli')
 
 /**
  * Generate a `subgraph.yaml` file from `datasource.yaml` fragments in
   `mappings` directory `mappings.json` and migration.json`
  */
-async function generateSubgraph() {
-  const migrationFile = migrationFileLocation;
+async function generateSubgraph(opts={}) {
+  const migrationFile = opts.migrationFileLocation || defaultMigrationFileLocation;
+  opts.subgraphLocation = opts.subgraphLocation || defaultSubgraphLocation;
   const addresses = JSON.parse(fs.readFileSync(migrationFile, "utf-8"));
 
   const dataSources = mappings.map(mapping => {
     var contract = mapping.name;
     var abis, entities, eventHandler, file, yamlLoad, abi;
-    if (fs.existsSync("src/mappings/" + mapping.mapping + "/datasource.yaml")) {
+    if (fs.existsSync(`${__dirname}/../src/mappings/` + mapping.mapping + "/datasource.yaml")) {
       yamlLoad = yaml.safeLoad(
         fs.readFileSync(
-          "src/mappings/" + mapping.mapping + "/datasource.yaml",
+          `${__dirname}/../src/mappings/` + mapping.mapping + "/datasource.yaml",
           "utf-8"
         )
       );
-      file = `src/mappings/${mapping.mapping}/mapping.ts`;
+      file = `${__dirname}/../src/mappings/${mapping.mapping}/mapping.ts`;
       eventHandlers = yamlLoad.eventHandlers;
       entities = yamlLoad.entities;
       (abis = (yamlLoad.abis || [contract]).map(contract => ({
         name: contract,
-        file: `./abis/${mapping.arcVersion}/${contract}.json`
+        file: `${__dirname}/../abis/${mapping.arcVersion}/${contract}.json`
       }))),
         (abi =
           yamlLoad.abis && yamlLoad.abis.length ? yamlLoad.abis[0] : contract);
     } else {
-      file = `ops/emptymapping.ts`;
+      file = path.resolve(`${__dirname}/emptymapping.ts`);
       eventHandlers = [{ event: "Dummy()", handler: "handleDummy" }];
       entities = ["nothing"];
-      (abis = [{ name: contract, file: `./ops/dummyabi.json` }]),
+      (abis = [{ name: contract, file: path.resolve(`${__dirname}/dummyabi.json`) }]),
         (abi = contract);
     }
 
     let contractAddress;
-    if (mapping.dao === 'organs') {
+    if (mapping.dao === 'address') {
+      contractAddress = mapping.address
+    } else if (mapping.dao === 'organs') {
       contractAddress = addresses[network].test[mapping.arcVersion][mapping.dao][mapping.contractName];
     } else {
       contractAddress = addresses[network][mapping.dao][mapping.arcVersion][mapping.contractName];
     }
-    
+
     if (!contractAddress) {
       throw Error(
         `Address for contract ${contract} of ${
@@ -64,7 +70,7 @@ async function generateSubgraph() {
         kind: "ethereum/events",
         apiVersion: "0.0.1",
         language: "wasm/assemblyscript",
-        file: file,
+        file: path.resolve(file),
         entities,
         abis,
         eventHandlers
@@ -78,7 +84,7 @@ async function generateSubgraph() {
     dataSources
   };
   fs.writeFileSync(
-    "subgraph.yaml",
+    opts.subgraphLocation,
     yaml.safeDump(subgraph, { noRefs: true }),
     "utf-8"
   );

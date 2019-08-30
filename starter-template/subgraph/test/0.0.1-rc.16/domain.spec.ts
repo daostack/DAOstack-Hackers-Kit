@@ -97,10 +97,9 @@ describe('Domain Layer', () => {
       }
     }`;
     let register;
-    register = (await sendQuery(getRegister)).dao.register;
-    expect(register).toEqual('na');
-
     const accounts = web3.eth.accounts.wallet;
+
+    register = (await sendQuery(getRegister)).dao.register;
 
     const daoRegistry = new web3.eth.Contract(
       DAORegistry.abi,
@@ -108,8 +107,6 @@ describe('Domain Layer', () => {
       opts,
     );
 
-    await daoRegistry.methods.propose(addresses.Avatar).send();
-    register = (await sendQuery(getRegister, 2000)).dao.register;
     expect(register).toEqual('proposed');
 
     await daoRegistry.methods.register(addresses.Avatar, 'test').send();
@@ -973,9 +970,9 @@ describe('Domain Layer', () => {
   });
     expect(proposal).toMatchObject({
     accountsWithUnclaimedRewards: [
+      accounts[5].address.toLowerCase(),
       accounts[0].address.toLowerCase(),
       accounts[1].address.toLowerCase(),
-      accounts[5].address.toLowerCase(),
     ]});
     async function redeem({ proposalId, beneficiary }) {
     const { blockNumber } = await genesisProtocol.methods

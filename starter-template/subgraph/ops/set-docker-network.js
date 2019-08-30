@@ -13,7 +13,7 @@ async function setDockerNetwork() {
     let network = args[0];
     let file = require("path").join("docker-compose.yml");
     let doc = yaml.safeLoad(fs.readFileSync(file));
-    if (network === "development") {
+    if (network === "private") {
       doc["services"]["ganache"] = {
         image:
           "daostack/migration:" +

@@ -75,6 +75,9 @@ describe('Reputation', () => {
     txs.push(await uController.methods.mintReputation(100, accounts[0].address, addresses.DemoAvatar)
     .send({from : accounts[0].address}));
 
+    let firstMemberCreatedAt = (await web3.eth.getBlock(
+      txs[0].blockNumber,
+    )).timestamp.toString();
     await checkTotalSupply(100);
     txs.push(await uController.methods.mintReputation('100' , accounts[1].address, addresses.DemoAvatar).send());
 
@@ -83,10 +86,13 @@ describe('Reputation', () => {
     await checkTotalSupply(170);
 
     txs.push(await uController.methods.mintReputation('300', accounts[2].address, addresses.DemoAvatar).send());
+    let secondMemberCreatedAt = (await web3.eth.getBlock(
+      txs[3].blockNumber,
+    )).timestamp.toString();
     await checkTotalSupply(470);
     txs.push(await uController.methods.burnReputation('100' , accounts[1].address, addresses.DemoAvatar).send());
     await checkTotalSupply(370);
-    txs.push(await uController.methods.burnReputation( '1', accounts[2].address, addresses.DemoAvatar).send());
+    txs.push(await uController.methods.burnReputation('1', accounts[2].address, addresses.DemoAvatar).send());
     await checkTotalSupply(369);
 
     txs = txs.map(({ transactionHash }) => transactionHash);
@@ -95,7 +101,8 @@ describe('Reputation', () => {
       reputationHolders {
         contract,
         address,
-        balance
+        balance,
+        createdAt
       }
     }`);
 
@@ -104,11 +111,13 @@ describe('Reputation', () => {
       contract: reputation.options.address.toLowerCase(),
       address: accounts[0].address.toLowerCase(),
       balance: parseInt(await reputation.methods.balanceOf(accounts[0].address).call(), 10) + '',
+      createdAt: firstMemberCreatedAt,
     });
     expect(reputationHolders).toContainEqual({
       contract: reputation.options.address.toLowerCase(),
       address: accounts[2].address.toLowerCase(),
       balance: parseInt(await reputation.methods.balanceOf(accounts[2].address).call(), 10) + '',
+      createdAt: secondMemberCreatedAt,
     });
 
     const { reputationMints } = await sendQuery(`{
