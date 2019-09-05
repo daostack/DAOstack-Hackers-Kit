@@ -6,7 +6,7 @@
 
 ## The Stack
 
-![Stack](../images/daostack-overview.png)
+![Stack](./images/daostack-overview.png)
 
 A DApp build with DAOstack DAOs consists of 
 
