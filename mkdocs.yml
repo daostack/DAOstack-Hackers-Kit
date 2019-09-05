@@ -1,0 +1,44 @@
+site_name: DAOstack Developer Egress
+repo_url: https://github.com/daostack/DAOstack-Hacker-Kit/
+repo_name: daostack/DAOstack-Hacker-Kit
+site_description: A platform for building DAOs
+docs_dir: docs
+markdown_extensions:
+- admonition
+- codehilite:
+    linenums: true
+- toc:
+    permalink: true
+theme:
+  name: 'material'
+  palette:
+    primary: 'black'
+    accent: 'pink'
+  logo: 'images/daostack-logoW.svg'
+      
+extra:
+  social:
+  - type: 'github'
+    link: 'https://github.com/daostack/DAOstack-Hacker-Kit'
+  - type: 'slack'
+    link: 'https://daostack.slack.com'
+  - type: 'telegram'
+    link: 'https://t.me/daostackcommunity'
+
+nav:
+- Home: 'index.md'
+- Stack:
+  - Infra: 'stack/infra/infraIntro.md'
+  - Arc: 'stack/arc/arcIntro.md'
+  - Client: 'stack/client/clientIntro.md'
+  - Subgraph: 'stack/subgraph/subgraphIntro.md'
+  - DApps/Alchemy: 'stack/alchemy/alchemyIntro.md'
+- Migration: 'migration.md'
+- Getting Started:
+    - Deploy a DAO with existing actions: 'gettingStarted/deployDAO.md'
+    - Deploy a DAO and enable custom actions: 'gettingStarted/deployDAOcustomActions.md'
+    - Add features to Alchemy interface: 'gettingStarted/setupAlchemyDevMode.md'
+    - Setup Alchemy to play with your DAO: 'gettingStarted/addNewDAOtoAlchemy.md'
+    - Add custom scheme support to Alchemy: 'gettingStarted/customSchemeSupportAlchemy.md'
+    - Create your own interface for DAOstack DAOs: 'gettingStarted/createNewInterface.md'
+- Hacker-kit: 'hackerkit.md'

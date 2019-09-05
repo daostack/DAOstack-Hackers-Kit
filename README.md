@@ -1,4 +1,4 @@
-<img src="./daostack-hk.png">
+<img src="./docs/images/daostack-hk.png">
 
 # Table of contents
 
