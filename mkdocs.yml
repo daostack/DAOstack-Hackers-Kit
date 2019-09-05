@@ -35,10 +35,10 @@ nav:
   - DApps/Alchemy: 'stack/alchemy/alchemyIntro.md'
 - Migration: 'migration.md'
 - Getting Started:
-    - Deploy a DAO with existing actions: 'gettingStarted/deployDAO.md'
-    - Deploy a DAO and enable custom actions: 'gettingStarted/deployDAOcustomActions.md'
     - Add features to Alchemy interface: 'gettingStarted/setupAlchemyDevMode.md'
     - Setup Alchemy to play with your DAO: 'gettingStarted/addNewDAOtoAlchemy.md'
+    - Deploy a DAO with existing actions: 'gettingStarted/deployDAO.md'
+    - Deploy a DAO and enable custom actions: 'gettingStarted/deployDAOcustomActions.md'
     - Add custom scheme support to Alchemy: 'gettingStarted/customSchemeSupportAlchemy.md'
     - Create your own interface for DAOstack DAOs: 'gettingStarted/createNewInterface.md'
 - Hacker-kit: 'hackerkit.md'
