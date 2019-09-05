@@ -87,6 +87,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#about-alchmey" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -378,6 +382,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
     <a href="./" title="Add features to Alchemy interface" class="md-nav__link md-nav__link--active">
       Add features to Alchemy interface
@@ -446,6 +452,21 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -454,9 +475,23 @@
                   <a href="https://github.com/daostack/DAOstack-Hacker-Kit/edit/master/docs/gettingStarted/setupAlchemyDevMode.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Add features to Alchemy interface</h1>
-                
-                
+                <h1 id="about-alchmey">About Alchmey<a class="headerlink" href="#about-alchmey" title="Permanent link">&para;</a></h1>
+<h1 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h1>
+<h1 id="setup-alchemy-in-dev-mode">Setup Alchemy in Dev mode<a class="headerlink" href="#setup-alchemy-in-dev-mode" title="Permanent link">&para;</a></h1>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">daostack</span><span class="o">/</span><span class="n">alchemy</span><span class="p">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">alchemy</span>
+<span class="n">npm</span> <span class="n">ci</span>
+<span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">build</span>
+<span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span>
+</pre></div>
+</td></tr></table>
+
+<h1 id="setup-alchemy-to-work-with-testnet-daos">Setup Alchemy to work with Testnet DAOs<a class="headerlink" href="#setup-alchemy-to-work-with-testnet-daos" title="Permanent link">&para;</a></h1>
+<h1 id="setup-alchemy-to-work-with-mainnet-daos">Setup Alchemy to work with Mainnet DAOs<a class="headerlink" href="#setup-alchemy-to-work-with-mainnet-daos" title="Permanent link">&para;</a></h1>
                 
                   
                 
