@@ -36,6 +36,8 @@ nav:
 - Migration: 'migration.md'
 - Getting Started:
     - Add features to Alchemy interface: 'gettingStarted/setupAlchemyDevMode.md'
+    - Add new scheme for a DAO: 'gettingStarted/setupNewScheme.md'
+    - Setup Generic Scheme for a DAO: 'gettingStarted/setupGenericScheme.md'
     - Setup Alchemy to play with your DAO: 'gettingStarted/addNewDAOtoAlchemy.md'
     - Deploy a DAO with existing actions: 'gettingStarted/deployDAO.md'
     - Deploy a DAO and enable custom actions: 'gettingStarted/deployDAOcustomActions.md'
