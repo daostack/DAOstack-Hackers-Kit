@@ -83,16 +83,48 @@
   Choose this if,
 
   - using any of the already supported schemes by client & alchemy
-  - playing with DAO you just deployed to any of the testnet
-  - using any testnet other than rinkeby
+  - playing with DAO you just deployed and to any of the testnet and not yet whitelisted by daostack
+  - using any testnet
 
   Make following changes:
 
-  1. Clone subgraph repo in Alchemy
+  1. Clone subgraph repo and start-graph node locally
+
+        git clone git@github.com:daostack/subgraph.git
+        cd subgraph
+        npm i
+
+        touch .env
+        echo network="network-name" >> .env # eg "rinkeby"
+        echo subgraph="subgraph-name"
+        echo postgres_password="letmein"
+        echo ethereum_node="https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2"
+
+        npm run docker:run-rinkeby 
+
   2. Update your DAO details and deploy subgraph
+
+        touch daos/rinkeby/<DAO-Name>.json
+        # Add your DAO details in `<DAO-Name.json> file
+        # refer to any of existing file in daos/rinkeby folder
+        npm run deploy '{  "migrationFile" : "../migration.json" }'
+        
   3. Update `docker-compose.yml`
-  4. Update `webpack.docker.config.js`
+        - remove link to `graph-node` in service `alchemy`
+        - remove services `graph-node`, `ipfs`, `postgres4graphnode` and `ganache`
+
+  4. Update `webpack.docker.config.js`, add following process variables
+        'ARC_GRAPHQLHTTPPROVIDER': JSON.stringify('http://127.0.0.1:8000/subgraphs/name/daostack'),
+        'ARC_GRAPHQLWSPROVIDER': JSON.stringify('ws://127.0.0.1:8001/subgraphs/name/daostack'),
+        'ARC_IPFSPROVIDER': JSON.stringify('localhost')
+
   5. Build and run
+        
+          docker-compose build
+          docker-compose up -d
+
+   Note: You can also deploy subgraph to graph explorer. `Step 1 & 2` will be replaced by [deploy to graph-explorer](https://github.com/daostack/subgraph#deploy-subgraph)
+   and `Step 4` will be updated to have corresponding url
 
 ### Run  graph-node locally with new/not yet supported schemes
   
