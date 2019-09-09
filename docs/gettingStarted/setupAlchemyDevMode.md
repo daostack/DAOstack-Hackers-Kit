@@ -58,7 +58,12 @@
   After the boilerplate steps you would need to change the `docker-compose.yml`, `webpack.docker.config.js` and `.env`
 
   Choose from one of the following setup for testnet to start playing and integrating features to Alchemy:
+  
+  - [Use daostack rinkeby subgraph](#use-daostack-rinkeby-subgraph)
+  - [Run graph-node locally with already supported schemes](#run-graph-node-locally-with-already-supported-schemes)
+  - [Run  graph-node locally with new/not yet supported schemes](#run-graph-node-locally-with-newnot-yet-supported-schemes)
 
+  
 ### Use daostack rinkeby subgraph
 
   Choose this if,
@@ -127,5 +132,3 @@
    and `Step 4` will be updated to have corresponding url
 
 ### Run  graph-node locally with new/not yet supported schemes
-  
-# Setup Alchemy to work with Mainnet DAOs
