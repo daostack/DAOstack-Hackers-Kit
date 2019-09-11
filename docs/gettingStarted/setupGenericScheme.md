@@ -1,7 +1,11 @@
 # Setup Generic Scheme for a DAO
 
-## When to use Generic Scheme
-[Generic Scheme](https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol) allows a DAO to interact with other contracts and execute any method from the contract if the DAO decides to
+## When to use GenericScheme or UGenericScheme
+[GenericScheme](https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol) and [UGenericScheme](https://github.com/daostack/arc/blob/master/contracts/universalSchemes/UGenericScheme.sol) both allows a DAO to interact with other contracts and execute any method from the contract if the DAO decides to.
+
+**UGenericScheme**: If a DAO does not have a generic scheme registered or want to edit parameters of existing one, then use the already deployed UGenericScheme.
+
+**GenericScheme**: If a DAO wants to have multiple generic scheme i.e. integration with multiple different contracts, then for each subsequent contract (apart from the one already registered via UGenericScheme) you need to deploy an instance of GenericScheme and register it to the DAO.
 
 ## How to register Generic Scheme with a DAO
 
@@ -9,21 +13,26 @@ DAO only uses the schemes that are registered with its controller. There are two
 
   - While forging/deploying the DAO as part of initial set of schemes
 
-  - While proposing the new scheme to DAO via Scheme Registrar for the DAO.
+  - While proposing the new scheme to DAO via any Scheme that has permission to register another Scheme for the DAO. **In case of GenesisAlpha you can register via Scheme Registrar**
     
 ### Setup Generic Scheme while deploying DAO
+
+  While deploying DAO UGenericScheme is used. If there is more than one contract integration in DAO, then the first contract will be registered with UGenericScheme and that number of GenericScheme instances will be deployed and registered respectively with the rest of the contracts.
 
   Refer to [How to deploy DAO](../deployDAO)
   
 ### Setup Generic Scheme via Scheme Registrar
 
-#### Set Generic Scheme to interact with your contract
+#### Set UGenericScheme to interact with your contract
 
-You can use GenericScheme's `setParameters` method to setup which contract it will interact with.
+NOTE: Follow this if generic scheme is not already registered or need to update to new parameters
+
+You can use UGenericScheme's `setParameters` method to setup `contractToCall`, `votingMachine` to use and `voteParameters` for the voting
+
 Following is a short script that describes how to do this
 
 ```
-  const genericScheme = new web3.eth.Contract(
+  const ugenericScheme = new web3.eth.Contract(
     require('@daostack/arc/build/contracts/UGenericScheme.json').abi,
     UGenericSchemeAddress, // address from https://github.com/daostack/migration/blob/master/migration.json
     {
@@ -59,7 +68,7 @@ Following is a short script that describes how to do this
 
 
   // paramHash will be useful in later step so lets log it
-  const paramHash = genericScheme.methods.setParameters(
+  const paramHash = ugenericScheme.methods.setParameters(
       voteParams,
       votingMachineAddress,
       targetContractAddress
@@ -67,13 +76,89 @@ Following is a short script that describes how to do this
 
   console.log(paramHash)
 
-  genericScheme.methods.setParameters(
+  ugenericScheme.methods.setParameters(
         voteParams,
         votingMachineAddress,
         targetContractAddress
       ).send()
 ```
 
+OR
+
+#### Set GenericScheme to interact with your contract
+
+NOTE: Follow this if UGenericScheme is already being used and DAO need to interact with another contract
+
+You can use GenericScheme's `initialize` method to setup the DAO `Avatar`, `contractToCall`, `votingMachine` to use and `voteParameters` for the voting.
+
+Following is a short script that describes how to do this
+
+```
+  const genericSchemeJson = require('@daostack/arc/build/contracts/GenericScheme.json')
+  const genericSchemeContract = new web3.eth.Contract(
+    genericSchemeJson.abi,
+    undefined,
+    {
+      from,
+      gas,
+      gasPrice
+    }
+  )
+
+  // Deploy New GenericScheme Instance
+  const genericSchemeDeployedContract = genericSchemeContract.deploy({
+        data: genericSchemeJson.bytecode,
+        arguments: null
+      }).send()
+
+  let genericScheme = await genericSchemeDeployedContract
+  
+  // Log Address of new instance to use in next step while registering the scheme to DAO
+  console.log(`Deployed new GenericScheme instance at ${genericScheme.options.address}`)
+
+  // Following are example values, Please change appropriately
+  // Refer https://daostack.zendesk.com/hc/en-us/sections/360000535638-Genesis-Protocol
+  const voteParams = {
+        "boostedVotePeriodLimit": 345600,
+        "daoBountyConst": 10,
+        "minimumDaoBountyGWei": 150000000000,
+        "queuedVotePeriodLimit": 2592000,
+        "queuedVoteRequiredPercentage": 50,
+        "preBoostedVotePeriodLimit": 86400,
+        "proposingRepRewardGwei": 50000000000,
+        "quietEndingPeriod": 172800,
+        "thresholdConst": 1200,
+        "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+        "votersReputationLossRatio": 4,
+        "activationTime": 0
+      }
+
+  // Get address from https://github.com/daostack/migration/blob/master/migration.json
+  const votingMachineAddress = "0xaddress-of-VotingMachine-of-DAO-on-given-network"
+
+  // For eg if you want this Generic Scheme to enable DAO to interact with Bounties Network
+  // then targetContract would be the address of Bounties Network's respective contract
+  const targetContractAddress = "0xaddress-of-contract-this-will-interact-with"
+
+  const avatar = "0xaddres-of-DAO"
+
+  // paramHash will be useful in later step so lets log it
+  const paramHash = genericScheme.methods.initialize(
+      avatar,
+      voteParams,
+      votingMachineAddress,
+      targetContractAddress
+      ).call()
+
+  console.log(paramHash)
+
+  genericScheme.methods.initialize(
+        avatar,
+        voteParams,
+        votingMachineAddress,
+        targetContractAddress
+      ).send()
+```
 
 #### Submit new proposal to Scheme Registrar via Alchemy UI
 
@@ -81,10 +166,10 @@ Following is a short script that describes how to do this
   2. Visit DAO's `Home` page and choose `Scheme Registrar`
   3. Click `New Proposal`, this will open a popup
   4. Select `Add Scheme` on the popup sidebar (on left)
-  5. Give appropriate title, description, url
-  6. Put the address of Generic Scheme contract deployed
+  5. Give appropriate title, description, url which describes the proposal
+  6. Put the address of Generic Scheme contract
 
-      **Note**: If DAO does not have a `Generic Scheme` registered to it you can use the already deployed instance of GenericScheme find the address for correct network [here](https://github.com/daostack/migration/blob/master/migration.json), else you will have to deploy new instance of Generic Scheme.
+      **NOTE**: Based on above step this would be either address of UGenericScheme (if registering generic scheme for first time or editing params for existing one) or address of GenericScheme instance deployed in previous step (if registering multiple generic scheme to the DAO)
 
   7. Enter the `paramHash` you got [here](#set-generic-scheme-to-interact-with-your-contract)
   8. In permissions section choose `Call genericCall on behalf of`
