@@ -17,7 +17,9 @@ DAO only uses the schemes that are registered with its controller. There are two
     
 ### Setup Generic Scheme while deploying DAO
 
-  While deploying DAO UGenericScheme is used. If there is more than one contract integration in DAO, then the first contract will be registered with UGenericScheme and that number of GenericScheme instances will be deployed and registered respectively with the rest of the contracts.
+  While deploying DAO, if you want to interact with just single contract then you can use `UGenericScheme` and register that to your DAO.
+
+  In case there are multiple contracts you wish to interact with, then you can register multiple `GenericScheme` and mention each in `customSchemes` section of your `migration-dao-params.json`.
 
   Refer to [How to deploy DAO](../deployDAO)
   
