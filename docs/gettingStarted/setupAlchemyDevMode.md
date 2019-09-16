@@ -1,5 +1,3 @@
-# Developing With Alchemy
-
 ## Prerequisites
 
   - docker >= 18.06.1-c
