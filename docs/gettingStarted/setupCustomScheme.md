@@ -22,8 +22,3 @@ To Enable DAO with some custom actions, you will have to work on multiple layers
 ### Arc: Deploy Scheme Contract
 
 #### Scheme design
-  permissions what it can do
-
-Idea?
-  - subtle fuck giver. Mint rep based on like/dislike.
-
