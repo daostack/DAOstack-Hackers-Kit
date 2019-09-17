@@ -36,6 +36,7 @@ Schemes are the actions a DAOstack DAO can take. Once you have created your sche
         2. [entities](https://github.com/graphprotocol/graph-node/blob/master/docs/subgraph-manifest.md#1521-ethereum-events-mapping): list of entities that are written by the the mapping.
         3. [`eventHandlers`](https://github.com/graphprotocol/graph-node/blob/master/docs/subgraph-manifest.md#1522-eventhandler): map of solidity event signatures to event handlers in mapping code.
 
+      NOTE: types are generated during the build step based on the entities described in schema.graphQL. Import these types while writing handlers in `mapping.ts`
   4. integration test (optional): `test/integration/MyContractName.spec.ts`
 
 
@@ -56,7 +57,7 @@ Schemes are the actions a DAOstack DAO can take. Once you have created your sche
             {
                "name": "<contract name as appears in `abis/arcVersion` folder>",
                "dao": "address",
-               "mapping": "<contract name from step 2>",
+               "mapping": "<MyContractName>",
                "arcVersion": "<contract arc version under which the abi is located in the `abis` folder>",
                "address": "<the contract address>"
             },
@@ -68,10 +69,10 @@ Schemes are the actions a DAOstack DAO can take. Once you have created your sche
   1. Update `.env` file in `subgraph` directory
 
         # Following are example values please change for customization
-        echo network="rinkeby" >> .env
-        echo subgraph="daostack" >> .env
-        echo postgres_password="letmein" >> .env
-        echo ethereum_node="https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2" >> .env
+        network="rinkeby"
+        subgraph="daostack"
+        postgres_password="letmein"
+        ethereum_node="https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2"
 
   2. Start `graph-node` in docker for your testnet
 

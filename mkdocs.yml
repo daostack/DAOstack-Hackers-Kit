@@ -38,7 +38,7 @@ nav:
     - Add features to Alchemy interface: 'gettingStarted/setupAlchemyDevMode.md'
     - Setup Generic Scheme for a DAO: 'gettingStarted/setupGenericScheme.md'
     - Add custom scheme to the DAO: 'gettingStarted/setupCustomScheme.md'
-    - Add custom scheme to Alchemy: 'gettingStarted/customSchemeSupportAlchemy.md'
+    - Add custom scheme to Alchemy: 'gettingStarted/setupCustomSchemeAlchemy.md'
     - Deploy a DAO: 'gettingStarted/deployDAO.md'
     - Create your own interface for DAOstack DAOs: 'gettingStarted/createNewInterface.md'
 - Hacker-kit: 'hackerkit.md'
