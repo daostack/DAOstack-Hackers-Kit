@@ -363,18 +363,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../setupNewScheme/" title="Add new scheme for a DAO" class="md-nav__link">
-      Add new scheme for a DAO
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -404,8 +392,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#when-to-use-generic-scheme" class="md-nav__link">
-    When to use Generic Scheme
+  <a href="#when-to-use-genericscheme-or-ugenericscheme" class="md-nav__link">
+    When to use GenericScheme or UGenericScheme
   </a>
   
 </li>
@@ -434,8 +422,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-generic-scheme-to-interact-with-your-contract" class="md-nav__link">
-    Set Generic Scheme to interact with your contract
+  <a href="#set-ugenericscheme-to-interact-with-your-contract" class="md-nav__link">
+    Set UGenericScheme to interact with your contract
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-genericscheme-to-interact-with-your-contract" class="md-nav__link">
+    Set GenericScheme to interact with your contract
   </a>
   
 </li>
@@ -462,6 +457,33 @@
     How to get your Generic Scheme shown in Alchemy
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-proposal" class="md-nav__link">
+    Creating Proposal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#displaying-proposals" class="md-nav__link">
+    Displaying proposals
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-changes-to-scheme-ui" class="md-nav__link">
+    (Optional) Changes to scheme UI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -481,8 +503,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../addNewDAOtoAlchemy/" title="Setup Alchemy to play with your DAO" class="md-nav__link">
-      Setup Alchemy to play with your DAO
+    <a href="../setupCustomScheme.md" title="Add custom scheme to the DAO" class="md-nav__link">
+      Add custom scheme to the DAO
     </a>
   </li>
 
@@ -493,8 +515,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../deployDAO/" title="Deploy a DAO with existing actions" class="md-nav__link">
-      Deploy a DAO with existing actions
+    <a href="../setupCustomSchemeAlchemy.md" title="Add custom scheme to Alchemy" class="md-nav__link">
+      Add custom scheme to Alchemy
     </a>
   </li>
 
@@ -505,20 +527,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../deployDAOcustomActions/" title="Deploy a DAO and enable custom actions" class="md-nav__link">
-      Deploy a DAO and enable custom actions
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../customSchemeSupportAlchemy/" title="Add custom scheme support to Alchemy" class="md-nav__link">
-      Add custom scheme support to Alchemy
+    <a href="../deployDAO/" title="Deploy a DAO" class="md-nav__link">
+      Deploy a DAO
     </a>
   </li>
 
@@ -573,8 +583,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#when-to-use-generic-scheme" class="md-nav__link">
-    When to use Generic Scheme
+  <a href="#when-to-use-genericscheme-or-ugenericscheme" class="md-nav__link">
+    When to use GenericScheme or UGenericScheme
   </a>
   
 </li>
@@ -603,8 +613,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-generic-scheme-to-interact-with-your-contract" class="md-nav__link">
-    Set Generic Scheme to interact with your contract
+  <a href="#set-ugenericscheme-to-interact-with-your-contract" class="md-nav__link">
+    Set UGenericScheme to interact with your contract
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-genericscheme-to-interact-with-your-contract" class="md-nav__link">
+    Set GenericScheme to interact with your contract
   </a>
   
 </li>
@@ -631,6 +648,33 @@
     How to get your Generic Scheme shown in Alchemy
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-proposal" class="md-nav__link">
+    Creating Proposal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#displaying-proposals" class="md-nav__link">
+    Displaying proposals
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-changes-to-scheme-ui" class="md-nav__link">
+    (Optional) Changes to scheme UI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -653,8 +697,11 @@
                 
                 
                 <h1 id="setup-generic-scheme-for-a-dao">Setup Generic Scheme for a DAO<a class="headerlink" href="#setup-generic-scheme-for-a-dao" title="Permanent link">&para;</a></h1>
-<h2 id="when-to-use-generic-scheme">When to use Generic Scheme<a class="headerlink" href="#when-to-use-generic-scheme" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol">Generic Scheme</a> allows a DAO to interact with other contracts and execute any method from the contract if the DAO decides to</p>
+<h2 id="when-to-use-genericscheme-or-ugenericscheme">When to use GenericScheme or UGenericScheme<a class="headerlink" href="#when-to-use-genericscheme-or-ugenericscheme" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol">GenericScheme</a> and <a href="https://github.com/daostack/arc/blob/master/contracts/universalSchemes/UGenericScheme.sol">UGenericScheme</a> both allows a DAO to interact with other contracts and execute any method from the contract if the DAO decides to.</p>
+<p><strong>UGenericScheme</strong>: If a DAO does not have a generic scheme registered or want to edit parameters of existing one, then use the already deployed UGenericScheme.</p>
+<p><strong>GenericScheme</strong>: If a DAO wants to have multiple generic scheme i.e. integration with multiple different contracts, then for each subsequent contract (apart from the one already registered via UGenericScheme) you need to deploy an instance of GenericScheme and register it to the DAO.</p>
+<p>NOTE: <em>While at the contract level GenericScheme only needs encoded call data to function, this is not the user friendly way. You will have to add Alchemy support to be able to use it. Please do not register your scheme on mainnet without adding alchemy support for it</em></p>
 <h2 id="how-to-register-generic-scheme-with-a-dao">How to register Generic Scheme with a DAO<a class="headerlink" href="#how-to-register-generic-scheme-with-a-dao" title="Permanent link">&para;</a></h2>
 <p>DAO only uses the schemes that are registered with its controller. There are two ways to register a scheme:</p>
 <ul>
@@ -662,15 +709,18 @@
 <p>While forging/deploying the DAO as part of initial set of schemes</p>
 </li>
 <li>
-<p>While proposing the new scheme to DAO via Scheme Registrar for the DAO.</p>
+<p>While proposing the new scheme to DAO via any Scheme that has permission to register another Scheme for the DAO. <strong>In case of GenesisAlpha you can register via Scheme Registrar</strong></p>
 </li>
 </ul>
 <h3 id="setup-generic-scheme-while-deploying-dao">Setup Generic Scheme while deploying DAO<a class="headerlink" href="#setup-generic-scheme-while-deploying-dao" title="Permanent link">&para;</a></h3>
+<p>While deploying DAO, if you want to interact with just single contract then you can use <code>UGenericScheme</code> and register that to your DAO.</p>
+<p>In case there are multiple contracts you wish to interact with, then you can register multiple <code>GenericScheme</code> and mention each in <code>customSchemes</code> section of your <code>migration-dao-params.json</code>.</p>
 <p>Refer to <a href="../deployDAO">How to deploy DAO</a></p>
 <h3 id="setup-generic-scheme-via-scheme-registrar">Setup Generic Scheme via Scheme Registrar<a class="headerlink" href="#setup-generic-scheme-via-scheme-registrar" title="Permanent link">&para;</a></h3>
-<h4 id="set-generic-scheme-to-interact-with-your-contract">Set Generic Scheme to interact with your contract<a class="headerlink" href="#set-generic-scheme-to-interact-with-your-contract" title="Permanent link">&para;</a></h4>
-<p>You can use GenericScheme's <code>setParameters</code> method to setup which contract it will interact with.
-Following is a short script that describes how to do this</p>
+<h4 id="set-ugenericscheme-to-interact-with-your-contract">Set UGenericScheme to interact with your contract<a class="headerlink" href="#set-ugenericscheme-to-interact-with-your-contract" title="Permanent link">&para;</a></h4>
+<p>NOTE: Follow this if generic scheme is not already registered or need to update to new parameters</p>
+<p>You can use UGenericScheme's <code>setParameters</code> method to setup <code>contractToCall</code>, <code>votingMachine</code> to use and <code>voteParameters</code> for the voting</p>
+<p>Following is a short script that describes how to do this</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -719,78 +769,63 @@ Following is a short script that describes how to do this</p>
 46
 47
 48
-49</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="nv">const</span> <span class="nv">genericScheme</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">web3</span>.<span class="nv">eth</span>.<span class="nv">Contract</span><span class="ss">(</span>
-    <span class="nv">require</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">@daostack/arc/build/contracts/UGenericScheme.json</span><span class="s1">&#39;</span><span class="ss">)</span>.<span class="nv">abi</span>,
-    <span class="nv">UGenericSchemeAddress</span>, <span class="o">//</span> <span class="nv">address</span> <span class="nv">from</span> <span class="nv">https</span>:<span class="o">//</span><span class="nv">github</span>.<span class="nv">com</span><span class="o">/</span><span class="nv">daostack</span><span class="o">/</span><span class="nv">migration</span><span class="o">/</span><span class="nv">blob</span><span class="o">/</span><span class="nv">master</span><span class="o">/</span><span class="nv">migration</span>.<span class="nv">json</span>
-    {
-      <span class="nv">from</span>,
-      <span class="nv">gas</span>,
-      <span class="nv">gasPrice</span>
-    }
-  <span class="ss">)</span>
+49</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kr">const</span> <span class="nx">ugenericScheme</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">Contract</span><span class="p">(</span>
+    <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@daostack/arc/build/contracts/UGenericScheme.json&#39;</span><span class="p">).</span><span class="nx">abi</span><span class="p">,</span>
+    <span class="nx">UGenericSchemeAddress</span><span class="p">,</span> <span class="c1">// address from https://github.com/daostack/migration/blob/master/migration.json</span>
+    <span class="p">{</span>
+      <span class="nx">from</span><span class="p">,</span>
+      <span class="nx">gas</span><span class="p">,</span>
+      <span class="nx">gasPrice</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
 
-  <span class="o">//</span> <span class="nv">Following</span> <span class="nv">are</span> <span class="nv">example</span> <span class="nv">values</span>, <span class="nv">Please</span> <span class="nv">change</span> <span class="nv">appropriately</span>
-  <span class="o">//</span> <span class="nv">Refer</span> <span class="nv">https</span>:<span class="o">//</span><span class="nv">daostack</span>.<span class="nv">zendesk</span>.<span class="nv">com</span><span class="o">/</span><span class="nv">hc</span><span class="o">/</span><span class="nv">en</span><span class="o">-</span><span class="nv">us</span><span class="o">/</span><span class="nv">sections</span><span class="o">/</span><span class="mi">360000535638</span><span class="o">-</span><span class="nv">Genesis</span><span class="o">-</span><span class="nv">Protocol</span>
-  <span class="nv">const</span> <span class="nv">voteParams</span> <span class="o">=</span> {
-        <span class="s2">&quot;</span><span class="s">boostedVotePeriodLimit</span><span class="s2">&quot;</span>: <span class="mi">345600</span>,
-        <span class="s2">&quot;</span><span class="s">daoBountyConst</span><span class="s2">&quot;</span>: <span class="mi">10</span>,
-        <span class="s2">&quot;</span><span class="s">minimumDaoBountyGWei</span><span class="s2">&quot;</span>: <span class="mi">150000000000</span>,
-        <span class="s2">&quot;</span><span class="s">queuedVotePeriodLimit</span><span class="s2">&quot;</span>: <span class="mi">2592000</span>,
-        <span class="s2">&quot;</span><span class="s">queuedVoteRequiredPercentage</span><span class="s2">&quot;</span>: <span class="mi">50</span>,
-        <span class="s2">&quot;</span><span class="s">preBoostedVotePeriodLimit</span><span class="s2">&quot;</span>: <span class="mi">86400</span>,
-        <span class="s2">&quot;</span><span class="s">proposingRepRewardGwei</span><span class="s2">&quot;</span>: <span class="mi">50000000000</span>,
-        <span class="s2">&quot;</span><span class="s">quietEndingPeriod</span><span class="s2">&quot;</span>: <span class="mi">172800</span>,
-        <span class="s2">&quot;</span><span class="s">thresholdConst</span><span class="s2">&quot;</span>: <span class="mi">1200</span>,
-        <span class="s2">&quot;</span><span class="s">voteOnBehalf</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">0x0000000000000000000000000000000000000000</span><span class="s2">&quot;</span>,
-        <span class="s2">&quot;</span><span class="s">votersReputationLossRatio</span><span class="s2">&quot;</span>: <span class="mi">4</span>,
-        <span class="s2">&quot;</span><span class="s">activationTime</span><span class="s2">&quot;</span>: <span class="mi">0</span>
-      }
+  <span class="c1">// Following are example values, Please change appropriately</span>
+  <span class="c1">// Refer https://daostack.zendesk.com/hc/en-us/sections/360000535638-Genesis-Protocol</span>
+  <span class="kr">const</span> <span class="nx">voteParams</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;boostedVotePeriodLimit&quot;</span><span class="o">:</span> <span class="mi">345600</span><span class="p">,</span>
+        <span class="s2">&quot;daoBountyConst&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s2">&quot;minimumDaoBountyGWei&quot;</span><span class="o">:</span> <span class="mi">150000000000</span><span class="p">,</span>
+        <span class="s2">&quot;queuedVotePeriodLimit&quot;</span><span class="o">:</span> <span class="mi">2592000</span><span class="p">,</span>
+        <span class="s2">&quot;queuedVoteRequiredPercentage&quot;</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="s2">&quot;preBoostedVotePeriodLimit&quot;</span><span class="o">:</span> <span class="mi">86400</span><span class="p">,</span>
+        <span class="s2">&quot;proposingRepRewardGwei&quot;</span><span class="o">:</span> <span class="mi">50000000000</span><span class="p">,</span>
+        <span class="s2">&quot;quietEndingPeriod&quot;</span><span class="o">:</span> <span class="mi">172800</span><span class="p">,</span>
+        <span class="s2">&quot;thresholdConst&quot;</span><span class="o">:</span> <span class="mi">1200</span><span class="p">,</span>
+        <span class="s2">&quot;voteOnBehalf&quot;</span><span class="o">:</span> <span class="s2">&quot;0x0000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;votersReputationLossRatio&quot;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;activationTime&quot;</span><span class="o">:</span> <span class="mi">0</span>
+      <span class="p">}</span>
 
-  <span class="o">//</span> <span class="nv">Get</span> <span class="nv">address</span> <span class="nv">from</span> <span class="nv">https</span>:<span class="o">//</span><span class="nv">github</span>.<span class="nv">com</span><span class="o">/</span><span class="nv">daostack</span><span class="o">/</span><span class="nv">migration</span><span class="o">/</span><span class="nv">blob</span><span class="o">/</span><span class="nv">master</span><span class="o">/</span><span class="nv">migration</span>.<span class="nv">json</span>
-  <span class="nv">const</span> <span class="nv">votingMachineAddress</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">0xaddress-of-VotingMachine-of-DAO-on-given-network</span><span class="s2">&quot;</span>
+  <span class="c1">// Get address from https://github.com/daostack/migration/blob/master/migration.json</span>
+  <span class="kr">const</span> <span class="nx">votingMachineAddress</span> <span class="o">=</span> <span class="s2">&quot;0xaddress-of-VotingMachine-of-DAO-on-given-network&quot;</span>
 
-  <span class="o">//</span> <span class="k">For</span> <span class="nv">eg</span> <span class="k">if</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">this</span> <span class="nv">Generic</span> <span class="nv">Scheme</span> <span class="nv">to</span> <span class="nv">enable</span> <span class="nv">DAO</span> <span class="nv">to</span> <span class="nv">interact</span> <span class="nv">with</span> <span class="nv">Bounties</span> <span class="nv">Network</span>
-  <span class="o">//</span> <span class="k">then</span> <span class="nv">targetContract</span> <span class="nv">would</span> <span class="nv">be</span> <span class="nv">the</span> <span class="nv">address</span> <span class="nv">of</span> <span class="nv">Bounties</span> <span class="nv">Network</span><span class="s1">&#39;</span><span class="s">s respective contract</span>
-  <span class="nv">const</span> <span class="nv">targetContractAddress</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">0xaddress-of-contract-this-will-interact-with</span><span class="s2">&quot;</span>
+  <span class="c1">// For eg if you want this Generic Scheme to enable DAO to interact with Bounties Network</span>
+  <span class="c1">// then targetContract would be the address of Bounties Network&#39;s respective contract</span>
+  <span class="kr">const</span> <span class="nx">targetContractAddress</span> <span class="o">=</span> <span class="s2">&quot;0xaddress-of-contract-this-will-interact-with&quot;</span>
 
 
-  <span class="o">//</span> <span class="nv">paramHash</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">useful</span> <span class="nv">in</span> <span class="nv">later</span> <span class="nv">step</span> <span class="nv">so</span> <span class="nv">lets</span> <span class="nv">log</span> <span class="nv">it</span>
-  <span class="nv">const</span> <span class="nv">paramHash</span> <span class="o">=</span> <span class="nv">genericScheme</span>.<span class="nv">methods</span>.<span class="nv">setParameters</span><span class="ss">(</span>
-      <span class="nv">voteParams</span>,
-      <span class="nv">votingMachineAddress</span>,
-      <span class="nv">targetContractAddress</span>
-      <span class="ss">)</span>.<span class="nv">call</span><span class="ss">()</span>
+  <span class="c1">// paramHash will be useful in later step so lets log it</span>
+  <span class="kr">const</span> <span class="nx">paramHash</span> <span class="o">=</span> <span class="nx">ugenericScheme</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">setParameters</span><span class="p">(</span>
+      <span class="nx">voteParams</span><span class="p">,</span>
+      <span class="nx">votingMachineAddress</span><span class="p">,</span>
+      <span class="nx">targetContractAddress</span>
+      <span class="p">).</span><span class="nx">call</span><span class="p">()</span>
 
-  <span class="nv">console</span>.<span class="nv">log</span><span class="ss">(</span><span class="nv">paramHash</span><span class="ss">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">paramHash</span><span class="p">)</span>
 
-  <span class="nv">genericScheme</span>.<span class="nv">methods</span>.<span class="nv">setParameters</span><span class="ss">(</span>
-        <span class="nv">voteParams</span>,
-        <span class="nv">votingMachineAddress</span>,
-        <span class="nv">targetContractAddress</span>
-      <span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
+  <span class="nx">ugenericScheme</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">setParameters</span><span class="p">(</span>
+        <span class="nx">voteParams</span><span class="p">,</span>
+        <span class="nx">votingMachineAddress</span><span class="p">,</span>
+        <span class="nx">targetContractAddress</span>
+      <span class="p">).</span><span class="nx">send</span><span class="p">()</span>
 </pre></div>
 </td></tr></table>
 
-<h4 id="submit-new-proposal-to-scheme-registrar-via-alchemy-ui">Submit new proposal to Scheme Registrar via Alchemy UI<a class="headerlink" href="#submit-new-proposal-to-scheme-registrar-via-alchemy-ui" title="Permanent link">&para;</a></h4>
-<ol>
-<li>On Alchmey landing page choose the DAO to which you wish to register the scheme</li>
-<li>Visit DAO's <code>Home</code> page and choose <code>Scheme Registrar</code></li>
-<li>Click <code>New Proposal</code>, this will open a popup</li>
-<li>Select <code>Add Scheme</code> on the popup sidebar (on left)</li>
-<li>Give appropriate title, description, url</li>
-<li>
-<p>Put the address of Generic Scheme contract deployed</p>
-<p><strong>Note</strong>: If DAO does not have a <code>Generic Scheme</code> registered to it you can use the already deployed instance of GenericScheme find the address for correct network <a href="https://github.com/daostack/migration/blob/master/migration.json">here</a>, else you will have to deploy new instance of Generic Scheme.</p>
-</li>
-<li>
-<p>Enter the <code>paramHash</code> you got <a href="#set-generic-scheme-to-interact-with-your-contract">here</a></p>
-</li>
-<li>In permissions section choose <code>Call genericCall on behalf of</code></li>
-<li>Submit Proposal and sign off the transaction</li>
-<li>If the DAO agrees then your Generic Scheme with ability to interact with the <code>targetContract</code> will be registered to the DAO</li>
-</ol>
-<h2 id="how-to-get-your-generic-scheme-shown-in-alchemy">How to get your Generic Scheme shown in Alchemy<a class="headerlink" href="#how-to-get-your-generic-scheme-shown-in-alchemy" title="Permanent link">&para;</a></h2>
-<p>You will have to submit PR to Alchemy repo with details of your scheme. So if this was Generic Scheme to interact with Bounties Network we will create, say, <code>Bounties.json</code> file and put <a href="https://github.com/daostack/alchemy/tree/dev/src/genericSchemeRegistry/schemes">here</a></p>
+<p>OR</p>
+<h4 id="set-genericscheme-to-interact-with-your-contract">Set GenericScheme to interact with your contract<a class="headerlink" href="#set-genericscheme-to-interact-with-your-contract" title="Permanent link">&para;</a></h4>
+<p>NOTE: Follow this if UGenericScheme is already being used and DAO need to interact with another contract</p>
+<p>You will have to deploy a new instance of GenericScheme contract and use its <code>initialize</code> method to setup the DAO <code>Avatar</code>, <code>contractToCall</code>, <code>votingMachine</code> to use and <code>voteParameters</code> for the voting.</p>
+<p>Following is a short script that describes how to do this</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -821,39 +856,207 @@ Following is a short script that describes how to do this</p>
 28
 29
 30
-31</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="o">//</span> <span class="nv">Bounties</span>.<span class="nv">json</span>
-  {
-    <span class="s2">&quot;</span><span class="s">name</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">Bounties</span><span class="s2">&quot;</span>,
-    <span class="s2">&quot;</span><span class="s">address</span><span class="s2">&quot;</span>: {
-      <span class="s2">&quot;</span><span class="s">main</span><span class="s2">&quot;</span>: [ <span class="s2">&quot;</span><span class="s">0xtarget-contract-address-on-mainnet</span><span class="s2">&quot;</span> ],
-      <span class="s2">&quot;</span><span class="s">rinkeby</span><span class="s2">&quot;</span>: [],
-      <span class="s2">&quot;</span><span class="s">private</span><span class="s2">&quot;</span>: []
-    },
-    <span class="s2">&quot;</span><span class="s">actions</span><span class="s2">&quot;</span>: [
-      {
-        <span class="s2">&quot;</span><span class="s">id</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">this-is-a-method-on-contract</span><span class="s2">&quot;</span>,
-        <span class="s2">&quot;</span><span class="s">label</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">this will appear on Alchemy UI for submitting proposal for this action</span><span class="s2">&quot;</span>,
-        <span class="s2">&quot;</span><span class="s">description</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">Describe what this action will do on-chain when proposal is passed by DAO</span><span class="s2">&quot;</span>,
-        <span class="s2">&quot;</span><span class="s">notes</span><span class="s2">&quot;</span>: <span class="s2">&quot;&quot;</span>,
-        <span class="s2">&quot;</span><span class="s">fields</span><span class="s2">&quot;</span>: [
-          {
-            <span class="s2">&quot;</span><span class="s">label</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">label for this field</span><span class="s2">&quot;</span>,
-            <span class="s2">&quot;</span><span class="s">name</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">name-of-field-in-abi</span><span class="s2">&quot;</span>,
-            <span class="s2">&quot;</span><span class="s">placeholder</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">Default to show on UI for reference</span><span class="s2">&quot;</span>
-          },
-          {
-            <span class="o">//</span> <span class="nv">more</span> <span class="nv">feilds</span> <span class="k">if</span> <span class="nv">any</span>
-          },
-        ],
-        <span class="s2">&quot;</span><span class="s">abi</span><span class="s2">&quot;</span>: {},
-      },
-      {
-        <span class="o">//</span> <span class="nv">more</span> <span class="nv">methods</span> <span class="nv">of</span> <span class="nv">contract</span> <span class="k">if</span> <span class="nv">any</span>
-      }
-    ],
-  }
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kr">const</span> <span class="nx">genericSchemeJson</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@daostack/arc/build/contracts/GenericScheme.json&#39;</span><span class="p">)</span>
+
+  <span class="kr">const</span> <span class="nx">genericSchemeContract</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">Contract</span><span class="p">(</span>
+    <span class="nx">genericSchemeJson</span><span class="p">.</span><span class="nx">abi</span><span class="p">,</span>
+    <span class="kc">undefined</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nx">from</span><span class="p">,</span>
+      <span class="nx">gas</span><span class="p">,</span>
+      <span class="nx">gasPrice</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+
+  <span class="c1">// Deploy New GenericScheme Instance</span>
+  <span class="kr">const</span> <span class="nx">genericSchemeDeployedContract</span> <span class="o">=</span> <span class="nx">genericSchemeContract</span><span class="p">.</span><span class="nx">deploy</span><span class="p">({</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="nx">genericSchemeJson</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">,</span>
+        <span class="nx">arguments</span><span class="o">:</span> <span class="kc">null</span>
+      <span class="p">}).</span><span class="nx">send</span><span class="p">()</span>
+
+  <span class="kd">let</span> <span class="nx">genericScheme</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">genericSchemeDeployedContract</span>
+
+  <span class="c1">// Log Address of new instance to use in next step while registering the scheme to DAO</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Deployed new GenericScheme instance at </span><span class="si">${</span><span class="nx">genericScheme</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">address</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+
+  <span class="c1">// Following are example values, Please change appropriately</span>
+  <span class="c1">// Refer https://daostack.zendesk.com/hc/en-us/sections/360000535638-Genesis-Protocol</span>
+  <span class="kr">const</span> <span class="nx">voteParams</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;boostedVotePeriodLimit&quot;</span><span class="o">:</span> <span class="mi">345600</span><span class="p">,</span>
+        <span class="s2">&quot;daoBountyConst&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s2">&quot;minimumDaoBountyGWei&quot;</span><span class="o">:</span> <span class="mi">150000000000</span><span class="p">,</span>
+        <span class="s2">&quot;queuedVotePeriodLimit&quot;</span><span class="o">:</span> <span class="mi">2592000</span><span class="p">,</span>
+        <span class="s2">&quot;queuedVoteRequiredPercentage&quot;</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="s2">&quot;preBoostedVotePeriodLimit&quot;</span><span class="o">:</span> <span class="mi">86400</span><span class="p">,</span>
+        <span class="s2">&quot;proposingRepRewardGwei&quot;</span><span class="o">:</span> <span class="mi">50000000000</span><span class="p">,</span>
+        <span class="s2">&quot;quietEndingPeriod&quot;</span><span class="o">:</span> <span class="mi">172800</span><span class="p">,</span>
+        <span class="s2">&quot;thresholdConst&quot;</span><span class="o">:</span> <span class="mi">1200</span><span class="p">,</span>
+        <span class="s2">&quot;voteOnBehalf&quot;</span><span class="o">:</span> <span class="s2">&quot;0x0000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;votersReputationLossRatio&quot;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;activationTime&quot;</span><span class="o">:</span> <span class="mi">0</span>
+      <span class="p">}</span>
+
+  <span class="c1">// Get address from https://github.com/daostack/migration/blob/master/migration.json</span>
+  <span class="kr">const</span> <span class="nx">votingMachineAddress</span> <span class="o">=</span> <span class="s2">&quot;0xaddress-of-VotingMachine-of-DAO-on-given-network&quot;</span>
+
+  <span class="c1">// For eg if you want this Generic Scheme to enable DAO to interact with Bounties Network</span>
+  <span class="c1">// then targetContract would be the address of Bounties Network&#39;s respective contract</span>
+  <span class="kr">const</span> <span class="nx">targetContractAddress</span> <span class="o">=</span> <span class="s2">&quot;0xaddress-of-contract-this-will-interact-with&quot;</span>
+
+  <span class="kr">const</span> <span class="nx">avatar</span> <span class="o">=</span> <span class="s2">&quot;0xaddres-of-DAO&quot;</span>
+
+  <span class="c1">// paramHash will be useful in later step so lets log it</span>
+  <span class="kr">const</span> <span class="nx">paramHash</span> <span class="o">=</span> <span class="nx">genericScheme</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span>
+      <span class="nx">avatar</span><span class="p">,</span>
+      <span class="nx">voteParams</span><span class="p">,</span>
+      <span class="nx">votingMachineAddress</span><span class="p">,</span>
+      <span class="nx">targetContractAddress</span>
+      <span class="p">).</span><span class="nx">call</span><span class="p">()</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">paramHash</span><span class="p">)</span>
+
+  <span class="nx">genericScheme</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span>
+        <span class="nx">avatar</span><span class="p">,</span>
+        <span class="nx">voteParams</span><span class="p">,</span>
+        <span class="nx">votingMachineAddress</span><span class="p">,</span>
+        <span class="nx">targetContractAddress</span>
+      <span class="p">).</span><span class="nx">send</span><span class="p">()</span>
 </pre></div>
 </td></tr></table>
+
+<h4 id="submit-new-proposal-to-scheme-registrar-via-alchemy-ui">Submit new proposal to Scheme Registrar via Alchemy UI<a class="headerlink" href="#submit-new-proposal-to-scheme-registrar-via-alchemy-ui" title="Permanent link">&para;</a></h4>
+<ol>
+<li>On Alchmey landing page choose the DAO to which you wish to register the scheme</li>
+<li>Visit DAO's <code>Home</code> page and choose <code>Scheme Registrar</code></li>
+<li>Click <code>New Proposal</code>, this will open a popup</li>
+<li>Select <code>Add Scheme</code> on the popup sidebar (on left)</li>
+<li>Give appropriate title, description, url which describes the proposal</li>
+<li>
+<p>Put the address of Generic Scheme contract</p>
+<p><strong>NOTE</strong>: Based on above step this would be either address of</p>
+<ul>
+<li><strong>UGenericScheme</strong>: if DAO does not have UGenericScheme registered or you are editing params for existing one, then you can use UGenericScheme address (select Generic Scheme from the options list)</li>
+<li><strong>GenericScheme</strong>: if DAO already has UGenericScheme registered, then address of the new GenericScheme instance deployed in previous step should be used</li>
+</ul>
+</li>
+<li>
+<p>Enter the <code>paramHash</code> you got <a href="#set-generic-scheme-to-interact-with-your-contract">here</a></p>
+</li>
+<li>In permissions section choose <code>Call genericCall on behalf of</code></li>
+<li>Submit Proposal and sign off the transaction</li>
+<li>If the DAO agrees then your Generic Scheme with ability to interact with the <code>targetContract</code> will be registered to the DAO</li>
+</ol>
+<h2 id="how-to-get-your-generic-scheme-shown-in-alchemy">How to get your Generic Scheme shown in Alchemy<a class="headerlink" href="#how-to-get-your-generic-scheme-shown-in-alchemy" title="Permanent link">&para;</a></h2>
+<p>To enable a User-friendly Interface for GenericScheme, we have created a way for customizing the UI for specific contracts’ proposals.</p>
+<p>The customization will happen at the following places and you will have to submit PR to Alchemy repo with details of your scheme.</p>
+<h3 id="creating-proposal">Creating Proposal<a class="headerlink" href="#creating-proposal" title="Permanent link">&para;</a></h3>
+<p>Customize the create proposal popup to present the different functions the scheme can call on the contract. This requires adding the contracts’ ABI and customizing things like the titles of the labels and placeholders.</p>
+<p>Say if this was GenericScheme to interact with Bounties Network we will create, say <code>Bounties.json</code>, file and add <a href="https://github.com/daostack/alchemy/tree/dev/src/genericSchemeRegistry/schemes">here</a></p>
+<p>Use the following example or refer to an existing <a href="https://github.com/daostack/alchemy/blob/dev/src/genericSchemeRegistry/schemes/DutchX.json">DutchX</a> integration</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="c1">// Bounties.json</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Bounties&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;main&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;0xtarget-contract-address-on-mainnet&quot;</span> <span class="p">],</span>
+      <span class="s2">&quot;rinkeby&quot;</span><span class="o">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;private&quot;</span><span class="o">:</span> <span class="p">[]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;actions&quot;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;createBountyMethod-from-contract&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="s2">&quot;Create Bounty&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;This method will create a bounty with the DAO as the issuer&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fields&quot;</span><span class="o">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="s2">&quot;bounty title&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;name-of-field-in-abi&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;placeholder&quot;</span><span class="o">:</span> <span class="s2">&quot;Osam Bin-Laden - dead or alive&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="c1">// more feilds if any</span>
+          <span class="p">},</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;abi&quot;</span><span class="o">:</span> <span class="p">{},</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="c1">// more methods of contract if any</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+  <span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="displaying-proposals">Displaying proposals<a class="headerlink" href="#displaying-proposals" title="Permanent link">&para;</a></h3>
+<p>You will also have to customize the description summary of proposal to explain what will happen if passed.</p>
+<p>Refer to <a href="https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/ProposalSummaryDutchX.tsx">ProposalSummaryDutchX</a> and add your own, say <code>ProposalSummaryBountiesNetwork.tsx</code>, proposal summary file <a href="https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/">here</a></p>
+<h3 id="optional-changes-to-scheme-ui">(Optional) Changes to scheme UI<a class="headerlink" href="#optional-changes-to-scheme-ui" title="Permanent link">&para;</a></h3>
+<p>Current, Alchemy’s UI is only focused on the current open proposals. But based on the scheme you are adding there might be some UI features/tabs that are required.
+ Say for bounties scheme, having a new tab of open bounties with information about remaining balance would be necessary.</p>
                 
                   
                 
@@ -874,7 +1077,7 @@ Following is a short script that describes how to do this</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../setupNewScheme/" title="Add new scheme for a DAO" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../setupAlchemyDevMode/" title="Add features to Alchemy interface" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -883,19 +1086,19 @@ Following is a short script that describes how to do this</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Add new scheme for a DAO
+                Add features to Alchemy interface
               </span>
             </div>
           </a>
         
         
-          <a href="../addNewDAOtoAlchemy/" title="Setup Alchemy to play with your DAO" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../deployDAO/" title="Deploy a DAO" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Setup Alchemy to play with your DAO
+                Deploy a DAO
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
