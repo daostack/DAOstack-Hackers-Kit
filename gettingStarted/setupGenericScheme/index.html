@@ -453,6 +453,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-to-get-generic-scheme-indexed-by-daostack-subgraph" class="md-nav__link">
+    How to get Generic Scheme indexed by DAOstack subgraph
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-to-get-your-generic-scheme-shown-in-alchemy" class="md-nav__link">
     How to get your Generic Scheme shown in Alchemy
   </a>
@@ -640,6 +647,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-get-generic-scheme-indexed-by-daostack-subgraph" class="md-nav__link">
+    How to get Generic Scheme indexed by DAOstack subgraph
+  </a>
   
 </li>
       
@@ -980,6 +994,60 @@
 <li>Submit Proposal and sign off the transaction</li>
 <li>If the DAO agrees then your Generic Scheme with ability to interact with the <code>targetContract</code> will be registered to the DAO</li>
 </ol>
+<h2 id="how-to-get-generic-scheme-indexed-by-daostack-subgraph">How to get Generic Scheme indexed by DAOstack subgraph<a class="headerlink" href="#how-to-get-generic-scheme-indexed-by-daostack-subgraph" title="Permanent link">&para;</a></h2>
+<p>If you are using:</p>
+<ul>
+<li>
+<p>UGenericScheme: Done automatically and you do not have to worry about it 😅</p>
+</li>
+<li>
+<p>GenericScheme: You will have to submit a PR <a href="https://github.com/daostack/subgraph/tree/master/daos">here</a></p>
+<ol>
+<li>Choose the right network on which the DAO, for which this scheme is registered, exists</li>
+<li>
+<p>If the scheme is for a new DAO, then add <code>YourDAO.json</code> in that network folder. eg.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="err">{</span>
+  <span class="ss">&quot;name&quot;</span><span class="p">:</span> <span class="ss">&quot;New DAO&quot;</span><span class="p">,</span>
+  <span class="ss">&quot;Avatar&quot;</span><span class="p">:</span> <span class="ss">&quot;0xaddress-of-avatar-on-this-network&quot;</span><span class="p">,</span>
+  <span class="ss">&quot;DAOToken&quot;</span><span class="p">:</span> <span class="ss">&quot;0xaddress-of-daotoken-on-this-network&quot;</span><span class="p">,</span>
+  <span class="ss">&quot;Reputation&quot;</span><span class="p">:</span> <span class="ss">&quot;0xaddress-of-nativereputation-on-this-network&quot;</span><span class="p">,</span>
+  <span class="ss">&quot;Controller&quot;</span><span class="p">:</span> <span class="ss">&quot;0xaddress-of-controller-on-this-network&quot;</span><span class="p">,</span>
+  <span class="ss">&quot;Schemes&quot;</span><span class="p">:</span> <span class="err">{</span>
+    <span class="ss">&quot;GenesisScheme&quot;</span><span class="p">:</span> <span class="ss">&quot;0xaddress-of-genericScheme-on-this-network&quot;</span>
+    <span class="err">}</span><span class="p">,</span>
+  <span class="ss">&quot;arcVersion&quot;</span><span class="p">:</span> <span class="ss">&quot;0.0.1-rc.22&quot;</span> <span class="o">#</span> <span class="n">choose</span> <span class="n">the</span> <span class="n">correct</span> <span class="n">arc</span> <span class="k">version</span>
+<span class="err">}</span>
+</pre></div>
+</td></tr></table>
+
+</li>
+<li>
+<p>If the scheme is for an already existing DAO, then edit <code>&lt;existing-DAO&gt;.json</code> for correct network. 
+    Add schemes section eg.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="ss">&quot;Schemes&quot;</span><span class="p">:</span> <span class="err">{</span>
+    <span class="ss">&quot;GenesisScheme&quot;</span><span class="p">:</span> <span class="ss">&quot;0xaddress-of-genericScheme-on-this-network&quot;</span>
+    <span class="err">}</span><span class="p">,</span>
+  <span class="ss">&quot;arcVersion&quot;</span><span class="p">:</span> <span class="ss">&quot;0.0.1-rc.22&quot;</span> <span class="o">#</span> <span class="n">choose</span> <span class="n">the</span> <span class="n">correct</span> <span class="n">arc</span> <span class="k">version</span>
+</pre></div>
+</td></tr></table>
+
+</li>
+</ol>
+</li>
+</ul>
 <h2 id="how-to-get-your-generic-scheme-shown-in-alchemy">How to get your Generic Scheme shown in Alchemy<a class="headerlink" href="#how-to-get-your-generic-scheme-shown-in-alchemy" title="Permanent link">&para;</a></h2>
 <p>To enable a User-friendly Interface for GenericScheme, we have created a way for customizing the UI for specific contracts’ proposals.</p>
 <p>The customization will happen at the following places and you will have to submit PR to Alchemy repo with details of your scheme.</p>
