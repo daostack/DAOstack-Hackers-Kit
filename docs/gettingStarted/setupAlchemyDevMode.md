@@ -156,3 +156,14 @@
       
   6. Build and run
           docker-compose up -d
+
+### Run  graph-node locally with new/not yet supported schemes
+
+  Choose this if,
+
+  - using custom scheme or any arc scheme which is not yet tracked by daostack subgraph
+  - adding subgraph/client support for new contract or customizing current client/subgraph
+  - playing with DAO you just deployed to any of the testnet and not yet whitelisted by daostack
+  - using any testnet
+  
+  Refer to [Add custom scheme to Alchemy](../setupCustomSchemeAlchemy)
