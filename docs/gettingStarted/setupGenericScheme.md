@@ -1,39 +1,43 @@
-# Setup Generic Scheme for a DAO
+# Generic Schemes
 
-## When to use GenericScheme or UGenericScheme
-[GenericScheme](https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol) and [UGenericScheme](https://github.com/daostack/arc/blob/master/contracts/universalSchemes/UGenericScheme.sol) both allows a DAO to interact with other contracts and execute any method from the contract if the DAO decides to.
+In DAOstack, "schemes" are smart contracts that enable various DAO actions, and "generic schemes" are schemes that enable nearly any kind of action possible for an Ethereum address. [GenericScheme](https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol) and [UGenericScheme](https://github.com/daostack/arc/blob/master/contracts/universalSchemes/UGenericScheme.sol) are both types of generic scheme. DAOs can use these schemes: 
+ 1) to enable truly generic DAO actions (letting proposers choose which contracts to interact with and how), or 
+ 2) to create specific, custom integrations for their DAO (actions that make particular calls to particular smart contracts that serve a particular purpose for the DAO).
 
-**UGenericScheme**: If a DAO does not have a generic scheme registered or want to edit parameters of existing one, then use the already deployed UGenericScheme.
+## When to use GenericScheme and when to use UGenericScheme
 
-**GenericScheme**: If a DAO wants to have multiple generic scheme i.e. integration with multiple different contracts, then for each subsequent contract (apart from the one already registered via UGenericScheme) you need to deploy an instance of GenericScheme and register it to the DAO.
+**UGenericScheme**: If a DAO only needs a single generic scheme and/or doesn't need to change the scheme's on-chain code at all, then the UGenericScheme is a good choice, since it is already deployed and can be used by any number of DAOs (the "U" stands for "universal").
 
-  NOTE: _While at the contract level GenericScheme only needs encoded call data to function, this is not the user friendly way. You will have to add Alchemy support to be able to use it. Please do not register your scheme on mainnet without adding alchemy support for it_
+**GenericScheme**: If a DAO wants to make multiple custom Ethereum actions available, with different labels and proposal types in the UI, then each action should use its own GenericScheme, customized if required for the DAO's purpose.
 
-## How to register Generic Scheme with a DAO
+  NOTE: _While at the contract level, both generic schemes only need encoded call data to function, asking users to provide this data is not good UX. If you're using a generic scheme for anything except a truly generic action, which is only accessible to Ethereum experts, we ask that you add Alchemy support for the specific actions you intend. Please do not register your scheme on mainnet without adding alchemy support for it. [Here](https://alchemy.daostack.io/dao/0x519b70055af55a007110b4ff99b0ea33071c720a/scheme/0xeca5415360191a29f12e1da442b9b050adf22c81b08230f1dafba908767e604f/proposals/) is an example of a customized generic scheme on mainnet._
 
-DAO only uses the schemes that are registered with its controller. There are two ways to register a scheme:
+## How to register a generic scheme to a DAO
 
-  - While forging/deploying the DAO as part of initial set of schemes
+A DAO can only use schemes that are registered with its controller. There are two ways to register a scheme to a DAO's controller:
 
-  - While proposing the new scheme to DAO via any Scheme that has permission to register another Scheme for the DAO. **In case of GenesisAlpha you can register via Scheme Registrar**
-    
-### Setup Generic Scheme while deploying DAO
+  - During the DAO's creation, while deploying the DAO's contracts
 
-  While deploying DAO, if you want to interact with just single contract then you can use `UGenericScheme` and register that to your DAO.
-
-  In case there are multiple contracts you wish to interact with, then you can register multiple `GenericScheme` and mention each in `customSchemes` section of your `migration-dao-params.json`.
-
-  Refer to [How to deploy DAO](../deployDAO)
+  - Through a proposal that uses a scheme with permission to register schemes to the DAO. 
   
-### Setup Generic Scheme via Scheme Registrar
+  NOTE: _In case of the Genesis DAO, you can propose new schemes to be registered using the aptly named Scheme Registrar scheme._
+    
+### Register a generic scheme while deploying a DAO
+
+While deploying DAO, "`UGenericScheme`" can be used to register the universal generic scheme.
+
+If are using the regular GenericScheme, then you can register multiple "`GenericScheme`" instances and mention each in the
+`customSchemes` section of your `migration-dao-params.json`.
+
+Refer to the instructions for [how to deploy DAO](../deployDAO).
 
 #### Set UGenericScheme to interact with your contract
 
-NOTE: Follow this if generic scheme is not already registered or need to update to new parameters
+NOTE: _Follow this if `UGenericScheme` is not already registered in your DAO or you need to update `UGenericScheme` with new parameters._
 
-You can use UGenericScheme's `setParameters` method to setup `contractToCall`, `votingMachine` to use and `voteParameters` for the voting
+You can use UGenericScheme's `setParameters` method to setup the `contractToCall`, the `votingMachine` to use, and the `voteParameters` used for voting on proposals for the generic scheme action.
 
-Following is a short script that describes how to do this
+The following is a short script that shows how to do this:
 
 ```javascript
   const ugenericScheme = new web3.eth.Contract(
@@ -46,8 +50,8 @@ Following is a short script that describes how to do this
     }
   )
 
-  // Following are example values, Please change appropriately
-  // Refer https://daostack.zendesk.com/hc/en-us/sections/360000535638-Genesis-Protocol
+  // These are example values: please change appropriately.
+  // Refer to https://daostack.zendesk.com/hc/en-us/sections/360000535638-Genesis-Protocol
   const voteParams = {
         "boostedVotePeriodLimit": 345600,
         "daoBountyConst": 10,
@@ -66,7 +70,7 @@ Following is a short script that describes how to do this
   // Get address from https://github.com/daostack/migration/blob/master/migration.json
   const votingMachineAddress = "0xaddress-of-VotingMachine-of-DAO-on-given-network"
 
-  // For eg if you want this Generic Scheme to enable DAO to interact with Bounties Network
+  // If you want this Generic Scheme to enable DAO to interact with Bounties Network
   // then targetContract would be the address of Bounties Network's respective contract
   const targetContractAddress = "0xaddress-of-contract-this-will-interact-with"
 
@@ -91,11 +95,9 @@ OR
 
 #### Set GenericScheme to interact with your contract
 
-NOTE: Follow this if UGenericScheme is already being used and DAO need to interact with another contract
+First, you will have to deploy a new instance of `GenericScheme` and use its `initialize` method to setup its params: the DAO `Avatar` it connects to, the `contractToCall`, the `votingMachine` to use, and the `voteParameters` for voting on proposals that use the scheme.
 
-You will have to deploy a new instance of GenericScheme contract and use its `initialize` method to setup the DAO `Avatar`, `contractToCall`, `votingMachine` to use and `voteParameters` for the voting.
-
-Following is a short script that describes how to do this
+The following is a short script that shows how to do this:
 
 ```javascript
   const genericSchemeJson = require('@daostack/arc/build/contracts/GenericScheme.json')
@@ -165,33 +167,29 @@ Following is a short script that describes how to do this
       ).send()
 ```
 
-#### Submit new proposal to Scheme Registrar via Alchemy UI
+#### Submit a new proposal to the Scheme Registrar via Alchemy UI
 
-  1. On Alchmey landing page choose the DAO to which you wish to register the scheme
-  2. Visit DAO's `Home` page and choose `Scheme Registrar`
-  3. Click `New Proposal`, this will open a popup
-  4. Select `Add Scheme` on the popup sidebar (on left)
-  5. Give appropriate title, description, url which describes the proposal
-  6. Put the address of Generic Scheme contract
-
-      **NOTE**: Based on above step this would be either address of
-
-      - **UGenericScheme**: if DAO does not have UGenericScheme registered or you are editing params for existing one, then you can use UGenericScheme address (select Generic Scheme from the options list)
-      - **GenericScheme**: if DAO already has UGenericScheme registered, then address of the new GenericScheme instance deployed in previous step should be used
-
-  7. Enter the `paramHash` you got [here](#set-generic-scheme-to-interact-with-your-contract)
-  8. In permissions section choose `Call genericCall on behalf of`
-  9. Submit Proposal and sign off the transaction
-  10. If the DAO agrees then your Generic Scheme with ability to interact with the `targetContract` will be registered to the DAO
+  1. On Alchemy's landing page, choose the DAO to which you wish to register the scheme.
+  2. Visit the DAO's `Home` page and choose `Scheme Registrar`.
+  3. Click `New Proposal` – this will open a popup.
+  4. Select `Add Scheme` on the popup sidebar (on the left).
+  5. Give the proposal an appropriate title, description, and url linking to a description of the proposal.
+  6. For `Scheme`,  put the address of your Generic Scheme contract (universal or not).
+  7. Enter the `paramHash` you got [here](#set-generic-scheme-to-interact-with-your-contract).
+  8. In the permissions section, check `Call genericCall on behalf of` (this will allow your scheme to make generic calls, which is the whole point here).
+  9. Submit the proposal and sign the transaction as normal.
+  10. If the DAO passes your proposal, then your Generic Scheme with the ability to interact with the `targetContract` will be registered to the DAO, and people will be able to submit proposals for the DAO to take your custom generic action.
 
 ## How to get Generic Scheme indexed by DAOstack subgraph
+The DAOstack subgraph enables Alchemy's quick loading of cached blockchain data and is a huge part of creating a positive user experience in Alchemy.
+
 If you are using:
 
-  - UGenericScheme: Done automatically and you do not have to worry about it 😅
+  - UGenericScheme: the subgraph is already indexing the scheme, and you do not have to worry about it 😅
 
   - GenericScheme: You will have to submit a PR [here](https://github.com/daostack/subgraph/tree/master/daos)
 
-    1. Choose the right network on which the DAO, for which this scheme is registered, exists
+    1. Make sure to choose the correct Ethereum network for your DAO
     2. If the scheme is for a new DAO, then add `YourDAO.json` in that network folder. eg.
       
             {
@@ -206,8 +204,8 @@ If you are using:
               "arcVersion": "0.0.1-rc.22" # choose the correct arc version
             }
 
-     3. If the scheme is for an already existing DAO, then edit `<existing-DAO>.json` for correct network. 
-        Add schemes section eg.
+     3. If the scheme is for an already existing DAO, then edit `<existing-DAO>.json` for the correct network. 
+        Add to the schemes section, eg.
 
               "Schemes": {
                 "GenesisScheme": "0xaddress-of-genericScheme-on-this-network"
@@ -215,19 +213,19 @@ If you are using:
               "arcVersion": "0.0.1-rc.22" # choose the correct arc version
 
 
-## How to get your Generic Scheme shown in Alchemy
+## How to get your Generic Scheme showing up in Alchemy
 
-  To enable a User-friendly Interface for GenericScheme, we have created a way for customizing the UI for specific contracts’ proposals.
+To help you get a user-friendly interface for your generic scheme, we have created a way to customize Alchemy's UI for specific generic schemes.
   
-  The customization will happen at the following places and you will have to submit PR to Alchemy repo with details of your scheme.
+The customization has a few pieces, and you will have to submit a PR to the Alchemy repo once you're finished with it.
 
-### Creating Proposal
+### Proposal Creation Interface
 
-  Customize the create proposal popup to present the different functions the scheme can call on the contract. This requires adding the contracts’ ABI and customizing things like the titles of the labels and placeholders.
+Customize the "create proposal" popup to present the different functions the scheme can call on the contract. This requires adding the contracts’ ABI and customizing things like the titles of the labels and placeholders.
 
-  Say if this was GenericScheme to interact with Bounties Network we will create, say `Bounties.json`, file and add [here](https://github.com/daostack/alchemy/tree/dev/src/genericSchemeRegistry/schemes)
+If this was a generic scheme for interacting with the Bounties Network, you would create a file named something like `Bounties.json` and add it [here](https://github.com/daostack/alchemy/tree/dev/src/genericSchemeRegistry/schemes).
 
-  Use the following example or refer to an existing [DutchX](https://github.com/daostack/alchemy/blob/dev/src/genericSchemeRegistry/schemes/DutchX.json) integration
+Use the following example or refer to an example using the [DutchX](https://github.com/daostack/alchemy/blob/dev/src/genericSchemeRegistry/schemes/DutchX.json) integration.
 
 ```javascript
   // Bounties.json
@@ -263,13 +261,12 @@ If you are using:
   }
 ```
 
-### Displaying proposals
+### Proposal Display Interface
 
- You will also have to customize the description summary of proposal to explain what will happen if passed.
+You will also have to customize the description summary for your scheme to explain what it does.
 
- Refer to [ProposalSummaryDutchX](https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/ProposalSummaryDutchX.tsx) and add your own, say `ProposalSummaryBountiesNetwork.tsx`, proposal summary file [here](https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/)
+Refer to the [ProposalSummaryDutchX](https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/ProposalSummaryDutchX.tsx) and add your own proposal summary file, say `ProposalSummaryBountiesNetwork.tsx`, [here](https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/).
 
-### (Optional) Changes to scheme UI
+### (Optional) Change the Scheme UI
 
- Current, Alchemy’s UI is only focused on the current open proposals. But based on the scheme you are adding there might be some UI features/tabs that are required.
- Say for bounties scheme, having a new tab of open bounties with information about remaining balance would be necessary.
+Right now, Alchemy’s UI is only focused on currently open proposals (it does not show past proposals). But based on the scheme you are adding, there might be some different UI features/tabs that are required. For a bounties scheme, for example, if would be helpful to have a new tab that shows open bounties (from proposals that have already been passed).
