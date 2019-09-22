@@ -8,7 +8,7 @@ In DAOstack, "schemes" are smart contracts that enable various DAO actions, and 
 
 **UGenericScheme**: If a DAO only needs a single generic scheme and/or doesn't need to change the scheme's on-chain code at all, then the UGenericScheme is a good choice, since it is already deployed and can be used by any number of DAOs (the "U" stands for "universal").
 
-**GenericScheme**: If a DAO wants to make multiple custom Ethereum actions available, with different labels and proposal types in the UI, then each action should use its own GenericScheme, customized if required for the DAO's purpose.
+**GenericScheme**: If a DAO wants to make multiple smart contracts available, with different labels and proposal types in the UI, then each contract should use its own GenericScheme, customized if required for the DAO's purpose.
 
   NOTE: _While at the contract level, both generic schemes only need encoded call data to function, asking users to provide this data is not good UX. If you're using a generic scheme for anything except a truly generic action, which is only accessible to Ethereum experts, we ask that you add Alchemy support for the specific actions you intend. Please do not register your scheme on mainnet without adding alchemy support for it. [Here](https://alchemy.daostack.io/dao/0x519b70055af55a007110b4ff99b0ea33071c720a/scheme/0xeca5415360191a29f12e1da442b9b050adf22c81b08230f1dafba908767e604f/proposals/) is an example of a customized generic scheme on mainnet._
 
@@ -269,4 +269,4 @@ Refer to the [ProposalSummaryDutchX](https://github.com/daostack/alchemy/blob/de
 
 ### (Optional) Change the Scheme UI
 
-Right now, Alchemy’s UI is only focused on currently open proposals (it does not show past proposals). But based on the scheme you are adding, there might be some different UI features/tabs that are required. For a bounties scheme, for example, if would be helpful to have a new tab that shows open bounties (from proposals that have already been passed).
+Right now, Alchemy’s UI is only focused on currently open proposals (it does not show past proposals). But based on the scheme you are adding, there might be some different UI features/tabs that are required. For a bounties scheme, for example, it would be helpful to have a new tab that shows open bounties (from proposals that have already been passed).
