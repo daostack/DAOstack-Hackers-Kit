@@ -1,4 +1,4 @@
-Scheme is an action a DAO deployed with DAOstack can be enabled to take.
+Scheme is an action a DAO deployed with DAOstack can be enabled to take
 
 A scheme could be,
 
@@ -6,7 +6,7 @@ A scheme could be,
 
   OR
 
-  - **Non Universal**: do not follow any standard and do not inherit from UniversalSchemeInterface. A non universal scheme has to be deployed for each DAO.
+  - **Non Universal**: do not follow any standard and do not inherit from UniversalSchemeInterface. A non universal scheme has to be deployed for each DAO separately
 
 Arc repo have examples of some [Universal Scheme]("https://github.com/daostack/arc/tree/master/contracts/universalSchemes") and [Non Universal Scheme](https://github.com/daostack/arc/tree/master/contracts/schemes) developed by DAOstack team. Apart from the schemes already designed by DAOstack, you can also deploy your own Universal/Non-universal `Custom Schemes` and register them to the DAO.
 
@@ -21,11 +21,13 @@ To Enable DAO with some custom actions, you will have to work on multiple layers
   - **Client**: enable DAOstack client library to `write` to your `scheme contract` and `read` scheme data from `subgraph` using graphQL
   - **Alchemy**: enable user friendly interface for your scheme in Alchemy
 
-### Arc: Deploy Scheme Contract
+### Arc: Develop Scheme Contract
 
   Decide whether the action your scheme provides is going to be `universal` or `non-universal`
 
-  *Tutorial for adding non-universal* [skip]()
+  Develop the Scheme and register it to your DAO as part of initial scheme set or via another scheme (SchemeRegistrar in case of GenesisAlpha DAO)
+
+  *Tutorial for adding non-universal* [skip to subgraph](#subgraph-cache-for-efficiency)
 
   Say you want to create a non-universal scheme that allow People to Buy reputation by donating money to the DAO and Quit at some later time by giving up reputation
 
@@ -115,49 +117,232 @@ To Enable DAO with some custom actions, you will have to work on multiple layers
   2. Create a new directory with your `contract-name`
 
         cd subgraph
-        mkdir src/mappings/MyContractName
+        mkdir src/mappings/BuyInWithRageQuitOpt
 
-  3. Add to the `src`:
+  3. Add contract abi to abis/'version' folder i.e. `abis/0.0.1-rc.24/BuyInWithRageQuitOpt.json`
 
-#### Add Mapping Code: describe how blockchain events are processed and stored in your database
-  - `src/mappings/MyContractName/mapping.ts`
+        [
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "avatar",
+            "outputs": [
+              {
+                "internalType": "contract Avatar",
+                "name": "",
+                "type": "address"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "reputation",
+            "outputs": [
+              {
+                "internalType": "contract Reputation",
+                "name": "",
+                "type": "address"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": true,
+                "internalType": "address",
+                "name": "_member",
+                "type": "address"
+              },
+              {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "_amount",
+                "type": "uint256"
+              },
+              {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "_rep",
+                "type": "uint256"
+              }
+            ],
+            "name": "buyIn",
+            "type": "event"
+          },
+          {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": true,
+                "internalType": "address",
+                "name": "_member",
+                "type": "address"
+              },
+              {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "_amount",
+                "type": "uint256"
+              },
+              {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "_rep",
+                "type": "uint256"
+              }
+            ],
+            "name": "rageQuit",
+            "type": "event"
+          },
+          {
+            "constant": false,
+            "inputs": [
+              {
+                "internalType": "contract Avatar",
+                "name": "_avatar",
+                "type": "address"
+              }
+            ],
+            "name": "initialize",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          {
+            "constant": false,
+            "inputs": [],
+            "name": "deposit",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "function"
+          },
+          {
+            "constant": false,
+            "inputs": [],
+            "name": "quit",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        ]
 
-#### Add GraphQL schema: describe the various entities/objects your graph would have
-  - `src/mappings/MyContractName/schema.graphql`
+  4. Add following to the `src/mappings/BuyInWithRageQuitOpt`:
+    - **yaml fragment**: file containing the subgraph manifest
+    
+        `src/mappings/BuyInWithRageQuitOpt/datasource.yaml`
 
-#### Add yaml fragment: describe 
-  - `src/mappings/MyContractName/datasource.yaml`
+            abis:
+              - BuyInWithRageQuitOpt
+            entities:
+              - Deposit
+              - Quit
+            eventHandlers:
+              - event: buyIn(indexed address,uint256,uint256)
+                handler: handleBuyIn
+              - event: rageQuit(indexed address,uint256,uint256)
+                handler: handleRageQuit
 
-        1. `abis`:  optional - list of contract names that are required by the mapping.
-        2. [entities](https://github.com/graphprotocol/graph-node/blob/master/docs/subgraph-manifest.md#1521-ethereum-events-mapping): list of entities that are written by the the mapping.
-        3. [`eventHandlers`](https://github.com/graphprotocol/graph-node/blob/master/docs/subgraph-manifest.md#1522-eventhandler): map of solidity event signatures to event handlers in mapping code.
+    - **GraphQL schema**: describe what data is stored for your subgraph and how to query it via GraphQL
+  
+        `src/mappings/BuyInWithRageQuitOpt/schema.graphql`
 
-      NOTE: types are generated during the build step based on the entities described in schema.graphQL. Import these types while writing handlers in `mapping.ts`
-  4. integration test (optional): `test/integration/MyContractName.spec.ts`
+        NOTE: types are generated during the build step based on the entities described in schema.graphQL. Import these types while writing handlers in `mapping.ts`
+    
+            type Deposit @entity {
+              id: ID!
+              memberAddress: Bytes!
+              amount: BigInt!
+              rep: BigInt!
+            }
 
+            type Quit @entity {
+              id: ID!
+              memberAddress: Bytes!
+              amount: BigInt!
+              rep: BigInt!
+            }
+
+    - **AssemblyScript Mapping**: describe how blockchain events are processed and stored in entities defined in your schema
+    
+        `src/mappings/BuyInWithRageQuitOpt/mapping.ts`
+
+            import 'allocator/arena';
+
+            import {
+              store,
+            } from '@graphprotocol/graph-ts';
+
+            import * as domain from '../../domain';
+
+            import {
+              Deposit,
+              Quit
+            } from '../../types/schema';
+
+            import { concat, equalsBytes, eventId } from '../../utils';
+
+            import {
+              buyIn,
+              rageQuit,
+            } from '../../types/BuyInWithRageQuitOpt/BuyInWithRageQuitOpt';
+
+            export function handleBuyIn(event: buyIn): void {
+              let ent = new Deposit(eventId(event));
+              ent.memberAddress = event.params._member;
+              ent.amount = event.params._amount;
+              ent.rep = event.params._rep;
+
+              store.set('Deposit', ent.id, ent);
+            }
+
+            export function handleRageQuit(event: rageQuit): void {
+              let ent = new Quit(eventId(event));
+              ent.memberAddress = event.params._member;
+              ent.amount = event.params._amount;
+              ent.rep = event.params._rep;
+
+              store.set('Quit', ent.id, ent);
+            }
+
+    - **integration test** (optional): `test/integration/MyContractName.spec.ts`
 
   5. Add your contract to `ops/mappings.json`. Under the JSON object for the network your contract is located at, under the `"mappings"` JSON array, add the following.
 
-    1. If your contract information is in the `migration.json` file specified (default is the file under `@daostack/migration` folder, as defined in the `ops/settings.js` file)
+    - If your contract information is in the `migration.json` file specified (default is the file under `@daostack/migration` folder, as defined in the `ops/settings.js` file)
 
-            {
-               "name": "<contract name as appears in `abis/arcVersion` folder>",
-               "contractName": "<contract name as appears in migration.json file>",
-               "dao": "<section label where contract is defined in migration.json file (base/ dao/ test/ organs)>",
-               "mapping": "<contract name from step 2>",
-               "arcVersion": "<contract arc version>"
-            },
+                {
+                   "name": "<contract name as appears in `abis/arcVersion` folder>",
+                   "contractName": "<contract name as appears in migration.json file>",
+                   "dao": "<section label where contract is defined in migration.json file (base/ dao/ test/ organs)>",
+                   "mapping": "<contract name from step 2>",
+                   "arcVersion": "<contract arc version>"
+                },
 
-    2. If your contract does not appear in the migration file:
+    - If your contract does not appear in the migration file:
 
-            {
-               "name": "<contract name as appears in `abis/arcVersion` folder>",
-               "dao": "address",
-               "mapping": "<MyContractName>",
-               "arcVersion": "<contract arc version under which the abi is located in the `abis` folder>",
-               "address": "<the contract address>"
-            },
+                {
+                   "name": "<contract name as appears in `abis/arcVersion` folder>",
+                   "dao": "address",
+                   "mapping": "<MyContractName>",
+                   "arcVersion": "<contract arc version under which the abi is located in the `abis` folder>",
+                   "address": "<the contract address>"
+                },
 
-  6. (Optionally) add a deployment step for your contract in `ops/migrate.js` that will run before testing.
-
-
+### Client
