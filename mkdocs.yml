@@ -45,7 +45,7 @@ nav:
       - Migration:
         - Register scheme to new DAO: 'gettingStarted/customScheme/registerToNewDAO.md'
         - Register scheme to existing DAO: 'gettingStarted/customScheme/registerToExistingDAO.md'
-      - 'Subgraph: mapping for new scheme': 'gettingStarted/customScheme/subgraphForNewScheme.md'
+      - 'Subgraph: enable cache for new scheme': 'gettingStarted/customScheme/subgraphForNewScheme.md'
       - 'Client: interact with new Scheme': 'gettingStarted/customScheme/clientForNewScheme.md'
       - 'Alchemy: integrate with DAOstack interface': 'gettingStarted/customScheme/alchemyIntegrationForNewScheme.md'
     - Deploy a DAO: 'gettingStarted/deployDAO.md'

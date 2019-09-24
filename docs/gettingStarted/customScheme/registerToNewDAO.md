@@ -111,13 +111,19 @@ Create a `.env` file with following environment variables
   - **NETWORK**: private, rinkeby, mainnet etc. depending on which network you are deploying your DAO
   - **PROVIDER**: url of the ethprovider, this could be infura address for testneet/mainnet or `localhost:8545` in case of ganache
   - **PRIVATE_KEY**: key of the account you are using to deploy the DAO
+  - **OUTPUT_FILE**: full path of file where to store migration output, eg. `data/migration.json`
+  - **CUSTOM_ABI_LOCATION**: location of all your compiled contracts, eg. `contracts/build`
+  - **DEFAULT_GAS**: gas price for tx, eg. 3.0
+
+### Example migration script
+
 
     const DAOstackMigration = require('@daostack/migration');
     const migrationSpec =  require('./CommunityDaoSpec.json')
     require('dotenv').config();
 
     async function migrate() {
-      const DEFAULT_GAS = 3.0
+      const DEFAULT_GAS = process.env.DEFAULT_GAS
 
       const options = {
         provider: process.env.PROVIDER,
