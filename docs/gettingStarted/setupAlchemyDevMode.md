@@ -107,10 +107,12 @@
 
    2. Alchemy only shows `daos` that are registered via `DAOregistry`. In order to bypass this during development, make changes in `src/components/Daos/DaosPage.tsx`:
       
-        # original
+        // original
+
         arc.daos({ where: { name_not_contains: "Genesis Alpha", register: "registered" }, orderBy: "name", orderDirection: "asc"})
 
-        # changed to
+        // changed to
+
         arc.daos({ where: { name_not_contains: "Genesis Alpha" }, orderBy: "name", orderDirection: "asc"})
 
   Make following changes:
@@ -121,21 +123,18 @@
         cd subgraph
         npm i
 
-        touch .env
+  2. Setup `.env` file and run rinkeby graph node
 
-        # Following are example values please change for customization
-        echo network="rinkeby" >> .env
-        echo subgraph="daostack" >> .env
-        echo postgres_password="letmein" >> .env
-        echo ethereum_node="https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2" >> .env
+        // Following are example values please change for customization
+
+        network="rinkeby"
+        subgraph="daostack"
+        postgres_password="letmein"
+        ethereum_node="https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2"
 
         npm run docker:run-rinkeby 
 
-  2. Update your DAO details and deploy subgraph
-
-        touch daos/rinkeby/<DAO-Name>.json
-        # Add your DAO details in <DAO-Name.json> file
-        # refer to any of existing file in daos/rinkeby folder
+  2. Update your DAO details in `daos/rinkeby/<DAO-Name>.json` and deploy subgraph
 
         npm run deploy '{  "migrationFile" : "../migration.json" }'
         
@@ -157,7 +156,7 @@
   6. Build and run
           docker-compose up -d
 
-### Run  graph-node locally with new/not yet supported schemes
+### Run graph-node locally with new/not yet supported schemes
 
   Choose this if,
 
