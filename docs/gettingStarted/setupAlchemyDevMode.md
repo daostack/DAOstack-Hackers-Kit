@@ -108,9 +108,11 @@
    2. Alchemy only shows `daos` that are registered via `DAOregistry`. In order to bypass this during development, make changes in `src/components/Daos/DaosPage.tsx`:
       
         // original
+
         arc.daos({ where: { name_not_contains: "Genesis Alpha", register: "registered" }, orderBy: "name", orderDirection: "asc"})
 
         // changed to
+
         arc.daos({ where: { name_not_contains: "Genesis Alpha" }, orderBy: "name", orderDirection: "asc"})
 
   Make following changes:
@@ -124,6 +126,7 @@
   2. Setup `.env` file and run rinkeby graph node
 
         // Following are example values please change for customization
+
         network="rinkeby"
         subgraph="daostack"
         postgres_password="letmein"
