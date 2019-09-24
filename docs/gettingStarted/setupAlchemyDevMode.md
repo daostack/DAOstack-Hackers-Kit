@@ -121,21 +121,17 @@
         cd subgraph
         npm i
 
-        touch .env
+  2. Setup `.env` file and run rinkeby graph node
 
         # Following are example values please change for customization
-        echo network="rinkeby" >> .env
-        echo subgraph="daostack" >> .env
-        echo postgres_password="letmein" >> .env
-        echo ethereum_node="https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2" >> .env
+        network="rinkeby"
+        subgraph="daostack"
+        postgres_password="letmein"
+        ethereum_node="https://rinkeby.infura.io/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2"
 
         npm run docker:run-rinkeby 
 
-  2. Update your DAO details and deploy subgraph
-
-        touch daos/rinkeby/<DAO-Name>.json
-        # Add your DAO details in <DAO-Name.json> file
-        # refer to any of existing file in daos/rinkeby folder
+  2. Update your DAO details in `daos/rinkeby/<DAO-Name>.json` and deploy subgraph
 
         npm run deploy '{  "migrationFile" : "../migration.json" }'
         
@@ -156,3 +152,14 @@
       
   6. Build and run
           docker-compose up -d
+
+### Run graph-node locally with new/not yet supported schemes
+
+  Choose this if,
+
+  - using custom scheme or any arc scheme which is not yet tracked by daostack subgraph
+  - adding subgraph/client support for new contract or customizing current client/subgraph
+  - playing with DAO you just deployed to any of the testnet and not yet whitelisted by daostack
+  - using any testnet
+  
+  Refer to [Add custom scheme to Alchemy](../setupCustomSchemeAlchemy)
