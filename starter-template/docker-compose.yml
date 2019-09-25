@@ -15,14 +15,14 @@ services:
       - 3000:3000
 
   ganache:
-    image: daostack/test-env:ganache-0.0.1-rc.23-v0-3.0.0
+    image: 'daostack/migration:0.0.1-rc.24-v3'
     volumes:
       - ./data:/app/data
     ports:
       - 8545:8545
 
   graph-node:
-    image: 'graphprotocol/graph-node@sha256:688f00bd12d619c3cc8c8c0b11aee47d61b5f5e36d62ad002e5ce1e7f3c116f2'
+    image: 'graphprotocol/graph-node:v0.15.1'
     ports:
       - 8000:8000
       - 8001:8001
