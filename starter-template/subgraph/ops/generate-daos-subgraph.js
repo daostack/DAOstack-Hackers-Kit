@@ -23,10 +23,17 @@ function daoYaml(contract, contractAddress, arcVersion) {
       language: "wasm/assemblyscript",
       file: path.resolve(`${__dirname}/../src/mappings/${contract}/mapping.ts`),
       entities,
-      abis: (abis || [contract]).map(contract => ({
-        name: contract,
-        file: path.resolve(`./abis/${arcVersion}/${contract}.json`)
-      })),
+      abis: (abis || [contract]).map(contractName => {
+        let _arcVersion = Number(arcVersion.slice(arcVersion.length-2,arcVersion.length));
+        if ((_arcVersion < 24) && (contractName === "UGenericScheme")) {
+          return {name: contractName,
+                  file: path.resolve(`./abis/${arcVersion}/GenericScheme.json`)
+                };
+        }
+        return {name: contractName,
+                file: path.resolve(`./abis/${arcVersion}/${contractName}.json`)
+              };
+      }),
       eventHandlers
     }
   };
@@ -63,13 +70,14 @@ async function generateSubgraph(opts={}) {
     const subgraphYaml = yaml.safeLoad(
       fs.readFileSync(opts.subgraphLocation, "utf8")
     );
+    var genericSchemeAddresses = {};
     files.forEach(function(file) {
       const dao = JSON.parse(fs.readFileSync(daodir + '/' + file, "utf-8"));
       let includeRep = false;
       let includeToken = false;
       let includeAvatar = false;
       let includeController = false;
-      for (let i = 0; i < subgraphYaml.dataSources.length; i++) {
+      for (var i = 0, len = subgraphYaml.dataSources.length; i < len; i++) {
         if (subgraphYaml.dataSources[i].source.address === dao.Reputation) {
           includeRep = true;
         }
@@ -82,6 +90,21 @@ async function generateSubgraph(opts={}) {
         if (subgraphYaml.dataSources[i].source.address === dao.Controller) {
           includeController = true;
         }
+        if ( dao.Schemes !== undefined) {
+        for (var j = 0, schemesLen = dao.Schemes.length; j < schemesLen; j++) {
+            let scheme = dao.Schemes[j];
+            if (scheme.name == "GenericScheme") {
+              if (!genericSchemeAddresses[scheme.address]) {
+                subgraphYaml.dataSources[subgraphYaml.dataSources.length] = daoYaml(
+                  "GenericScheme",
+                  scheme.address,
+                  dao.arcVersion
+                );
+                genericSchemeAddresses[scheme.address] = true;
+              }
+            }
+        }
+       }
       }
       if (includeRep === false) {
         subgraphYaml.dataSources[subgraphYaml.dataSources.length] = daoYaml(

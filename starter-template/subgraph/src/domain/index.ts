@@ -5,7 +5,6 @@ import {
   ProposalExecuted,
 } from '../types/ContributionReward/ContributionReward';
 import { Transfer } from '../types/DAOToken/DAOToken';
-import { NewCallProposal } from '../types/GenericScheme/GenericScheme';
 import {
   ExecuteProposal,
   GenesisProtocol,
@@ -115,18 +114,22 @@ export function handleNewSchemeRegisterProposal(
  }
 
 export function handleNewCallProposal(
-  event: NewCallProposal,
+  avatar: Address,
+  proposalId: Bytes,
+  timestamp: BigInt,
+  descriptionHash: string,
+  eventAddress: Address,
 ): void {
-  if (!daoModule.exists(event.params._avatar)) {
+  if (!daoModule.exists(avatar)) {
     return;
   }
-  handleGPProposalPrivate(event.params._proposalId.toHex());
+  handleGPProposalPrivate(proposalId.toHex());
   updateGSProposal(
-    event.params._proposalId,
-    event.block.timestamp,
-    event.params._avatar,
-    event.params._descriptionHash,
-    event.address,
+    proposalId,
+    timestamp,
+    avatar,
+    descriptionHash,
+    eventAddress,
   );
 }
 

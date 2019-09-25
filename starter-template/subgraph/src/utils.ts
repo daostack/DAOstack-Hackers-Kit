@@ -71,12 +71,13 @@ export function equalStrings(a: string, b: string): boolean {
   return true;
 }
 
-export function setContractInfo(address: string, name: string, version: string): void {
+export function setContractInfo(address: string, name: string, alias: string, version: string): void {
     let contractInfo = ContractInfo.load(address);
     if (contractInfo == null) {
         contractInfo = new  ContractInfo(address);
         contractInfo.address = Address.fromString(address);
         contractInfo.name =  name;
+        contractInfo.alias =  alias;
         contractInfo.version = version;
         contractInfo.save();
     }

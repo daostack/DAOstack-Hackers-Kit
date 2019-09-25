@@ -107,7 +107,7 @@ describe('Domain Layer', () => {
       opts,
     );
 
-    expect(register).toEqual('proposed');
+    expect(register).toEqual('na');
 
     await daoRegistry.methods.register(addresses.Avatar, 'test').send();
     register = (await sendQuery(getRegister, 2000)).dao.register;
@@ -387,6 +387,7 @@ describe('Domain Layer', () => {
             descriptionHash
             title
             description
+            fulltext
             url
             stage
             executionState
@@ -466,6 +467,9 @@ describe('Domain Layer', () => {
             scheme {
               address
               name
+              numberOfQueuedProposals
+              numberOfPreBoostedProposals
+              numberOfBoostedProposals
             }
         }
     }`;
@@ -487,6 +491,7 @@ describe('Domain Layer', () => {
       descriptionHash: descHash,
       title: proposalTitle,
       description: proposalDescription,
+      fulltext: proposalTitle.split(' ').concat(proposalDescription.split(' ')),
       url: proposalUrl,
       stage: 'Queued',
       closingAt: (Number(gpParams.queuedVotePeriodLimit) + Number(p1Creation)).toString(),
@@ -545,6 +550,9 @@ describe('Domain Layer', () => {
       scheme: {
         address: addresses.ContributionReward.toLowerCase(),
         name: 'ContributionReward',
+        numberOfBoostedProposals: '0',
+        numberOfPreBoostedProposals: '0',
+        numberOfQueuedProposals: '1',
       },
     });
 
@@ -743,7 +751,7 @@ describe('Domain Layer', () => {
      });
 
     await waitUntilTrue(stakeIsIndexed);
-    proposal = (await sendQuery(getProposal)).proposal;
+    proposal = (await sendQuery(getProposal, 2000)).proposal;
     expect(proposal.stage).toEqual('PreBoosted');
     expect(proposal.preBoostedAt).toEqual(s3Timestamp.toString());
     expect(proposal.confidenceThreshold).toEqual(Math.pow(2, REAL_FBITS).toString());
@@ -1073,6 +1081,14 @@ describe('Domain Layer', () => {
           threshold
           scheme {
             name
+            numberOfQueuedProposals
+            numberOfPreBoostedProposals
+            numberOfBoostedProposals
+          }
+          dao {
+            numberOfQueuedProposals
+            numberOfPreBoostedProposals
+            numberOfBoostedProposals
           }
       }
     }`;
@@ -1083,6 +1099,14 @@ describe('Domain Layer', () => {
         threshold: Math.pow(2, REAL_FBITS).toString(),
         scheme: {
           name: 'ContributionReward',
+          numberOfBoostedProposals: '0',
+          numberOfPreBoostedProposals: '0',
+          numberOfQueuedProposals: '0',
+        },
+        dao: {
+          numberOfQueuedProposals: '0',
+          numberOfPreBoostedProposals: '0',
+          numberOfBoostedProposals: '0',
         },
     });
 
@@ -1090,6 +1114,14 @@ describe('Domain Layer', () => {
         threshold: Math.pow(2, REAL_FBITS).toString(),
         scheme: {
           name: 'GenericScheme',
+          numberOfBoostedProposals: '0',
+          numberOfPreBoostedProposals: '0',
+          numberOfQueuedProposals: '0',
+        },
+        dao: {
+          numberOfQueuedProposals: '0',
+          numberOfPreBoostedProposals: '0',
+          numberOfBoostedProposals: '0',
         },
     });
 
@@ -1097,6 +1129,14 @@ describe('Domain Layer', () => {
         threshold: Math.pow(2, REAL_FBITS + 1).toString(),
         scheme: {
           name: 'ContributionReward',
+          numberOfBoostedProposals: '1',
+          numberOfPreBoostedProposals: '1',
+          numberOfQueuedProposals: '1',
+        },
+        dao: {
+          numberOfQueuedProposals: '2',
+          numberOfPreBoostedProposals: '1',
+          numberOfBoostedProposals: '1',
         },
     });
 
@@ -1127,8 +1167,8 @@ describe('Domain Layer', () => {
     increaseTime(600 + 1 , web3);
     await genesisProtocol.methods.execute(p2).send();
 
-    let stage = (await sendQuery(getExpiredProposal)).proposal.stage;
-    expect((await sendQuery(getExpiredProposal)).proposal.stage).toEqual('Boosted');
+    let stage = (await sendQuery(getExpiredProposal, 3000)).proposal.stage;
+    expect((await sendQuery(getExpiredProposal, 3000)).proposal.stage).toEqual('Boosted');
     increaseTime((+gpParams.boostedVotePeriodLimit) - (+gpParams.quietEndingPeriod) + 1 , web3);
     let quietEndingPeriodBeganAt = await vote({
       proposalId: p2,

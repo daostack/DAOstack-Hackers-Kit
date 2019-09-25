@@ -6,6 +6,9 @@ export function getDAO(id: string): DAO {
   let dao = store.get('DAO', id) as DAO;
   if (dao == null) {
     dao = new DAO(id);
+    dao.numberOfQueuedProposals = BigInt.fromI32(0);
+    dao.numberOfPreBoostedProposals = BigInt.fromI32(0);
+    dao.numberOfBoostedProposals = BigInt.fromI32(0);
   }
 
   return dao;
