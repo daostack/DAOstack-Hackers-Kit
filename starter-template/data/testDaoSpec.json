@@ -28,10 +28,18 @@
       "tokens": 1500
     }
   ],
+   "UGenericScheme":[
+     {
+       "voteParams": 0,
+       "targetContract": "0x4a35d1434D34Ac7842381362924E6399ca63Da5A"
+     }
+   ],
   "SchemeRegistrar": {
       "voteRegisterParams": 0,
       "voteRemoveParams": 0
   },
+  "CustomSchemes": [
+  ],
   "VotingMachinesParams": [
     {
       "queuedVoteRequiredPercentage": 50,
@@ -48,11 +56,9 @@
       "voteOnBehalf": "0x0000000000000000000000000000000000000000"
     }
   ],
-  "schemes": {
-    "ContributionReward": true,
-    "GenericScheme": false,
-    "SchemeRegistrar": true,
-    "GlobalConstraintRegistrar": false,
-    "UpgradeScheme": false
-  }
+   "schemes":{
+      "ContributionReward":true,
+      "SchemeRegistrar":true,
+      "UGenericScheme":true
+   }
 }
