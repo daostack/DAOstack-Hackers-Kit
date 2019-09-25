@@ -1,13 +1,16 @@
-import { Address, BigInt, ByteArray, Bytes, crypto } from '@graphprotocol/graph-ts';
+import { Address, BigDecimal, BigInt, ByteArray, Bytes, crypto } from '@graphprotocol/graph-ts';
 import { setContributionRewardParams,
          setGenericSchemeParams,
-         setSchemeRegistrarParams } from '../mappings/Controller/mapping';
+         setSchemeRegistrarParams,
+         setUGenericSchemeParams,
+        } from '../mappings/Controller/mapping';
 import {ContributionReward} from '../types/ContributionReward/ContributionReward';
 import {GenericScheme} from '../types/GenericScheme/GenericScheme';
 import { GenesisProtocol } from '../types/GenesisProtocol/GenesisProtocol';
 import { ContractInfo, GPQueue } from '../types/schema';
 import {SchemeRegistrar} from '../types/SchemeRegistrar/SchemeRegistrar';
-import { concat, debug, equalStrings} from '../utils';
+import {UGenericScheme} from '../types/UGenericScheme/UGenericScheme';
+import { concat, equalStrings} from '../utils';
 
 export function getGPQueue(id: string): GPQueue {
   let gpQueue = GPQueue.load(id) ;
@@ -62,15 +65,29 @@ export function create(dao: Address,
          isGPQue = true;
      }
    }
-   if (equalStrings(contractInfo.name, 'GenericScheme')) {
-     let genericScheme =  GenericScheme.bind(scheme);
+   let arcVersion = BigDecimal.fromString(
+      contractInfo.version.slice(contractInfo.version.length - 2, contractInfo.version.length));
+
+   if ((equalStrings(contractInfo.name, 'UGenericScheme')) ||
+       (equalStrings(contractInfo.name, 'GenericScheme') && (arcVersion < BigDecimal.fromString('24')))) {
+     let genericScheme =  UGenericScheme.bind(scheme);
      let parameters = genericScheme.parameters(paramsHash);
      if (!equalStrings(parameters.value0.toHex(), addressZero)) {
          gpAddress = parameters.value0;
-         setGenericSchemeParams(dao, scheme, gpAddress, parameters.value1, parameters.value2);
+         setUGenericSchemeParams(dao, scheme, gpAddress, parameters.value1, parameters.value2);
          isGPQue = true;
      }
+   } else if (equalStrings(contractInfo.name, 'GenericScheme')) {
+     let genericScheme =  GenericScheme.bind(scheme);
+     setGenericSchemeParams(
+                     dao,
+                     scheme,
+                     genericScheme.votingMachine(),
+                     genericScheme.voteParams(),
+                     genericScheme.contractToCall());
+     isGPQue = true;
    }
+
    if (isGPQue) {
       let bigOne = new ByteArray(6);
       bigOne[0] = 0;

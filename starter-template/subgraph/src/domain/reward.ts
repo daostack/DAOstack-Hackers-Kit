@@ -1,5 +1,4 @@
-import { Address, BigInt, Bytes , crypto, EthereumValue, SmartContract , store} from '@graphprotocol/graph-ts';
-import { GenesisProtocol__voteInfoResult } from '../types/GenesisProtocol/GenesisProtocol';
+import { Address, BigInt, Bytes , crypto, EthereumValue, log , SmartContract, store} from '@graphprotocol/graph-ts';
 import { GenesisProtocol } from '../types/GenesisProtocol/GenesisProtocol';
 import { ContributionRewardProposal,
          ControllerScheme,
@@ -130,7 +129,7 @@ export function insertGPRewards(
   state: number,
 ): void {
   let proposal = getProposal(proposalId.toHex());
-  let genesisProtocolExt = GenesisProtocolExt.bind(gpAddress);
+  let genesisProtocol = GenesisProtocol.bind(gpAddress);
   let i = 0;
   let gpRewards: string[] = getGPRewardsHelper(proposalId.toHex()).gpRewards as string[];
   let controllerScheme = ControllerScheme.load(proposal.scheme.toString());
@@ -146,10 +145,22 @@ export function insertGPRewards(
     redeemValues[1] = BigInt.fromI32(0);
     redeemValues[2] = BigInt.fromI32(0);
     let daoBountyForStaker: BigInt = BigInt.fromI32(0);
+
     if (controllerScheme !== null ) {
-        redeemValues = genesisProtocolExt.redeem(proposalId, gpReward.beneficiary as Address);
+        let callResult = genesisProtocol.try_redeem(proposalId, gpReward.beneficiary as Address);
+        if (callResult.reverted) {
+            log.info('genesisProtocol try_redeem reverted', []);
+        } else {
+            redeemValues = callResult.value;
+        }
         if (state === 2) {// call redeemDaoBounty only on execute
-           daoBountyForStaker = genesisProtocolExt.redeemDaoBounty(proposalId, gpReward.beneficiary as Address).value1;
+           let callResultRedeemDaoBounty =
+           genesisProtocol.try_redeemDaoBounty(proposalId, gpReward.beneficiary as Address);
+           if (callResultRedeemDaoBounty.reverted) {
+              log.info('genesisProtocol try_redeemDaoBounty reverted', []);
+           } else {
+               daoBountyForStaker = callResultRedeemDaoBounty.value.value1;
+           }
         }
     }
     if (!redeemValues[0].isZero() ||
@@ -234,30 +245,4 @@ function updatePreGPReward(id: string, beneficiary: Bytes): PreGPReward {
 
   reward.save();
   return reward;
-}
-
-// this is a hack :)
-export class GenesisProtocolExt extends SmartContract {
-  public static bind(address: Address): GenesisProtocolExt {
-    return new GenesisProtocolExt('GenesisProtocol', address);
-  }
-
-  public redeem(proposalId: Bytes, beneficiary: Address): BigInt[] {
-    let result = super.call('redeem', [
-      EthereumValue.fromFixedBytes(proposalId),
-      EthereumValue.fromAddress(beneficiary),
-    ]);
-    return result[0].toBigIntArray();
-  }
-
-  public redeemDaoBounty(proposalId: Bytes, beneficiary: Address): GenesisProtocol__voteInfoResult {
-    let result = super.call('redeemDaoBounty', [
-      EthereumValue.fromFixedBytes(proposalId),
-      EthereumValue.fromAddress(beneficiary),
-    ]);
-    return new GenesisProtocol__voteInfoResult(
-      result[0].toBigInt(),
-      result[1].toBigInt(),
-    );
-  }
 }

@@ -2,24 +2,23 @@ import { store } from '@graphprotocol/graph-ts';
 
 // Import event types from the Reputation contract ABI
 import {
-  GenericScheme,
   NewCallProposal,
   ProposalExecuted,
-} from '../../types/GenericScheme/GenericScheme';
+  UGenericScheme,
+} from '../../types/UGenericScheme/UGenericScheme';
 
 import * as domain from '../../domain';
 
 // Import entity types generated from the GraphQL schema
 import {
-  GenericSchemeParam,
   GenericSchemeProposal,
 } from '../../types/schema';
 
 function insertNewProposal(event: NewCallProposal): void {
-  let genericSchemeParams = GenericSchemeParam.load(event.address.toHex());
+  let gs = UGenericScheme.bind(event.address);
   let ent = new GenericSchemeProposal(event.params._proposalId.toHex());
   ent.dao = event.params._avatar.toHex();
-  ent.contractToCall = genericSchemeParams.contractToCall;
+  ent.contractToCall = gs.getContractToCall(event.params._avatar);
   ent.callData = event.params._callData;
   ent.value = event.params._value;
   ent.executed = false;
@@ -30,6 +29,7 @@ function insertNewProposal(event: NewCallProposal): void {
 export function handleNewCallProposal(
   event: NewCallProposal,
 ): void {
+
   domain.handleNewCallProposal(
     event.params._avatar,
     event.params._proposalId,

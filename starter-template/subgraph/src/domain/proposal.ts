@@ -1,8 +1,8 @@
 import { Address, BigDecimal, BigInt, Bytes, crypto, ipfs, json, JSONValueKind, store } from '@graphprotocol/graph-ts';
 import { GenesisProtocol } from '../types/GenesisProtocol/GenesisProtocol';
-import { ControllerScheme, GenesisProtocolParam, Proposal } from '../types/schema';
+import { ControllerScheme, DAO, GenesisProtocolParam, Proposal } from '../types/schema';
 import { concat, equalsBytes, equalStrings } from '../utils';
-import { getDAO } from './dao';
+import { getDAO, saveDAO } from './dao';
 import { updateThreshold } from './gpqueue';
 import { getReputation } from './reputation';
 
@@ -55,10 +55,12 @@ export function getProposalIPFSData(proposal: Proposal): Proposal {
           return proposal;
         }
         if (descJson.toObject().get('title') != null) {
-           proposal.title = descJson.toObject().get('title').toString();
+          proposal.title = descJson.toObject().get('title').toString();
+          proposal.fulltext = proposal.title.split(' ');
         }
         if (descJson.toObject().get('description') != null) {
           proposal.description = descJson.toObject().get('description').toString();
+          proposal.fulltext = proposal.fulltext.concat(proposal.description.split(' '));
         }
         if (descJson.toObject().get('url') != null) {
           proposal.url = descJson.toObject().get('url').toString();
@@ -112,6 +114,35 @@ export function updateProposalState(id: Bytes, state: number, gpAddress: Address
 
 export function setProposalState(proposal: Proposal, state: number, gpTimes: BigInt[]): void {
   // enum ProposalState { None, ExpiredInQueue, Executed, Queued, PreBoosted, Boosted, QuietEndingPeriod}
+  let controllerScheme = ControllerScheme.load(proposal.scheme);
+  let dao = DAO.load(proposal.dao);
+  if (controllerScheme != null) {
+    if (equalStrings(proposal.stage, 'Queued')) {
+      controllerScheme.numberOfQueuedProposals = controllerScheme
+      .numberOfQueuedProposals.minus(
+        BigInt.fromI32(1),
+      );
+    } else if (equalStrings(proposal.stage, 'PreBoosted')) {
+      controllerScheme.numberOfPreBoostedProposals = controllerScheme
+      .numberOfPreBoostedProposals.minus(
+        BigInt.fromI32(1),
+      );
+    } else if (equalStrings(proposal.stage, 'Boosted')) {
+      controllerScheme.numberOfBoostedProposals = controllerScheme
+      .numberOfBoostedProposals.minus(
+        BigInt.fromI32(1),
+      );
+    }
+  }
+  if (dao != null) {
+    if (equalStrings(proposal.stage, 'Queued')) {
+      dao.numberOfQueuedProposals = dao.numberOfQueuedProposals.minus(BigInt.fromI32(1));
+    } else if (equalStrings(proposal.stage, 'PreBoosted')) {
+      dao.numberOfPreBoostedProposals = dao.numberOfPreBoostedProposals.minus(BigInt.fromI32(1));
+    } else if (equalStrings(proposal.stage, 'Boosted')) {
+      dao.numberOfBoostedProposals = dao.numberOfBoostedProposals.minus(BigInt.fromI32(1));
+    }
+  }
   if (state === 1) {
     // Closed
     proposal.stage = 'ExpiredInQueue';
@@ -123,25 +154,51 @@ export function setProposalState(proposal: Proposal, state: number, gpTimes: Big
     proposal.stage = 'Queued';
     proposal.closingAt =  proposal.createdAt +
                           GenesisProtocolParam.load(proposal.genesisProtocolParams).queuedVotePeriodLimit;
+    if (controllerScheme != null) {
+      controllerScheme.numberOfQueuedProposals = controllerScheme
+      .numberOfQueuedProposals.plus(BigInt.fromI32(1));
+    }
+    if (dao != null) {
+      dao.numberOfQueuedProposals = dao.numberOfQueuedProposals.plus(BigInt.fromI32(1));
+    }
   } else if (state === 4) {
     // PreBoosted
     proposal.stage = 'PreBoosted';
     proposal.preBoostedAt = gpTimes[2];
     proposal.closingAt =  proposal.preBoostedAt +
                           GenesisProtocolParam.load(proposal.genesisProtocolParams).preBoostedVotePeriodLimit;
+    if (controllerScheme != null) {
+      controllerScheme.numberOfPreBoostedProposals = controllerScheme
+      .numberOfPreBoostedProposals.plus(BigInt.fromI32(1));
+    }
+    if (dao != null) {
+      dao.numberOfPreBoostedProposals = dao.numberOfPreBoostedProposals.plus(BigInt.fromI32(1));
+    }
   } else if (state === 5) {
     // Boosted
     proposal.boostedAt = gpTimes[1];
     proposal.stage = 'Boosted';
     proposal.closingAt =  proposal.boostedAt +
                           GenesisProtocolParam.load(proposal.genesisProtocolParams).boostedVotePeriodLimit;
-
+    if (controllerScheme != null) {
+      controllerScheme.numberOfBoostedProposals = controllerScheme
+      .numberOfBoostedProposals.plus(BigInt.fromI32(1));
+    }
+    if (dao != null) {
+      dao.numberOfBoostedProposals = dao.numberOfBoostedProposals.plus(BigInt.fromI32(1));
+    }
   } else if (state === 6) {
     // QuietEndingPeriod
     proposal.quietEndingPeriodBeganAt = gpTimes[1];
     proposal.closingAt =  proposal.quietEndingPeriodBeganAt +
                           GenesisProtocolParam.load(proposal.genesisProtocolParams).quietEndingPeriod;
     proposal.stage = 'QuietEndingPeriod';
+  }
+  if (controllerScheme != null) {
+    controllerScheme.save();
+  }
+  if (dao != null) {
+    dao.save();
   }
 }
 
@@ -186,10 +243,17 @@ export function updateGPProposal(
   }
 
   let dao = getDAO(avatarAddress.toHex());
+  dao.numberOfQueuedProposals = dao.numberOfQueuedProposals.plus(BigInt.fromI32(1));
+  saveDAO(dao);
   let reputation = getReputation(dao.nativeReputation);
   proposal.totalRepWhenCreated = reputation.totalSupply;
   proposal.closingAt =  proposal.createdAt +
                         GenesisProtocolParam.load(proposal.genesisProtocolParams).queuedVotePeriodLimit;
+  let controllerScheme = ControllerScheme.load(proposal.scheme);
+  if (controllerScheme != null) {
+    controllerScheme.numberOfQueuedProposals = controllerScheme.numberOfQueuedProposals.plus(BigInt.fromI32(1));
+    controllerScheme.save();
+  }
 
   saveProposal(proposal);
 }

@@ -32,6 +32,7 @@ script:
   - docker-compose exec graph-node graph-node --version
   # - docker-compose logs graph-node
   - echo -en 'travis_fold:end:script.2\\r'
+  - sleep 120
 
   - npm run lint
   - npm run jest

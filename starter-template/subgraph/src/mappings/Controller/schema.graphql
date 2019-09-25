@@ -18,10 +18,14 @@ type ControllerScheme @entity {
 	address: Bytes!
 	name: String
 	version: String
+	alias: String
 	contributionRewardParams: ContributionRewardParam
 	schemeRegistrarParams: SchemeRegistrarParam
+	uGenericSchemeParams: UGenericSchemeParam
 	genericSchemeParams: GenericSchemeParam
-
+	numberOfQueuedProposals: BigInt!
+	numberOfPreBoostedProposals: BigInt!
+	numberOfBoostedProposals: BigInt!
 }
 
 type ControllerGlobalConstraint @entity {
@@ -83,6 +87,13 @@ type SchemeRegistrarParam @entity {
 	votingMachine : Bytes!
 	voteRegisterParams : GenesisProtocolParam!
 	voteRemoveParams : GenesisProtocolParam!
+}
+
+type UGenericSchemeParam @entity {
+	id: ID!
+	votingMachine : Bytes!
+	voteParams: GenesisProtocolParam!
+	contractToCall: Bytes!
 }
 
 type GenericSchemeParam @entity {

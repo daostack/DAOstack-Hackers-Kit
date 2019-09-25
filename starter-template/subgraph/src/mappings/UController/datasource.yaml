@@ -6,6 +6,7 @@ abis:
   - SchemeRegistrar
   - ContributionReward
   - GenericScheme
+  - UGenericScheme
   - GenesisProtocol
 entities:
   - UControllerOrganization

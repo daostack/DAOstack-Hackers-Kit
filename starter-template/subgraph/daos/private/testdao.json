@@ -1,9 +1,20 @@
 {
-  "name": "DevTest",
-  "Avatar": "0x5085810B901e0C555AB26bf83c21D39A5CFF25f4",
-  "DAOToken": "0x81Ac48a0fAa9f57c26112469eB56660D4f951f99",
-  "Reputation": "0x4200862E16C59fD6d1d3584805Ff3eC85ebbF253",
-  "Controller": "0x163a5e217386EbD478f564f458d9ab75E733c72c",
-  "Schemes": {},
-  "arcVersion": "0.0.1-rc.23"
+  "name": "Precipitate Inker",
+  "Avatar": "0x8f6Ec2eca7FB7B15df480d1266Ba142aEbfd373D",
+  "DAOToken": "0xf9D3854d8c5ACE915a8a4FfF16253B1CA7CEf0cD",
+  "Reputation": "0x7744cE2c85DCE57d76b17D374397d84387F450eA",
+  "Controller": "0x2f8212Ca2F6c947611ef342Aa231c6eFEd84684F",
+  "Schemes": [
+    {
+      "name": "GenericScheme",
+      "alias": "GenericSchemeAlias",
+      "address": "0xf6CAd21F949dCdAD487b531361Bb0c6a5e700F88"
+    },
+    {
+      "name": "GenericScheme",
+      "alias": "GenericSchemeAlias2",
+      "address": "0xe9846aBe8EE7e8f8E371eD17BF3557573Ee34069"
+    }
+  ],
+  "arcVersion": "0.0.1-rc.24"
 }

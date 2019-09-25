@@ -1,0 +1,10 @@
+abis:
+  - UGenericScheme
+  - GenesisProtocol
+entities:
+  - GenericSchemeProposal
+eventHandlers:
+  - event: ProposalExecuted(indexed address,indexed bytes32,bytes)
+    handler: handleProposalExecuted
+  - event: NewCallProposal(indexed address,indexed bytes32,bytes,uint256,string)
+    handler: handleNewCallProposal

@@ -57,10 +57,14 @@ function insertScheme(
   /* tslint:disable:no-bitwise */
   ent.canDelegateCall = (perms[3] & 16) === 16;
   ent.address = scheme;
+  ent.numberOfQueuedProposals = BigInt.fromI32(0);
+  ent.numberOfPreBoostedProposals = BigInt.fromI32(0);
+  ent.numberOfBoostedProposals = BigInt.fromI32(0);
   let contractInfo = ContractInfo.load(scheme.toHex());
   if (contractInfo != null) {
      ent.name = contractInfo.name;
      ent.version = contractInfo.version;
+     ent.alias = contractInfo.alias;
   }
   store.set('ControllerScheme', ent.id, ent);
 }
