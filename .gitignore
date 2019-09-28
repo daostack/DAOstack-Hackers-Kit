@@ -2,3 +2,4 @@
 *.swp
 site/*
 notes.md
+**node_modules*
