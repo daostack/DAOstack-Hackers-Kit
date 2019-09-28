@@ -1,0 +1,6 @@
+[submodule "alchemy-starter/subgraph"]
+	path = alchemy-starter/subgraph
+	url = git@github.com:daostack/subgraph.git
+[submodule "alchemy-starter/alchemy"]
+	path = alchemy-starter/alchemy
+	url = https://github.com/daostack/alchemy.git
