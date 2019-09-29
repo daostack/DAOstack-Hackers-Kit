@@ -6,21 +6,21 @@ Use this template if you want to develop on Alchemy Interface while also editing
 
 - Download all submodules
 
-    git submodule update --init --recursive
+        git submodule update --init --recursive
 
 - Install the package
 
-    npm i
+        npm i
 
 - create `.env` file with following
 
-    DEFAULT_GAS=3.0
-    PROVIDER='http://localhost:8545'
-    PRIVATE_KEY='0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d'
+        DEFAULT_GAS=3.0
+        PROVIDER='http://localhost:8545'
+        PRIVATE_KEY='0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d'
 
 - Start Alchemy-server and Graph-node
 
-    npm run launch:docker
+        npm run launch:docker
 
 ## (Optional) Deploy DAO
     
