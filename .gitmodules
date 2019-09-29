@@ -4,3 +4,6 @@
 [submodule "alchemy-starter/alchemy"]
 	path = alchemy-starter/alchemy
 	url = https://github.com/daostack/alchemy.git
+[submodule "alchemy-starter/client"]
+	path = alchemy-starter/client
+	url = git@github.com:daostack/client.git

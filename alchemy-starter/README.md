@@ -60,12 +60,21 @@ Refer to [subgraph repo](https://github.com/daostack/subgraph) or [Add new schem
 
 If you edited/updated the subgraph or deployed a new DAO, then you will have to deploy new subgraph to the graph node
 
-    npm run deploy-graph
+    npm run deploy:graph
 
 ## (Optional) Update Client
+
+You might want to update client library while working on Alchemy integration if you added new contract of updated subgraph
+
+    npm run build:client
+    npm run link:client
+
+If you are developing on client, you might want to launch watcher to compile new version. So run watcher
+
+    npm run watch:client
 
 ## Start Alchemy
 
 You can start Alchemy app with a webpack watcher that will build and relaunch the app as you make changes
 
-    npm run start-alchemy  
+    npm run start:alchemy  
