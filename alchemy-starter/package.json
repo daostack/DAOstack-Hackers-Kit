@@ -9,7 +9,8 @@
   "scripts": {
     "deploy-graph": "bash ops/deploy-graph.sh",
     "launch:docker": "cd alchemy && docker-compose up -d graph-node alchemy-server",
-    "migrate": "node ops/deployDao.js"
+    "migrate": "node ops/deployDao.js",
+    "start-alchemy": "cd alchemy && npm run start"
   },
   "keywords": [
     "DAO",

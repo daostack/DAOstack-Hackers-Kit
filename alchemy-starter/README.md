@@ -1,19 +1,71 @@
 # Alchemy starter template
 
-Use this template if you want to develop on Alchemy Interface and add new scheme support to the Alchemy for existing/new DAO
+Use this template if you want to develop on Alchemy Interface while also editing any of the other layers of the stack
 
-Once you are in alchemy-starter folder follow the following instructions
+## Setup
+
+- Download all submodules
+
+    git submodule update --init --recursive
+
+- Install the package
 
     npm i
 
-  - Start Alchemy-server and Graph-node
+- create `.env` file with following
 
-        npm run launch:docker
+    DEFAULT_GAS=3.0
+    PROVIDER='http://localhost:8545'
+    PRIVATE_KEY='0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d'
 
-  - (Optional) Edit daoSpec.json and Deploy new DAO
+- Start Alchemy-server and Graph-node
+
+    npm run launch:docker
+
+## (Optional) Deploy DAO
+    
+- Edit `data/testDaoSpec.json` with specifications for your DAO
+- Deploy DAO
 
         npm run migrate
 
-  - (Optional) Edit `subgraph/src` to add new contract tracker and deploy new subgraph
+- Check `subgraph/ops/mapping.json` to make sure `arc-version` for which you deployed the DAO is being tracked
+- If your version is missing add them to `mapping.json`. eg
 
-        npm run deploy-graph
+        {
+            "name": "GEN",
+            "contractName": "GEN",
+            "dao": "base",
+            "mapping": "DAOToken",
+            "arcVersion": "0.0.1-rc.27"
+        },
+        {
+         "name": "ContributionReward",
+         "contractName": "ContributionReward",
+         "dao": "base",
+         "mapping": "ContributionReward",
+         "arcVersion": "0.0.1-rc.27"
+       },
+      // Do this for all the contracts of new version
+
+  NOTE: You can check the version of your DAO in `data/migration.json`
+
+## (Optional) Update Subgraph
+
+If you want to add new contract to track or update/edit existing tracker you may want to update subgraph `src/mappings` or `src/domain/`
+
+Refer to [subgraph repo](https://github.com/daostack/subgraph) or [Add new scheme tutorial](https://daostack.github.io/DAOstack-Hackers-Kit/gettingStarted/setupCustomScheme/) for details
+
+## (Optional) Deploy Subgraph
+
+If you edited/updated the subgraph or deployed a new DAO, then you will have to deploy new subgraph to the graph node
+
+    npm run deploy-graph
+
+## (Optional) Update Client
+
+## Start Alchemy
+
+You can start Alchemy app with a webpack watcher that will build and relaunch the app as you make changes
+
+    npm run start-alchemy  
