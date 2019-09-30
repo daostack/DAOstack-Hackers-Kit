@@ -37,8 +37,17 @@ nav:
 - Getting Started:
     - Add features to Alchemy interface: 'gettingStarted/setupAlchemyDevMode.md'
     - Setup Generic Scheme for a DAO: 'gettingStarted/setupGenericScheme.md'
-    - Add custom scheme to the DAO: 'gettingStarted/setupCustomScheme.md'
-    - Add custom scheme to Alchemy: 'gettingStarted/setupCustomSchemeAlchemy.md'
+    - Add custom scheme to the DAO:
+      - Intro: 'gettingStarted/customScheme/intro.md'
+      - Arc:
+        - 'Non-Universal Scheme': 'gettingStarted/customScheme/developCustomNonUniScheme.md'
+        - 'Universal Scheme': 'gettingStarted/customScheme/developCustomUniScheme.md'
+      - Migration:
+        - Register scheme to new DAO: 'gettingStarted/customScheme/registerToNewDAO.md'
+        - Register scheme to existing DAO: 'gettingStarted/customScheme/registerToExistingDAO.md'
+      - 'Subgraph: enable cache for new scheme': 'gettingStarted/customScheme/subgraphForNewScheme.md'
+      - 'Client: interact with new Scheme': 'gettingStarted/customScheme/clientForNewScheme.md'
+      - 'Alchemy: integrate with DAOstack interface': 'gettingStarted/customScheme/alchemyIntegrationForNewScheme.md'
     - Deploy a DAO: 'gettingStarted/deployDAO.md'
     - Create your own interface for DAOstack DAOs: 'gettingStarted/createNewInterface.md'
 - Hacker-kit: 'hackerkit.md'
