@@ -25,4 +25,12 @@ To Enable DAO with some custom actions, you will have to work on multiple layers
 In following section we will see some sample code for adding a custom scheme to the DAO and enable Alchemy to interact with it.
 We will be using [Alchemy-starter](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/alchemy-starter) for this tutorial
 
+If you have not cloned the *DAOstack Hacker kit repo*, then clone it recursively to get the submodules
+
+    git clone --recursive git@github.com:daostack/DAOstack-Hackers-Kit.git
+
+If you have already cloned the *DAOstack Hackers kit repo*, then make sure you have the latest submodules too
+
+    git submodule update --init
+
 Depending on your requirements all or some parts of the tutorial might be useful for you.
