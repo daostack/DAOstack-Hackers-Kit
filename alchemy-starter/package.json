@@ -1,0 +1,30 @@
+{
+  "name": "YOUR_PROJECT_NAME",
+  "version": "1.0.0",
+  "description": "YOUR_PROJECT_DESCRIPTION",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build:client": "cd client && npm i && npm run build && npm link",
+    "deploy:graph": "bash ops/deploy-graph.sh",
+    "launch:docker": "cd alchemy && docker-compose up -d graph-node alchemy-server",
+    "link:client": "cd alchemy && npm link @daostack/client",
+    "migrate": "node ops/deployDao.js",
+    "start:alchemy": "cd alchemy && npm run start",
+    "watch:client": "cd client && npm run build:watch"
+  },
+  "keywords": [
+    "DAO",
+    "DAOStack",
+    "Ethereum",
+    "Blockchain"
+  ],
+  "author": "YOUR_NAME",
+  "license": "YOUR_LICENSE",
+  "dependencies": {
+    "@daostack/migration": "0.0.1-rc.27-v0",
+    "dotenv": "^8.0.0"
+  }
+}
