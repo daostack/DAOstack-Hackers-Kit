@@ -1,6 +1,6 @@
-const DAOstackMigration = require('@daostack/migration');
-const migrationSpec =  require('../data/testDaoSpec.json')
 require('dotenv').config();
+const DAOstackMigration = require('@daostack/migration');
+const migrationSpec =  require(process.env.DAO_SPEC)
 
 async function migrate() {
   const options = {
@@ -8,8 +8,9 @@ async function migrate() {
     gasPrice: process.env.DEFAULT_GAS,
     quiet: false,
     force: true,
-    output: 'data/migration.json',
+    output: process.env.OUTPUT_FILE,
     privateKey: process.env.PRIVATE_KEY,
+    customabislocation: process.env.CUSTOM_ABI_LOCATION,
     params: {
       private: migrationSpec,
       rinkeby: migrationSpec

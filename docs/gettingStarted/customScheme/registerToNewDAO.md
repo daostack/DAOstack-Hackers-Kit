@@ -1,10 +1,10 @@
-You can deploy your new custom scheme contract and register it to the DAO while creating a new DAO using `@daostack/migration` tool
+You can deploy your new custom scheme contract and register it to the New DAO as part of initial scheme set using `@daostack/migration` tool
 
-## Create DAO-spec file
+## Create DAO-spec
 
-Create dao-spec file that describes the specifics of the DAO such as Name of Organization, Token name and symbol, initial set of scheme registered and founder members etc. You can refer to [Deploy a DAO](../../deployDAO) section for base dao-spec file 
+Add `data/YourDaoSpec.json` file that describes the specifics of the DAO such as Name of Organization, Token name and symbol, initial set of scheme registered and founder members etc. You can refer to [Deploy a DAO](../../deployDAO) section for base dao-spec file 
 
-In the `dap-spec.json` add `CustomSchemes` section with the details of your scheme
+Add `CustomSchemes` section with the details of your scheme as follows. Refer [*Example DAO spec*](#example-dao-spec-file)
   
   - **name**: Name of the contract file
   - **schemeName**: Name of the scheme
@@ -100,34 +100,45 @@ In the `dap-spec.json` add `CustomSchemes` section with the details of your sche
 
 ## Create DAO-deploy file
 
-Create migration file to deploy your DAO. You will need
+1. Create migration file to deploy your DAO. You will need
 
-  - node >= 10.16.0
-  - dotenv >=8.1.0
-  - @daostack/migration latest
+    - node >= 10.16.0
+    - dotenv >=8.1.0
+    - @daostack/migration latest
 
-Create a `.env` file with following environment variables
+2. Update `.env` file with following environment variables
 
-  - **NETWORK**: private, rinkeby, mainnet etc. depending on which network you are deploying your DAO
-  - **PROVIDER**: url of the ethprovider, this could be infura address for testneet/mainnet or `localhost:8545` in case of ganache
-  - **PRIVATE_KEY**: key of the account you are using to deploy the DAO
-  - **OUTPUT_FILE**: full path of file where to store migration output, eg. `data/migration.json`
-  - **CUSTOM_ABI_LOCATION**: location of all your compiled contracts, eg. `contracts/build`
-  - **DEFAULT_GAS**: gas price for tx, eg. 3.0
+    - **CUSTOM_ABI_LOCATION**: location of all your compiled contracts, eg. `contracts/build`
+    - **DAO_SPEC**: path to `yourDaoSpec.json` file
+    - **DEFAULT_GAS**: gas price for tx, eg. 3.0
+    - **OUTPUT_FILE**: full path of file where to store migration output, eg. `data/migration.json`
+    - **PRIVATE_KEY**: key of the account you are using to deploy the DAO
+    - **PROVIDER**: url of the ethprovider, this could be infura or ganache
 
-### Example migration script
+    Example
+
+        CUSTOM_ABI_LOCATION='build/contracts'
+        DAO_SPEC='../data/testDaoSpec.json'
+        DEFAULT_GAS=3.0
+        OUTPUT_FILE='data/migration.json'
+        PRIVATE_KEY='0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d'
+        PROVIDER='http://localhost:8545'
 
 
-    const DAOstackMigration = require('@daostack/migration');
-    const migrationSpec =  require('./CommunityDaoSpec.json')
+  3. Add/Update the `ops/deployDAO.js`, Refer [Example deploy script](#example-deploy-script)
+
+### Example deploy script
+
+
     require('dotenv').config();
+    const DAOstackMigration = require('@daostack/migration');
+    const migrationSpec =  require(process.env.DAO_SPEC)
 
     async function migrate() {
-      const DEFAULT_GAS = process.env.DEFAULT_GAS
 
       const options = {
         provider: process.env.PROVIDER,
-        gasPrice: DEFAULT_GAS,
+        gasPrice: process.env.DEFAULT_GAS,
         quiet: false,
         force: true,
         output: process.env.OUTPUT_FILE,
@@ -139,15 +150,7 @@ Create a `.env` file with following environment variables
         },
       };
 
-      switch (process.env.NETWORK) {
-        case "ganache":
-        case "private":
-          options.prevmigration = " ";
-          const migrationBaseResult = await DAOstackMigration.migrateBase(options);
-          options.prevmigration = options.output;
-          break;
-      }
-      const migrationDAOResult = await DAOstackMigration.migrateDAO(options);
+      await DAOstackMigration.migrateDAO(options);
     }
 
     migrate()

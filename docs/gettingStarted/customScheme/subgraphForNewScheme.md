@@ -4,16 +4,22 @@
 
 ## Pre Work
 
-  1. Clone subgraph repo, if you have not already
+  1. Make sure you have cloned subgraph submodule, if you have not already
 
-        git clone git@github.com:daostack/subgraph.git
+        git submodule update --init
   
   2. Create a new directory with your `scheme-name` in mappings
 
         cd subgraph
         mkdir src/mappings/BuyInWithRageQuitOpt
 
-  3. Add contract abi to abis/'version' folder i.e. `abis/0.0.1-rc.24/BuyInWithRageQuitOpt.json`
+  3. Add contract abi to abis/'version' folder e.g. `abis/0.0.1-rc.27/BuyInWithRageQuitOpt.json`
+
+    If you have *jq* tool installed you can use this command to extract abi, make sure to use right version folder
+
+        cat ../build/contracts/BuyInWithRageQuitOpt.json | jq .abi >> abis/0.0.1-rc.27/BuyInWithRageQuitOpt.json
+
+    Abi file for the non-universal scheme from previous step would be as follows
 
         [
           {
@@ -139,7 +145,7 @@
 
 ## Add contract mappings
       
-We will create following files in `src/mappings/BuyInWithRageQuitOpt`:
+In order to cache the events from blockchain, we will create following files in `src/mappings/BuyInWithRageQuitOpt`:
 
 ### datasource.yaml
 
@@ -158,9 +164,9 @@ File containing the subgraph manifest `src/mappings/BuyInWithRageQuitOpt/datasou
 
 ### schema.graphql
 
-Describe what data is stored for your subgraph and how to query it via GraphQL `src/mappings/BuyInWithRageQuitOpt/schema.graphql`
+Describe what data is stored for your subgraph and how to query it via GraphQL in `src/mappings/BuyInWithRageQuitOpt/schema.graphql`
 
-NOTE: types are generated during the build step based on the entities described in schema.graphQL. Import these types while writing handlers in `mapping.ts`
+NOTE: These will be used for the generating types in `src/types/` during build step and will need to be imported while writing handlers in `mapping.ts`
     
         type Deposit @entity {
           id: ID!
@@ -179,6 +185,8 @@ NOTE: types are generated during the build step based on the entities described 
 ### mapping.ts
 
 Describe how blockchain events are processed and stored in entities defined in your schema `src/mappings/BuyInWithRageQuitOpt/mapping.ts`
+
+NOTE: `src/types/BuyInWithRageQuitOpt/BuyInWithRageQuitOpt` will be generated during the build step based on the entities described in schema.graphQL.
 
         import 'allocator/arena';
 
@@ -220,7 +228,7 @@ Describe how blockchain events are processed and stored in entities defined in y
 
 ## Integration test (optional)
 
-Add integration for the subgraph `test/integration/MyContractName.spec.ts`
+Add integration test for the subgraph `test/integration/MyContractName.spec.ts`
 
 ## Update Ops
 
@@ -247,5 +255,3 @@ OR
            "arcVersion": "<contract arc version under which the abi is located in the `abis` folder>",
            "address": "<the contract address>"
         },
-
-

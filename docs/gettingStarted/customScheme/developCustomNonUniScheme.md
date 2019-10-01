@@ -7,23 +7,16 @@
 
 ## Setup
 
-- Once you are in *Alchemy-starter*, install starter-package and create `.env` file
+- Once you are in *Alchemy-starter*, install starter-package
   
         npm i
-        DEFAULT_GAS=3.0
-        PROVIDER='http://localhost:8545'
-        PRIVATE_KEY='0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d'
 
 - Add your custom scheme contract to `contracts` folder. Refer [*BuyInWithRageQuitOpt.sol*](#example-buyinwithragequitoptsol)
 
+- Compile your contracts
+
         npm run compile
   
-- Create `build/abis/<version-folder>` for your contracts' abi, this will be useful later in migration
-
-    If you have *jq* tool installed you can use this command to extract abi
-
-        cat build/contracts/BuyInWithRageQuitOpt.json | jq .abi >> build/abis/0.0.1-rc.27/BuyInWithRageQuitOpt.json
-
 ## Example: *BuyInWithRageQuitOpt.sol*
 
     // BuyInWRageQuitOpt.sol
