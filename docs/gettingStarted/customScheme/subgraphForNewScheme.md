@@ -17,9 +17,9 @@
 
     If you have *jq* tool installed you can use this command to extract abi, make sure to use right version folder
 
-        cat ../build/contracts/BuyInWithRageQuitOpt.json | jq .abi >> abis/0.0.1-rc.27/BuyInWithRageQuitOpt.json
+        cat ../build/contracts/BuyInWithRageQuitOpt.json | jq .abi > abis/0.0.1-rc.27/BuyInWithRageQuitOpt.json
 
-    Abi file for the non-universal scheme from previous step would be as follows
+    If you ran above command you should be able to see an Abi file for the non-universal scheme as follows
 
         [
           {
@@ -168,19 +168,19 @@ Describe what data is stored for your subgraph and how to query it via GraphQL i
 
 NOTE: These will be used for the generating types in `src/types/` during build step and will need to be imported while writing handlers in `mapping.ts`
     
-        type Deposit @entity {
-          id: ID!
-          memberAddress: Bytes!
-          amount: BigInt!
-          rep: BigInt!
-        }
+    type Deposit @entity {
+      id: ID!
+      memberAddress: Bytes!
+      amount: BigInt!
+      rep: BigInt!
+    }
 
-        type Quit @entity {
-          id: ID!
-          memberAddress: Bytes!
-          amount: BigInt!
-          rep: BigInt!
-        }
+    type Quit @entity {
+      id: ID!
+      memberAddress: Bytes!
+      amount: BigInt!
+      rep: BigInt!
+    }
 
 ### mapping.ts
 
@@ -188,43 +188,43 @@ Describe how blockchain events are processed and stored in entities defined in y
 
 NOTE: `src/types/BuyInWithRageQuitOpt/BuyInWithRageQuitOpt` will be generated during the build step based on the entities described in schema.graphQL.
 
-        import 'allocator/arena';
+    import 'allocator/arena';
 
-        import {
-          store,
-        } from '@graphprotocol/graph-ts';
+    import {
+      store,
+    } from '@graphprotocol/graph-ts';
 
-        import * as domain from '../../domain';
+    import * as domain from '../../domain';
 
-        import {
-          Deposit,
-          Quit
-        } from '../../types/schema';
+    import {
+      Deposit,
+      Quit
+    } from '../../types/schema';
 
-        import { concat, equalsBytes, eventId } from '../../utils';
+    import { concat, equalsBytes, eventId } from '../../utils';
 
-        import {
-          buyIn,
-          rageQuit,
-        } from '../../types/BuyInWithRageQuitOpt/BuyInWithRageQuitOpt';
+    import {
+      buyIn,
+      rageQuit,
+    } from '../../types/BuyInWithRageQuitOpt/BuyInWithRageQuitOpt';
 
-        export function handleBuyIn(event: buyIn): void {
-          let ent = new Deposit(eventId(event));
-          ent.memberAddress = event.params._member;
-          ent.amount = event.params._amount;
-          ent.rep = event.params._rep;
+    export function handleBuyIn(event: buyIn): void {
+      let ent = new Deposit(eventId(event));
+      ent.memberAddress = event.params._member;
+      ent.amount = event.params._amount;
+      ent.rep = event.params._rep;
 
-          store.set('Deposit', ent.id, ent);
-        }
+      store.set('Deposit', ent.id, ent);
+    }
 
-        export function handleRageQuit(event: rageQuit): void {
-          let ent = new Quit(eventId(event));
-          ent.memberAddress = event.params._member;
-          ent.amount = event.params._amount;
-          ent.rep = event.params._rep;
+    export function handleRageQuit(event: rageQuit): void {
+      let ent = new Quit(eventId(event));
+      ent.memberAddress = event.params._member;
+      ent.amount = event.params._amount;
+      ent.rep = event.params._rep;
 
-          store.set('Quit', ent.id, ent);
-        }
+      store.set('Quit', ent.id, ent);
+    }
 
 ## Integration test (optional)
 
@@ -232,26 +232,41 @@ Add integration test for the subgraph `test/integration/MyContractName.spec.ts`
 
 ## Update Ops
 
-Add your contract to `ops/mappings.json`. Under the JSON object for the network your contract is located at, under the `"mappings"` JSON array, add the following.
+Add tracker for your contract in `ops/mappings.json`.
 
-  - If your contract information is in the `migration.json` file specified (default is the file under `@daostack/migration` folder, as defined in the `ops/settings.js` file)
+In the JSON object for the network your contract is located at, under the `"mappings"` JSON array, add the following.
 
+  - *arcVersion*: contract arc version
+
+  - *dao*: section label where contract is defined in migration.json file (base/ dao/ test/ organs) or `address`,
+     
+  - *mapping*: contract name as in mappings,
+
+  - *name*: contract name as appears in `abis/arcVersion` folder,
+
+  - *contractName*: contract name as appears in migration.json file,
+
+    If your contract information is in the `migration.json` file specified (default is the file under `@daostack/migration` folder, as defined in the `ops/settings.js` file)
+
+     
         {
-           "name": "<contract name as appears in `abis/arcVersion` folder>",
-           "contractName": "<contract name as appears in migration.json file>",
-           "dao": "<section label where contract is defined in migration.json file (base/ dao/ test/ organs)>",
-           "mapping": "<contract name from step 2>",
-           "arcVersion": "<contract arc version>"
+          "name": "BuyInWithRageQuitOpt",
+          "contractName": "BuyInWithRageQuitOpt",
+          "dao": "dao",
+          "mapping": "BuyInWithRageQuitOpt",
+          "arcVersion": "0.0.1-rc.27"
         },
 
 OR
 
-  - If your contract does not appear in the migration file:
+  - *address*: the contract address on network
+    
+    If your contract does not appear in the migration file add following info:
 
         {
-           "name": "<contract name as appears in `abis/arcVersion` folder>",
-           "dao": "address",
-           "mapping": "<MyContractName>",
-           "arcVersion": "<contract arc version under which the abi is located in the `abis` folder>",
-           "address": "<the contract address>"
+          "name": "BuyInWithRageQuitOpt",
+          "address": "0x4a35d1434D34Ac7842381362924E6399ca63Da5A"
+          "dao": "address",
+          "mapping": "BuyInWithRageQuitOpt",
+          "arcVersion": "0.0.1-rc.27",
         },

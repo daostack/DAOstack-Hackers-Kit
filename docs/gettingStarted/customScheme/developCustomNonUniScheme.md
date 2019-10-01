@@ -1,14 +1,13 @@
   *Tutorial for adding non-universal scheme* [skip](../developCustomUniScheme)
 
-  Here is a simple non-universal scheme that allow People to Buy reputation by donating money to the DAO and if their goals no more align with the DAO, have the ability to Quit at some later time by giving up reputation
-
 ## Design Principle
   TODO: Need Oren's input here
 
 ## Setup
 
-- Once you are in *Alchemy-starter*, install starter-package
+- We will use *Alchemy-starter* for this tutorial, enter the directory and install starter-package
   
+        cd alchemy-starter/
         npm i
 
 - Add your custom scheme contract to `contracts` folder. Refer [*BuyInWithRageQuitOpt.sol*](#example-buyinwithragequitoptsol)
@@ -18,6 +17,8 @@
         npm run compile
   
 ## Example: *BuyInWithRageQuitOpt.sol*
+
+Here is a simple non-universal scheme that allow People to Buy reputation by donating money to the DAO and if their goals no more align with the DAO, have the ability to Quit at some later time by giving up reputation
 
     // BuyInWRageQuitOpt.sol
 
