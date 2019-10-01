@@ -34,3 +34,29 @@ If you have already cloned the *DAOstack Hackers kit repo*, then make sure you h
     git submodule update --init
 
 Depending on your requirements all or some parts of the tutorial might be useful for you.
+
+### Launch dev mode
+
+        cd alchemy-starter
+        npm run launch:docker 
+
+Update scheme contract and deploy new DAO
+        
+        npm run migrate
+
+Update subgraph and deploy
+
+        npm run deploy:graph
+
+Update client and build
+
+        npm run build:client
+        npm run link:client
+
+To develop on the client
+
+        npm run client:watch
+
+Update alchemy and launch it
+
+        npm run start:alchemy
