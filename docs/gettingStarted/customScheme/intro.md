@@ -35,28 +35,45 @@ If you have already cloned the *DAOstack Hackers kit repo*, then make sure you h
 
 Depending on your requirements all or some parts of the tutorial might be useful for you.
 
-### Launch dev mode
+### Pre Work
 
-        cd alchemy-starter
-        npm run launch:docker 
+    cd alchemy-starter
+    npm i
+    npm run launch:docker 
 
-Update scheme contract and deploy new DAO
+### Add scheme contract and deploy
+
+Follow tutorial for [Universal Scheme](../developCustomUniScheme/) or [Non-Universal Scheme](../developCustomNonUniScheme/)
+  
+Deploy with [New DAO](../registerToNewDAO)
         
-        npm run migrate
+    npm run migrate
 
-Update subgraph and deploy
+OR
 
-        npm run deploy:graph
+Deploy and register to [Existing DAO](../registerToExistingDAO/)
 
-Update client and build
+### Update subgraph and deploy
 
-        npm run build:client
-        npm run link:client
+Make changes to subgraph refer [Update subgraph](../subgraphForNewScheme/) tutorial and deploy graph
 
-To develop on the client
+    npm run deploy:graph
 
-        npm run client:watch
+### Update client and build
 
-Update alchemy and launch it
+Update client to interact with your scheme, refer [Update client](../clientForNewScheme/) tutorial
 
-        npm run start:alchemy
+    npm run build:client
+    npm run link:client
+
+To develop on the client in tandem with alchemy, start watcher
+
+    npm run client:watch
+
+### Update alchemy
+
+Add front-end support for you scheme, refer to [Update alchemy](../alchemyIntegrationForNewScheme/) tutorial for some basics
+
+Launch alchemy in dev mode
+
+    npm run start:alchemy
