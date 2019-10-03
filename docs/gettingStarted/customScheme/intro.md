@@ -68,7 +68,7 @@ Update client to interact with your scheme, refer [Update client](../clientForNe
 
 To develop on the client in tandem with alchemy, start watcher
 
-    npm run client:watch
+    npm run watch:client
 
 ### Update alchemy
 
