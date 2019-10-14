@@ -11,6 +11,12 @@ You might want to update client library while working on Alchemy integration if 
     -Class: Scheme `client/src/schemes.ts`
     - *ISchemeStaticState*:
 
+## Integration Tests
+  1. Create test spec
+  2. Start test watcher while you update the client
+
+        npm run test:watch:client -- test/scheme-buyInWithRageQuitOpt.spec.ts
+
 ## Build and Link new client
     
 From main alchemy starter folder

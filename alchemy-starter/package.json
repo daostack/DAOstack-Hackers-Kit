@@ -15,6 +15,7 @@
     "migrate": "node ops/deployDao.js",
     "start:alchemy": "cd alchemy && npm run start",
     "stop": "cd alchemy && docker-compose down",
+    "test:watch:client": "cd client && npm run test:watch -- ",
     "watch:client": "cd client && npm run build:watch"
   },
   "keywords": [
