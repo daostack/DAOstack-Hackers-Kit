@@ -22,6 +22,10 @@ Use this template if you want to develop on Alchemy Interface while also editing
 
         npm run launch:docker
 
+- Stop Alchemy-server and Graph-node
+
+        npm run stop:docker
+
 ## (Optional) Deploy DAO
     
 - Edit `data/testDaoSpec.json` with specifications for your DAO
