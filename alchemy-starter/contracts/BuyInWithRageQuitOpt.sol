@@ -10,8 +10,8 @@ import "@daostack/arc/contracts/controller/ControllerInterface.sol";
 contract BuyInWithRageQuitOpt{
   using SafeMath for uint256;
 
-  event buyIn(address indexed _member, uint256 _amount, uint256 _rep);
-  event rageQuit(address indexed _member, uint256 _amount, uint256 _rep);
+  event buyIn(address indexed _avatar, address indexed _member, uint256 _amount, uint256 _rep);
+  event rageQuit(address indexed _avatar, address indexed _member, uint256 _amount, uint256 _rep);
 
   Avatar public avatar;
   Reputation public reputation;
@@ -31,16 +31,16 @@ contract BuyInWithRageQuitOpt{
     // Transfer buy in amount to DAO
     require(address(avatar).send(msg.value));
 
-    // Mint Equivallent Rep to the buyer
+    // Mint Equivalent Rep to the buyer
     require(ControllerInterface(avatar.owner()).mintReputation(msg.value, msg.sender, address(avatar)), "mint reputation should succeed");
 
-    emit buyIn(msg.sender, msg.value, msg.value);
+    emit buyIn(address(avatar), msg.sender, msg.value, msg.value);
   }
 
   function quit() public returns(uint256){
     // Get current reputation of the quitter
     uint256 rep = reputation.balanceOfAt(msg.sender, block.number);
-    
+
     require( rep > 0, "Only members can quit");
 
 
@@ -63,8 +63,7 @@ contract BuyInWithRageQuitOpt{
       avatar)
     );
 
-    emit rageQuit(msg.sender, amount, rep);
+    emit rageQuit(address(avatar), msg.sender, amount, rep);
     return rep;
   }
 }
-
