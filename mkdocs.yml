@@ -34,7 +34,7 @@ nav:
   - Subgraph: 'stack/subgraph/subgraphIntro.md'
   - DApps/Alchemy: 'stack/alchemy/alchemyIntro.md'
 - Migration: 'migration.md'
-- Getting Started:
+- Tutorials:
     - Add features to Alchemy interface: 'gettingStarted/setupAlchemyDevMode.md'
     - Setup Generic Scheme for a DAO: 'gettingStarted/setupGenericScheme.md'
     - Add custom scheme to the DAO:

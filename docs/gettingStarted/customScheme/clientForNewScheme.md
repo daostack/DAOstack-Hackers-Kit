@@ -10,6 +10,12 @@ Make sure you have cloned client submodule, if you have not already
   
 ## Update Client
 
+In order to extend client support for the new scheme you will have to add the following:
+
+  - **New Scheme Class**
+  - **New Entity Class**
+  - **Integration Test** ( Merging code without testing is a risky business 😁)
+
 ### Add new scheme class
 
 Create file `client/src/schemes/BuyInWithRageQuitOpt.ts` that exports the new scheme class to enable client to interact with the scheme contract
@@ -107,7 +113,7 @@ Enable client library to interact with the Entities added to subgraph during pre
 
 Please refer to example [Deposit Entity class](#example-entity-class)
 
-### Example Entity Class
+#### Example Entity Class
 
     import gql from 'graphql-tag'
     import { Observable } from 'rxjs'
