@@ -1,3 +1,5 @@
+  Following is the guide to start developing with Alchemy if you are using already supported schemes by `client.js` and `subgraph`. If you have created your own `scheme contracts` for your DAO, please refer to [Add Custom Scheme support tutorial](../customScheme/intro/)
+
 ## Prerequisites
 
   - docker >= 18.06.1-c
@@ -13,8 +15,6 @@
 
   Interaction of Alchemy with rest of the stack
   ![Interaction](../images/daostack-interaction.png)
-
-  Following is the guide to start developing with alchemy if you are using already supported schemes by `client.js` and `subgraph`. If you have created your own `scheme contracts` for your DAO, please refer to [Add Custom Scheme support to Alchemy](../customSchemeSupportAlchemy)
 
 ## Boilerplate
 
@@ -60,22 +60,22 @@
 
   Choose from one of the following setup for testnet to start playing/integrating features to Alchemy:
   
-  - [Use daostack rinkeby subgraph](#use-daostack-rinkeby-subgraph)
+  - [Use DAOstack rinkeby subgraph](#use-daostack-rinkeby-subgraph)
   - [Run graph-node locally](#run-graph-node-locally)
 
   
   NOTE: 
   
-  1. Alchemy only shows `daos` that are registered via `DAOregistry` and tracked by daostack subgraph for the respective network. You can send the `.json` of your DAO details to us (contact Nave Rachman, telegram: @NaveRachman) and we will help you.
+  1. Alchemy only shows `daos` that are registered via `DAOregistry` and tracked by DAOstack subgraph for the respective network. You can send the `.json` of your DAO details to us (contact Nave Rachman, telegram: @NaveRachman) and we will help you.
 
   2. Since above process of registering DAO takes up to 24hrs in following section we provide way to hack it during development
 
-### Use daostack rinkeby subgraph
+### Use DAOstack rinkeby subgraph
 
-  Choose this if,
+  Choose this when,
 
   - using rinkeby testnet
-  - working with existing whitelisted DAOs on daostack subgraph
+  - working with existing whitelisted DAOs on DAOstack subgraph
 
   Make following changes:
 
@@ -83,31 +83,16 @@
 
      - Change `NODE_ENV` from `development` to `staging`
 
-  2. Run alchemy
+  2. Run Alchemy
         
           npm run start-staging
 
 ### Run graph-node locally
 
-  Choose this if,
+  Choose this when,
 
-  - using any of the already supported schemes by client & alchemy
-  - playing with DAO you just deployed to any of the testnet and not yet whitelisted by daostack and registered with DAOregistry
-
-  NOTE: 
-   
-   1. You can also deploy subgraph to graph explorer. `Step 1 & 2` will be replaced by [deploy to graph-explorer](https://github.com/daostack/subgraph#deploy-subgraph)
-   and `Step 4` will be updated to corresponding url
-
-   2. Alchemy only shows `daos` that are registered via `DAOregistry`. In order to bypass this during development, make changes in `src/components/Daos/DaosPage.tsx`:
-      
-        // original
-
-        arc.daos({ where: { name_not_contains: "Genesis Alpha", register: "registered" }, orderBy: "name", orderDirection: "asc"})
-
-        // changed to
-
-        arc.daos({ where: { name_not_contains: "Genesis Alpha" }, orderBy: "name", orderDirection: "asc"})
+  - working with any of the already supported Arc schemes by client & Alchemy
+  - playing with the DAO that is not yet tracked by DAOstack subgraph and registered with DAOregistry
 
   Make following changes:
 
@@ -149,14 +134,3 @@
       
   6. Build and run
           docker-compose up -d
-
-### Run graph-node locally with new/not yet supported schemes
-
-  Choose this if,
-
-  - using custom scheme or any arc scheme which is not yet tracked by daostack subgraph
-  - adding subgraph/client support for new contract or customizing current client/subgraph
-  - playing with DAO you just deployed to any of the testnet and not yet whitelisted by daostack
-  - using any testnet
-  
-  Refer to [Add custom scheme to Alchemy](../setupCustomSchemeAlchemy)

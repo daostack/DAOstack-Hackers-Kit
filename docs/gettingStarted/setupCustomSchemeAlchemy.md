@@ -2,16 +2,16 @@ Schemes are the actions a DAOstack DAO can take. Once you have created your sche
 
 ### Run  graph-node locally with new/not yet supported schemes
 
-  Choose this if,
+  Choose this when,
 
-  - using custom scheme or any arc scheme which is not yet tracked by daostack subgraph
+  - using custom scheme or any Arc scheme which is not yet tracked by daostack subgraph
   - adding subgraph/client support for new contract or customizing current client/subgraph
   - playing with DAO you just deployed to any of the testnet and not yet whitelisted by daostack
   - using any testnet
 
 #### Add new contract tracker in subgraph
 
-  If you created a custom scheme or used any of the new arc scheme that are not yet tracked by subgraph, then you will have to make changes to DAOstack caching layer. 
+  If you created a custom scheme or used any of the new Arc scheme that are not yet tracked by subgraph, then you will have to make changes to DAOstack caching layer. 
 
   NOTE: You can skip this step if you do not wish to take advantage of caching layer for faster access and would rather read data directly from blockchain. But would recommend not to.
 
