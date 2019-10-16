@@ -7,10 +7,10 @@ import {
 } from './util';
 
 const ActionMock = require('@daostack/arc/build/contracts/ActionMock.json');
-const GenericScheme = require('@daostack/arc/build/contracts/GenericScheme.json');
+const GenericScheme = require('@daostack/arc/build/contracts/UGenericScheme.json');
 const GenesisProtocol = require('@daostack/arc/build/contracts/GenesisProtocol.json');
 
-describe('Generic Scheme', () => {
+describe('UGeneric Scheme', () => {
   let web3;
   let addresses;
   let opts;
@@ -50,7 +50,6 @@ describe('Generic Scheme', () => {
       const proposalId = await prop.call();
       const { blockNumber } = await prop.send();
       const { timestamp } = await web3.eth.getBlock(blockNumber);
-
       return { proposalId, timestamp };
     }
 
@@ -87,7 +86,7 @@ describe('Generic Scheme', () => {
             returnValue
           }
           scheme {
-            genericSchemeParams {
+            uGenericSchemeParams {
               contractToCall
             }
           }
@@ -116,7 +115,7 @@ describe('Generic Scheme', () => {
         returnValue: null,
       },
       scheme: {
-        genericSchemeParams: {
+        uGenericSchemeParams: {
           contractToCall: actionMock.options.address.toLowerCase(),
         },
       },

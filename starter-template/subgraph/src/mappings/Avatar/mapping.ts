@@ -13,7 +13,6 @@ function handleAvatarBalance(
   value: BigInt,
   received: boolean,
 ): void {
-
   let avatar = store.get('AvatarContract', address.toHex()) as AvatarContract;
   if (avatar == null) {
      return;
@@ -31,9 +30,11 @@ function handleAvatarBalance(
 export function handleSendEth(event: SendEther): void {
   handleAvatarBalance(event.address, event.params._amountInWei, false);
 }
+
 export function handleReceiveEth(event: ReceiveEther): void {
   handleAvatarBalance(event.address, event.params._value, true);
 }
+
 export function handleOwnershipTransferred(event: OwnershipTransferred): void {
   let avatar = AvatarContract.load(event.address.toHex());
   if (avatar == null) {

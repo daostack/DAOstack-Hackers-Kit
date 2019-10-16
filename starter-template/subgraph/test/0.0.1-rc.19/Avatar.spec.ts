@@ -20,14 +20,14 @@ describe('Avatar', () => {
     const balance = await web3.eth.getBalance(addresses.Avatar.toLowerCase());
     await web3.eth.sendTransaction({
       from: accounts[0].address,
-      to: avatar.options.address,
+      to: addresses.Avatar,
       value: 1,
       gas: 2000000,
       data: '0xABCD',
     });
 
-    const { avatarContracts } = await sendQuery(`{
-      avatarContracts {
+    const { avatarContract } = await sendQuery(`{
+      avatarContract(id: "${addresses.Avatar.toLowerCase()}") {
         id
         address
         name
@@ -36,15 +36,17 @@ describe('Avatar', () => {
         balance
         owner
       }
-    }`, 3000);
+    }`, 5000);
 
-    expect(avatarContracts).toContainEqual({
+    const newBalance = Number(balance) + 1;
+
+    expect(avatarContract).toEqual({
       id: addresses.Avatar.toLowerCase(),
       address: addresses.Avatar.toLowerCase(),
       name: orgName,
       nativeToken: addresses.NativeToken.toLowerCase(),
       nativeReputation: addresses.NativeReputation.toLowerCase(),
-      balance: `${Number(balance) + 1}`,
+      balance: `${newBalance}`,
       owner: addresses.Controller.toLowerCase(),
     });
   }, 20000);

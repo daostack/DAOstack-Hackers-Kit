@@ -22,6 +22,9 @@ type DAO @entity {
 	register: String!
 	schemes: [ControllerScheme!] @derivedFrom(field: "dao")
 	gpQueues: [GPQueue!] @derivedFrom(field: "dao")
+	numberOfQueuedProposals: BigInt!
+	numberOfPreBoostedProposals: BigInt!
+	numberOfBoostedProposals: BigInt!
 }
 
 type GPQueue @entity {
@@ -70,6 +73,7 @@ type Proposal @entity {
 	title: String
 	description: String
 	url: String
+	fulltext: [String!]
 
 	gpRewards: [GPReward!] @derivedFrom(field: "proposal")
 	accountsWithUnclaimedRewards: [Bytes!]
@@ -96,7 +100,7 @@ type Proposal @entity {
 	genericScheme : GenericSchemeProposal
 
 	# SchemeRegistrar proposal
-  schemeRegistrar : SchemeRegistrarProposal
+  	schemeRegistrar : SchemeRegistrarProposal
 
 	genesisProtocolParams : GenesisProtocolParam!
 
@@ -172,6 +176,7 @@ type FirstRegisterSchemeFlag @entity {
 type ContractInfo @entity {
 	id: ID!
 	name: String!
+	alias: String!
 	version: String!
 	address: Bytes!
 }

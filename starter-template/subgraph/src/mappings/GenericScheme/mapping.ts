@@ -11,14 +11,15 @@ import * as domain from '../../domain';
 
 // Import entity types generated from the GraphQL schema
 import {
+  GenericSchemeParam,
   GenericSchemeProposal,
 } from '../../types/schema';
 
 function insertNewProposal(event: NewCallProposal): void {
-  let gs = GenericScheme.bind(event.address);
+  let genericSchemeParams = GenericSchemeParam.load(event.address.toHex());
   let ent = new GenericSchemeProposal(event.params._proposalId.toHex());
   ent.dao = event.params._avatar.toHex();
-  ent.contractToCall = gs.getContractToCall(event.params._avatar);
+  ent.contractToCall = genericSchemeParams.contractToCall;
   ent.callData = event.params._callData;
   ent.value = event.params._value;
   ent.executed = false;
@@ -29,7 +30,12 @@ function insertNewProposal(event: NewCallProposal): void {
 export function handleNewCallProposal(
   event: NewCallProposal,
 ): void {
-  domain.handleNewCallProposal(event);
+  domain.handleNewCallProposal(
+    event.params._avatar,
+    event.params._proposalId,
+    event.block.timestamp,
+    event.params._descriptionHash,
+    event.address);
 
   insertNewProposal(event);
 }

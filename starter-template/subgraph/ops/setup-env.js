@@ -48,7 +48,13 @@ async function setupenv (opts={}) {
 }
 
 if (require.main === module) {
-  setupenv(JSON.parse(process.argv[2])).catch((err) => { console.log(err); process.exit(1) })
+  if (process.argv[2]) {
+    setupenv(JSON.parse(process.argv[2])).catch((err) => { console.log(err); process.exit(1) })
+  }
+  else {
+    setupenv().catch((err) => { console.log(err); process.exit(1) })
+  }
+
 } else {
   module.exports = {
     setupEnv: setupenv

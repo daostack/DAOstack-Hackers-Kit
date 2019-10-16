@@ -36,7 +36,9 @@ After downloading the project and docker:
   This would build the docker images and start the docker container for `ganache`, `starter-app` with webpack server, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
 
 - Wait for the logs screen to say *Starting JSON-RPC admin server at: ....*, then you can either exit the logs or in a different terminal window type
+
   ```
+  npm run migrate
   npm run logs:ganache
   ```
 

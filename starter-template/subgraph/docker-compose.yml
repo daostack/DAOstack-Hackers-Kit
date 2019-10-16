@@ -1,8 +1,7 @@
 version: '3'
 services:
   graph-node:
-    image: >-
-      graphprotocol/graph-node@sha256:688f00bd12d619c3cc8c8c0b11aee47d61b5f5e36d62ad002e5ce1e7f3c116f2
+    image: 'graphprotocol/graph-node:v0.15.1'
     ports:
       - '8000:8000'
       - '8001:8001'
@@ -20,6 +19,7 @@ services:
       ethereum: 'private:http://ganache:8545'
       GRAPH_IPFS_TIMEOUT: '2'
       GRAPH_MAX_IPFS_FILE_BYTES: '120000'
+      GRAPH_GRAPHQL_MAX_FIRST: '1000'
   ipfs:
     build: docker/ipfs
     ports:
@@ -31,6 +31,6 @@ services:
     environment:
       POSTGRES_PASSWORD: letmein
   ganache:
-    image: 'daostack/migration:0.0.1-rc.23-v2'
+    image: 'daostack/migration:0.0.1-rc.24-v3'
     ports:
       - '8545:8545'
