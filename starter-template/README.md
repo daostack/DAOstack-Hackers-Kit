@@ -24,7 +24,7 @@ The structure is basically as follows:
 ### Using docker
 After downloading the project and docker:
 
-- Update the `.env` file with your `SEED_PHRASE` or `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `starter-template` directory. Use `data/example.env` for reference
+- Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `starter-template` directory. Use `data/example.env` for reference
 - Update the `.env` file in `starter-template/subgraph` directory. Use `subgraph/example.env` or `subgraph/readme.md` for reference
 - Enter the project folder from the terminal (i.e. starter-template) and type the following:
 
@@ -76,7 +76,7 @@ _To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com
 
 ### Deploy and use on test network:
 
-- Update the `.env` file with your `SEED_PHRASE` or `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `starter-template` directory. Use `data/example.env` for reference
+- Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `starter-template` directory. Use `data/example.env` for reference
 - Update the `.env` file in `starter-template/subgraph` directory. Use `subgraph/example.env` or `subgraph/readme.md` for reference
 - Open terminal at the project folder and run the following commands:
 
