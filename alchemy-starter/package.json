@@ -8,12 +8,15 @@
   },
   "scripts": {
     "build:client": "cd client && npm i && npm run build && npm link",
+    "compile": "truffle compile",
     "deploy:graph": "bash ops/deploy-graph.sh",
     "launch:docker": "cd alchemy && docker-compose up -d graph-node alchemy-server",
     "stop:docker": "cd alchemy && docker-compose stop",
     "link:client": "cd alchemy && npm link @daostack/client",
     "migrate": "node ops/deployDao.js",
     "start:alchemy": "cd alchemy && npm run start",
+    "stop": "cd alchemy && docker-compose down",
+    "test:watch:client": "cd client && npm run test:watch -- ",
     "watch:client": "cd client && npm run build:watch"
   },
   "keywords": [
@@ -25,7 +28,11 @@
   "author": "YOUR_NAME",
   "license": "YOUR_LICENSE",
   "dependencies": {
+    "@daostack/arc": "0.0.1-rc.27",
+    "@daostack/infra": "^0.0.1-rc.14",
     "@daostack/migration": "0.0.1-rc.27-v0",
-    "dotenv": "^8.0.0"
+    "dotenv": "^8.0.0",
+    "openzeppelin-solidity": "^2.3.0",
+    "truffle": "^5.0.36"
   }
 }

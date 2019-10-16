@@ -283,12 +283,17 @@
         ]
       },
       "0.0.1-rc.27": {
-        "name": "DevTest",
+        "name": "CommunityDAO",
         "Avatar": "0x1769d4176b76ec87F70e19E95aC9C7f3AfdCb993",
         "DAOToken": "0x1CCc72f4ba43b7Fcd4CA06C8e0966B8408F15a1e",
         "Reputation": "0x058CF38313b19a42B72F7ACA7e53E578d6166694",
         "Controller": "0x2C8AcFd72674D92EaF330E50De20682B6359ACC8",
-        "Schemes": []
+        "Schemes": [
+          {
+            "name": "BuyInWithRageQuitOpt",
+            "address": "0x6D065A54f0a14cB03b949A146dBb58C14a0afc48"
+          }
+        ]
       }
     },
     "test": {
