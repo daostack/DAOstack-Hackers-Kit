@@ -15,6 +15,7 @@ In order to extend client support for the new scheme you will have to add the fo
   - **New Scheme Class**
   - **New Entity Class**
   - **Integration Test** ( Merging code without testing is a risky business 😁)
+  - Some case dependent updates
 
 ### Add new scheme class
 
@@ -255,15 +256,15 @@ Please refer to example [Deposit Entity class](#example-entity-class)
        }
     }
 
-## Integration Tests
+### Integration Tests
   1. Add relevant integration test for the new scheme, `client/test/scheme-buyInWithRageQuitOpt.spec.ts`
   2. Start test watcher while you test and update the client
 
         npm run test:watch:client -- test/scheme-buyInWithRageQuitOpt.spec.ts
 
-Refer to example [Test BuyInWithRageQuitOpt Scheme](#test-buyInWithRageQuitOpt-scheme)
+Refer to example [Test BuyInWithRageQuitOpt Scheme](#example-test-buyinwithragequitopt-scheme)
 
-### Test BuyInWithRageQuitOpt Scheme
+#### Example Test BuyInWithRageQuitOpt Scheme
 
 Following is an example integration test file to test the sample non-universal scheme we developed in this tutorial
 
@@ -372,7 +373,7 @@ Following is an example integration test file to test the sample non-universal s
         // add more tests
     })
 
-## Extra Interoperability updates (may differ per use case)
+### Extra Interoperability updates (may differ per use case)
 
 Apart from the above standard updates you might need to update some other files depending on the scheme you are adding.
 
