@@ -68,7 +68,7 @@
   
   1. Alchemy only shows `daos` that are registered via `DAOregistry` and tracked by DAOstack subgraph for the respective network. You can send the `.json` of your DAO details to us (contact Nave Rachman, telegram: @NaveRachman) and we will help you.
 
-  2. Since above process of registering DAO takes up to 24hrs in following section we provide way to hack it during development
+  2. Since above process of registering DAO takes up to 24hrs in following section we provide way to hack it during development and start your own graph-node
 
 ### Use DAOstack rinkeby subgraph
 
@@ -77,14 +77,12 @@
   - using rinkeby testnet
   - working with existing whitelisted DAOs on DAOstack subgraph
 
-  Make following changes:
-
-  1. Update `webpack.docker.config.js`
-
-     - Change `NODE_ENV` from `development` to `staging`
-
-  2. Run Alchemy
+  1. Run alchemy-server
         
+          docker-compose up -d alchemy-server
+
+  2. Start alchemy in staging mode
+
           npm run start-staging
 
 ### Run graph-node locally
@@ -92,7 +90,7 @@
   Choose this when,
 
   - working with any of the already supported Arc schemes by client & Alchemy
-  - playing with the DAO that is not yet tracked by DAOstack subgraph and registered with DAOregistry
+  - playing with the DAO that is not yet tracked by DAOstack subgraph 
 
   Make following changes:
 
@@ -117,20 +115,18 @@
 
         npm run deploy '{  "migrationFile" : "../migration.json" }'
         
-  3. Go back to directory `alchemy`
-        
-  4. Update `docker-compose.yml`
+  3. Go back to `alchemy` and Update `webpack.dev.config.js`, add following process variables
 
-        - remove link to `graph-node` in service `alchemy`
-        - remove services `graph-node`, `ipfs`, `postgres4graphnode` and `ganache`
-
-  5. Update `webpack.docker.config.js`, add following process variables
-
-        'ARC_GRAPHQLHTTPPROVIDER': JSON.stringify('http://127.0.0.1:8000/subgraphs/name/daostack'),
-        'ARC_GRAPHQLWSPROVIDER': JSON.stringify('ws://127.0.0.1:8001/subgraphs/name/daostack'),
-        'ARC_IPFSPROVIDER': JSON.stringify('localhost')
+        'ARC_GRAPHQLHTTPPROVIDER': 'http://127.0.0.1:8000/subgraphs/name/daostack',
+        'ARC_GRAPHQLWSPROVIDER': 'ws://127.0.0.1:8001/subgraphs/name/daostack',
+        'ARC_IPFSPROVIDER': 'localhost'
 
       NOTE: If you changed name of `subgraph` while setting up `.env` in `step 1` then change it in this step accordingly
       
-  6. Build and run
-          docker-compose up -d
+  4. Run alchemy-server
+        
+          docker-compose up -d alchemy-server
+
+  5. Start alchemy in staging mode
+
+          npm run start-staging
