@@ -25,17 +25,17 @@
 ## Setup Alchemy with Ganache (mode: development)
 
     docker-compose build
-    docker-compose up -d
+    docker-compose up -d graph-node alchemy-server
+    npm run start
 
   The above commands will build docker images and start the following services locally:
 
-  - **alchemy** => react frontend with webpack-dev-server
   - **alchemy-server** => for storing proposal information for quick access
   - **graph-node** => for handling events from blockchain as described in subgraph
   - **ganache** => dev blockchain with some test DAOs deployed and loaded with GEN and Eth
   - **subgraph-ipfs** => subgraph mappings on ipfs node
   - **subgraph-postgres** => db for caching events based on subgraph and later fetched via GraphQL
-  - **redis**
+  - **redis** => used by alchemy-server for sessions
   - **alchemy-postgres**
 
   Import test accounts that are setup with GEN and ETH to your metamask. You can get the account details by:
@@ -79,19 +79,13 @@
 
   Make following changes:
 
-  1. Update `docker-compose.yml`
-
-     - remove link to `graph-node` in service `alchemy`
-     - remove services `graph-node`, `ipfs`, `postgres4graphnode` and `ganache`
-
-  2. Update `webpack.docker.config.js`
+  1. Update `webpack.docker.config.js`
 
      - Change `NODE_ENV` from `development` to `staging`
 
-  3. Build and run
+  2. Run alchemy
         
-          docker-compose build
-          docker-compose up -d
+          npm run start-staging
 
 ### Run graph-node locally
 
