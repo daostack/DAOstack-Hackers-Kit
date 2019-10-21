@@ -465,11 +465,44 @@
     Proposal Creation Interface
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-known-schemes" class="md-nav__link">
+    Update Known Schemes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#proposal-display-interface" class="md-nav__link">
     Proposal Display Interface
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-proposal-summary-render" class="md-nav__link">
+    Update Proposal Summary render
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-tests" class="md-nav__link">
+    Integration tests
   </a>
   
 </li>
@@ -800,11 +833,44 @@
     Proposal Creation Interface
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-known-schemes" class="md-nav__link">
+    Update Known Schemes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#proposal-display-interface" class="md-nav__link">
     Proposal Display Interface
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-proposal-summary-render" class="md-nav__link">
+    Update Proposal Summary render
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-tests" class="md-nav__link">
+    Integration tests
   </a>
   
 </li>
@@ -841,9 +907,12 @@
                 
                 
                 <h1 id="generic-schemes">Generic Schemes<a class="headerlink" href="#generic-schemes" title="Permanent link">&para;</a></h1>
-<p>In DAOstack, "schemes" are smart contracts that enable various DAO actions, and "generic schemes" are schemes that enable nearly any kind of action possible for an Ethereum address. <a href="https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol">GenericScheme</a> and <a href="https://github.com/daostack/arc/blob/master/contracts/universalSchemes/UGenericScheme.sol">UGenericScheme</a> are both types of generic scheme. DAOs can use these schemes: 
- 1) to enable truly generic DAO actions (letting proposers choose which contracts to interact with and how), or 
- 2) to create specific, custom integrations for their DAO (actions that make particular calls to particular smart contracts that serve a particular purpose for the DAO).</p>
+<p>In DAOstack, "schemes" are smart contracts that enable various DAO actions, and "generic schemes" are schemes that enable nearly any kind of action possible for an Ethereum address.</p>
+<p><a href="https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol">GenericScheme</a> and <a href="https://github.com/daostack/arc/blob/master/contracts/universalSchemes/UGenericScheme.sol">UGenericScheme</a> are both types of generic scheme. DAOs can use these schemes:</p>
+<ol>
+<li>to enable truly generic DAO actions (letting proposers choose which contracts to interact with and how), or</li>
+<li>to create specific, custom integrations for their DAO (actions that make particular calls to particular smart contracts that serve a particular purpose for the DAO).</li>
+</ol>
 <h2 id="when-to-use-genericscheme-and-when-to-use-ugenericscheme">When to use GenericScheme and when to use UGenericScheme<a class="headerlink" href="#when-to-use-genericscheme-and-when-to-use-ugenericscheme" title="Permanent link">&para;</a></h2>
 <p><strong>UGenericScheme</strong>: If a DAO only needs a single generic scheme and/or doesn't need to change the scheme's on-chain code at all, then the UGenericScheme is a good choice, since it is already deployed and can be used by any number of DAOs (the "U" stands for "universal").</p>
 <p><strong>GenericScheme</strong>: If a DAO wants to make multiple smart contracts available, with different labels and proposal types in the UI, then each contract should use its own GenericScheme, customized if required for the DAO's purpose.</p>
@@ -855,7 +924,7 @@
 <p>During the DAO's creation, while deploying the DAO's contracts</p>
 </li>
 <li>
-<p>Through a proposal that uses a scheme with permission to register schemes to the DAO. </p>
+<p>Through a proposal that uses a scheme with permission to register schemes to the DAO.</p>
 </li>
 </ul>
 <p>NOTE: <em>In case of the Genesis DAO, you can propose new schemes to be registered using the aptly named Scheme Registrar scheme.</em></p>
@@ -1156,7 +1225,7 @@
 
 </li>
 <li>
-<p>If the scheme is for an already existing DAO, then edit <code>&lt;existing-DAO&gt;.json</code> for the correct network. 
+<p>If the scheme is for an already existing DAO, then edit <code>&lt;existing-DAO&gt;.json</code> for the correct network.
     Add to the schemes section, eg.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1243,9 +1312,41 @@
 </pre></div>
 </td></tr></table>
 
+<h4 id="update-known-schemes">Update Known Schemes<a class="headerlink" href="#update-known-schemes" title="Permanent link">&para;</a></h4>
+<p>Once you have customised the proposal create interface update the <a href="https://github.com/daostack/alchemy/blob/dev/src/genericSchemeRegistry/index.ts">genericSchemeRegistry</a></p>
+<p>For eg. In case of StandardBounty scheme we will add:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">standardBountiesInfo</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="ss">&quot;./schemes/StandardBounties.json&quot;</span><span class="p">)</span>
+
+<span class="n">const</span> <span class="n">KNOWNSCHEMES</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">...,</span>
+  <span class="n">standardBountiesInfo</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table>
+
 <h3 id="proposal-display-interface">Proposal Display Interface<a class="headerlink" href="#proposal-display-interface" title="Permanent link">&para;</a></h3>
-<p>You will also have to customize the description summary for your scheme to explain what it does.</p>
+<p>You will also have to customise the description summary for your scheme to explain what it does.</p>
 <p>Refer to the <a href="https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/ProposalSummaryDutchX.tsx">ProposalSummaryDutchX</a> and add your own proposal summary file, say <code>ProposalSummaryBountiesNetwork.tsx</code>, <a href="https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/">here</a>.</p>
+<h4 id="update-proposal-summary-render">Update Proposal Summary render<a class="headerlink" href="#update-proposal-summary-render" title="Permanent link">&para;</a></h4>
+<p>Once you have created the proposal summary make sure that it gets rendered by updating <a href="https://github.com/daostack/alchemy/blob/d9557ca98ab18f1eb41e2d6d5159370ebfa2d9db/src/components/Proposal/ProposalSummary/ProposalSummaryKnownGenericScheme.tsx#L27">ProposalSummaryKnownGenericScheme.tsx</a></p>
+<p>For eg. In case of StandardBounty scheme we will add:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">ProposalSummaryStandardBounties</span> <span class="nn">from</span> <span class="s2">&quot;./ProposalSummaryStandardBounties&quot;</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">genericSchemeInfo</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">name</span> <span class="o">===</span> <span class="s2">&quot;StandardBounties&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="o">&lt;</span><span class="n">ProposalSummaryStandardBounties</span> <span class="p">{</span><span class="o">...</span><span class="n">this</span><span class="o">.</span><span class="n">props</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">;</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="integration-tests">Integration tests<a class="headerlink" href="#integration-tests" title="Permanent link">&para;</a></h3>
+<p>Please add the relevant integration test for your scheme. You can refer to <a href="https://github.com/daostack/alchemy/blob/dev/test/integration/proposal-genericSchemeDutchx.ts">genericSchemeDutchx</a> tests.</p>
 <h3 id="optional-change-the-scheme-ui">(Optional) Change the Scheme UI<a class="headerlink" href="#optional-change-the-scheme-ui" title="Permanent link">&para;</a></h3>
 <p>Right now, Alchemy’s UI is only focused on currently open proposals (it does not show past proposals). But based on the scheme you are adding, there might be some different UI features/tabs that are required. For a bounties scheme, for example, it would be helpful to have a new tab that shows open bounties (from proposals that have already been passed).</p>
                 
