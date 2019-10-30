@@ -15,7 +15,7 @@ theme:
     primary: 'black'
     accent: 'pink'
   logo: 'images/daostack-logoW.svg'
-      
+
 extra:
   social:
   - type: 'github'
@@ -31,7 +31,9 @@ nav:
   - Infra: 'stack/infra/infraIntro.md'
   - Arc: 'stack/arc/arcIntro.md'
   - Client: 'stack/client/clientIntro.md'
-  - Subgraph: 'stack/subgraph/subgraphIntro.md'
+  - Subgraph:
+    - Intro: 'stack/subgraph/subgraphIntro.md'
+    - GraphQL queries: 'stack/subgraph/queries.md'
   - DApps/Alchemy: 'stack/alchemy/alchemyIntro.md'
 - Migration: 'migration.md'
 - Tutorials:
