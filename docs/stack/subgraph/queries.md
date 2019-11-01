@@ -10,6 +10,8 @@ The full list of `Subgraph Entities` cached by DAOstack subgraph can be found [h
   2. Entity name is same as provided in [Entity list](../Entity) but in `lower case`.
   3. You can [query for single entity](#query-for-single-entity) by providing Entity `id`.
   4. You can [query for multiple Entities](#query-for-multiple-entities) by changing entity to plural. i.e. `proposal` -> `proposals`   
+  5. The `complex-field` i.e. fields that are themselves an Entity such as *dao* and *proposals* in above example, need to be wrapped in `{}` and provided with the subfield needed to be queried
+  6. Filter and Sort is not available for complex fields
 
 ## Query for single Entity
 
@@ -59,10 +61,6 @@ query {
 ```
 </body>
 </details>
-
-NOTE:
-
-  - The `complex-field` i.e. fields that are themselves an Entity such as *dao* and *proposals* in above example, need to be wrapped in `{}` and provided with the subfield needed to be queried
 
 ## Query for Multiple Entities
  
@@ -156,6 +154,50 @@ query {
 ```
   </body>
 </details>
+
+<details>
+  <summary> Genesis DAO proposals that contains word 'Reputation' in title
+  </summary>
+
+  <body>
+```
+query{
+  proposals(
+    where: {
+      dao: "0x294f999356ed03347c7a23bcbcf8d33fa41dc830"
+      title_contains: "Reputation"
+    }
+  ){
+    title
+    dao{
+      name
+    }
+  }
+}
+```
+  </body>
+</details>
+
+NOTE:
+  
+  - The suffix `_contains` in the above example is used for the comparison
+  - Some suffixes are only supported for specific types. For example, Boolean only supports `_not`, `_in`, and `_not_in`.
+  - <details>
+    <summary> Complete list of suffix is </summary>
+    - _not
+    - _gt
+    - _lt
+    - _gte
+    - _lte
+    - _in
+    - _not_in
+    - _contains
+    - _not_contains
+    - _starts_with
+    - _ends_with
+    - _not_starts_with
+    - _not_ends_with
+  </details>
 
 ### Sort by field values
 
@@ -276,22 +318,27 @@ You can combine the above parameters to create a more complex query
 *Examples*
 
 <details>
-  <summary> Get top 3 boosted proposals from Genesis DAO </summary>
+  <summary> Get top 6 boosted proposals that belong to either Genesis Alpha or DutchX  </summary>
 
   <body>
 ```
-query {
-  proposals (
+query{
+  proposals(
     where: {
-      dao: "0x294f999356ed03347c7a23bcbcf8d33fa41dc830",
+      dao_in: [
+        "0x294f999356ed03347c7a23bcbcf8d33fa41dc830",
+        "0x519b70055af55a007110b4ff99b0ea33071c720a"
+      ]
       stage: "Boosted"
     }
     orderBy: createdAt
     orderDirection: asc
-    first: 3
-  ) {
-
+    first: 6
+  ){
     title
+    dao{
+      name
+    }
   }
 }
 ```
