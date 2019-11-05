@@ -25,6 +25,7 @@ type DAO @entity {
 	numberOfQueuedProposals: BigInt!
 	numberOfPreBoostedProposals: BigInt!
 	numberOfBoostedProposals: BigInt!
+	numberOfExpiredInQueueProposals: BigInt!
 }
 
 type GPQueue @entity {
@@ -73,6 +74,7 @@ type Proposal @entity {
 	title: String
 	description: String
 	url: String
+	tags: [Tag!]
 	fulltext: [String!]
 
 	gpRewards: [GPReward!] @derivedFrom(field: "proposal")
@@ -104,6 +106,12 @@ type Proposal @entity {
 
 	genesisProtocolParams : GenesisProtocolParam!
 
+}
+
+type Tag @entity {
+	id: ID!
+	proposals: [Proposal!]
+	numberOfProposals: BigInt!
 }
 
 type ProposalStake @entity {

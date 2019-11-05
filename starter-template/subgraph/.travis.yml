@@ -36,3 +36,7 @@ script:
 
   - npm run lint
   - npm run jest
+
+after_success:
+  - chmod +x deploy-travis.sh
+  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_EVENT_TYPE = "push" && travis_wait 30 ./deploy-travis.sh

@@ -1,10 +1,11 @@
-const spawn = require('spawn-command')
-const path = require('path')
+const spawn = require('spawn-command');
+const path = require('path');
 
 const runGraphCli = async (args = [], cwd = process.cwd()) => {
   // Resolve the path to graph.js
-  // let graphClix = `${require.resolve('@graphprotocol/graph-cli')}/graph.js`
-  let graphCli = `${__dirname}/../node_modules/@graphprotocol/graph-cli/bin/graph`
+  // (we cannot do `require.resolve('@graphprotocol/graph-cli')`, because that is not a requirable package)
+  const graphCli = path.resolve(`${require.resolve('@graphprotocol/graph-ts')}/../../graph-cli/bin/graph`)
+  // let graphCli = `${__dirname}/../node_modules/@graphprotocol/graph-cli/bin/graph`
 
   // Make sure to set an absolute working directory
   cwd = cwd[0] !== '/' ? path.resolve(__dirname, cwd) : cwd

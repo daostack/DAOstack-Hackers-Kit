@@ -319,11 +319,13 @@ describe('Domain Layer', () => {
       description: 'Just eat them',
       title: 'A modest proposal',
       url: 'http://swift.org/modest',
+      tags: ['test', 'proposal'],
     };
 
     let proposalDescription = proposalIPFSData.description;
     let proposalTitle = proposalIPFSData.title;
     let proposalUrl = proposalIPFSData.url;
+    let proposalTags = proposalIPFSData.tags;
 
     const descHash = await writeProposalIPFS(proposalIPFSData);
 
@@ -389,6 +391,11 @@ describe('Domain Layer', () => {
             description
             fulltext
             url
+            tags {
+              id
+              numberOfProposals
+              proposals { id }
+            }
             stage
             executionState
             createdAt
@@ -470,6 +477,7 @@ describe('Domain Layer', () => {
               numberOfQueuedProposals
               numberOfPreBoostedProposals
               numberOfBoostedProposals
+              numberOfExpiredInQueueProposals
             }
         }
     }`;
@@ -485,6 +493,12 @@ describe('Domain Layer', () => {
 
     await waitUntilTrue(voteIsIndexed);
     await waitUntilTrue(stakeIsIndexed);
+
+    let tagsList = [];
+    for (let tag of proposalTags) {
+      tagsList.unshift({ id: tag, numberOfProposals: '1', proposals: [{ id: p1 }] });
+    }
+
     let proposal = (await sendQuery(getProposal)).proposal;
     expect(proposal).toMatchObject({
       id: p1,
@@ -493,6 +507,7 @@ describe('Domain Layer', () => {
       description: proposalDescription,
       fulltext: proposalTitle.split(' ').concat(proposalDescription.split(' ')),
       url: proposalUrl,
+      tags: tagsList,
       stage: 'Queued',
       closingAt: (Number(gpParams.queuedVotePeriodLimit) + Number(p1Creation)).toString(),
       executionState: 'None',
@@ -551,6 +566,7 @@ describe('Domain Layer', () => {
         address: addresses.ContributionReward.toLowerCase(),
         name: 'ContributionReward',
         numberOfBoostedProposals: '0',
+        numberOfExpiredInQueueProposals: '0',
         numberOfPreBoostedProposals: '0',
         numberOfQueuedProposals: '1',
       },
@@ -1076,70 +1092,6 @@ describe('Domain Layer', () => {
 
     expect(proposal).toMatchObject({ accountsWithUnclaimedRewards: [] });
 
-    const getGPQueues = `{
-      gpqueues {
-          threshold
-          scheme {
-            name
-            numberOfQueuedProposals
-            numberOfPreBoostedProposals
-            numberOfBoostedProposals
-          }
-          dao {
-            numberOfQueuedProposals
-            numberOfPreBoostedProposals
-            numberOfBoostedProposals
-          }
-      }
-    }`;
-
-    let gpQueues = (await sendQuery(getGPQueues)).gpqueues;
-
-    expect(gpQueues).toContainEqual({
-        threshold: Math.pow(2, REAL_FBITS).toString(),
-        scheme: {
-          name: 'ContributionReward',
-          numberOfBoostedProposals: '0',
-          numberOfPreBoostedProposals: '0',
-          numberOfQueuedProposals: '0',
-        },
-        dao: {
-          numberOfQueuedProposals: '0',
-          numberOfPreBoostedProposals: '0',
-          numberOfBoostedProposals: '0',
-        },
-    });
-
-    expect(gpQueues).toContainEqual({
-        threshold: Math.pow(2, REAL_FBITS).toString(),
-        scheme: {
-          name: 'GenericScheme',
-          numberOfBoostedProposals: '0',
-          numberOfPreBoostedProposals: '0',
-          numberOfQueuedProposals: '0',
-        },
-        dao: {
-          numberOfQueuedProposals: '0',
-          numberOfPreBoostedProposals: '0',
-          numberOfBoostedProposals: '0',
-        },
-    });
-
-    expect(gpQueues).toContainEqual({
-        threshold: Math.pow(2, REAL_FBITS + 1).toString(),
-        scheme: {
-          name: 'ContributionReward',
-          numberOfBoostedProposals: '1',
-          numberOfPreBoostedProposals: '1',
-          numberOfQueuedProposals: '1',
-        },
-        dao: {
-          numberOfQueuedProposals: '2',
-          numberOfPreBoostedProposals: '1',
-          numberOfBoostedProposals: '1',
-        },
-    });
-
     const { proposalId: p2 } = await propose({
     rep: 10,
     tokens: 10,
@@ -1188,6 +1140,91 @@ describe('Domain Layer', () => {
     expect((await sendQuery(getExpiredProposal)).proposal.stage).toEqual('QuietEndingPeriod');
     expect((await sendQuery(getExpiredProposal)).proposal.quietEndingPeriodBeganAt)
            .toEqual(quietEndingPeriodBeganAt.toString());
+
+    const getGPQueues = `{
+            gpqueues {
+                threshold
+                scheme {
+                  name
+                  numberOfQueuedProposals
+                  numberOfPreBoostedProposals
+                  numberOfBoostedProposals
+                  numberOfExpiredInQueueProposals
+                }
+                dao {
+                  numberOfQueuedProposals
+                  numberOfPreBoostedProposals
+                  numberOfBoostedProposals
+                  numberOfExpiredInQueueProposals
+                }
+            }
+          }`;
+
+    const { proposalId: expiredInQueueProposal } = await propose({
+        rep: 10,
+        tokens: 10,
+        eth: 0,
+        external: 0,
+        periodLength: 0,
+        periods: 1,
+        beneficiary: accounts[1].address,
+        });
+
+    increaseTime(1800 + 1 , web3);
+    await genesisProtocol.methods.execute(expiredInQueueProposal).send();
+
+    let gpQueues = (await sendQuery(getGPQueues)).gpqueues;
+
+    expect(gpQueues).toContainEqual({
+        threshold: Math.pow(2, REAL_FBITS + 1).toString(),
+        scheme: {
+          name: 'ContributionReward',
+          numberOfBoostedProposals: '1',
+          numberOfExpiredInQueueProposals: '1',
+          numberOfPreBoostedProposals: '0',
+          numberOfQueuedProposals: '0',
+        },
+        dao: {
+          numberOfQueuedProposals: '0',
+          numberOfPreBoostedProposals: '0',
+          numberOfBoostedProposals: '1',
+          numberOfExpiredInQueueProposals: '1',
+        },
+    });
+
+    expect(gpQueues).toContainEqual({
+        threshold: Math.pow(2, REAL_FBITS).toString(),
+        scheme: {
+          name: 'GenericScheme',
+          numberOfBoostedProposals: '0',
+          numberOfExpiredInQueueProposals: '0',
+          numberOfPreBoostedProposals: '0',
+          numberOfQueuedProposals: '0',
+        },
+        dao: {
+          numberOfQueuedProposals: '0',
+          numberOfPreBoostedProposals: '0',
+          numberOfBoostedProposals: '0',
+          numberOfExpiredInQueueProposals: '0',
+        },
+    });
+
+    expect(gpQueues).toContainEqual({
+        threshold: Math.pow(2, REAL_FBITS + 1).toString(),
+        scheme: {
+          name: 'ContributionReward',
+          numberOfBoostedProposals: '1',
+          numberOfExpiredInQueueProposals: '0',
+          numberOfPreBoostedProposals: '1',
+          numberOfQueuedProposals: '1',
+        },
+        dao: {
+          numberOfQueuedProposals: '2',
+          numberOfPreBoostedProposals: '1',
+          numberOfBoostedProposals: '1',
+          numberOfExpiredInQueueProposals: '0',
+        },
+    });
     increaseTime(300 + 1 , web3);
     await genesisProtocol.methods.execute(p2).send();
     expect((await sendQuery(getExpiredProposal)).proposal.accountsWithUnclaimedRewards)

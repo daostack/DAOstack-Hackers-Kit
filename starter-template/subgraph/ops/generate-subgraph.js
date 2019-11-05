@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path")
 const yaml = require("js-yaml");
 const { migrationFileLocation: defaultMigrationFileLocation,
-network } = require("./settings");
+network ,startBlock} = require("./settings");
 const mappings = require("./mappings.json")[network].mappings;
 const { subgraphLocation: defaultSubgraphLocation } = require('./graph-cli')
 
@@ -52,6 +52,7 @@ async function generateSubgraph(opts={}) {
 }
 
 function combineFragments(fragments, isTemplate, addresses, missingAddresses) {
+  let ids = [];
   return fragments.map(mapping => {
     const contract = mapping.name;
     const fragment = `${__dirname}/../src/mappings/${mapping.mapping}/datasource.yaml`;
@@ -116,12 +117,23 @@ function combineFragments(fragments, isTemplate, addresses, missingAddresses) {
       abi
     } : {
       address: contractAddress,
-      abi
+      abi,
+      startBlock
     };
+
+    let name = contract;
+    if (ids.indexOf(contract) == -1) {
+      ids.push(contract);
+    } else if (ids.indexOf(contract+contractAddress) == -1) {
+      ids.push(contract+contractAddress);
+      name = contract+contractAddress;
+    } else {
+      return;
+    }
 
     var result = {
       kind: 'ethereum/contract',
-      name: `${contract}`,
+      name: `${name}`,
       network: `${network}`,
       source,
       mapping: {

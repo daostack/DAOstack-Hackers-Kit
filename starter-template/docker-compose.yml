@@ -38,7 +38,9 @@ services:
       postgres_db: postgres
       ipfs: 'ipfs:5001'
       ethereum: 'private:http://ganache:8545'
-      GRAPH_IPFS_TIMEOUT: '2'
+      GRAPH_LOG: "graph.log"
+      GRAPH_GRAPHQL_MAX_FIRST: 1000
+      GRAPH_IPFS_TIMEOUT: '4'
       GRAPH_MAX_IPFS_FILE_BYTES: '102400'
 
   ipfs:
