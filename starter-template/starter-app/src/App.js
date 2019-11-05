@@ -39,7 +39,7 @@ async function initializeArc() {
   // TODO: change dev - testnet or mainnet as per your project need
   if (metamask) settings.dev.web3Provider = metamask
   const arc = new Arc(settings.dev);
-  await arc.fetchContractInfos();
+  const contractInfo = await arc.fetchContractInfos();
   return arc;
 }
 
@@ -56,7 +56,7 @@ class App extends Component {
         description: "Please provide Sample proposal description",
         title: "Sample Proposal",
         url: "#",
-        scheme: "0xe9846abe8ee7e8f8e371ed17bf3557573ee34069",
+        scheme: "",
         beneficiary: (window).ethereum.selectedAddress,
         nativeTokenReward: "",
         reputationReward: eth.utils.parseEther('100').toString(),
@@ -75,11 +75,11 @@ class App extends Component {
 
   async componentWillMount() {
     const arc = await initializeArc()
-    console.log(DAO.search(arc, {where: {name: 'DevTest'}}))
-    const daos = await arc.daos().pipe(first()).toPromise()
-    console.log(daos)
-    const dao = new DAO(daos[3].id, arc)
-    console.log(dao)
+    const daos = await arc.daos({where: {name: 'DevTest'}}).first()
+    const dao = new DAO(daos[0].id, arc)
+    const schemes = await dao.schemes({ where: { name: 'ContributionReward'}}).first()
+    const schemeState = await schemes[0].state().first()
+    this.handleChange({ target: {name: 'scheme', value: schemeState.address}})
     await dao.proposals().subscribe((proposals) => {
       this.setState({
         arcIsInitialized: true,
