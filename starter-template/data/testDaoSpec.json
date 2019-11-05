@@ -4,8 +4,11 @@
   "tokenSymbol": "DEV",
   "useUController": false,
   "useDaoCreator": true,
-  "ContributionReward": {
-  },
+  "ContributionReward": [
+    {
+      "voteParams": 0
+    }
+  ],
   "founders": [
     {
       "address": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
@@ -34,10 +37,12 @@
        "targetContract": "0x4a35d1434D34Ac7842381362924E6399ca63Da5A"
      }
    ],
-  "SchemeRegistrar": {
-      "voteRegisterParams": 0,
-      "voteRemoveParams": 0
-  },
+  "SchemeRegistrar": [
+    {
+        "voteRegisterParams": 0,
+        "voteRemoveParams": 0
+    }
+  ],
   "CustomSchemes": [
   ],
   "VotingMachinesParams": [
