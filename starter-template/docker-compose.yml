@@ -15,7 +15,7 @@ services:
       - 3000:3000
 
   ganache:
-    image: 'daostack/migration:0.0.1-rc.24-v3'
+    image: 'daostack/migration:0.0.1-rc.31-v0'
     volumes:
       - ./data:/app/data
     ports:
