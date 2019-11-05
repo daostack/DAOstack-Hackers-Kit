@@ -34,6 +34,7 @@ nav:
   - Subgraph:
     - Intro: 'stack/subgraph/subgraphIntro.md'
     - GraphQL queries: 'stack/subgraph/queries.md'
+    - Entities: 'stack/subgraph/entities.md'
   - DApps/Alchemy: 'stack/alchemy/alchemyIntro.md'
 - Migration: 'migration.md'
 - Tutorials:
