@@ -1,4 +1,4 @@
-You can use GraphQL queries to get quick info from [DAOstack Sunbgraph](https://thegraph.com/explorer/subgraph/daostack/v30_1) hosted on GraphExplorer.
+You can use GraphQL queries to get quick info from [DAOstack Sunbgraph](https://thegraph.com/explorer/subgraph/daostack/master) hosted on GraphExplorer.
 
 This guide explains how to use GraphQL queries to get single or multiple Entities and sort, filter and paginate them.
 
@@ -7,11 +7,12 @@ The full list of `Subgraph Entities` cached by DAOstack subgraph can be found [h
 ## General Guidelines
 
   1. All queries must be wrapped inside `query {}` object.
-  2. Entity name is same as provided in [Entity list](../Entity) but in `lower case`.
+  2. While querying, the Entity name is same as provided in [Entity list](../Entity) but starts with `lowerCase`.
   3. You can [query for single entity](#query-for-single-entity) by providing Entity `id`.
   4. You can [query for multiple Entities](#query-for-multiple-entities) by changing entity to plural. i.e. `proposal` -> `proposals`   
-  5. The `complex-field` i.e. fields that are themselves an Entity such as *dao* and *proposals* in above example, need to be wrapped in `{}` and provided with the subfield needed to be queried
-  6. Filter and Sort is not available for complex fields
+  5. The `complex-field` i.e. fields that are themselves an Entity such as *dao* and *proposals* in [below example](#query-for-single-entity), need to be proceeded with `{}` and provided with the subfield needed to be queried
+  6. While you can Filter/Sort/Paginate complex subfield (Entity) array, the Top level Entity itself cannot be Filtered/Sorted/Paginated by complex fields.
+  7. If no pagination limit is provided, by default a limit of *100* entities is used. Maximum pagination limit is 1000
 
 ## Query for single Entity
 
@@ -112,6 +113,8 @@ query {
 
 To query for a subset of Entities you can add `where: {}` parameter to filter for different properties. You can filter for single or multiple properties.
 
+#### Filter top level entity
+
 *Examples*
 
 <details>
@@ -161,8 +164,8 @@ query {
 
   <body>
 ```
-query{
-  proposals(
+query {
+  proposals (
     where: {
       dao: "0x294f999356ed03347c7a23bcbcf8d33fa41dc830"
       title_contains: "Reputation"
@@ -171,6 +174,34 @@ query{
     title
     dao{
       name
+    }
+  }
+}
+```
+  </body>
+</details>
+
+#### Filter complex subfield array
+
+*Examples*
+
+<details>
+  <summary> Get rewards detail for all DAO where 250 GEN or more were awarded in DAO bounty </summary>
+
+  <body>
+```
+query { 
+  daos {
+    name
+		rewards (
+      where: {
+        daoBountyForStaker_gte: "250000000000000000000"
+      }
+    ){
+      proposal {
+        id
+      }
+      daoBountyForStaker
     }
   }
 }
@@ -200,6 +231,8 @@ NOTE:
   </details>
 
 ### Sort by field values
+
+#### Sort top level entity
 
 *Examples*
 
@@ -235,6 +268,29 @@ query {
   ) {
     name
     numberOfBoostedProposals
+  }
+}
+```
+  </body>
+</details>
+
+#### Sort complex subfield array
+
+*Examples*
+
+<details>
+  <summary> Get all proposals from all the daos ordered by the date of submission </summary>
+
+  <body>
+```
+query { 
+  daos {
+  	proposals (
+      orderBy: createdAt,
+      orderDirection: desc
+    ){
+      title
+    }
   }
 }
 ```
@@ -311,6 +367,8 @@ query {
   </body>
 </details>
 
+NOTE: There is a limit of 1000 entities per query.
+
 ### Combine them all ...
 
 You can combine the above parameters to create a more complex query
@@ -338,6 +396,30 @@ query{
     title
     dao{
       name
+    }
+  }
+}
+```
+  </body>
+</details>
+
+
+<details>
+  <summary> Get top 3 reputation holders from all DAOstack </summary>
+
+  <body>
+```
+query { 
+  daos {
+    name
+  	reputationHolders (
+      orderBy: balance
+      orderDirection: desc
+      first: 3
+    ){
+      address
+      balance
+      
     }
   }
 }
