@@ -286,10 +286,58 @@
           
 
 
-  <li class="md-nav__item">
-    <a href="../stack/subgraph/subgraphIntro/" title="Subgraph" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
       Subgraph
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        Subgraph
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../stack/subgraph/subgraphIntro/" title="Intro" class="md-nav__link">
+      Intro
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../stack/subgraph/queries/" title="GraphQL queries" class="md-nav__link">
+      GraphQL queries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../stack/subgraph/entities/" title="Entities" class="md-nav__link">
+      Entities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -670,19 +718,11 @@
 <tbody>
 <tr>
 <td>DAO to DAO relations</td>
-<td>Client &amp; Alchemy</td>
+<td>Alchemy</td>
 <td>Allow DAOs to interact with other DAOs by submitting proposals for voting / staking (/ proposing)</td>
 <td>2 w</td>
 <td>🍎</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Hashtags</td>
-<td>Caching &amp; Alchemy</td>
-<td>Proposers can freely tag their proposals (e.g. #idea, #norm, #bounty etc), and then anyone can search / filter proposals by tags. Hashtags are case-insensitive (appear only with lower case). At first stage no admin, which means anyone can create any hashtag they want, and likely similarities will appear (#idea, #ideas, #ideation). Currently search available only inside DAO, can have cross-DAO search later</td>
-<td>2 w</td>
-<td>🔥</td>
-<td>-</td>
+<td><a href="https://github.com/daostack/Ecosystem/issues/27">#27</a></td>
 </tr>
 <tr>
 <td>Buy GEN with ETH or any token</td>
@@ -691,6 +731,54 @@
 <td>2 w</td>
 <td>🍎</td>
 <td><a href="https://github.com/daostack/DAOstack-collab/issues/1">#1</a></td>
+</tr>
+<tr>
+<td>Prediction bot</td>
+<td>External</td>
+<td>A bot that will make predictions on daos. It can use public training data as past proposals by the proposer or voters who voted for or against the proposal etc</td>
+<td>2-3 w</td>
+<td>🔥</td>
+<td><a href="https://github.com/daostack/Ecosystem/issues/6">#6</a></td>
+</tr>
+<tr>
+<td>Better representation of the protocol. Help Mode</td>
+<td>Alchemy</td>
+<td>Added tooltips, tours, walkthroughs that explain the genesis protocol</td>
+<td>2 w</td>
+<td>🔥</td>
+<td><a href="https://github.com/daostack/Ecosystem/issues/15">#15</a></td>
+</tr>
+<tr>
+<td>Notification Bot for Alchemy</td>
+<td>Alchemy</td>
+<td>Allow users to subscribe for telegram/email/twitter etc. notification for activities in DAO</td>
+<td>2 w</td>
+<td>🍎</td>
+<td><a href="https://github.com/daostack/Ecosystem/issues/7">#7</a></td>
+</tr>
+<tr>
+<td>Improved Scheme Registrar UX</td>
+<td>Alchemy</td>
+<td>A more simplistic and abstracted interface in order to change the Genesis parameters without wanting to commit seppuku.</td>
+<td>2 w</td>
+<td>🍎</td>
+<td><a href="https://github.com/daostack/Ecosystem/issues/11">#11</a></td>
+</tr>
+<tr>
+<td>DAO treasury management</td>
+<td>Alchemy</td>
+<td>Enable DAO to manage its treasury by re-appropriating its funds via decentralized exchange or deFi Projects</td>
+<td>2 w</td>
+<td>🍎</td>
+<td><a href="https://github.com/daostack/Ecosystem/issues/3">#3</a>, <a href="https://github.com/daostack/Ecosystem/issues/2">#2</a>, <a href="https://github.com/daostack/Ecosystem/issues/4">#4</a>, <a href="https://github.com/daostack/Ecosystem/issues/5">#5</a></td>
+</tr>
+<tr>
+<td>Hashtags</td>
+<td>Caching &amp; Alchemy</td>
+<td>Proposers can freely tag their proposals (e.g. #idea, #norm, #bounty etc), and then anyone can search / filter proposals by tags. Hashtags are case-insensitive (appear only with lower case). At first stage no admin, which means anyone can create any hashtag they want, and likely similarities will appear (#idea, #ideas, #ideation). Currently search available only inside DAO, can have cross-DAO search later</td>
+<td>2 w</td>
+<td>🔥</td>
+<td>-</td>
 </tr>
 <tr>
 <td>GSN Integration</td>
@@ -705,14 +793,6 @@
 <td>Alchemy</td>
 <td>Allow people to interact with dao widgets (voting / proposing etc) inside twitter (e.g. https://twitter.com/sassal0x/status/1109263205606387712)</td>
 <td>3 w</td>
-<td>🔥</td>
-<td></td>
-</tr>
-<tr>
-<td>Direct messages (decentralized &amp; realtime)</td>
-<td>External</td>
-<td>Decentralised commenting, 1 to 1 DMing between addresses, alerts</td>
-<td>2-3 w</td>
 <td>🔥</td>
 <td></td>
 </tr>
@@ -757,14 +837,6 @@
 <td></td>
 </tr>
 <tr>
-<td>Prediction bot</td>
-<td>External</td>
-<td>A bot that will make predictions on daos. It can use public training data as past proposals by the proposer or voters who voted for or against the proposal etc</td>
-<td>2-3 w</td>
-<td>🔥</td>
-<td></td>
-</tr>
-<tr>
 <td>Alchemy dashboard</td>
 <td>Alchemy &amp; Caching</td>
 <td>This would show stats about the entire DAOstack ecosystem - no. daos, no. proposals, gen staked etc... Could be part of the DAO explorer</td>
@@ -773,25 +845,9 @@
 <td></td>
 </tr>
 <tr>
-<td>Better representation of the protocol</td>
-<td>Alchemy</td>
-<td>Added tooltips, tours, walkthroughs that explain the genesis protocol</td>
-<td>2 w</td>
-<td>🔥</td>
-<td></td>
-</tr>
-<tr>
 <td>Aggregated boosted proposals view</td>
 <td>Alchemy</td>
 <td>Show the boosted proposals from all the DAOs. This will be useful for predictors</td>
-<td>2 w</td>
-<td>🔥</td>
-<td></td>
-</tr>
-<tr>
-<td>Register and manage an ENS domain</td>
-<td>External</td>
-<td>Allow a DAO to register an ens domain, manage ownership and where it should point to via proposals</td>
 <td>2 w</td>
 <td>🔥</td>
 <td></td>
