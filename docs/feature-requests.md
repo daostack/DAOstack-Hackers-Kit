@@ -12,12 +12,11 @@ Table Guide:
 
 | Feature | Stack Layer | Description | Dev Time | Status | Github Issue Link |
 | ------- | -------------| ---------- | ------- | -------- | ---------- |
-| DAO to DAO relations | Client & Alchemy | Allow DAOs to interact with other DAOs by submitting proposals for voting / staking (/ proposing) | 2 w | 🍎 | - |
+| DAO to DAO relations | Client & Alchemy | Allow DAOs to interact with other DAOs by submitting proposals for voting / staking (/ proposing) | 2 w | 🍎 | [#27](https://github.com/daostack/Ecosystem/issues/27) |
 | Hashtags | Caching & Alchemy | Proposers can freely tag their proposals (e.g. #idea, #norm, #bounty etc), and then anyone can search / filter proposals by tags. Hashtags are case-insensitive (appear only with lower case). At first stage no admin, which means anyone can create any hashtag they want, and likely similarities will appear (#idea, #ideas, #ideation). Currently search available only inside DAO, can have cross-DAO search later| 2 w | 🔥 | - |
 | Buy GEN with ETH or any token | Alchemy | Integrate uniswap / kyber widget to allow the user to directly stake with eth or any other token which will be converted to gen. | 2 w | 🍎 | [#1](https://github.com/daostack/DAOstack-collab/issues/1) |
 | GSN Integration | External | Allow users to participate without a cost, i.e. sponsor the gas fees <br/> - Allow another agent to pay for gas, technically <br/> - Who can pay for gas: the DAO? other agent? <br/> | 4 w| 🍎 |
 | Twitter player integration | Alchemy | Allow people to interact with dao widgets (voting / proposing etc) inside twitter (e.g. https://twitter.com/sassal0x/status/1109263205606387712) | 3 w | 🔥 |
-| Direct messages (decentralized & realtime) | External | Decentralised commenting, 1 to 1 DMing between addresses, alerts | 2-3 w | 🔥 |
 | DAO setup wizard integrated in Alchemy | Alchemy | Allow users to create a new DAO inside alchemy. This includes integrating with the DAO creator by dOrg, but also figuring out the indexing part | 4 w | 🔥 |
 | Decentralized Social identity integration | Alchemy | Like the existing social identity but decentralised (https://3box.io) | 2 w | 🔥 |
 | Unseen proposals indicator (in all DAOs) | Alchemy | When a user comes in to the platform again, there's an indication on the dashboard of the number of new proposals in each DAO since his last visited. | 1 w | 🔥 |
