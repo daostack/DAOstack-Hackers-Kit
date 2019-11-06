@@ -1,4 +1,4 @@
-You can use GraphQL queries to get quick info from [DAOstack Sunbgraph](https://thegraph.com/explorer/subgraph/daostack/master) hosted on GraphExplorer.
+You can use GraphQL queries to get quick info from [DAOstack Subgraph](https://thegraph.com/explorer/subgraph/daostack/master) hosted on GraphExplorer.
 
 This guide explains how to use GraphQL queries to get single or multiple Entities and sort, filter and paginate them.
 
