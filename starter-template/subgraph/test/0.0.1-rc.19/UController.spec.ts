@@ -240,6 +240,7 @@ describe('UController', () => {
         numberOfQueuedProposals
         numberOfPreBoostedProposals
         numberOfBoostedProposals
+        numberOfExpiredInQueueProposals
       }
     }`);
 
@@ -255,6 +256,7 @@ describe('UController', () => {
       canDelegateCall: true,
       gpQueue: null,
       numberOfBoostedProposals: '0',
+      numberOfExpiredInQueueProposals: '0',
       numberOfPreBoostedProposals: '0',
       numberOfQueuedProposals: '0',
     });
@@ -270,6 +272,7 @@ describe('UController', () => {
       canDelegateCall: false,
       gpQueue: null,
       numberOfBoostedProposals: '0',
+      numberOfExpiredInQueueProposals: '0',
       numberOfPreBoostedProposals: '0',
       numberOfQueuedProposals: '0',
     });

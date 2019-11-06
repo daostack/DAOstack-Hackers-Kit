@@ -26,6 +26,7 @@ type ControllerScheme @entity {
 	numberOfQueuedProposals: BigInt!
 	numberOfPreBoostedProposals: BigInt!
 	numberOfBoostedProposals: BigInt!
+	numberOfExpiredInQueueProposals: BigInt!
 }
 
 type ControllerGlobalConstraint @entity {
@@ -119,4 +120,8 @@ type GenesisProtocolParam @entity {
 	daoBountyConst: BigInt!
 	activationTime: BigInt!
 	voteOnBehalf: Bytes!
+}
+
+type FirstRegisterScheme @entity {
+	id: ID!
 }

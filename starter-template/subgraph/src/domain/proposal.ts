@@ -1,6 +1,6 @@
 import { Address, BigDecimal, BigInt, Bytes, crypto, ipfs, json, JSONValueKind, store } from '@graphprotocol/graph-ts';
 import { GenesisProtocol } from '../types/GenesisProtocol/GenesisProtocol';
-import { ControllerScheme, DAO, GenesisProtocolParam, Proposal } from '../types/schema';
+import { ControllerScheme, DAO, GenesisProtocolParam, Proposal, Tag } from '../types/schema';
 import { concat, equalsBytes, equalStrings } from '../utils';
 import { getDAO, saveDAO } from './dao';
 import { updateThreshold } from './gpqueue';
@@ -65,6 +65,29 @@ export function getProposalIPFSData(proposal: Proposal): Proposal {
         if (descJson.toObject().get('url') != null) {
           proposal.url = descJson.toObject().get('url').toString();
         }
+        let tags: string[] = [];
+        let tagsData =  descJson.toObject().get('tags');
+        if (tagsData != null && tagsData.kind === JSONValueKind.ARRAY) {
+          let tagsObjects = tagsData.toArray();
+          let tagsLength = tagsObjects.length < 100 ? tagsObjects.length : 100;
+          for (let i = 0; i < tagsLength; i++) {
+            if (tags.indexOf(tagsObjects[i].toString()) === -1) {
+              tags.push(tagsObjects[i].toString());
+              let tagEnt = Tag.load(tagsObjects[i].toString());
+              if (tagEnt == null) {
+                tagEnt = new Tag(tagsObjects[i].toString());
+                tagEnt.numberOfProposals = BigInt.fromI32(0);
+                tagEnt.proposals = [];
+              }
+              let tagProposals = tagEnt.proposals;
+              tagProposals.push(proposal.id);
+              tagEnt.proposals = tagProposals;
+              tagEnt.numberOfProposals = tagEnt.numberOfProposals.plus(BigInt.fromI32(1));
+              tagEnt.save();
+            }
+          }
+          proposal.tags = tags;
+        }
       }
     }
     return proposal;
@@ -119,19 +142,14 @@ export function setProposalState(proposal: Proposal, state: number, gpTimes: Big
   if (controllerScheme != null) {
     if (equalStrings(proposal.stage, 'Queued')) {
       controllerScheme.numberOfQueuedProposals = controllerScheme
-      .numberOfQueuedProposals.minus(
-        BigInt.fromI32(1),
-      );
+      .numberOfQueuedProposals.minus(BigInt.fromI32(1));
     } else if (equalStrings(proposal.stage, 'PreBoosted')) {
       controllerScheme.numberOfPreBoostedProposals = controllerScheme
-      .numberOfPreBoostedProposals.minus(
-        BigInt.fromI32(1),
-      );
-    } else if (equalStrings(proposal.stage, 'Boosted')) {
+      .numberOfPreBoostedProposals.minus(BigInt.fromI32(1));
+    } else if ((equalStrings(proposal.stage, 'Boosted') ||
+                equalStrings(proposal.stage, 'QuietEndingPeriod')) && (state !== 6)) {
       controllerScheme.numberOfBoostedProposals = controllerScheme
-      .numberOfBoostedProposals.minus(
-        BigInt.fromI32(1),
-      );
+      .numberOfBoostedProposals.minus(BigInt.fromI32(1));
     }
   }
   if (dao != null) {
@@ -139,13 +157,21 @@ export function setProposalState(proposal: Proposal, state: number, gpTimes: Big
       dao.numberOfQueuedProposals = dao.numberOfQueuedProposals.minus(BigInt.fromI32(1));
     } else if (equalStrings(proposal.stage, 'PreBoosted')) {
       dao.numberOfPreBoostedProposals = dao.numberOfPreBoostedProposals.minus(BigInt.fromI32(1));
-    } else if (equalStrings(proposal.stage, 'Boosted')) {
+    } else if ((equalStrings(proposal.stage, 'Boosted') ||
+                equalStrings(proposal.stage, 'QuietEndingPeriod')) && (state !== 6)) {
       dao.numberOfBoostedProposals = dao.numberOfBoostedProposals.minus(BigInt.fromI32(1));
     }
   }
   if (state === 1) {
     // Closed
     proposal.stage = 'ExpiredInQueue';
+    if (controllerScheme != null) {
+      controllerScheme.numberOfExpiredInQueueProposals = controllerScheme
+      .numberOfExpiredInQueueProposals.plus(BigInt.fromI32(1));
+    }
+    if (dao != null) {
+      dao.numberOfExpiredInQueueProposals = dao.numberOfExpiredInQueueProposals.plus(BigInt.fromI32(1));
+    }
   } else if (state === 2) {
     // Executed
     proposal.stage = 'Executed';

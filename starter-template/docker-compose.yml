@@ -15,7 +15,7 @@ services:
       - 3000:3000
 
   ganache:
-    image: 'daostack/migration:0.0.1-rc.24-v3'
+    image: 'daostack/migration:0.0.1-rc.31-v0'
     volumes:
       - ./data:/app/data
     ports:
@@ -38,7 +38,9 @@ services:
       postgres_db: postgres
       ipfs: 'ipfs:5001'
       ethereum: 'private:http://ganache:8545'
-      GRAPH_IPFS_TIMEOUT: '2'
+      GRAPH_LOG: "graph.log"
+      GRAPH_GRAPHQL_MAX_FIRST: 1000
+      GRAPH_IPFS_TIMEOUT: '4'
       GRAPH_MAX_IPFS_FILE_BYTES: '102400'
 
   ipfs:

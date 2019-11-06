@@ -130,6 +130,7 @@ Then follow this by logging into your Graph Explorer account using:
    # Not necessary for The Graph server
    postgres_password=<YOUR_PASSWORD>
    ethereum_node="https://<TARGET_NETWORK>.infura.io/<INFURA-KEY>"
+   start_block=<START INDEX BLOCK> (default is 0)
    ```
 
 3. Run: ``npm run deploy``
