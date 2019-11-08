@@ -54,3 +54,6 @@ nav:
     - Deploy a DAO: 'gettingStarted/deployDAO.md'
     - Create your own interface for DAOstack DAOs: 'gettingStarted/createNewInterface.md'
 - Hacker-kit: 'hackerkit.md'
+- Want to contribute?:
+    - Feature Requests: 'feature-requests.md'
+    - Propose to Genesis DAO: 'how-to-propose.md'
