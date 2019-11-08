@@ -30,7 +30,9 @@ nav:
 - Stack:
   - Infra: 'stack/infra/infraIntro.md'
   - Arc: 'stack/arc/arcIntro.md'
-  - Client: 'stack/client/clientIntro.md'
+  - Client:
+    - Intro: 'stack/client/clientIntro.md'
+    - Client: 'stack/client/clientApi.md'
   - Subgraph:
     - Intro: 'stack/subgraph/subgraphIntro.md'
     - GraphQL queries: 'stack/subgraph/queries.md'
