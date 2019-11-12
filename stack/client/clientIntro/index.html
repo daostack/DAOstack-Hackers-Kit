@@ -348,8 +348,32 @@
 
 
   <li class="md-nav__item">
-    <a href="../clientApi/" title="Client API" class="md-nav__link">
-      Client API
+    <a href="../GettingStarted/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../querying/" title="Subscriptions" class="md-nav__link">
+      Subscriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../example/" title="Quick Example" class="md-nav__link">
+      Quick Example
     </a>
   </li>
 
@@ -748,18 +772,6 @@
   </li>
 
     
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../../FAQ/" title="FAQ" class="md-nav__link">
-      FAQ
-    </a>
-  </li>
-
-    
   </ul>
 </nav>
                   </div>
@@ -806,11 +818,23 @@
                 
                   <h1>Intro</h1>
                 
-                <p><strong><a href="https://github.com/daostack/client">Client</a> is a library that facilitates access to Arc contracts without having to directly interact with the Ethereum blockchain.</strong> It provides functions to interact with DAOstack contracts to vote, propose, stake and execute proposals.</p>
-<p>Client library is also a wrapper around <a href="https://github.com/daostack/sugbraph">DAOstack subgraph</a>. It enable developers to interact with subgraph and execute various generic graph queries to access proposals, daos and other complex entities</p>
-<p>Using Client, JavaScript/TypeScript developers can easily write scripts or applications which can interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations. This is particularly helpful for developers who want to get the advantages of decentralized governance on the blockchain without dealing directly with a smart contract language.</p>
+                <p><strong><a href="https://github.com/daostack/client">Client</a> is a nodejs library that provides a helpful set of tools to interact with the DAOstack ecosystem.</strong></p>
+<p>In particular, the  library provides an interface to</p>
+<ul>
+<li><a href="https://github.com/daostack/arc">DAOstack contracts</a> and</li>
+<li><a href="https://github.com/daostack/subgraph">DAOstack subgraph</a> (an index of on-chain data).</li>
+</ul>
 <h3 id="should-i-work-at-this-level">Should I work at this level?<a class="headerlink" href="#should-i-work-at-this-level" title="Permanent link">&para;</a></h3>
-<p>You should use Client whenever you want to use JavaScript or TypeScript to interact with Arc contracts for voting, proposing etc or to execute generic GraphQL queries on subgraph for accessing blockchain data. If you are interacting with custom Arc contracts or custom subgraph, then you might have to write your own Web3 library to interact with contracts and/or query the subgraph.</p>
+<p><strong>Import client package as a dependency, if you are</strong></p>
+<ul>
+<li>developing a dApp in DAOstack platform (we are using it to build our <a href="https://github.com/daostack/alchemy">React App</a> - <a href="https://alchemy.daostack.io">Alchemy</a>) </li>
+<li>writing nodejs scripts that interact with the <a href="https://github.com/daostack/arc">Arc Contracts</a> and query data from the <a href="https://github.com/daostack/subgraph">subgraph</a></li>
+</ul>
+<p><strong>Extend the client package, if you are</strong> </p>
+<ul>
+<li>interacting with Arc contracts that are not yet supported by <em>Client.js</em></li>
+<li>modifying/Extending DAOstack subgraph</li>
+</ul>
                 
                   
                 
@@ -846,13 +870,13 @@
           </a>
         
         
-          <a href="../clientApi/" title="Client API" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../GettingStarted/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Client API
+                Getting Started
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

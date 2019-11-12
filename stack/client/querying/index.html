@@ -38,7 +38,7 @@
     
     
       
-        <title>Client API - DAOstack Developer Egress</title>
+        <title>Subscriptions - DAOstack Developer Egress</title>
       
     
     
@@ -87,6 +87,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#subscriptions" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -109,7 +113,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Client API
+                Subscriptions
               
             </span>
           
@@ -308,6 +312,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../GettingStarted/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -315,11 +331,61 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
     
-    <a href="./" title="Client API" class="md-nav__link md-nav__link--active">
-      Client API
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Subscriptions
+      </label>
+    
+    <a href="./" title="Subscriptions" class="md-nav__link md-nav__link--active">
+      Subscriptions
     </a>
     
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#query-examples" class="md-nav__link">
+    Query examples:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-does" class="md-nav__link">
+    What this does
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../example/" title="Quick Example" class="md-nav__link">
+      Quick Example
+    </a>
   </li>
 
         
@@ -717,18 +783,6 @@
   </li>
 
     
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../../FAQ/" title="FAQ" class="md-nav__link">
-      FAQ
-    </a>
-  </li>
-
-    
   </ul>
 </nav>
                   </div>
@@ -736,17 +790,154 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#query-examples" class="md-nav__link">
+    Query examples:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-does" class="md-nav__link">
+    What this does
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/daostack/DAOstack-Hacker-Kit/edit/master/docs/stack/client/clientApi.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/daostack/DAOstack-Hacker-Kit/edit/master/docs/stack/client/querying.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Client API</h1>
-                
-                
+                <h1 id="subscriptions">Subscriptions<a class="headerlink" href="#subscriptions" title="Permanent link">&para;</a></h1>
+<p>In this guide we describe how to query and subscribe to the subgraph that contains the index of DAOstack data.</p>
+<h2 id="query-examples">Query examples:<a class="headerlink" href="#query-examples" title="Permanent link">&para;</a></h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">()</span>
+<span class="n">arc</span><span class="p">.</span><span class="n">sendQuery</span><span class="p">(</span><span class="o">`</span><span class="n">daos</span> <span class="err">{</span> <span class="n">id</span> <span class="n">name</span> <span class="err">}</span><span class="o">`</span><span class="p">)</span>
+<span class="n">proposal</span><span class="p">.</span><span class="k">state</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="what-this-does">What this does<a class="headerlink" href="#what-this-does" title="Permanent link">&para;</a></h2>
+<p>Calling each of these function by itself will not actually send the qeury to the server.
+Instead, each query returns an <em>observable</em>, to which you can subscribe.
+Only at that moment will the server be queried:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>const observable = arc.daos()
+// only in the nexzt line will a query be sent to the server
+const subscription = arc.daos.subscribe((daos) =&gt; console.log(`we found <span class="cp">${</span><span class="n">daos</span><span class="o">.</span><span class="n">length</span><span class="cp">}</span> results`))
+</pre></div>
+</td></tr></table>
+
+<p>By default, subscribing to an observable will do to things:</p>
+<ol>
+<li>It will send a query to the server, fetching the data</li>
+<li>It will send a subscription query to the server, which will cause the server to send you an update each time the data changes</li>
+</ol>
+<p>Because subscriptions can be expensive, this behavior can be controlled in several ways.</p>
+<p>First of all, we can pass Apollo's <a href="https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy"><code>fetchPolicy</code></a> argument to control how the query (from step 1) interacts with the cache:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{}</span><span class="p">,</span> <span class="err">{</span> <span class="k">fetch</span><span class="o">-</span><span class="n">policy</span><span class="p">:</span> <span class="s1">&#39;cache-first&#39;</span><span class="err">}</span><span class="p">)</span> <span class="o">//</span> <span class="n">the</span> <span class="k">default</span> <span class="n">value</span>
+<span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{</span><span class="k">where</span><span class="p">:</span> <span class="err">{</span><span class="n">stage</span><span class="p">:</span> <span class="ss">&quot;Boosted&quot;</span><span class="err">}}</span><span class="p">,</span> <span class="err">{</span> <span class="k">fetch</span><span class="o">-</span><span class="n">policy</span><span class="p">:</span> <span class="s1">&#39;network-only&#39;</span><span class="err">}</span><span class="p">)</span> <span class="o">//</span> <span class="n">bypass</span> <span class="n">the</span> <span class="k">cache</span>
+</pre></div>
+</td></tr></table>
+
+<p>Regarding step 2, the creation of a subscription can be controlled by passing the <code>subscribe</code> parameter.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{}</span><span class="p">,</span> <span class="err">{</span> <span class="n">subscribe</span><span class="p">:</span> <span class="k">false</span><span class="err">}</span><span class="p">)</span>
+<span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">(</span><span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">false</span><span class="err">}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Although these queries will not subscribe themselves to updates, the observable will still watch for changes in the Appollo cache and return updated results if the cache changes.</p>
+<p>Most of these methods are implemented in such a way that the queries will fetch (and subscribe to) just as much data as is needed to create the result set. For example, <code>dao.proposals()</code> will only fetch the proposal IDs. This can be controlled (in a limited way) by setting the parameter <code>fetchAllData</code> to true</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span><span class="n">orderBy</span><span class="p">:</span> <span class="ss">&quot;creationDate&quot;</span><span class="err">}</span><span class="p">,</span> <span class="err">{</span><span class="n">fetchAllData</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>This is useful for cache handling, where it may be useful to have more complete control over what data is being fetched. Consider the following example, which will get the list of proposals from the dao, and then get the state for each of the proposals.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span>.<span class="nv">subscribe</span><span class="ss">(</span>
+  <span class="ss">(</span><span class="nv">props</span><span class="ss">)</span> <span class="o">=&gt;</span> {
+    <span class="k">for</span> <span class="ss">(</span><span class="nv">let</span> <span class="nv">prop</span> <span class="nv">of</span> <span class="nv">props</span><span class="ss">)</span> {
+      <span class="nv">prop</span>.<span class="nv">state</span><span class="ss">()</span>.<span class="nv">subscribe</span><span class="ss">(</span>.....<span class="ss">)</span>
+    }
+  }
+<span class="ss">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>The problem with this pattern is that it is very expensive. The (subscription to) <code>dao.proposals(..)</code> will send a query and create a subscription, and then each of the calls to <code>proposal.state()</code> will create a new query and a separate subscription.</p>
+<p>Consider now the following pattern:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">(</span>{}, { <span class="nv">fetchAllData</span>: <span class="nv">true</span> }<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>
+  <span class="ss">(</span><span class="nv">props</span><span class="ss">)</span> <span class="o">=&gt;</span> {
+    <span class="k">for</span> <span class="ss">(</span><span class="nv">let</span> <span class="nv">prop</span> <span class="nv">of</span> <span class="nv">props</span><span class="ss">)</span> {
+      <span class="nv">prop</span>.<span class="nv">state</span><span class="ss">(</span> {<span class="nv">subscribe</span>: <span class="nv">false</span> }<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>.....<span class="ss">)</span>
+    }
+  }
+<span class="ss">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>This will resolve two inefficiencies. First of all, the <code>fetchAllData</code> in the proposals query will make it so that the
+<code>dao.proposals</code> query will fetch (and subscribe to) a much larger query - in particular, it will get all state data for each of the proposals. This means that when <code>prop.state()</code> is called, it will find all the needed information in the cache (and so it will nto send a new query to the server), and we can safely pass it the <code>subscribe: false</code> flag, because <code>dao.proposals()</code> already subscribes to updates for all the cached data.</p>
+<p>For even more control over what data is being fetched and subscribed to, you can write explicit queries:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">arc</span>.<span class="nv">apolloClient</span>.<span class="nv">sendQuery</span><span class="ss">(</span><span class="nv">gql</span>`<span class="nv">query</span> { <span class="nv">proposal</span> <span class="ss">(</span><span class="nv">id</span>: <span class="s2">&quot;</span><span class="s">0x1245</span><span class="s2">&quot;</span><span class="ss">)</span> { <span class="nv">votes</span>: { <span class="nv">id</span> <span class="nv">outcome</span> }}<span class="ss">)</span>`<span class="ss">)</span>
+<span class="nv">arc</span>.<span class="nv">apolloClient</span>.<span class="nv">subscribe</span><span class="ss">(</span><span class="nv">gql</span>`<span class="nv">subscribe</span> { <span class="nv">proposal</span> <span class="ss">(</span><span class="nv">id</span>: <span class="s2">&quot;</span><span class="s">0x1245</span><span class="s2">&quot;</span><span class="ss">)</span> { <span class="nv">votes</span>: { <span class="nv">id</span> <span class="nv">outcome</span> }}<span class="ss">)</span>`<span class="ss">)</span>
+<span class="nv">new</span> <span class="nv">Proposal</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">0x1245</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="nv">votes</span><span class="ss">(</span>{ <span class="nv">subscribe</span>: <span class="nv">false</span> }<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>
+  <span class="ss">(</span><span class="k">next</span><span class="ss">)</span> <span class="o">=&gt;</span> {
+
+  }
+<span class="ss">)</span>
+</pre></div>
+</td></tr></table>
                 
                   
                 
@@ -767,7 +958,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../clientIntro/" title="Intro" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../GettingStarted/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -776,19 +967,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Intro
+                Getting Started
               </span>
             </div>
           </a>
         
         
-          <a href="../../subgraph/subgraphIntro/" title="Intro" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../example/" title="Quick Example" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Intro
+                Quick Example
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
