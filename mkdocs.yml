@@ -32,7 +32,9 @@ nav:
   - Arc: 'stack/arc/arcIntro.md'
   - Client:
     - Intro: 'stack/client/clientIntro.md'
-    - Client: 'stack/client/clientApi.md'
+    - Getting Started: 'stack/client/GettingStarted.md'
+    - Subscriptions: 'stack/client/querying.md'
+    - Quick Example: 'stack/client/example.md'
   - Subgraph:
     - Intro: 'stack/subgraph/subgraphIntro.md'
     - GraphQL queries: 'stack/subgraph/queries.md'
