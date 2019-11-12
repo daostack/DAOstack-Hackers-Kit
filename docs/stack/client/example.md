@@ -1,35 +1,27 @@
-In the following code we use client library's Arc and DAO class to list all the DAOs and then create a new proposal in the first DAO.
+In the following code we use client library to interact with Arc contracts and then query the subgraph to fetch DAOstack data.
 
-## Example Setup
+## Setup
 
-Run the DAOstack stack (ganache image with Arc contracts + test DAOs and graph node with DAOstack subgraph) to play with this example script locally.
+You can use development setup from [Alchemy Starter](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/alchemy-starter) or [Starter-template](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template)
+ 
+## Example
 
-  - Clone [DAOstack-Hackers-Kit](https://github.com/daostack/DAOstack-Hackers-Kit/)
-      
-      git clone git@github.com:daostack/DAOstack-Hackers-Kit.git
-      cd DAOstack-Hackers-Kit/alchemy-starter
-      npm i
+### Import Client
 
-  - Launch Ganache and GraphNode
-    
-      npm run launch:docker
-
-  - Now create a `Demo` project folder and this file. Run the file using node
-      
-      npm install @daostack/client
-      node demo.js
-
-## Example Code
-
-```js
+```javascript
 const client = require('@daostack/client')
 
 const Arc = client.Arc
 const DAO = client.DAO
+const Proposal = client.Proposal
 const utils = client.utils
 
 let arc;
+```
 
+### Initialize Arc configuration
+
+```javascript
 const initialize = async () => {
   // "Arc" is the main class that handles configuration and connections
   // to various services. Create an Arc instance with settings to connect
@@ -47,11 +39,22 @@ const initialize = async () => {
   // get this information from the subgraph
   await arc.fetchContractInfos()
 
-  // Add your private key or you can use metamask web3Provider above
-  const account = arc.web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY)
-  arc.web3.eth.accounts.wallet.add(account)
 }
+```
 
+### Add your private key 
+
+While using Ganache, by default it will be set to `account[0]`
+
+```
+// Add your private key or you can use metamask web3Provider above
+const account = arc.web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY)
+arc.web3.eth.accounts.wallet.add(account)
+```
+
+### Query All DAOs
+
+```javascript
 const showAllDAOs = () => {
   arc.daos().subscribe(
     (daos) => {
@@ -60,7 +63,11 @@ const showAllDAOs = () => {
     }
   )
 }
+```
 
+### Create Proposal
+
+```javascript
 const createProposal = async () => {
   // we get the first returned item from the obervable that returns a list of DAOs
   const daos = await arc.daos().first()
@@ -98,7 +105,13 @@ const createProposal = async () => {
 
   console.log(`Tx Hash: ${minedTx.receipt.transactionHash}`)
 }
+```
 
+### Query Proposals
+
+Query the subgraph to get Details of all the proposals
+
+```javascript
 const showProposalDetails = async () => {
   const daos = await arc.daos().first()
   const dao = new DAO(daos[0].id, arc)
@@ -111,16 +124,34 @@ const showProposalDetails = async () => {
       }
     })
 }
+```
 
-const demo = async () => {
-  initialize()
-  console.log( 'calling show all DAOs')
-  await showAllDAOs()
-  console.log( 'creating new proposal in first DAO')
-  await createProposal()
-  console.log( 'calling show all proposals in first DAO')
-  await showProposalDetails()
+### Vote on Proposal
+
+This will only succeed if the proposal is still open for voting and the account has reputation in the respective DAO.
+Replace the `id` below accordingly.
+
+```
+const voteOnProposal = async () => {
+  const proposal = new Proposal('0xfa06e538a0ecb32c1cd1eaad2102a8104180b56b6f088fab298c1ce86f582b8e', arc)
+  vote(IProposalOutcome.Pass).send()
 }
+```
 
-demo()
+### Query Votes
+
+We will query all the voters for the first DAO
+
+```javascript
+const showAllVotes = async () => {
+  const proposal = new client.Proposal('0xfa06e538a0ecb32c1cd1eaad2102a8104180b56b6f088fab298c1ce86f582b8e', arc)
+  proposal.votes({}, { fetchAllData: true }).subscribe(
+    async (votes) => {
+      for (let vote of votes) {
+        vote.state().subscribe(
+          (vote) => {
+            console.log(vote)
+            console.log( `Vote id: ${vote.id}, voter: ${vote.voter}, proposal: ${proposal.id}`)
+          })}})
+}
 ```
