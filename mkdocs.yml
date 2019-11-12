@@ -35,6 +35,7 @@ nav:
     - Getting Started: 'stack/client/GettingStarted.md'
     - Subscriptions: 'stack/client/querying.md'
     - Quick Example: 'stack/client/example.md'
+    - API Reference: 'https://daostack.github.io/client/docs/globals.html'
   - Subgraph:
     - Intro: 'stack/subgraph/subgraphIntro.md'
     - GraphQL queries: 'stack/subgraph/queries.md'
