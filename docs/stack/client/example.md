@@ -56,6 +56,7 @@ arc.web3.eth.accounts.wallet.add(account)
 
 ```javascript
 const showAllDAOs = () => {
+  // we subscribe to the data needed to create resultant set i.e. DAO id in this case
   arc.daos().subscribe(
     (daos) => {
       console.log('Here are all the DAOS:')
@@ -76,11 +77,11 @@ const createProposal = async () => {
   const dao = new DAO(daos[0].id, arc)
 
 
-  // to create a proposal, we must first find the address of the Scheme to create it in
+  // to create a proposal, we must first find the address of the Scheme in which to create the proposal
   const schemes = await dao.schemes({ where: { name: 'ContributionReward'}}).first()
 
   if (schemes.length === 0) {
-    throw Error('Something went wrong - no ContrsbutsonReward scheme was registered with this DAO')
+    throw Error('Something went wrong - no ContributionReward scheme was registered with this DAO')
   }
   const schemeState = await schemes[0].state().first()
 
@@ -88,6 +89,7 @@ const createProposal = async () => {
       in DAO: ${dao.id}
       for Scheme: ${schemeState.address}`)
 
+  // Send Transaction to create new proposal
   await dao.createProposal({
     description: "This is a Sample proposal",
     title: "Sample Proposal",
