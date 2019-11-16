@@ -87,7 +87,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#subscriptions" tabindex="1" class="md-skip">
+      <a href="#query-observables-and-subscription" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -324,14 +324,24 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../howToUseClient/" title="How To Use" class="md-nav__link">
+      How To Use
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
   <li class="md-nav__item md-nav__item--active">
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
@@ -346,23 +356,55 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#query-examples" class="md-nav__link">
-    Query examples:
+  <a href="#query-observables-and-subscription" class="md-nav__link">
+    Query, Observables and Subscription
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-this-does" class="md-nav__link">
-    What this does
+  <a href="#what-does-subscription-do-and-why-we-use-it" class="md-nav__link">
+    What does Subscription do and Why we use it?
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-subscriptions" class="md-nav__link">
+    Types of Subscriptions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-to-only-cache-changes" class="md-nav__link">
+    Subscribe to Only Cache changes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-fetchalldata-with-nested-subscription" class="md-nav__link">
+    Use fetchAllData with Nested subscription
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-to-explicit-query" class="md-nav__link">
+    Subscribe to explicit query
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -809,23 +851,55 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#query-examples" class="md-nav__link">
-    Query examples:
+  <a href="#query-observables-and-subscription" class="md-nav__link">
+    Query, Observables and Subscription
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-this-does" class="md-nav__link">
-    What this does
+  <a href="#what-does-subscription-do-and-why-we-use-it" class="md-nav__link">
+    What does Subscription do and Why we use it?
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-subscriptions" class="md-nav__link">
+    Types of Subscriptions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-to-only-cache-changes" class="md-nav__link">
+    Subscribe to Only Cache changes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-fetchalldata-with-nested-subscription" class="md-nav__link">
+    Use fetchAllData with Nested subscription
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-to-explicit-query" class="md-nav__link">
+    Subscribe to explicit query
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -848,30 +922,29 @@
                   <a href="https://github.com/daostack/DAOstack-Hacker-Kit/edit/master/docs/stack/client/querying.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="subscriptions">Subscriptions<a class="headerlink" href="#subscriptions" title="Permanent link">&para;</a></h1>
-<p>In this guide we describe how to query and subscribe to the subgraph that contains the index of DAOstack data.</p>
-<h2 id="query-examples">Query examples:<a class="headerlink" href="#query-examples" title="Permanent link">&para;</a></h2>
+                  <h1>Subscriptions</h1>
+                
+                <h2 id="query-observables-and-subscription">Query, Observables and Subscription<a class="headerlink" href="#query-observables-and-subscription" title="Permanent link">&para;</a></h2>
+<p>The entity methods provided by <code>@daostack/client</code> for querying the subgraph, by themself does not actually send the query to the server. Instead, each methods returns an <em>Observable</em> to which we can subscribe. <em>Subscriptions</em> are used so that our handler gets called every time a new value is emitted for the observable stream.</p>
+<p>Take a look at the following methods that return observable:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">()</span>
-<span class="n">arc</span><span class="p">.</span><span class="n">sendQuery</span><span class="p">(</span><span class="o">`</span><span class="n">daos</span> <span class="err">{</span> <span class="n">id</span> <span class="n">name</span> <span class="err">}</span><span class="o">`</span><span class="p">)</span>
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">()</span>
 <span class="n">proposal</span><span class="p">.</span><span class="k">state</span><span class="p">()</span>
 </pre></div>
 </td></tr></table>
 
-<h2 id="what-this-does">What this does<a class="headerlink" href="#what-this-does" title="Permanent link">&para;</a></h2>
-<p>Calling each of these function by itself will not actually send the qeury to the server.
-Instead, each query returns an <em>observable</em>, to which you can subscribe.
-Only at that moment will the server be queried:</p>
+<p>Now, in order to query the server we must subscribe</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>const observable = arc.daos()
-// only in the nexzt line will a query be sent to the server
-const subscription = arc.daos.subscribe((daos) =&gt; console.log(`we found <span class="cp">${</span><span class="n">daos</span><span class="o">.</span><span class="n">length</span><span class="cp">}</span> results`))
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">observable</span> <span class="o">=</span> <span class="nv">arc</span>.<span class="nv">daos</span><span class="ss">()</span>
+<span class="o">//</span> <span class="nv">only</span> <span class="nv">in</span> <span class="nv">the</span> <span class="k">next</span> <span class="nv">line</span> <span class="nv">will</span> <span class="nv">a</span> <span class="nv">query</span> <span class="nv">be</span> <span class="nv">sent</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">server</span>
+<span class="nv">const</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="nv">arc</span>.<span class="nv">daos</span>.<span class="nv">subscribe</span><span class="ss">((</span><span class="nv">daos</span><span class="ss">)</span> <span class="o">=&gt;</span> <span class="nv">console</span>.<span class="nv">log</span><span class="ss">(</span>`<span class="nv">we</span> <span class="nv">found</span> ${<span class="nv">daos</span>.<span class="nv">length</span>} <span class="nv">results</span>`<span class="ss">))</span>
 </pre></div>
 </td></tr></table>
 
-<p>By default, subscribing to an observable will do to things:</p>
+<p>In this guide we will describe how to query and subscribe to the subgraph that contains the index of DAOstack data.</p>
+<h2 id="what-does-subscription-do-and-why-we-use-it">What does Subscription do and Why we use it?<a class="headerlink" href="#what-does-subscription-do-and-why-we-use-it" title="Permanent link">&para;</a></h2>
+<p>By default, subscribing to an observable will do two things:</p>
 <ol>
 <li>It will send a query to the server, fetching the data</li>
 <li>It will send a subscription query to the server, which will cause the server to send you an update each time the data changes</li>
@@ -884,14 +957,19 @@ const subscription = arc.daos.subscribe((daos) =&gt; console.log(`we found <span
 </pre></div>
 </td></tr></table>
 
-<p>Regarding step 2, the creation of a subscription can be controlled by passing the <code>subscribe</code> parameter.</p>
+<p>Regarding step 2, the creation of a subscription can be controlled by choosing the right <a href="#types-of-subscriptions">type of subscriptions</a> as discussed below</p>
+<h2 id="types-of-subscriptions">Types of Subscriptions<a class="headerlink" href="#types-of-subscriptions" title="Permanent link">&para;</a></h2>
+<h3 id="subscribe-to-only-cache-changes">Subscribe to Only Cache changes<a class="headerlink" href="#subscribe-to-only-cache-changes" title="Permanent link">&para;</a></h3>
+<p>The creation of a subscription can be controlled by passing the subscribe parameter.
+In the following query we will subscribe not subscribe to updates from the server. The subscription will still watch changes in the Apollo cache and return updated results if the cache changes</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{}</span><span class="p">,</span> <span class="err">{</span> <span class="n">subscribe</span><span class="p">:</span> <span class="k">false</span><span class="err">}</span><span class="p">)</span>
-<span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">(</span><span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">false</span><span class="err">}</span><span class="p">)</span>
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{}</span><span class="p">,</span> <span class="err">{</span> <span class="n">subscribe</span><span class="p">:</span> <span class="k">false</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
+<span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">(</span><span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">false</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p>Although these queries will not subscribe themselves to updates, the observable will still watch for changes in the Appollo cache and return updated results if the cache changes.</p>
+<p>NOTE: the cache could change as a result of another smaller query which does subscribe to server changes.</p>
+<h3 id="use-fetchalldata-with-nested-subscription">Use fetchAllData with Nested subscription<a class="headerlink" href="#use-fetchalldata-with-nested-subscription" title="Permanent link">&para;</a></h3>
 <p>Most of these methods are implemented in such a way that the queries will fetch (and subscribe to) just as much data as is needed to create the result set. For example, <code>dao.proposals()</code> will only fetch the proposal IDs. This can be controlled (in a limited way) by setting the parameter <code>fetchAllData</code> to true</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span><span class="n">orderBy</span><span class="p">:</span> <span class="ss">&quot;creationDate&quot;</span><span class="err">}</span><span class="p">,</span> <span class="err">{</span><span class="n">fetchAllData</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">)</span>
 </pre></div>
@@ -933,7 +1011,8 @@ const subscription = arc.daos.subscribe((daos) =&gt; console.log(`we found <span
 </td></tr></table>
 
 <p>This will resolve two inefficiencies. First of all, the <code>fetchAllData</code> in the proposals query will make it so that the
-<code>dao.proposals</code> query will fetch (and subscribe to) a much larger query - in particular, it will get all state data for each of the proposals. This means that when <code>prop.state()</code> is called, it will find all the needed information in the cache (and so it will nto send a new query to the server), and we can safely pass it the <code>subscribe: false</code> flag, because <code>dao.proposals()</code> already subscribes to updates for all the cached data.</p>
+<code>dao.proposals</code> query will fetch (and subscribe to) a much larger query - in particular, it will get all state data for each of the proposals. This means that when <code>prop.state()</code> is called, it will find all the needed information in the cache (and so it will not send a new query to the server), and we can safely pass it the <code>subscribe: false</code> flag, because <code>dao.proposals()</code> already subscribes to updates for all the cached data.</p>
+<h3 id="subscribe-to-explicit-query">Subscribe to explicit query<a class="headerlink" href="#subscribe-to-explicit-query" title="Permanent link">&para;</a></h3>
 <p>For even more control over what data is being fetched and subscribed to, you can write explicit queries:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -970,7 +1049,7 @@ const subscription = arc.daos.subscribe((daos) =&gt; console.log(`we found <span
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../GettingStarted/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../howToUseClient/" title="How To Use" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -979,7 +1058,7 @@ const subscription = arc.daos.subscribe((daos) =&gt; console.log(`we found <span
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Getting Started
+                How To Use
               </span>
             </div>
           </a>

@@ -355,67 +355,6 @@
     General Structure
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#initialization-arc-configuration" class="md-nav__link">
-    Initialization: Arc configuration
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#proposals-schemes-votes-stakes-queues-etc" class="md-nav__link">
-    Proposals, Schemes, Votes, Stakes, Queues, etc
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#class-instances" class="md-nav__link">
-    Class instances
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#entity-states" class="md-nav__link">
-    Entity states
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#searching-and-observables" class="md-nav__link">
-    Searching and observables
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sending-transactions" class="md-nav__link">
-    Sending transactions
-  </a>
-  
 </li>
       
       
@@ -426,6 +365,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../howToUseClient/" title="How To Use" class="md-nav__link">
+      How To Use
+    </a>
   </li>
 
         
@@ -896,67 +847,6 @@
     General Structure
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#initialization-arc-configuration" class="md-nav__link">
-    Initialization: Arc configuration
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#proposals-schemes-votes-stakes-queues-etc" class="md-nav__link">
-    Proposals, Schemes, Votes, Stakes, Queues, etc
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#class-instances" class="md-nav__link">
-    Class instances
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#entity-states" class="md-nav__link">
-    Entity states
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#searching-and-observables" class="md-nav__link">
-    Searching and observables
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sending-transactions" class="md-nav__link">
-    Sending transactions
-  </a>
-  
 </li>
       
       
@@ -1009,217 +899,26 @@ yarn add @daostack/client
 </td></tr></table>
 
 <h2 id="general-structure">General Structure<a class="headerlink" href="#general-structure" title="Permanent link">&para;</a></h2>
-<p>The client library provides a number of <a href="https://daostack.github.io/client/docs/globals.html#classes">Classes</a> that represents the DAOstack entities - the basic building blocks of a DAO.</p>
-<p>The <a href="https://daostack.github.io/client/docs/classes/arc.html">Arc</a> class has basic configuration. A <a href="https://daostack.github.io/client/docs/classes/dao.html">DAO</a> has a number of <a href="https://daostack.github.io/client/docs/classes/member.html">Member</a>, which are holders of reputation (from the <a href="https://daostack.github.io/client/docs/classes/reputation.html">Reputation</a> contract) and can cast a <a href="https://daostack.github.io/client/docs/classes/vote.html">Vote</a> on a <a href="https://daostack.github.io/client/docs/classes/proposal.html">Proposal</a>.
-Proposals are always made in a <a href="https://daostack.github.io/client/docs/classes/scheme.html">Scheme</a> - that determines the conditions and effects of executing a proposal, typically by ordering them in a  <a href="https://daostack.github.io/client/docs/classes/queue.html">Queue</a>.
-Users can also put a <a href="https://daostack.github.io/client/docs/classes/stake.html">Stake</a> on the outcome of a proposal, and claim one or more <a href="https://daostack.github.io/client/docs/classes/reward.html">Reward</a> if they vote or stake effectively.</p>
-<h3 id="initialization-arc-configuration">Initialization: Arc configuration<a class="headerlink" href="#initialization-arc-configuration" title="Permanent link">&para;</a></h3>
-<p>The <code>Arc</code> class holds the basic configuration and serves as the main entrypoint when using the library. The user of the library must provide some basic configuration options.</p>
-<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="p">{</span> <span class="n">Arc</span> <span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@daostack/client&#39;</span>
-
-<span class="n">const</span> <span class="n">arc</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Arc</span><span class="p">({</span>
-  <span class="n">graphqlHttpProvider</span><span class="p">:</span> <span class="s2">&quot;https://subgraph.daostack.io/subgraphs/name/v23&quot;</span><span class="p">,</span>
-  <span class="n">graphqlWsProvider</span><span class="p">:</span> <span class="s2">&quot;wss://ws.subgraph.daostack.io/subgraphs/name/v23&quot;</span><span class="p">,</span>
-  <span class="n">web3Provider</span><span class="p">:</span> <span class="sb">`wss://mainnet.infura.io/ws/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2`</span><span class="p">,</span>
-  <span class="n">ipfsProvider</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;subgraph.daostack.io&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="s2">&quot;443&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;https&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;api-path&quot;</span><span class="p">:</span> <span class="s2">&quot;/ipfs/api/v0/&quot;</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-
-<span class="o">//</span> <span class="n">before</span> <span class="n">we</span> <span class="n">can</span> <span class="n">use</span> <span class="n">the</span> <span class="n">Arc</span> <span class="n">instance</span> <span class="n">to</span> <span class="n">send</span> <span class="n">transactions</span><span class="p">,</span> <span class="n">we</span> <span class="n">need</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">it</span>
-<span class="o">//</span> <span class="k">with</span> <span class="n">information</span> <span class="n">on</span> <span class="n">where</span> <span class="n">the</span> <span class="n">contracts</span> <span class="n">can</span> <span class="n">be</span> <span class="n">found</span>
-<span class="o">//</span> <span class="n">query</span> <span class="n">the</span> <span class="n">subgraph</span> <span class="k">for</span> <span class="n">the</span> <span class="n">contract</span> <span class="n">addresses</span><span class="p">,</span> <span class="ow">and</span> <span class="n">use</span> <span class="n">those</span>
-<span class="n">await</span> <span class="n">arc</span><span class="o">.</span><span class="n">fetchContractInfos</span><span class="p">()</span>
-</pre></div>
-</td></tr></table>
-
-<p>Note how we are passing to Arc all the information it needs to connect to the various services: the web3Provider represents a  connection to an Ethereum node,  websocket and http connections to the subgraph of The Graph;
-and a connection to an IPFS provider (which is used to as a data storage layer by DAOStack).</p>
-<p>Some of these configuration settings are optional: to use <code>@daostack/client</code> for creating and sending transactions to the blockchain, it is sufficient
-to provide the web3Provider;
-similarly, the <code>web3</code> and <code>ipfs</code> providers can be omitted when the library is only used for fetching data from the subgraph.</p>
-<h3 id="proposals-schemes-votes-stakes-queues-etc">Proposals, Schemes, Votes, Stakes, Queues, etc<a class="headerlink" href="#proposals-schemes-votes-stakes-queues-etc" title="Permanent link">&para;</a></h3>
-<p>All basic Entity classes in the client library implement a number of common functions.</p>
-<p>For example, all these classes implement a <code>search</code>  function as a class method, which can be used to search for those entities on the subgraph.
-To get all DAOs that are called <code>Foo</code>, you can do:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="p">{</span> <span class="n">DAO</span> <span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@doastack/client&#39;</span>
-<span class="n">DAO</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="p">{</span><span class="n">where</span><span class="p">:</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Foo&quot;</span> <span class="p">}})</span>
-</pre></div>
-</td></tr></table>
-
-<p>Note how the search function must be provided with an <code>Arc</code> instance, so it knows to which service to send the queries.</p>
-<p>All queries return <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html">rxjs.Observable</a>.
-<a href="#searching-and-observables">See below</a> for further explanation.</p>
-<h3 id="class-instances">Class instances<a class="headerlink" href="#class-instances" title="Permanent link">&para;</a></h3>
-<p>All Entity classes can be created by providing an <code>id</code> (and an instance of <code>Arc</code>), for example:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">proposal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Proposal</span><span class="p">(</span><span class="s1">&#39;0x1234....&#39;</span><span class="p">,</span> <span class="n">arc</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p>The proposal object can now be used to vote, and stake.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">await</span> <span class="nv">proposal</span>.<span class="nv">vote</span><span class="ss">(</span>...<span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
-</pre></div>
-</td></tr></table>
-
-<p>This call will register a vote by sending a transaction to the blockchain. <a href="#sending-transactions">See below</a> for more details.</p>
-<p>Because the proposal is created with only an <code>id</code>, the client will query the subgraph for additional information, such as the address of the contract that the vote needs to be sent to. To make the client usable without having subgraph service available, all Entities have a second way of being created:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">proposal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Proposal</span><span class="p">(</span><span class="err">{</span>
-  <span class="n">id</span><span class="p">:</span> <span class="s1">&#39;0x12455..&#39;</span><span class="p">,</span>
-  <span class="n">votingMachine</span><span class="p">:</span> <span class="s1">&#39;0x1111..&#39;</span><span class="p">,</span>
-  <span class="n">scheme</span><span class="p">:</span> <span class="s1">&#39;0x12345...&#39;</span>
-<span class="err">}</span><span class="p">,</span> <span class="n">arc</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p>This will provide the instance with enough information to send transactions without having to query the subgraph for additional information.</p>
-<h2 id="entity-states">Entity states<a class="headerlink" href="#entity-states" title="Permanent link">&para;</a></h2>
-<p>All entities implement a <code>state()</code> method that returns an observable of objects that represent the current state of the entity.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">proposal</span>.<span class="k">state</span>().<span class="n">subscribe</span>(
-  (<span class="n">newState</span>) =&gt; <span class="n">console</span>.<span class="nb">log</span>(`<span class="n">This</span> <span class="n">proposal</span> <span class="k">has</span> ${<span class="n">newState</span>.<span class="n">votesFor</span>} <span class="n">upvotes</span>`)
-)
-</pre></div>
-</td></tr></table>
-
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">dao</span>.<span class="k">state</span>().<span class="n">subscribe</span>(
-  (<span class="n">newState</span>) =&gt; <span class="n">console</span>.<span class="nb">log</span>(`<span class="n">This</span> <span class="n">DAO</span> <span class="k">has</span> ${<span class="n">newState</span>.<span class="n">memberCount</span>} <span class="n">members</span>`)
-)
-</pre></div>
-</td></tr></table>
-
-<h2 id="searching-and-observables">Searching and observables<a class="headerlink" href="#searching-and-observables" title="Permanent link">&para;</a></h2>
-<p>The search functions are wrappers around graphql queries, and standard graphql syntax can be used
-to filter and sort the queries, and for pagination:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Proposal</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">dao</span><span class="p">:</span> <span class="s1">&#39;0x1234..&#39;</span> <span class="err">}}</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">scheme</span><span class="p">:</span> <span class="s1">&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;</span><span class="err">}}</span><span class="p">)</span>
-  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">scheme_in</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;</span><span class="p">]</span><span class="err">}}</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p>Paging</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="n">skip</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="k">first</span><span class="p">:</span> <span class="mi">100</span><span class="err">}</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p>Sorting:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="n">orderBy</span><span class="p">:</span> <span class="s1">&#39;createdAt&#39;</span><span class="p">,</span> <span class="n">orderDirection</span><span class="p">:</span> <span class="s1">&#39;desc&#39;</span><span class="err">}</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p>All these queries return an (rxjs <code>Observable</code>)[https://rxjs-dev.firebaseapp.com/guide/observable] object.</p>
-<p>This observables return a stream of results: everytime the data in the query gets updated, the observable will emit a new result.
-Observables are very flexible.
-Typically, an observable will be used by creating a subscription:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">observable</span> <span class="o">=</span>  <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span> <span class="o">//</span> <span class="nv">all</span> <span class="nv">proposals</span> <span class="nv">in</span> <span class="nv">this</span> <span class="nv">dao</span>
-
-<span class="o">//</span> <span class="nv">a</span> <span class="nv">subscription</span>
-<span class="nv">const</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="nv">observable</span>.<span class="nv">subscribe</span><span class="ss">(</span>
-  <span class="ss">(</span><span class="k">next</span><span class="ss">)</span> <span class="o">=&gt;</span> <span class="nv">console</span>.<span class="nv">log</span><span class="ss">(</span>`<span class="nv">Now</span> <span class="nv">there</span> <span class="nv">are</span> ${<span class="k">next</span>.<span class="nv">length</span>} <span class="nv">proposals</span>`<span class="ss">)</span> <span class="o">//</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">called</span> <span class="nv">each</span> <span class="nv">time</span> <span class="nv">the</span> <span class="nv">data</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">qeury</span> <span class="nv">changes</span>
-<span class="ss">)</span>
-<span class="nv">subscription</span>.<span class="nv">unsubscribe</span><span class="ss">()</span> <span class="o">//</span> <span class="k">do</span> <span class="nv">not</span> <span class="nv">forget</span> <span class="nv">to</span> <span class="nv">unsubscribe</span>
-</pre></div>
-</td></tr></table>
-
-<p>If you are only interested in the first result, but do not want to get further updates when the data is changed, there is a helper function that returns a Promise
-with the first result</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">observable</span> <span class="o">=</span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">()</span> <span class="o">//</span> <span class="k">all</span> <span class="n">proposals</span> <span class="k">in</span> <span class="n">this</span> <span class="n">dao</span>
-<span class="n">const</span> <span class="n">proposals</span> <span class="o">=</span> <span class="n">await</span> <span class="n">observable</span><span class="p">.</span><span class="k">first</span><span class="p">()</span> <span class="o">//</span> <span class="k">returns</span> <span class="n">a</span> <span class="n">list</span> <span class="k">of</span> <span class="n">Proposal</span> <span class="n">instances</span>
-</pre></div>
-</td></tr></table>
-
-<h2 id="sending-transactions">Sending transactions<a class="headerlink" href="#sending-transactions" title="Permanent link">&para;</a></h2>
-<p>One of the purposes of the client library is to make help with interactions with the DAOstack Ethereum contracts.</p>
-<p>Here is how you create a proposal in a DAO  for a contribution reward for a</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">DAO</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DAO</span><span class="p">(</span><span class="s1">&#39;0x123DAOADDRESS&#39;</span><span class="p">)</span>
-<span class="n">const</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">dao</span><span class="p">.</span><span class="n">createProposal</span><span class="p">(</span><span class="err">{</span>
-  <span class="n">beneficiary</span><span class="p">:</span> <span class="s1">&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;</span><span class="p">,</span>
-  <span class="n">ethReward</span><span class="p">:</span> <span class="n">toWei</span><span class="p">(</span><span class="s1">&#39;300&#39;</span><span class="p">),</span>
-  <span class="n">nativeTokenReward</span><span class="p">:</span> <span class="n">toWei</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),</span>
-  <span class="n">periodLength</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="n">periods</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="n">reputationReward</span><span class="p">:</span> <span class="n">toWei</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">),</span>
-  <span class="n">scheme</span><span class="p">:</span> <span class="s1">&#39;0xContributionRewardAddress&#39;</span> <span class="o">//</span> <span class="n">address</span> <span class="k">of</span> <span class="n">a</span> <span class="n">contribution</span> <span class="n">reward</span> <span class="n">scheme</span> <span class="n">that</span> <span class="k">is</span> <span class="n">registered</span> <span class="k">with</span> <span class="n">this</span> <span class="n">DAO</span>
-<span class="err">}</span><span class="p">)</span>
-</pre></div>
-</td></tr></table>
-
-<p>All functions that send a transaction to the blockchain (like <code>DAO.createProposal</code>, <code>Proposal.vote</code>, <code>Token.mint</code>, etc, etc) return an rxjs Observable. This observable returns a stream of updates about the state of the transaction: first when it is sent, then when it is mined and confirmed.</p>
-<p>You can subscribe to the transaction:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">tx</span>.<span class="n">subscribe</span>(
-  (<span class="k">next</span>) =&gt; {
-    <span class="n">console</span>.<span class="nb">log</span>(<span class="k">next</span>.<span class="k">state</span>) // <span class="n">sending</span>, <span class="n">sent</span>, <span class="o">or</span> <span class="n">mined</span>
-    <span class="k">if</span> (<span class="k">next</span>.<span class="n">stage</span> === <span class="n">ITransactionStage</span>.<span class="n">Mined</span>) {
-      <span class="n">console</span>.<span class="nb">log</span>(`<span class="n">This</span> <span class="n">transaction</span> <span class="k">has</span> ${<span class="k">next</span>.<span class="n">confirmations</span>} <span class="n">confirmations</span>`)
-      <span class="n">console</span>.<span class="nb">log</span>(<span class="k">next</span>.<span class="n">result</span>)
-    }
-  })
-</pre></div>
-</td></tr></table>
-
-<p>All operations also provide a convenience function <code>send()</code> that returns a promise that resolves when the transaction is mined</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">voteTransaction</span> <span class="o">=</span> <span class="nv">await</span> <span class="nv">proposal</span>.<span class="nv">vote</span><span class="ss">(</span>...<span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
-<span class="nv">const</span> <span class="nv">vote</span> <span class="o">=</span> <span class="nv">voteTransaction</span>.<span class="nb">result</span> <span class="o">//</span> <span class="nv">an</span> <span class="nv">instance</span> <span class="nv">of</span> <span class="nv">Vote</span>
-</pre></div>
-</td></tr></table>
-
-<p>For details, checkout complete <a href="https://daostack.github.io/client/docs/globals.html">API reference</a></p>
+<p>The client library provides a number of <a href="https://daostack.github.io/client/docs/globals.html#classes">Classes</a> that represents the DAOstack entities and configuration.</p>
+<ul>
+<li><a href="#initialization-arc-configuration">Configuration</a><ul>
+<li><a href="https://daostack.github.io/client/docs/classes/arc.html">Arc</a>: holds the basic configuration i.e. which services to connect. Any use of the library will start with instantiating a new Arc instance</li>
+</ul>
+</li>
+<li><a href="#entities-dao-proposals-vote-etc">Entities</a><ul>
+<li><a href="https://daostack.github.io/client/docs/classes/dao.html">DAO</a>: represents the DAOstack DAO and has all the informations about it.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/reputation.html">Reputation</a>: represents native reputation contract of the DAO and its details</li>
+<li><a href="https://daostack.github.io/client/docs/classes/token.html">Token</a>: represents native token contract of the DAO and its details</li>
+<li><a href="https://daostack.github.io/client/docs/classes/member.html">Member</a>: represents holders of reputation i.e. voting power in the DAO</li>
+<li><a href="https://daostack.github.io/client/docs/classes/proposal.html">Proposal</a>: represents Proposal made in the DAO, they can belong to any of the Scheme's registered in the DAO</li>
+<li><a href="https://daostack.github.io/client/docs/classes/vote.html">Vote</a>: represents votes made on the proposal</li>
+<li><a href="https://daostack.github.io/client/docs/classes/stake.html">Stake</a>: represents stake made on the outcome of a proposal</li>
+<li><a href="https://daostack.github.io/client/docs/classes/reward.html">Reward</a>: represents rewards awarded by the DAO for a given proposal</li>
+<li><a href="https://daostack.github.io/client/docs/classes/scheme.html">Scheme</a>: represents the various schemes (ContributionReward, SchemeRegistrar, GenericScheme etc) registered to the DAO and to which a proposal can be made. Scheme determines the conditions and effects of executing the proposal</li>
+<li><a href="https://daostack.github.io/client/docs/classes/queue.html">Queue</a>: represents queues for each scheme registered to the DAO. The proposal is ordered in queue upon submission</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
@@ -1255,13 +954,13 @@ with the first result</p>
           </a>
         
         
-          <a href="../querying/" title="Subscriptions" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../howToUseClient/" title="How To Use" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Subscriptions
+                How To Use
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
