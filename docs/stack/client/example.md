@@ -28,7 +28,6 @@ const initialize = async () => {
   // to the local docker images
   arc = new Arc({
     graphqlHttpProvider: 'http://127.0.0.1:8000/subgraphs/name/daostack',
-    graphqlHttpMetaProvider: 'http://127.0.0.1:8000/subgraphs',
     graphqlWsProvider: 'http://127.0.0.1:8001/subgraphs/name/daostack',
     web3Provider: 'ws://127.0.0.1:8545',
     ipfsProvider: '/ip4/127.0.0.1/tcp/5001',

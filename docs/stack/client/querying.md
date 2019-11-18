@@ -1,5 +1,33 @@
-## Query, Observables and Subscription
+# Query, Observables & Subscription
 
+In this guide we will describe how to query and subscribe to the subgraph that contains the index of DAOstack data.
+
+## Query
+These are the graphQL queries sent to graphnode to fetch DAOstack data from the subgraph.
+
+Following are the two ways to use client to query the subgraph:
+
+### Standard queries
+These are the queries provided by the *Entity methods*. The entity methods return an Observable for our queries as [described below](#observables-subscription).
+
+        // proposals of the DAO
+        Proposal.search(arc, { where: { dao: "0x123" } })
+
+        // members of the given dao
+        dao.members()
+
+### Custom queries
+  These are explicit queries made using the static method `arc.apolloClient`.
+  These queries can be customized to have more control over what data gets fetched and follow the standard
+  [graphQL syntax](../subgraph/queries/)
+
+        arc.apolloClient.sendQuery(gql`query {
+            proposal (id: "0x1245") {
+              votes: { id outcome }
+            }}`)
+
+  
+## Observables & Subscription
 The entity methods provided by `@daostack/client` for querying the subgraph, by themself does not actually send the query to the server. Instead, each methods returns an *Observable* to which we can subscribe. *Subscriptions* are used so that our handler gets called every time a new value is emitted for the observable stream.
 
 Take a look at the following methods that return observable:
@@ -15,7 +43,13 @@ const observable = arc.daos()
 const subscription = arc.daos.subscribe((daos) => console.log(`we found ${daos.length} results`))
 ```
 
-In this guide we will describe how to query and subscribe to the subgraph that contains the index of DAOstack data.
+There are multiple ways to subscribe to the Observables
+
+  - Subscribe to Cache
+  - Subscribe to Server standard queries
+  - Subscribe to Explicit queries
+  
+We discuss these below in detail.
 
 ## What does Subscription do and Why we use it?
 
@@ -36,9 +70,9 @@ Regarding step 2, the creation of a subscription can be controlled by choosing t
 
 ## Types of Subscriptions
 
-### Subscribe to Only Cache changes
+### Subscribe to Only Cache changes0xfd95fcbebaaefc6f0730c9c51491a95d08b814f840f92f1419eb9f97847bc291
 The creation of a subscription can be controlled by passing the subscribe parameter.
-In the following query we will subscribe not subscribe to updates from the server. The subscription will still watch changes in the Apollo cache and return updated results if the cache changes
+In the following query we will not subscribe to the server. The subscription will still watch changes in the Apollo cache and return updated results if the cache changes
 ```
 arc.daos({}, { subscribe: false}).subscribe(() => {})
 dao.state({subscribe: false}).subscribe( () => {})

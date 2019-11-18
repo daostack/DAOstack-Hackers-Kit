@@ -15,4 +15,4 @@ In particular, the  library provides an interface to
 **Extend the client package, if you are** 
 
   - interacting with Arc contracts that are not yet supported by *Client.js*
-  - modifying/Extending DAOstack subgraph
+  - modifying/extending DAOstack subgraph
