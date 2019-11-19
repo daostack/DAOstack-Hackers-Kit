@@ -124,21 +124,29 @@ All entities have:
           (newState) => console.log(`This DAO has ${newState.memberCount} members`)
         )
 
+    **Note:**
+      - There is a difference between `state().subscribe` and `state({subscribe: true})`. Refer [Types of Subscriptions](../querying/#types-of-subscriptions)
 
   - _**search()**_: method which can be used to search for the entities on the subgraph.
+
+    By default it will give us `id` of the Entity, but can be modified to fetch the `state()` by setting `fetchAllData`. Also refer to [Optimize subscription section](use-fetchalldata-with-nested-subscription)
 
     eg. To get all DAOs that are called `Foo`, you can do:
 
         DAO.search(arc, {where: { name: "Foo" }})
         
-    **Note:** Search function must be provided with an `Arc` instance, so it knows which service to send the queries.
+    eg. To get `currentState` of all DAOs that are called `Foo` ordered by `createdAt`, you can do:
 
-    All queries return [rxjs.Observable](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html).
+        DAO.search(arc, {where: { name: "Foo" }, orderBy: "createdAt" }, {fetchAllData: true} )
+        
+    **Note:**
+      - Search function must be provided with an `Arc` instance, so it knows which service to send the queries.
+      - All queries return [rxjs.Observable](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html).
     [See below](#search-and-observables) for further explanation.
 
 ## Search and Observables
 
-The search functions are wrappers around graphql queries, and standard [graphql syntax](../../subgraph/queries/) can be used
+The search functions are wrappers around graphql queries and standard [graphql syntax](../../subgraph/queries/) can be used
 to filter and sort the queries, and for pagination:
 ```
 Proposal.search({ where: { dao: '0x1234..' }})
