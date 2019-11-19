@@ -34,7 +34,7 @@ nav:
     - Intro: 'stack/client/clientIntro.md'
     - Getting Started: 'stack/client/GettingStarted.md'
     - How To Use: 'stack/client/howToUseClient.md'
-    - Subscriptions: 'stack/client/querying.md'
+    - Query, Observables & Subscriptions: 'stack/client/querying.md'
     - Quick Example: 'stack/client/example.md'
     - API Reference: 'https://daostack.github.io/client/docs/globals.html'
   - Subgraph:

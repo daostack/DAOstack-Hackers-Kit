@@ -61,8 +61,10 @@ To have more control over what gets fetched from the subgraph you can also custo
 As we noted above the query created need to be explicitly sent to the server.
 
 #### Entity Methods
-The query encapsulated by Entity Methods is automatically sent to the server on subscription as [discussed below]()
+By default `subscribe` parameter is set to `false`. This is useful to send a one time query and not bother the server with further requests for subscription.
 
+    // Get all proposals' Id of the DAO
+    dao.proposals().subscribe(() => {})
 
 #### Raw GraphQL queries
 These queries are made using the static method `arc.sendQuery`. Pass the query designed [above](#raw-graphql-queries) as the parameter to `sendQuery`.
@@ -81,8 +83,8 @@ These queries are made using the static method `arc.sendQuery`. Pass the query d
 As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe as follows to send the query as well as subscribe for updates.
 
 ```
-arc.daos().subscribe(() => {})
-dao.state({subscribe: false}).subscribe( () => {})
+arc.daos({subscribe: true}).subscribe(() => {})
+dao.state({subscribe: true}).subscribe( () => {})
 ```
   
 #### Raw graphQL queries
@@ -120,10 +122,8 @@ arc.daos({where: {stage: "Boosted"}}, { fetch-policy: 'network-only'}) // bypass
 ```
 
 ### Subscribe to Apollo Cache changes
-The creation of a subscription can be controlled by passing the subscribe parameter.
+The creation of a subscription can be controlled by passing the `subscribe` parameter.
 In the following query we will not subscribe to the updates from network but will still watch changes in the Apollo cache and return updated results if the cache changes.
-
-**Note**:
 
 ```
 arc.daos({}, { subscribe: false}).subscribe(() => {})
