@@ -338,8 +338,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../querying/" title="Subscriptions" class="md-nav__link">
-      Subscriptions
+    <a href="../querying/" title="Query, Observables & Subscriptions" class="md-nav__link">
+      Query, Observables & Subscriptions
     </a>
   </li>
 
@@ -1020,14 +1020,12 @@
 14
 15
 16
-17
-18</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">initialize</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">initialize</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="c1">// &quot;Arc&quot; is the main class that handles configuration and connections</span>
   <span class="c1">// to various services. Create an Arc instance with settings to connect</span>
   <span class="c1">// to the local docker images</span>
   <span class="nx">arc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Arc</span><span class="p">({</span>
     <span class="nx">graphqlHttpProvider</span><span class="o">:</span> <span class="s1">&#39;http://127.0.0.1:8000/subgraphs/name/daostack&#39;</span><span class="p">,</span>
-    <span class="nx">graphqlHttpMetaProvider</span><span class="o">:</span> <span class="s1">&#39;http://127.0.0.1:8000/subgraphs&#39;</span><span class="p">,</span>
     <span class="nx">graphqlWsProvider</span><span class="o">:</span> <span class="s1">&#39;http://127.0.0.1:8001/subgraphs/name/daostack&#39;</span><span class="p">,</span>
     <span class="nx">web3Provider</span><span class="o">:</span> <span class="s1">&#39;ws://127.0.0.1:8545&#39;</span><span class="p">,</span>
     <span class="nx">ipfsProvider</span><span class="o">:</span> <span class="s1">&#39;/ip4/127.0.0.1/tcp/5001&#39;</span><span class="p">,</span>
@@ -1238,7 +1236,7 @@ Replace the <code>id</code> below accordingly.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../querying/" title="Subscriptions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../querying/" title="Query, Observables & Subscriptions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1247,7 +1245,7 @@ Replace the <code>id</code> below accordingly.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Subscriptions
+                Query, Observables & Subscriptions
               </span>
             </div>
           </a>

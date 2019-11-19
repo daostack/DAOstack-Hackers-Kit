@@ -38,7 +38,7 @@
     
     
       
-        <title>Subscriptions - DAOstack Developer Egress</title>
+        <title>Query, Observables & Subscriptions - DAOstack Developer Egress</title>
       
     
     
@@ -87,7 +87,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#query-observables-and-subscription" tabindex="1" class="md-skip">
+      <a href="#query-observables-subscription" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -113,7 +113,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Subscriptions
+                Query, Observables & Subscriptions
               
             </span>
           
@@ -343,48 +343,146 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Subscriptions
+        Query, Observables & Subscriptions
       </label>
     
-    <a href="./" title="Subscriptions" class="md-nav__link md-nav__link--active">
-      Subscriptions
+    <a href="./" title="Query, Observables & Subscriptions" class="md-nav__link md-nav__link--active">
+      Query, Observables & Subscriptions
     </a>
     
       
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#query-observables-and-subscription" class="md-nav__link">
-    Query, Observables and Subscription
+  <a href="#why-subscription" class="md-nav__link">
+    Why Subscription
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-does-subscription-do-and-why-we-use-it" class="md-nav__link">
-    What does Subscription do and Why we use it?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#types-of-subscriptions" class="md-nav__link">
-    Types of Subscriptions
+  <a href="#how-to-query-and-subscribe" class="md-nav__link">
+    How to Query and Subscribe
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#subscribe-to-only-cache-changes" class="md-nav__link">
-    Subscribe to Only Cache changes
+  <a href="#creating-query" class="md-nav__link">
+    Creating Query
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entity-methods" class="md-nav__link">
+    Entity Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-graphql-queries" class="md-nav__link">
+    Raw GraphQL queries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executing-query" class="md-nav__link">
+    Executing Query
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entity-methods_1" class="md-nav__link">
+    Entity Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-graphql-queries_1" class="md-nav__link">
+    Raw GraphQL queries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribing-query" class="md-nav__link">
+    Subscribing Query
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entity-methods_2" class="md-nav__link">
+    Entity methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-graphql-queries_2" class="md-nav__link">
+    Raw graphQL queries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimizing-subscription-and-using-cache" class="md-nav__link">
+    Optimizing Subscription and Using Cache
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controlling-apollo-fetchpolicy" class="md-nav__link">
+    Controlling Apollo fetchPolicy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-to-apollo-cache-changes" class="md-nav__link">
+    Subscribe to Apollo Cache changes
   </a>
   
 </li>
@@ -392,13 +490,6 @@
           <li class="md-nav__item">
   <a href="#use-fetchalldata-with-nested-subscription" class="md-nav__link">
     Use fetchAllData with Nested subscription
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#subscribe-to-explicit-query" class="md-nav__link">
-    Subscribe to explicit query
   </a>
   
 </li>
@@ -851,35 +942,131 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#query-observables-and-subscription" class="md-nav__link">
-    Query, Observables and Subscription
+  <a href="#why-subscription" class="md-nav__link">
+    Why Subscription
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-does-subscription-do-and-why-we-use-it" class="md-nav__link">
-    What does Subscription do and Why we use it?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#types-of-subscriptions" class="md-nav__link">
-    Types of Subscriptions
+  <a href="#how-to-query-and-subscribe" class="md-nav__link">
+    How to Query and Subscribe
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#subscribe-to-only-cache-changes" class="md-nav__link">
-    Subscribe to Only Cache changes
+  <a href="#creating-query" class="md-nav__link">
+    Creating Query
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entity-methods" class="md-nav__link">
+    Entity Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-graphql-queries" class="md-nav__link">
+    Raw GraphQL queries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executing-query" class="md-nav__link">
+    Executing Query
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entity-methods_1" class="md-nav__link">
+    Entity Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-graphql-queries_1" class="md-nav__link">
+    Raw GraphQL queries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribing-query" class="md-nav__link">
+    Subscribing Query
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entity-methods_2" class="md-nav__link">
+    Entity methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-graphql-queries_2" class="md-nav__link">
+    Raw graphQL queries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimizing-subscription-and-using-cache" class="md-nav__link">
+    Optimizing Subscription and Using Cache
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controlling-apollo-fetchpolicy" class="md-nav__link">
+    Controlling Apollo fetchPolicy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe-to-apollo-cache-changes" class="md-nav__link">
+    Subscribe to Apollo Cache changes
   </a>
   
 </li>
@@ -887,13 +1074,6 @@
           <li class="md-nav__item">
   <a href="#use-fetchalldata-with-nested-subscription" class="md-nav__link">
     Use fetchAllData with Nested subscription
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#subscribe-to-explicit-query" class="md-nav__link">
-    Subscribe to explicit query
   </a>
   
 </li>
@@ -922,10 +1102,14 @@
                   <a href="https://github.com/daostack/DAOstack-Hacker-Kit/edit/master/docs/stack/client/querying.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Subscriptions</h1>
-                
-                <h2 id="query-observables-and-subscription">Query, Observables and Subscription<a class="headerlink" href="#query-observables-and-subscription" title="Permanent link">&para;</a></h2>
-<p>The entity methods provided by <code>@daostack/client</code> for querying the subgraph, by themself does not actually send the query to the server. Instead, each methods returns an <em>Observable</em> to which we can subscribe. <em>Subscriptions</em> are used so that our handler gets called every time a new value is emitted for the observable stream.</p>
+                <h1 id="query-observables-subscription">Query, Observables &amp; Subscription<a class="headerlink" href="#query-observables-subscription" title="Permanent link">&para;</a></h1>
+<p>The interaction with DAOstack subgraph comprises of:</p>
+<ul>
+<li><em><strong>Query</strong></em>: the graphQL queries sent to graphnode to fetch DAOstack data from the subgraph.</li>
+<li><em><strong>Observable</strong></em>: object representing the stream of data that can be subscribed.</li>
+<li><em><strong>Subscription</strong></em>: invokes our handler every time a new value is emitted for the observable.</li>
+</ul>
+<p>The entity methods provided by <code>@daostack/client</code> for querying the subgraph, by themself do not actually send the query to the server. Instead, each methods returns an <em>Observable</em> to which we can <em>subscribe</em>.</p>
 <p>Take a look at the following methods that return observable:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">()</span>
@@ -942,35 +1126,133 @@
 </pre></div>
 </td></tr></table>
 
-<p>In this guide we will describe how to query and subscribe to the subgraph that contains the index of DAOstack data.</p>
-<h2 id="what-does-subscription-do-and-why-we-use-it">What does Subscription do and Why we use it?<a class="headerlink" href="#what-does-subscription-do-and-why-we-use-it" title="Permanent link">&para;</a></h2>
+<p>In this guide we will describe how to create &amp; send query and subscribe to the data requested by the query.</p>
+<h2 id="why-subscription">Why Subscription<a class="headerlink" href="#why-subscription" title="Permanent link">&para;</a></h2>
+<p>Subscriptions will cause the server to send you an update each time the data changes and are useful for composing asynchronous and event-based programs.</p>
 <p>By default, subscribing to an observable will do two things:</p>
-<ol>
-<li>It will send a query to the server, fetching the data</li>
-<li>It will send a subscription query to the server, which will cause the server to send you an update each time the data changes</li>
-</ol>
-<p>Because subscriptions can be expensive, this behavior can be controlled in several ways.</p>
-<p>First of all, we can pass Apollo's <a href="https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy"><code>fetchPolicy</code></a> argument to control how the query (from step 1) interacts with the cache:</p>
+<ul>
+<li>send a query to the server to fetching the data</li>
+<li>send a subscription query to the server for update events</li>
+</ul>
+<h2 id="how-to-query-and-subscribe">How to Query and Subscribe<a class="headerlink" href="#how-to-query-and-subscribe" title="Permanent link">&para;</a></h2>
+<h3 id="creating-query">Creating Query<a class="headerlink" href="#creating-query" title="Permanent link">&para;</a></h3>
+<p>Following are the two types of query that can be made to the subgraph using client:</p>
+<h4 id="entity-methods">Entity Methods<a class="headerlink" href="#entity-methods" title="Permanent link">&para;</a></h4>
+<p>The entity methods return an Observables which encapsulate some predefined qraphQL queries to fetch Entity data from the subgraph.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">//</span> <span class="n">proposals</span> <span class="k">of</span> <span class="n">the</span> <span class="n">DAO</span>
+<span class="n">Proposal</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">dao</span><span class="p">:</span> <span class="ss">&quot;0x123&quot;</span> <span class="err">}</span> <span class="err">}</span><span class="p">)</span>
+
+<span class="o">//</span> <span class="n">members</span> <span class="k">of</span> <span class="n">the</span> <span class="n">given</span> <span class="n">dao</span>
+<span class="n">dao</span><span class="p">.</span><span class="n">members</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<h4 id="raw-graphql-queries">Raw GraphQL queries<a class="headerlink" href="#raw-graphql-queries" title="Permanent link">&para;</a></h4>
+<p>To have more control over what gets fetched from the subgraph you can also customize the query. These queries will follow the standard <a href="../subgraph/queries">graphQL syntax</a> which is used to query graph explorer directly. Though the query <strong>must be wrapped inside the <em>gql</em> tag</strong></p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">gql</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;graphql-tag&#39;</span><span class="p">)</span>
+
+<span class="o">//</span> <span class="n">titles</span> <span class="k">of</span> <span class="k">all</span> <span class="n">proposals</span> <span class="k">of</span> <span class="n">the</span> <span class="n">DAO</span>
+<span class="n">let</span> <span class="n">query</span> <span class="o">=</span> <span class="n">gql</span><span class="o">`</span><span class="n">query</span> <span class="err">{</span>
+  <span class="n">proposals</span> <span class="p">(</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">dao</span><span class="p">:</span> <span class="ss">&quot;0x294f999356ed03347c7a23bcbcf8d33fa41dc830&quot;</span> <span class="err">}</span><span class="p">)</span> <span class="err">{</span> <span class="n">title</span> <span class="err">}</span>
+<span class="err">}</span><span class="o">`</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="executing-query">Executing Query<a class="headerlink" href="#executing-query" title="Permanent link">&para;</a></h3>
+<p>As we noted above the query created need to be explicitly sent to the server.</p>
+<h4 id="entity-methods_1">Entity Methods<a class="headerlink" href="#entity-methods_1" title="Permanent link">&para;</a></h4>
+<p>By default <code>subscribe</code> parameter is set to <code>false</code>. This is useful to send a one time query and not bother the server with further requests for subscription.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">//</span> <span class="k">Get</span> <span class="k">all</span> <span class="n">proposals</span><span class="err">&#39;</span> <span class="n">Id</span> <span class="k">of</span> <span class="n">the</span> <span class="n">DAO</span>
+<span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">().</span><span class="n">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<h4 id="raw-graphql-queries_1">Raw GraphQL queries<a class="headerlink" href="#raw-graphql-queries_1" title="Permanent link">&para;</a></h4>
+<p>These queries are made using the static method <code>arc.sendQuery</code>. Pass the query designed <a href="#raw-graphql-queries">above</a> as the parameter to <code>sendQuery</code>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">//</span> <span class="k">Get</span> <span class="n">votes</span> <span class="n">id</span> <span class="k">and</span> <span class="n">outcome</span> <span class="k">of</span> <span class="n">the</span> <span class="n">given</span> <span class="n">Proposal</span>
+<span class="n">arc</span><span class="p">.</span><span class="n">sendQuery</span><span class="p">(</span><span class="n">gql</span><span class="o">`</span><span class="n">query</span> <span class="err">{</span>
+    <span class="n">proposal</span> <span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="ss">&quot;0x1245&quot;</span><span class="p">)</span> <span class="err">{</span>
+      <span class="n">votes</span> <span class="err">{</span> <span class="n">id</span> <span class="n">outcome</span> <span class="err">}</span>
+    <span class="err">}}</span><span class="o">`</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="subscribing-query">Subscribing Query<a class="headerlink" href="#subscribing-query" title="Permanent link">&para;</a></h3>
+<p><em>Subscriptions</em> are used so that our handler gets called every time a new value is emitted for the observable stream. This is useful to keep the app data updated as the value changes.</p>
+<h4 id="entity-methods_2">Entity methods<a class="headerlink" href="#entity-methods_2" title="Permanent link">&para;</a></h4>
+<p>As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe as follows to send the query as well as subscribe for updates.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
+<span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">(</span><span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<h4 id="raw-graphql-queries_2">Raw graphQL queries<a class="headerlink" href="#raw-graphql-queries_2" title="Permanent link">&para;</a></h4>
+<p>For even more control over what data is being fetched and subscribed to, you can write explicit queries:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">arc</span>.<span class="nv">subscribe</span><span class="ss">(</span><span class="nv">gql</span>`<span class="nv">subscribe</span> { <span class="nv">proposal</span> <span class="ss">(</span><span class="nv">id</span>: <span class="s2">&quot;</span><span class="s">0x1245</span><span class="s2">&quot;</span><span class="ss">)</span> { <span class="nv">votes</span> { <span class="nv">id</span> <span class="nv">outcome</span> }}<span class="ss">)</span>`<span class="ss">)</span>
+<span class="nv">new</span> <span class="nv">Proposal</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">0x1245</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="nv">votes</span><span class="ss">()</span>.<span class="nv">subscribe</span><span class="ss">(</span>
+  <span class="ss">(</span><span class="k">next</span><span class="ss">)</span> <span class="o">=&gt;</span> {
+
+  }
+<span class="ss">)</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="optimizing-subscription-and-using-cache">Optimizing Subscription and Using Cache<a class="headerlink" href="#optimizing-subscription-and-using-cache" title="Permanent link">&para;</a></h2>
+<p>Since, subscriptions can be expensive, this behavior can be controlled/optimized in several ways.</p>
+<ul>
+<li><a href="#controlling-apollo-fetchpolicy">Controlling fetchPolicy</a>: controlling cache interaction.</li>
+<li><a href="#subscribe-to-apollo-cache-changes">Subscribing to Apollo Cache</a>: getting updates from Apollo cache instead of graphnode server.</li>
+<li><a href="#use-fetchalldata-with-nested-subscription">FetchAllData and Nested subscription</a>: by querying larger set at top level and subscribing to Apollo cache for nested queries.</li>
+</ul>
+<h3 id="controlling-apollo-fetchpolicy">Controlling Apollo fetchPolicy<a class="headerlink" href="#controlling-apollo-fetchpolicy" title="Permanent link">&para;</a></h3>
+<p>We can pass Apollo's <a href="https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy"><code>fetchPolicy</code></a> argument to control how the query interacts with the cache:</p>
+<ul>
+<li><em><strong>cache-first</strong></em>: default value. Read data from cache first, fetch from network otherwise.</li>
+<li><em><strong>cache-and-network</strong></em>: return data from cache but still always fetch from network. It optimizes quick response while also keep cached data updated.</li>
+<li><em><strong>network-only</strong></em>: will always make a request network and write data to cache. It optimizes for data consistency with the server.</li>
+<li><em><strong>cache-only</strong></em>: will never execute a query using your network interface and throw error if data not available in cache.</li>
+<li><em><strong>no-cache</strong></em>: always make a request using your network interface. Also, it will not write any data to the cache</li>
+</ul>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{}</span><span class="p">,</span> <span class="err">{</span> <span class="k">fetch</span><span class="o">-</span><span class="n">policy</span><span class="p">:</span> <span class="s1">&#39;cache-first&#39;</span><span class="err">}</span><span class="p">)</span> <span class="o">//</span> <span class="n">the</span> <span class="k">default</span> <span class="n">value</span>
 <span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{</span><span class="k">where</span><span class="p">:</span> <span class="err">{</span><span class="n">stage</span><span class="p">:</span> <span class="ss">&quot;Boosted&quot;</span><span class="err">}}</span><span class="p">,</span> <span class="err">{</span> <span class="k">fetch</span><span class="o">-</span><span class="n">policy</span><span class="p">:</span> <span class="s1">&#39;network-only&#39;</span><span class="err">}</span><span class="p">)</span> <span class="o">//</span> <span class="n">bypass</span> <span class="n">the</span> <span class="k">cache</span>
 </pre></div>
 </td></tr></table>
 
-<p>Regarding step 2, the creation of a subscription can be controlled by choosing the right <a href="#types-of-subscriptions">type of subscriptions</a> as discussed below</p>
-<h2 id="types-of-subscriptions">Types of Subscriptions<a class="headerlink" href="#types-of-subscriptions" title="Permanent link">&para;</a></h2>
-<h3 id="subscribe-to-only-cache-changes">Subscribe to Only Cache changes<a class="headerlink" href="#subscribe-to-only-cache-changes" title="Permanent link">&para;</a></h3>
-<p>The creation of a subscription can be controlled by passing the subscribe parameter.
-In the following query we will subscribe not subscribe to updates from the server. The subscription will still watch changes in the Apollo cache and return updated results if the cache changes</p>
+<h3 id="subscribe-to-apollo-cache-changes">Subscribe to Apollo Cache changes<a class="headerlink" href="#subscribe-to-apollo-cache-changes" title="Permanent link">&para;</a></h3>
+<p>The creation of a subscription can be controlled by passing the <code>subscribe</code> parameter.
+In the following query we will not subscribe to the updates from network but will still watch changes in the Apollo cache and return updated results if the cache changes.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{}</span><span class="p">,</span> <span class="err">{</span> <span class="n">subscribe</span><span class="p">:</span> <span class="k">false</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
-<span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">(</span><span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">false</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
+<span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">().</span><span class="n">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p>NOTE: the cache could change as a result of another smaller query which does subscribe to server changes.</p>
+<p>NOTE:
+  - By default <code>subscribe</code> is set to false.
+  - Apollo cache could change as a result of another smaller query which does subscribe to server changes.</p>
 <h3 id="use-fetchalldata-with-nested-subscription">Use fetchAllData with Nested subscription<a class="headerlink" href="#use-fetchalldata-with-nested-subscription" title="Permanent link">&para;</a></h3>
-<p>Most of these methods are implemented in such a way that the queries will fetch (and subscribe to) just as much data as is needed to create the result set. For example, <code>dao.proposals()</code> will only fetch the proposal IDs. This can be controlled (in a limited way) by setting the parameter <code>fetchAllData</code> to true</p>
+<p>Most of the Entity methods are implemented in such a way that the queries will fetch (and subscribe to) just as much data as is needed to create the result set. For example, <code>dao.proposals()</code> will only fetch the proposal IDs. This can be controlled (in a limited way) by setting the parameter <code>fetchAllData</code> to true</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span><span class="n">orderBy</span><span class="p">:</span> <span class="ss">&quot;creationDate&quot;</span><span class="err">}</span><span class="p">,</span> <span class="err">{</span><span class="n">fetchAllData</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
@@ -1012,23 +1294,6 @@ In the following query we will subscribe not subscribe to updates from the serve
 
 <p>This will resolve two inefficiencies. First of all, the <code>fetchAllData</code> in the proposals query will make it so that the
 <code>dao.proposals</code> query will fetch (and subscribe to) a much larger query - in particular, it will get all state data for each of the proposals. This means that when <code>prop.state()</code> is called, it will find all the needed information in the cache (and so it will not send a new query to the server), and we can safely pass it the <code>subscribe: false</code> flag, because <code>dao.proposals()</code> already subscribes to updates for all the cached data.</p>
-<h3 id="subscribe-to-explicit-query">Subscribe to explicit query<a class="headerlink" href="#subscribe-to-explicit-query" title="Permanent link">&para;</a></h3>
-<p>For even more control over what data is being fetched and subscribed to, you can write explicit queries:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">arc</span>.<span class="nv">apolloClient</span>.<span class="nv">sendQuery</span><span class="ss">(</span><span class="nv">gql</span>`<span class="nv">query</span> { <span class="nv">proposal</span> <span class="ss">(</span><span class="nv">id</span>: <span class="s2">&quot;</span><span class="s">0x1245</span><span class="s2">&quot;</span><span class="ss">)</span> { <span class="nv">votes</span>: { <span class="nv">id</span> <span class="nv">outcome</span> }}<span class="ss">)</span>`<span class="ss">)</span>
-<span class="nv">arc</span>.<span class="nv">apolloClient</span>.<span class="nv">subscribe</span><span class="ss">(</span><span class="nv">gql</span>`<span class="nv">subscribe</span> { <span class="nv">proposal</span> <span class="ss">(</span><span class="nv">id</span>: <span class="s2">&quot;</span><span class="s">0x1245</span><span class="s2">&quot;</span><span class="ss">)</span> { <span class="nv">votes</span>: { <span class="nv">id</span> <span class="nv">outcome</span> }}<span class="ss">)</span>`<span class="ss">)</span>
-<span class="nv">new</span> <span class="nv">Proposal</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">0x1245</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="nv">votes</span><span class="ss">(</span>{ <span class="nv">subscribe</span>: <span class="nv">false</span> }<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>
-  <span class="ss">(</span><span class="k">next</span><span class="ss">)</span> <span class="o">=&gt;</span> {
-
-  }
-<span class="ss">)</span>
-</pre></div>
-</td></tr></table>
                 
                   
                 

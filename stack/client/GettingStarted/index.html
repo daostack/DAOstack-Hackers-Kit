@@ -386,8 +386,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../querying/" title="Subscriptions" class="md-nav__link">
-      Subscriptions
+    <a href="../querying/" title="Query, Observables & Subscriptions" class="md-nav__link">
+      Query, Observables & Subscriptions
     </a>
   </li>
 
@@ -899,26 +899,27 @@ yarn add @daostack/client
 </td></tr></table>
 
 <h2 id="general-structure">General Structure<a class="headerlink" href="#general-structure" title="Permanent link">&para;</a></h2>
-<p>The client library provides a number of <a href="https://daostack.github.io/client/docs/globals.html#classes">Classes</a> that represents the DAOstack entities and configuration.</p>
+<p>The client library provides a number of <a href="https://daostack.github.io/client/docs/globals.html#classes">Classes</a> that represent the DAOstack entities and configuration.</p>
 <ul>
 <li><a href="#initialization-arc-configuration">Configuration</a><ul>
 <li><a href="https://daostack.github.io/client/docs/classes/arc.html">Arc</a>: holds the basic configuration i.e. which services to connect. Any use of the library will start with instantiating a new Arc instance</li>
 </ul>
 </li>
 <li><a href="#entities-dao-proposals-vote-etc">Entities</a><ul>
-<li><a href="https://daostack.github.io/client/docs/classes/dao.html">DAO</a>: represents the DAOstack DAO and has all the informations about it.</li>
-<li><a href="https://daostack.github.io/client/docs/classes/reputation.html">Reputation</a>: represents native reputation contract of the DAO and its details</li>
-<li><a href="https://daostack.github.io/client/docs/classes/token.html">Token</a>: represents native token contract of the DAO and its details</li>
-<li><a href="https://daostack.github.io/client/docs/classes/member.html">Member</a>: represents holders of reputation i.e. voting power in the DAO</li>
-<li><a href="https://daostack.github.io/client/docs/classes/proposal.html">Proposal</a>: represents Proposal made in the DAO, they can belong to any of the Scheme's registered in the DAO</li>
-<li><a href="https://daostack.github.io/client/docs/classes/vote.html">Vote</a>: represents votes made on the proposal</li>
-<li><a href="https://daostack.github.io/client/docs/classes/stake.html">Stake</a>: represents stake made on the outcome of a proposal</li>
-<li><a href="https://daostack.github.io/client/docs/classes/reward.html">Reward</a>: represents rewards awarded by the DAO for a given proposal</li>
-<li><a href="https://daostack.github.io/client/docs/classes/scheme.html">Scheme</a>: represents the various schemes (ContributionReward, SchemeRegistrar, GenericScheme etc) registered to the DAO and to which a proposal can be made. Scheme determines the conditions and effects of executing the proposal</li>
-<li><a href="https://daostack.github.io/client/docs/classes/queue.html">Queue</a>: represents queues for each scheme registered to the DAO. The proposal is ordered in queue upon submission</li>
+<li><a href="https://daostack.github.io/client/docs/classes/dao.html">DAO</a>: represents the DAOstack DAO and has all the information about it.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/reputation.html">Reputation</a>: represents native reputation contract of the DAO.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/token.html">Token</a>: represents token contracts, including the native token of the DAO.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/member.html">Member</a>: represents holders of reputation i.e. voting power in the DAO.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/proposal.html">Proposal</a>: represents Proposal made in the DAO. Proposals belong to Schemes registered in the DAO.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/vote.html">Vote</a>: represents votes made on the proposal.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/stake.html">Stake</a>: represents stake made on the outcome of a proposal.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/reward.html">Reward</a>: represents rewards awarded by the DAO for a given proposal.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/scheme.html">Scheme</a>: represents the various schemes (ContributionReward, SchemeRegistrar, GenericScheme etc) registered to the DAO and to which a proposal can be made. Scheme determines the conditions and effects of executing the proposal.</li>
+<li><a href="https://daostack.github.io/client/docs/classes/queue.html">Queue</a>: represents queues for each scheme registered to the DAO. The proposal is ordered in queue upon submission.</li>
 </ul>
 </li>
 </ul>
+<p>Follow the <a href="../howToUseClient">How to use</a> guide for working details of client library.</p>
                 
                   
                 
