@@ -367,13 +367,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -400,38 +393,12 @@
     By providing id
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example_1" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
-  <a href="#by-providing-optsstaticstate" class="md-nav__link">
-    By providing opts/staticState
+  <a href="#by-providing-staticstate" class="md-nav__link">
+    By providing staticState
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example_2" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -942,13 +909,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -975,38 +935,12 @@
     By providing id
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example_1" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
-  <a href="#by-providing-optsstaticstate" class="md-nav__link">
-    By providing opts/staticState
+  <a href="#by-providing-staticstate" class="md-nav__link">
+    By providing staticState
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example_2" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1076,7 +1010,7 @@
 <li><em><strong>web3Provider</strong></em>: connection to ethereum node which it is presumed has a default account enabling transactions to be sent. Required to create and send transactions to the blockchain.</li>
 <li><em><strong>web3ProviderRead</strong></em>: connection to ethereum node to read Arc data. If provided arc will read all data from this provider, else if null/not provided it is set same as <code>web3Provider</code>. This is readonly and won't enable the user to submit transactions.</li>
 </ul>
-<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<p>Example</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1129,7 +1063,7 @@
 <p>All Entity classes can be created by providing an <code>id</code> or <code>opts</code> (and an instance of <code>Arc</code>) depending on whether using client with or without subgraph.</p>
 <h4 id="by-providing-id">By providing id<a class="headerlink" href="#by-providing-id" title="Permanent link">&para;</a></h4>
 <p>When using the client library with an <code>arc</code> instance which has subgraph configuration, it is sufficient to provide just an <code>id</code>. In this case, to vote or stake, the proposal object will need additional information (stored by the <code>staticState</code> of Entity) such as the address of the voting machine contract to which votes will be sent. The client will query the subgraph for this minimal set of information.</p>
-<h5 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h5>
+<p>Example</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1148,9 +1082,9 @@
 </pre></div>
 </td></tr></table>
 
-<h4 id="by-providing-optsstaticstate">By providing opts/staticState<a class="headerlink" href="#by-providing-optsstaticstate" title="Permanent link">&para;</a></h4>
+<h4 id="by-providing-staticstate">By providing staticState<a class="headerlink" href="#by-providing-staticstate" title="Permanent link">&para;</a></h4>
 <p>To make the client usable without having subgraph service available, all Entities can also be created by providing the <code>staticState</code>. This will provide the instance with enough information to send transactions without having to query the subgraph for additional information.</p>
-<h5 id="example_2">Example<a class="headerlink" href="#example_2" title="Permanent link">&para;</a></h5>
+<p>Example</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1173,23 +1107,33 @@
 <p>All entities have:</p>
 <ul>
 <li><em><strong>context</strong></em>: arc configuration described <a href="#initialization-arc-configuration">above</a></li>
-<li><em><strong>id</strong></em>: unique identifier of the entity instance</li>
 <li>
-<p><em><strong>staticState</strong></em> (if any): object representing properties of the entity that does not change over time.</p>
-<p>eg. In case of entity DAO, <code>address</code> of Avatar or Native <code>reputation</code> of DAO</p>
+<p><em><strong>id</strong></em>: unique identifier of the entity instance. Various Entity class Id represents the information as described below:</p>
+<ul>
+<li><code>address</code>: DAO, Reputation, Token</li>
+<li><code>hash(ReputationAddress, RepHolderAddress)</code>: Members</li>
+<li><code>proposalId</code> as on blockchain: Proposal</li>
+<li><code>hash(proposalId, beneficiaryAddress)</code>: Reward</li>
+<li><code>hash(daoAddress, schemeAddress)</code>: Scheme</li>
+<li><code>eventId</code>: Stake, Vote</li>
+</ul>
 </li>
 <li>
-<p><em><strong>fetchStaticState()</strong></em>: method that returns an observable of object that represent the <code>staticState</code> of the entity.
-    If the staticState is not set ( as <a href="#by-providing-id">here</a> ), then it queries the subgraph and <code>setStaticState</code>.</p>
+<p><em><strong>staticState</strong></em> <sup>[1]</sup>: object representing properties of the entity that does not change over time.
+    eg. In case of entity DAO, <code>address</code> of Avatar or Native <code>reputation</code> of DAO</p>
 </li>
 <li>
-<p><em><strong>setStaticState()</strong></em>: method that sets the static state to the state provided as parameter.</p>
+<p><em><strong>fetchStaticState()</strong></em> <sup>[1]</sup>: method that returns an observable of object that represent the <code>staticState</code> of the entity.
+    If the staticState is not set ( as <a href="#by-providing-id">here</a> ), then at first use it queries the subgraph and <code>setStaticState</code>.</p>
+</li>
+<li>
+<p><em><strong>setStaticState()</strong></em> <sup>[1]</sup>: method that sets the static state to the state provided as parameter.</p>
 </li>
 <li>
 <p><strong><strong>state()</strong></strong>: methods that returns an observable of objects that represent the current state of the entity. </br>
     The <em>EntityState</em> extends the <code>staticState</code> of the entity. It also include the properties that change over time.</p>
 <p>Like <em>DAOState</em> would contain <code>numberOfBoostedProposals</code> or <code>reputationTotalSupply</code> along with the base <code>staticState</code></p>
-<p>eg. Subscribe to current state of the Proposal or DAO</p>
+<p>eg. Subscribe <sup>[2]</sup> to current state of the Proposal or DAO</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1206,12 +1150,10 @@
 </pre></div>
 </td></tr></table>
 
-<p><strong>Note:</strong>
-  - There is a difference between <code>state().subscribe</code> and <code>state({subscribe: true})</code>. Refer <a href="../querying/#types-of-subscriptions">Types of Subscriptions</a></p>
 </li>
 <li>
-<p><em><strong>search()</strong></em>: method which can be used to search for the entities on the subgraph.</p>
-<p>By default it will give us <code>id</code> of the Entity, but can be modified to fetch the <code>state()</code> by setting <code>fetchAllData</code>. Also refer to <a href="use-fetchalldata-with-nested-subscription">Optimize subscription section</a></p>
+<p><em><strong>search()</strong></em> <sup>[3],[4]</sup>: method which can be used to search for the entities on the subgraph.</p>
+<p>By default it will return an observable of <code>id(s)</code> of the subgraph Entity for the given filter query, but can be modified to fetch the <code>state()</code> by setting <code>fetchAllData</code>. Also refer to <a href="use-fetchalldata-with-nested-subscription">Optimize subscription section</a></p>
 <p>eg. To get all DAOs that are called <code>Foo</code>, you can do:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">DAO</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="err">{</span><span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">name</span><span class="p">:</span> <span class="ss">&quot;Foo&quot;</span> <span class="err">}}</span><span class="p">)</span>
 </pre></div>
@@ -1222,12 +1164,15 @@
 </pre></div>
 </td></tr></table>
 
-<p><strong>Note:</strong>
-  - Search function must be provided with an <code>Arc</code> instance, so it knows which service to send the queries.
-  - All queries return <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html">rxjs.Observable</a>.
-<a href="#search-and-observables">See below</a> for further explanation.</p>
 </li>
 </ul>
+<p><strong>Note:</strong></p>
+<ol>
+<li><code>staticState</code>, <code>setStaticState</code> and <code>fetchStaticState</code> is not available for all Entities consistantly and might be discontinued or restructured in future versions.</li>
+<li>There is a difference between <code>state().subscribe</code> and <code>state({subscribe: true})</code>. Refer <a href="../querying/#types-of-subscriptions">Types of Subscriptions</a></li>
+<li>Search function must be provided with an <code>Arc</code> instance, so it knows which service to send the queries.</li>
+<li>All queries return <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html">rxjs.Observable</a>. <a href="#search-and-observables">See below</a> for further explanation.</li>
+</ol>
 <h2 id="search-and-observables">Search and Observables<a class="headerlink" href="#search-and-observables" title="Permanent link">&para;</a></h2>
 <p>The search functions are wrappers around graphql queries and standard <a href="../../subgraph/queries/">graphql syntax</a> can be used
 to filter and sort the queries, and for pagination:</p>
