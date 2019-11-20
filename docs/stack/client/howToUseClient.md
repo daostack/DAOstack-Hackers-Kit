@@ -19,7 +19,7 @@ The `Arc` class holds the basic configuration and serves as the main entrypoint 
   - _**web3Provider**_: connection to ethereum node which it is presumed has a default account enabling transactions to be sent. Required to create and send transactions to the blockchain.
   - _**web3ProviderRead**_: connection to ethereum node to read Arc data. If provided arc will read all data from this provider, else if null/not provided it is set same as `web3Provider`. This is readonly and won't enable the user to submit transactions.
 
-### Example
+Example
 
 ```
 import { Arc } from '@daostack/client'
@@ -66,7 +66,7 @@ All Entity classes can be created by providing an `id` or `opts` (and an instanc
 
 When using the client library with an `arc` instance which has subgraph configuration, it is sufficient to provide just an `id`. In this case, to vote or stake, the proposal object will need additional information (stored by the `staticState` of Entity) such as the address of the voting machine contract to which votes will be sent. The client will query the subgraph for this minimal set of information.
 
-##### Example
+Example
 ```
 const arc = new Arc({
   graphqlHttpProvider: "https://api.thegraph.com/subgraphs/name/daostack/alchemy",
@@ -78,11 +78,11 @@ const proposal = new Proposal('0x1234....', arc)
 await proposal.vote(...).send()
 ```
 
-#### By providing opts/staticState
+#### By providing staticState
 
 To make the client usable without having subgraph service available, all Entities can also be created by providing the `staticState`. This will provide the instance with enough information to send transactions without having to query the subgraph for additional information.
 
-##### Example
+Example
 ```
 const arc = new Arc({
   web3Provider: `wss://mainnet.infura.io/ws/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2`,
@@ -99,22 +99,29 @@ const proposal = new Proposal({
 All entities have:
 
   - _**context**_: arc configuration described [above](#initialization-arc-configuration)
-  - _**id**_: unique identifier of the entity instance
-  - _**staticState**_ (if any): object representing properties of the entity that does not change over time.
+  - _**id**_: unique identifier of the entity instance. Various Entity class Id represents the information as described below:
 
+      - `address`: DAO, Reputation, Token
+      - `hash(ReputationAddress, RepHolderAddress)`: Members
+      - `proposalId` as on blockchain: Proposal
+      - `hash(proposalId, beneficiaryAddress)`: Reward
+      - `hash(daoAddress, schemeAddress)`: Scheme
+      - `eventId`: Stake, Vote
+      
+  - _**staticState**_ <sup>[1]</sup>: object representing properties of the entity that does not change over time.
     eg. In case of entity DAO, `address` of Avatar or Native `reputation` of DAO
 
-  - _**fetchStaticState()**_: method that returns an observable of object that represent the `staticState` of the entity.
-    If the staticState is not set ( as [here](#by-providing-id) ), then it queries the subgraph and `setStaticState`.
+  - _**fetchStaticState()**_ <sup>[1]</sup>: method that returns an observable of object that represent the `staticState` of the entity.
+    If the staticState is not set ( as [here](#by-providing-id) ), then at first use it queries the subgraph and `setStaticState`.
 
-  - _**setStaticState()**_: method that sets the static state to the state provided as parameter.
+  - _**setStaticState()**_ <sup>[1]</sup>: method that sets the static state to the state provided as parameter.
 
   - __**state()**__: methods that returns an observable of objects that represent the current state of the entity. </br>
     The _EntityState_ extends the `staticState` of the entity. It also include the properties that change over time.
   
     Like *DAOState* would contain `numberOfBoostedProposals` or `reputationTotalSupply` along with the base `staticState`
 
-    eg. Subscribe to current state of the Proposal or DAO
+    eg. Subscribe <sup>[2]</sup> to current state of the Proposal or DAO
 
         proposal.state().subscribe(
           (newState) => console.log(`This proposal has ${newState.votesFor} upvotes`)
@@ -124,12 +131,9 @@ All entities have:
           (newState) => console.log(`This DAO has ${newState.memberCount} members`)
         )
 
-    **Note:**
-      - There is a difference between `state().subscribe` and `state({subscribe: true})`. Refer [Types of Subscriptions](../querying/#types-of-subscriptions)
+  - _**search()**_ <sup>[3],[4]</sup>: method which can be used to search for the entities on the subgraph.
 
-  - _**search()**_: method which can be used to search for the entities on the subgraph.
-
-    By default it will give us `id` of the Entity, but can be modified to fetch the `state()` by setting `fetchAllData`. Also refer to [Optimize subscription section](use-fetchalldata-with-nested-subscription)
+    By default it will return an observable of `id(s)` of the subgraph Entity for the given filter query, but can be modified to fetch the `state()` by setting `fetchAllData`. Also refer to [Optimize subscription section](use-fetchalldata-with-nested-subscription)
 
     eg. To get all DAOs that are called `Foo`, you can do:
 
@@ -138,11 +142,13 @@ All entities have:
     eg. To get `currentState` of all DAOs that are called `Foo` ordered by `createdAt`, you can do:
 
         DAO.search(arc, {where: { name: "Foo" }, orderBy: "createdAt" }, {fetchAllData: true} )
-        
-    **Note:**
-      - Search function must be provided with an `Arc` instance, so it knows which service to send the queries.
-      - All queries return [rxjs.Observable](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html).
-    [See below](#search-and-observables) for further explanation.
+      
+**Note:**
+
+  1. `staticState`, `setStaticState` and `fetchStaticState` is not available for all Entities consistantly and might be discontinued or restructured in future versions.
+  2. There is a difference between `state().subscribe` and `state({subscribe: true})`. Refer [Types of Subscriptions](../querying/#types-of-subscriptions)
+  2. Search function must be provided with an `Arc` instance, so it knows which service to send the queries.
+  4. All queries return [rxjs.Observable](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html). [See below](#search-and-observables) for further explanation.
 
 ## Search and Observables
 
