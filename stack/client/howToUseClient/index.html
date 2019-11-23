@@ -389,15 +389,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#by-providing-id" class="md-nav__link">
-    By providing id
+  <a href="#by-providing-entity-id" class="md-nav__link">
+    By providing entity id
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#by-providing-staticstate" class="md-nav__link">
-    By providing staticState
+  <a href="#by-providing-static-entity-state" class="md-nav__link">
+    By providing static entity state
   </a>
   
 </li>
@@ -931,15 +931,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#by-providing-id" class="md-nav__link">
-    By providing id
+  <a href="#by-providing-entity-id" class="md-nav__link">
+    By providing entity id
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#by-providing-staticstate" class="md-nav__link">
-    By providing staticState
+  <a href="#by-providing-static-entity-state" class="md-nav__link">
+    By providing static entity state
   </a>
   
 </li>
@@ -1006,7 +1006,8 @@
 <li><em><strong>graphqlPrefetchHook()</strong></em>: function executed before sending graphQL query.</li>
 <li><em><strong>graphqlSubscribeToQueries</strong></em>: determines if query should subscribe to updates from the graphProvider. Default True.</li>
 <li><em><strong>graphqlWsProvider</strong></em>: web socket connection to subgraph of TheGraph protocol. Needed for subscriptions.</li>
-<li><em><strong>ipfsProvider</strong></em>: connection to ipfs provider which is used as the data storage layer by DAOstack.</li>
+<li><em><strong>ipfsProvider</strong></em>: connection to ipfs provider which is used as the data storage layer by DAOstack. The configuration is either a string or an object as
+  <a href="https://github.com/ipfs/js-ipfs-http-client#importing-the-module-and-usage">used here</a></li>
 <li><em><strong>web3Provider</strong></em>: connection to ethereum node which it is presumed has a default account enabling transactions to be sent. Required to create and send transactions to the blockchain.</li>
 <li><em><strong>web3ProviderRead</strong></em>: connection to ethereum node to read Arc data. If provided arc will read all data from this provider, else if null/not provided it is set same as <code>web3Provider</code>. This is readonly and won't enable the user to submit transactions.</li>
 </ul>
@@ -1050,18 +1051,26 @@
 </td></tr></table>
 
 <p><strong>Note:</strong></p>
-<p>Some of these configuration settings are <em><strong>optional</strong></em> to use <code>@daostack/client</code>. Like</p>
 <ul>
-<li>For creating and sending transactions to the blockchain, it is sufficient to provide the <code>web3Provider</code>.</li>
-<li>For fetching data from the subgraph, it is sufficient to provide <code>graphqlHttpProvider</code> and/or <code>graphqlWsProvider</code>. The <code>web3</code> and <code>ipfs</code> providers can be omitted while using client package for subgraph query.</li>
+<li>If you instantiate arc with ipfs configuration, then <code>arc.ipfs</code> will have all the methods of the ipfslcient api available. Refer to <a href="https://github.com/ipfs/js-ipfs-http-client#api">ipfs client api</a></li>
+<li>Some of these configuration settings are <em><strong>optional</strong></em> while using <code>@daostack/client</code>. For example:<ul>
+<li>For using client to only create and send transactions to the blockchain, it is sufficient to provide the <code>web3Provider</code>.</li>
+<li>For using client to only read blockchain data, it is sufficient to provide the <code>web3ProviderRead</code>.</li>
+<li>When using client only to interact with subgraph, it is sufficient to provide <code>graphqlHttpProvider</code> and/or <code>graphqlWsProvider</code>.</li>
+</ul>
+</li>
 </ul>
 <h2 id="entities">Entities<a class="headerlink" href="#entities" title="Permanent link">&para;</a></h2>
 <p>Entities are the basic building blocks of DAOstack ecosystem.</p>
-<p>The entity instance holds the <code>currentState</code> of the entity they represent and also encapsulate some standard graphql queries to retrieve data from subgraph. Please refer to <a href="#common-methods-and-properties">Common properties and methods</a> section to understand what is cached and how to retrieve it.</p>
-<p><strong>Note</strong>: You can also make customized graphql queries, using the static method <code>arc.apolloClient</code>. Please refer to the <a href="../querying/#query">Queries</a> section for ways to query subgraph.</p>
+<p>The entity instance holds the <code>statoc</code> and <code>dynamic</code> state of the entity it represents and encapsulates graphql queries to retrieve data from subgraph. The client library caches entity data. Please refer to <a href="#common-methods-and-properties">Common properties and methods</a> section for more information about what is cached and how to retrieve it.</p>
+<p>While the entity classes provide nice helper methods that encapsulate graphql queries, you can also submit your own customized graphql queries using the static method <code>arc.apolloClient</code>. Please refer to the <a href="../querying/#query">Queries</a> section about all the ways to query subgraph.</p>
 <h3 id="instantiate">Instantiate<a class="headerlink" href="#instantiate" title="Permanent link">&para;</a></h3>
-<p>All Entity classes can be created by providing an <code>id</code> or <code>opts</code> (and an instance of <code>Arc</code>) depending on whether using client with or without subgraph.</p>
-<h4 id="by-providing-id">By providing id<a class="headerlink" href="#by-providing-id" title="Permanent link">&para;</a></h4>
+<p>All Entity classes can be created by providing an instance of <code>Arc</code> and either of the following:</p>
+<ul>
+<li><code>id</code>: in this case a query to the subgraph is used to hydrate the entity.</li>
+<li><code>staticState</code>: here entity's desired "static state" is provided at initialization and the subgraph query is bypassed.</li>
+</ul>
+<h4 id="by-providing-entity-id">By providing entity id<a class="headerlink" href="#by-providing-entity-id" title="Permanent link">&para;</a></h4>
 <p>When using the client library with an <code>arc</code> instance which has subgraph configuration, it is sufficient to provide just an <code>id</code>. In this case, to vote or stake, the proposal object will need additional information (stored by the <code>staticState</code> of Entity) such as the address of the voting machine contract to which votes will be sent. The client will query the subgraph for this minimal set of information.</p>
 <p>Example</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -1082,8 +1091,8 @@
 </pre></div>
 </td></tr></table>
 
-<h4 id="by-providing-staticstate">By providing staticState<a class="headerlink" href="#by-providing-staticstate" title="Permanent link">&para;</a></h4>
-<p>To make the client usable without having subgraph service available, all Entities can also be created by providing the <code>staticState</code>. This will provide the instance with enough information to send transactions without having to query the subgraph for additional information.</p>
+<h4 id="by-providing-static-entity-state">By providing static entity state<a class="headerlink" href="#by-providing-static-entity-state" title="Permanent link">&para;</a></h4>
+<p>To make the client usable without having subgraph service available, all Entities can also be created by providing the 'static state'. This will provide the instance with enough information to send transactions without having to query the subgraph for additional information.</p>
 <p>Example</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1120,7 +1129,7 @@
 </li>
 <li>
 <p><em><strong>staticState</strong></em> <sup>[1]</sup>: object representing properties of the entity that does not change over time.
-    eg. In case of entity DAO, <code>address</code> of Avatar or Native <code>reputation</code> of DAO</p>
+    e.g. In case of entity DAO, <code>address</code> of Avatar or Native <code>reputation</code> of DAO</p>
 </li>
 <li>
 <p><em><strong>fetchStaticState()</strong></em> <sup>[1]</sup>: method that returns an observable of object that represent the <code>staticState</code> of the entity.
@@ -1130,10 +1139,10 @@
 <p><em><strong>setStaticState()</strong></em> <sup>[1]</sup>: method that sets the static state to the state provided as parameter.</p>
 </li>
 <li>
-<p><strong><strong>state()</strong></strong>: methods that returns an observable of objects that represent the current state of the entity. </br>
-    The <em>EntityState</em> extends the <code>staticState</code> of the entity. It also include the properties that change over time.</p>
-<p>Like <em>DAOState</em> would contain <code>numberOfBoostedProposals</code> or <code>reputationTotalSupply</code> along with the base <code>staticState</code></p>
-<p>eg. Subscribe <sup>[2]</sup> to current state of the Proposal or DAO</p>
+<p><strong><strong>state()</strong></strong>: method that returns an observable of objects that represent the current dynamic state of the entity. </br>
+    The dynamic state extends the static state to include properties that may change over time.</p>
+<p>e.g. <em>IDAOState</em> is dynamic state that would contain <code>numberOfBoostedProposals</code> or <code>reputationTotalSupply</code> along with the base static state of the DAO entity.</p>
+<p>e.g. Subscribe <sup>[2]</sup> to current state of the Proposal or DAO</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1226,7 +1235,7 @@ with the first result</p>
 
 <h2 id="sending-transactions">Sending transactions<a class="headerlink" href="#sending-transactions" title="Permanent link">&para;</a></h2>
 <p>One of the purposes of the client library is to make help with interactions with the DAOstack Ethereum contracts.</p>
-<p>Here is how you create a proposal in a DAO  for a contribution reward for a</p>
+<p>Here is how you create a proposal in a DAO  for a contribution reward</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
