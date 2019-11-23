@@ -15,7 +15,8 @@ The `Arc` class holds the basic configuration and serves as the main entrypoint 
   - _**graphqlPrefetchHook()**_: function executed before sending graphQL query.
   - _**graphqlSubscribeToQueries**_: determines if query should subscribe to updates from the graphProvider. Default True.
   - _**graphqlWsProvider**_: web socket connection to subgraph of TheGraph protocol. Needed for subscriptions.
-  - _**ipfsProvider**_: connection to ipfs provider which is used as the data storage layer by DAOstack.
+  - _**ipfsProvider**_: connection to ipfs provider which is used as the data storage layer by DAOstack. The configuration is either a string or an object as
+  [used here](https://github.com/ipfs/js-ipfs-http-client#importing-the-module-and-usage)
   - _**web3Provider**_: connection to ethereum node which it is presumed has a default account enabling transactions to be sent. Required to create and send transactions to the blockchain.
   - _**web3ProviderRead**_: connection to ethereum node to read Arc data. If provided arc will read all data from this provider, else if null/not provided it is set same as `web3Provider`. This is readonly and won't enable the user to submit transactions.
 
@@ -44,25 +45,29 @@ await arc.fetchContractInfos()
 
 **Note:**
 
-Some of these configuration settings are _**optional**_ to use `@daostack/client`. Like
-
-  - For creating and sending transactions to the blockchain, it is sufficient to provide the `web3Provider`.
-  - For fetching data from the subgraph, it is sufficient to provide `graphqlHttpProvider` and/or `graphqlWsProvider`. The `web3` and `ipfs` providers can be omitted while using client package for subgraph query.
+  - If you instantiate arc with ipfs configuration, then `arc.ipfs` will have all the methods of the ipfslcient api available. Refer to [ipfs client api](https://github.com/ipfs/js-ipfs-http-client#api)
+  - Some of these configuration settings are _**optional**_ while using `@daostack/client`. For example:
+    - For using client to only create and send transactions to the blockchain, it is sufficient to provide the `web3Provider`.
+    - For using client to only read blockchain data, it is sufficient to provide the `web3ProviderRead`.
+    - When using client only to interact with subgraph, it is sufficient to provide `graphqlHttpProvider` and/or `graphqlWsProvider`.
 
 ## Entities
 
 Entities are the basic building blocks of DAOstack ecosystem.
 
-The entity instance holds the `currentState` of the entity they represent and also encapsulate some standard graphql queries to retrieve data from subgraph. Please refer to [Common properties and methods](#common-methods-and-properties) section to understand what is cached and how to retrieve it.
+The entity instance holds the `statoc` and `dynamic` state of the entity it represents and encapsulates graphql queries to retrieve data from subgraph. The client library caches entity data. Please refer to [Common properties and methods](#common-methods-and-properties) section for more information about what is cached and how to retrieve it.
 
 
-**Note**: You can also make customized graphql queries, using the static method `arc.apolloClient`. Please refer to the [Queries](../querying/#query) section for ways to query subgraph.
+While the entity classes provide nice helper methods that encapsulate graphql queries, you can also submit your own customized graphql queries using the static method `arc.apolloClient`. Please refer to the [Queries](../querying/#query) section about all the ways to query subgraph.
 
 ### Instantiate
 
-All Entity classes can be created by providing an `id` or `opts` (and an instance of `Arc`) depending on whether using client with or without subgraph.
+All Entity classes can be created by providing an instance of `Arc` and either of the following:
 
-#### By providing id
+  - `id`: in this case a query to the subgraph is used to hydrate the entity.
+  - `staticState`: here entity's desired "static state" is provided at initialization and the subgraph query is bypassed.
+
+#### By providing entity id
 
 When using the client library with an `arc` instance which has subgraph configuration, it is sufficient to provide just an `id`. In this case, to vote or stake, the proposal object will need additional information (stored by the `staticState` of Entity) such as the address of the voting machine contract to which votes will be sent. The client will query the subgraph for this minimal set of information.
 
@@ -78,9 +83,9 @@ const proposal = new Proposal('0x1234....', arc)
 await proposal.vote(...).send()
 ```
 
-#### By providing staticState
+#### By providing static entity state
 
-To make the client usable without having subgraph service available, all Entities can also be created by providing the `staticState`. This will provide the instance with enough information to send transactions without having to query the subgraph for additional information.
+To make the client usable without having subgraph service available, all Entities can also be created by providing the 'static state'. This will provide the instance with enough information to send transactions without having to query the subgraph for additional information.
 
 Example
 ```
@@ -109,19 +114,19 @@ All entities have:
       - `eventId`: Stake, Vote
       
   - _**staticState**_ <sup>[1]</sup>: object representing properties of the entity that does not change over time.
-    eg. In case of entity DAO, `address` of Avatar or Native `reputation` of DAO
+    e.g. In case of entity DAO, `address` of Avatar or Native `reputation` of DAO
 
   - _**fetchStaticState()**_ <sup>[1]</sup>: method that returns an observable of object that represent the `staticState` of the entity.
     If the staticState is not set ( as [here](#by-providing-id) ), then at first use it queries the subgraph and `setStaticState`.
 
   - _**setStaticState()**_ <sup>[1]</sup>: method that sets the static state to the state provided as parameter.
 
-  - __**state()**__: methods that returns an observable of objects that represent the current state of the entity. </br>
-    The _EntityState_ extends the `staticState` of the entity. It also include the properties that change over time.
+  - __**state()**__: method that returns an observable of objects that represent the current dynamic state of the entity. </br>
+    The dynamic state extends the static state to include properties that may change over time.
   
-    Like *DAOState* would contain `numberOfBoostedProposals` or `reputationTotalSupply` along with the base `staticState`
+    e.g. *IDAOState* is dynamic state that would contain `numberOfBoostedProposals` or `reputationTotalSupply` along with the base static state of the DAO entity.
 
-    eg. Subscribe <sup>[2]</sup> to current state of the Proposal or DAO
+    e.g. Subscribe <sup>[2]</sup> to current state of the Proposal or DAO
 
         proposal.state().subscribe(
           (newState) => console.log(`This proposal has ${newState.votesFor} upvotes`)
@@ -200,7 +205,7 @@ const proposals = await observable.first() // returns a list of Proposal instanc
 
 One of the purposes of the client library is to make help with interactions with the DAOstack Ethereum contracts.
 
-Here is how you create a proposal in a DAO  for a contribution reward for a
+Here is how you create a proposal in a DAO  for a contribution reward
 
 
 ```

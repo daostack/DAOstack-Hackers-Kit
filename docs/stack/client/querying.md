@@ -1,24 +1,34 @@
 # Query, Observables & Subscription
 
-The interaction with DAOstack subgraph comprises of:
+Your interactions with the DAOstack subgraph will involve working with the following:
 
   - _**Query**_: the graphQL queries sent to graphnode to fetch DAOstack data from the subgraph.
-  - _**Observable**_: object representing the stream of data that can be subscribed.
-  - _**Subscription**_: invokes our handler every time a new value is emitted for the observable.
+  - _**Observable**_: object representing the stream of data to which one can subscribe.
+  - _**Subscription**_: invokes a given function every time a new value is emitted for the observable.
 
-The entity methods provided by `@daostack/client` for querying the subgraph, by themself do not actually send the query to the server. Instead, each methods returns an *Observable* to which we can *subscribe*.
+The entity methods provided by `@daostack/client` for querying the subgraph, by themselves do not actually send the query to the server. Instead, each methods returns an *Observable* to which we can *subscribe*, which is what actually initiates the query.
 
 Take a look at the following methods that return observable:
-```
-dao.proposals()
+```javascript
+arc.daos()
 proposal.state()
 ```
 
 Now, in order to query the server we must subscribe
-```
+```javascript
 const observable = arc.daos()
+  
 // only in the next line will a query be sent to the server
-const subscription = arc.daos.subscribe((daos) => console.log(`we found ${daos.length} results`))
+const subscription = arc.daos.subscribe(
+    (daos) => console.log(`we found ${daos.length} results`)
+    )
+
+const proposal = new Propsal('0x123abc....', arc)
+let stateObservable = proposal.state()
+
+stateObservable.subscribe(
+    (proposal) => console.log(proposal)
+    )
 ```
 
 In this guide we will describe how to create & send query and subscribe to the data requested by the query.
@@ -33,18 +43,18 @@ By default, subscribing to an observable will do two things:
 
 ## How to Query and Subscribe
 
-### Creating Query
+### Creating Queries
 
-Following are the two types of query that can be made to the subgraph using client:
+As described in the following sections, you can query the subgraph using either entity methods or raw GraphQL queries.
 
 #### Entity Methods
 The entity methods return an Observables which encapsulate some predefined qraphQL queries to fetch Entity data from the subgraph.
 
     // proposals of the DAO
-    Proposal.search(arc, { where: { dao: "0x123" } })
+    const proposalsObservable = Proposal.search(arc, { where: { dao: "0x123" } })
 
     // members of the given dao
-    dao.members()
+    const membersObservable = dao.members()
 
 #### Raw GraphQL queries
 To have more control over what gets fetched from the subgraph you can also customize the query. These queries will follow the standard [graphQL syntax](../subgraph/queries) which is used to query graph explorer directly. Though the query **must be wrapped inside the _gql_ tag**
@@ -56,18 +66,27 @@ To have more control over what gets fetched from the subgraph you can also custo
       proposals ( where: { dao: "0x294f999356ed03347c7a23bcbcf8d33fa41dc830" }) { title }
     }`
 
-### Executing Query
+### Executing a Query
 
-As we noted above the query created need to be explicitly sent to the server.
+After creating a query, as we did in the previous section, we need to cause the query to be executed, that is, be sent to the graphnode server.
 
 #### Entity Methods
-By default `subscribe` parameter is set to `false`. This is useful to send a one time query and not bother the server with further requests for subscription.
+We can subscribe to an observable without passing `{subscribe: true}` parameter (refer to the [subscribing to a query section](#entity-methods_2)) for sending a one-time query without subscribing to further updates from the server for result of the query.
 
-    // Get all proposals' Id of the DAO
-    dao.proposals().subscribe(() => {})
+    // Get all proposals' Id of the DAO without subscribing to server
+    const proposalsObs = dao.proposals()
+    
+    // send query and open subscription only to the cache
+    proposalsObs.subscribe(() => {})
+
+    // Unsubscribe to cache once done
+    proposalsObs.unsubscribe()
+
+
+**Note**: Even though we are not subscribing to updates from the server, the observable still subscribes to the Apollo cache changes. The cache could change as a result of some other query and is discussed in detail in the [following section](#subscribe-to-apollo-cache-changes).
 
 #### Raw GraphQL queries
-These queries are made using the static method `arc.sendQuery`. Pass the query designed [above](#raw-graphql-queries) as the parameter to `sendQuery`.
+You can submit raw GraphQL queries using the static method `arc.sendQuery`. Pass the query designed [above](#raw-graphql-queries) as the parameter to `sendQuery`.
 
     // Get votes id and outcome of the given Proposal
     arc.sendQuery(gql`query {
@@ -76,16 +95,18 @@ These queries are made using the static method `arc.sendQuery`. Pass the query d
         }}`)
 
 
-### Subscribing Query
-*Subscriptions* are used so that our handler gets called every time a new value is emitted for the observable stream. This is useful to keep the app data updated as the value changes.
+### Subscribing to a Query
+Use *Subscriptions* to invoke a function that you supply to handle every time a new value is emitted by an observable stream. This is useful to keep the app data updated as the value changes.
 
 #### Entity methods
-As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe as follows to send the query as well as subscribe for updates.
+As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe by supplying `{subscribe: true}` as follows to send the query as well as subscribe for server updates.
 
 ```
 arc.daos({subscribe: true}).subscribe(() => {})
 dao.state({subscribe: true}).subscribe( () => {})
 ```
+
+**Note**: `{ subscribe: true }` is explicitly asking for updates from the graph-node server (and the results of those updates are added to the Apollo cache). This will send updates to observables subscribed to cache.
   
 #### Raw graphQL queries
 
@@ -100,7 +121,7 @@ new Proposal("0x1245").votes().subscribe(
 )
 ```
 
-## Optimizing Subscription and Using Cache
+## Optimizing How Subscriptions Use the Cache
 Since, subscriptions can be expensive, this behavior can be controlled/optimized in several ways.
   
   - [Controlling fetchPolicy](#controlling-apollo-fetchpolicy): controlling cache interaction.
@@ -110,11 +131,11 @@ Since, subscriptions can be expensive, this behavior can be controlled/optimized
 ### Controlling Apollo fetchPolicy
 We can pass Apollo's [`fetchPolicy`](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) argument to control how the query interacts with the cache:
 
-  - _**cache-first**_: default value. Read data from cache first, fetch from network otherwise.
-  - _**cache-and-network**_: return data from cache but still always fetch from network. It optimizes quick response while also keep cached data updated.
-  - _**network-only**_: will always make a request network and write data to cache. It optimizes for data consistency with the server.
+  - _**cache-first**_: default value. Read data from cache first, fetch from network if data is not available in cache.
+  - _**cache-and-network**_: return data from cache first and then always fetch from network to update the cache. It optimizes quick response while also keep cached data updated.
+  - _**network-only**_: will always make a request using network and write data to cache. It optimizes for data consistency with the server.
   - _**cache-only**_: will never execute a query using your network interface and throw error if data not available in cache.
-  - _**no-cache**_: always make a request using your network interface. Also, it will not write any data to the cache
+  - _**no-cache**_: like `network-only` it will always make a request using your network interface. But, it will not write any data to the cache
 
 ```
 arc.daos({}, { fetch-policy: 'cache-first'}) // the default value

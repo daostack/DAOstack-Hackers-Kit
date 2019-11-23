@@ -82,11 +82,10 @@ const createProposal = async () => {
   if (schemes.length === 0) {
     throw Error('Something went wrong - no ContributionReward scheme was registered with this DAO')
   }
-  const schemeState = await schemes[0].state().first()
 
   console.log(`Creating new proposal
       in DAO: ${dao.id}
-      for Scheme: ${schemeState.address}`)
+      for Scheme: ${schemes[0].staticState.address}`)
 
   // Send Transaction to create new proposal
   await dao.createProposal({
@@ -130,11 +129,10 @@ const showProposalDetails = async () => {
 ### Vote on Proposal
 
 This will only succeed if the proposal is still open for voting and the account has reputation in the respective DAO.
-Replace the `id` below accordingly.
 
 ```
 const voteOnProposal = async () => {
-  const proposal = new Proposal('0xfa06e538a0ecb32c1cd1eaad2102a8104180b56b6f088fab298c1ce86f582b8e', arc)
+  const proposal = new Proposal('0x123abc....', arc)
   vote(IProposalOutcome.Pass).send()
 }
 ```
