@@ -420,8 +420,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#search-and-observables" class="md-nav__link">
-    Search and Observables
+  <a href="#search-filters-and-observables" class="md-nav__link">
+    Search filters and Observables
   </a>
   
 </li>
@@ -962,8 +962,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#search-and-observables" class="md-nav__link">
-    Search and Observables
+  <a href="#search-filters-and-observables" class="md-nav__link">
+    Search filters and Observables
   </a>
   
 </li>
@@ -1161,15 +1161,41 @@
 
 </li>
 <li>
-<p><em><strong>search()</strong></em> <sup>[3],[4]</sup>: method which can be used to search for the entities on the subgraph.</p>
-<p>By default it will return an observable of <code>id(s)</code> of the subgraph Entity for the given filter query, but can be modified to fetch the <code>state()</code> by setting <code>fetchAllData</code>. Also refer to <a href="use-fetchalldata-with-nested-subscription">Optimize subscription section</a></p>
+<p><em><strong>search()</strong></em> <sup>[3]</sup>: method which can be used to search for the entities on the subgraph.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>context</strong>: must be provided with an <code>Arc</code> instance with subgraph details, so it knows which service to send the queries. </li>
+<li><strong>options</strong> (optional): <a href="#search-filters-and-observables">query filter options</a></li>
+<li><strong>apolloQueryOptions</strong> (optional): <a href="../querying/#optimizing-how-subscriptions-use-the-cache">apollo query options</a></li>
+</ul>
+<p>By default it will return an observable of <code>id(s)</code> of the subgraph Entity for the given filter query, but can be modified to fetch the <code>state()</code> using <code>apolloQueryOptions</code>.</p>
 <p>eg. To get all DAOs that are called <code>Foo</code>, you can do:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">DAO</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="err">{</span><span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">name</span><span class="p">:</span> <span class="ss">&quot;Foo&quot;</span> <span class="err">}}</span><span class="p">)</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">DAO</span><span class="p">.</span><span class="k">search</span><span class="p">(</span>
+  <span class="n">arc</span><span class="p">,</span>
+  <span class="err">{</span><span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">name</span><span class="p">:</span> <span class="ss">&quot;Foo&quot;</span> <span class="err">}}</span>
+<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p>eg. To get <code>currentState</code> of all DAOs that are called <code>Foo</code> ordered by <code>createdAt</code>, you can do:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">DAO</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="err">{</span><span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">name</span><span class="p">:</span> <span class="ss">&quot;Foo&quot;</span> <span class="err">}</span><span class="p">,</span> <span class="n">orderBy</span><span class="p">:</span> <span class="ss">&quot;createdAt&quot;</span> <span class="err">}</span><span class="p">,</span> <span class="err">{</span><span class="n">fetchAllData</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span> <span class="p">)</span>
+<p>eg. To get current state of all DAOs that are called <code>Foo</code> ordered by <code>createdAt</code>, you can do:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">DAO</span><span class="p">.</span><span class="k">search</span><span class="p">(</span>
+  <span class="n">arc</span><span class="p">,</span> <span class="o">//</span> <span class="n">context</span>
+  <span class="err">{</span><span class="k">where</span><span class="p">:</span> 
+    <span class="err">{</span> <span class="n">name</span><span class="p">:</span> <span class="ss">&quot;Foo&quot;</span> <span class="err">}</span><span class="p">,</span>
+    <span class="n">orderBy</span><span class="p">:</span> <span class="ss">&quot;createdAt&quot;</span>
+  <span class="err">}</span><span class="p">,</span> <span class="o">//</span> <span class="k">options</span>
+  <span class="err">{</span><span class="n">fetchAllData</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span> <span class="o">//</span> <span class="n">apolloQueryOptions</span>
+<span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -1178,14 +1204,12 @@
 <p><strong>Note:</strong></p>
 <ol>
 <li><code>staticState</code>, <code>setStaticState</code> and <code>fetchStaticState</code> is not available for all Entities consistantly and might be discontinued or restructured in future versions.</li>
-<li>There is a difference between <code>state().subscribe</code> and <code>state({subscribe: true})</code>. Refer <a href="../querying/#types-of-subscriptions">Types of Subscriptions</a></li>
-<li>Search function must be provided with an <code>Arc</code> instance, so it knows which service to send the queries.</li>
-<li>All queries return <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html">rxjs.Observable</a>. <a href="#search-and-observables">See below</a> for further explanation.</li>
+<li>There is a difference between <code>state().subscribe</code> and <code>state({subscribe: true})</code>. Refer <a href="../querying/#subscribe-to-apollo-cache-changes">Types of Subscriptions</a></li>
+<li>All queries return <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html">rxjs.Observable</a>. <a href="#search-filters-and-observables">See below</a> for further explanation.</li>
 </ol>
-<h2 id="search-and-observables">Search and Observables<a class="headerlink" href="#search-and-observables" title="Permanent link">&para;</a></h2>
-<p>The search functions are wrappers around graphql queries and standard <a href="../../subgraph/queries/">graphql syntax</a> can be used
-to filter and sort the queries, and for pagination:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Proposal</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">dao</span><span class="p">:</span> <span class="s1">&#39;0x1234..&#39;</span> <span class="err">}}</span><span class="p">)</span>
+<h2 id="search-filters-and-observables">Search filters and Observables<a class="headerlink" href="#search-filters-and-observables" title="Permanent link">&para;</a></h2>
+<p>The search functions are wrappers around graphql queries and standard <a href="../../subgraph/queries/">graphql syntax</a> can be used to filter and sort the queries, and for pagination:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Proposal</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">dao</span><span class="p">:</span> <span class="s1">&#39;0x1234..&#39;</span> <span class="err">}}</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -1215,7 +1239,7 @@ Please refer to <a href="../querying/">Subscriptions section</a> for details on 
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">observable</span> <span class="o">=</span>  <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span> <span class="o">//</span> <span class="nv">all</span> <span class="nv">proposals</span> <span class="nv">in</span> <span class="nv">this</span> <span class="nv">dao</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">observable</span> <span class="o">=</span>  <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">(</span>{<span class="nv">subscribe</span>: <span class="nv">true</span>}<span class="ss">)</span> <span class="o">//</span> <span class="nv">all</span> <span class="nv">proposals</span> <span class="nv">in</span> <span class="nv">this</span> <span class="nv">dao</span>
 
 <span class="o">//</span> <span class="nv">a</span> <span class="nv">subscription</span>
 <span class="nv">const</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="nv">observable</span>.<span class="nv">subscribe</span><span class="ss">(</span>

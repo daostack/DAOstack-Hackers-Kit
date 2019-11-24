@@ -1129,16 +1129,14 @@
  9
 10
 11
-12
-13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">observable</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">()</span>
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">observable</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">()</span>
 
-<span class="c1">// only in the next line will a query be sent to the server</span>
-<span class="kr">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
+<span class="kr">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">observable</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
     <span class="p">(</span><span class="nx">daos</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`we found </span><span class="si">${</span><span class="nx">daos</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="sb"> results`</span><span class="p">)</span>
     <span class="p">)</span>
 
 <span class="kr">const</span> <span class="nx">proposal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Propsal</span><span class="p">(</span><span class="s1">&#39;0x123abc....&#39;</span><span class="p">,</span> <span class="nx">arc</span><span class="p">)</span>
-<span class="kd">let</span> <span class="nx">stateObservable</span> <span class="o">=</span> <span class="nx">proposal</span><span class="p">.</span><span class="nx">state</span><span class="p">()</span>
+<span class="kd">let</span> <span class="nx">stateObservable</span> <span class="o">=</span> <span class="nx">proposal</span><span class="p">.</span><span class="nx">state</span><span class="p">({</span><span class="nx">subscribe</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
 
 <span class="nx">stateObservable</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
     <span class="p">(</span><span class="nx">proposal</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">proposal</span><span class="p">)</span>
@@ -1151,7 +1149,7 @@
 <p>Subscriptions will cause the server to send you an update each time the data changes and are useful for composing asynchronous and event-based programs.</p>
 <p>By default, subscribing to an observable will do two things:</p>
 <ul>
-<li>send a query to the server to fetching the data</li>
+<li>send a query to the server to fetch the data</li>
 <li>send a subscription query to the server for update events</li>
 </ul>
 <h2 id="how-to-query-and-subscribe">How to Query and Subscribe<a class="headerlink" href="#how-to-query-and-subscribe" title="Permanent link">&para;</a></h2>
@@ -1190,7 +1188,7 @@
 <h3 id="executing-a-query">Executing a Query<a class="headerlink" href="#executing-a-query" title="Permanent link">&para;</a></h3>
 <p>After creating a query, as we did in the previous section, we need to cause the query to be executed, that is, be sent to the graphnode server.</p>
 <h4 id="entity-methods_1">Entity Methods<a class="headerlink" href="#entity-methods_1" title="Permanent link">&para;</a></h4>
-<p>We can subscribe to an observable without passing <code>{subscribe: true}</code> parameter (refer to the <a href="#entity-methods_2">subscribing to a query section</a>) for sending a one-time query without subscribing to further updates from the server for result of the query.</p>
+<p>We can subscribe to an observable without passing <code>{subscribe: true}</code> parameter (introduced in the <a href="#entity-methods_2">subscribing to a query section</a>) for sending a one-time query without subscribing to further updates from the server for result of the query.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1201,7 +1199,7 @@
 8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">//</span> <span class="nv">Get</span> <span class="nv">all</span> <span class="nv">proposals</span><span class="s1">&#39;</span><span class="s"> Id of the DAO without subscribing to server</span>
 <span class="nv">const</span> <span class="nv">proposalsObs</span> <span class="o">=</span> <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span>
 
-<span class="o">//</span> <span class="k">send</span> <span class="nv">query</span> <span class="nv">and</span> <span class="nv">open</span> <span class="nv">subscription</span> <span class="nv">only</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">cache</span>
+<span class="o">//</span> <span class="k">send</span> <span class="nv">query</span> <span class="nv">and</span> <span class="nv">subscribe</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">cache</span> <span class="nv">updates</span>
 <span class="nv">proposalsObs</span>.<span class="nv">subscribe</span><span class="ss">(()</span> <span class="o">=&gt;</span> {}<span class="ss">)</span>
 
 <span class="o">//</span> <span class="nv">Unsubscribe</span> <span class="nv">to</span> <span class="nv">cache</span> <span class="nv">once</span> <span class="nv">done</span>
@@ -1209,7 +1207,7 @@
 </pre></div>
 </td></tr></table>
 
-<p><strong>Note</strong>: Even though we are not subscribing to updates from the server, the observable still subscribes to the Apollo cache changes. The cache could change as a result of some other query and is discussed in detail in the <a href="#subscribe-to-apollo-cache-changes">following section</a>.</p>
+<p><strong>Note</strong>: Refer to the <a href="#subscribe-to-apollo-cache-changes">Subscribe to Apollo Cache changes</a> section to understand difference between cache and server update.</p>
 <h4 id="raw-graphql-queries_1">Raw GraphQL queries<a class="headerlink" href="#raw-graphql-queries_1" title="Permanent link">&para;</a></h4>
 <p>You can submit raw GraphQL queries using the static method <code>arc.sendQuery</code>. Pass the query designed <a href="#raw-graphql-queries">above</a> as the parameter to <code>sendQuery</code>.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -1225,16 +1223,16 @@
 </td></tr></table>
 
 <h3 id="subscribing-to-a-query">Subscribing to a Query<a class="headerlink" href="#subscribing-to-a-query" title="Permanent link">&para;</a></h3>
-<p>Use <em>Subscriptions</em> to invoke a function that you supply to handle every time a new value is emitted by an observable stream. This is useful to keep the app data updated as the value changes.</p>
+<p>Use <em>Subscriptions</em> to invoke the handler that you supply to run every time a new value is emitted by an observable stream. This is useful to keep the app data updated as the value changes.</p>
 <h4 id="entity-methods_2">Entity methods<a class="headerlink" href="#entity-methods_2" title="Permanent link">&para;</a></h4>
 <p>As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe by supplying <code>{subscribe: true}</code> as follows to send the query as well as subscribe for server updates.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{}</span><span class="p">,</span> <span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
 <span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">(</span><span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-<p><strong>Note</strong>: <code>{ subscribe: true }</code> is explicitly asking for updates from the graph-node server (and the results of those updates are added to the Apollo cache). This will send updates to observables subscribed to cache.</p>
+<p><strong>Note</strong>: Refer to the <a href="#subscribe-to-apollo-cache-changes">Subscribe to Apollo Cache changes</a> section to understand difference between cache and server updates. </p>
 <h4 id="raw-graphql-queries_2">Raw graphQL queries<a class="headerlink" href="#raw-graphql-queries_2" title="Permanent link">&para;</a></h4>
 <p>For even more control over what data is being fetched and subscribed to, you can write explicit queries:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -1252,7 +1250,7 @@
 </td></tr></table>
 
 <h2 id="optimizing-how-subscriptions-use-the-cache">Optimizing How Subscriptions Use the Cache<a class="headerlink" href="#optimizing-how-subscriptions-use-the-cache" title="Permanent link">&para;</a></h2>
-<p>Since, subscriptions can be expensive, this behavior can be controlled/optimized in several ways.</p>
+<p>Since, subscriptions can be expensive, this behavior can be controlled/optimized in several ways. The client library uses <a href="https://www.apollographql.com/">Apollo</a> for data management which offers an intelligent caching and declarative approach to data fetching.</p>
 <ul>
 <li><a href="#controlling-apollo-fetchpolicy">Controlling fetchPolicy</a>: controlling cache interaction.</li>
 <li><a href="#subscribe-to-apollo-cache-changes">Subscribing to Apollo Cache</a>: getting updates from Apollo cache instead of graphnode server.</li>
@@ -1274,17 +1272,27 @@
 </td></tr></table>
 
 <h3 id="subscribe-to-apollo-cache-changes">Subscribe to Apollo Cache changes<a class="headerlink" href="#subscribe-to-apollo-cache-changes" title="Permanent link">&para;</a></h3>
-<p>The creation of a subscription can be controlled by passing the <code>subscribe</code> parameter.
-In the following query we will not subscribe to the updates from network but will still watch changes in the Apollo cache and return updated results if the cache changes.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{}</span><span class="p">,</span> <span class="err">{</span> <span class="n">subscribe</span><span class="p">:</span> <span class="k">false</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
-<span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">().</span><span class="n">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
+<p>As we have seen the client library offers two types of subscription that can be controlled by the <code>subscribe</code> parameter.</p>
+<ul>
+<li><strong>server and cache</strong> <code>{ subscribe: true }</code>: explicitly ask for the updates from the graph-node server. Update the cache with the results of the query.</li>
+<li><strong>only cache</strong> <code>{ subscribe: false }</code>: do not subscribe to the updates from the server but still subscribe to the Apollo cache changes.</li>
+</ul>
+<p>NOTE:</p>
+<ul>
+<li>By default <code>subscribe</code> is set to false.</li>
+<li>Apollo cache could change as a result of another query which does subscribe to server changes.</li>
+</ul>
+<p>e.g.</p>
+<p>In <em>q1</em> we will not subscribe to the updates from network but will still watch changes in the Apollo cache and return updated results if the cache changes.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">({},</span> <span class="p">{</span><span class="nx">fetchAllData</span><span class="o">:</span> <span class="kc">true</span><span class="p">}).</span><span class="nx">subscribe</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{})</span> <span class="c1">// q1</span>
 </pre></div>
 </td></tr></table>
 
-<p>NOTE:
-  - By default <code>subscribe</code> is set to false.
-  - Apollo cache could change as a result of another smaller query which does subscribe to server changes.</p>
+<p>In <em>q2</em>  we subscribe to server updates. The results of these updates are added to the Apollo cache and the observable in <em>q1</em> will also get the updates if cache changes.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">dao</span><span class="p">.</span><span class="nx">state</span><span class="p">({</span><span class="nx">subscribe</span><span class="o">:</span> <span class="kc">true</span><span class="p">}).</span><span class="nx">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{})</span> <span class="c1">// q2</span>
+</pre></div>
+</td></tr></table>
+
 <h3 id="use-fetchalldata-with-nested-subscription">Use fetchAllData with Nested subscription<a class="headerlink" href="#use-fetchalldata-with-nested-subscription" title="Permanent link">&para;</a></h3>
 <p>Most of the Entity methods are implemented in such a way that the queries will fetch (and subscribe to) just as much data as is needed to create the result set. For example, <code>dao.proposals()</code> will only fetch the proposal IDs. This can be controlled (in a limited way) by setting the parameter <code>fetchAllData</code> to true</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span><span class="n">orderBy</span><span class="p">:</span> <span class="ss">&quot;creationDate&quot;</span><span class="err">}</span><span class="p">,</span> <span class="err">{</span><span class="n">fetchAllData</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">)</span>
@@ -1298,17 +1306,17 @@ In the following query we will not subscribe to the updates from network but wil
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span>.<span class="nv">subscribe</span><span class="ss">(</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">(</span>{<span class="nv">subscribe</span>: <span class="nv">true</span>}<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>
   <span class="ss">(</span><span class="nv">props</span><span class="ss">)</span> <span class="o">=&gt;</span> {
     <span class="k">for</span> <span class="ss">(</span><span class="nv">let</span> <span class="nv">prop</span> <span class="nv">of</span> <span class="nv">props</span><span class="ss">)</span> {
-      <span class="nv">prop</span>.<span class="nv">state</span><span class="ss">()</span>.<span class="nv">subscribe</span><span class="ss">(</span>.....<span class="ss">)</span>
+      <span class="nv">prop</span>.<span class="nv">state</span><span class="ss">(</span>{<span class="nv">subscribe</span>: <span class="nv">true</span>}<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>.....<span class="ss">)</span>
     }
   }
 <span class="ss">)</span>
 </pre></div>
 </td></tr></table>
 
-<p>The problem with this pattern is that it is very expensive. The (subscription to) <code>dao.proposals(..)</code> will send a query and create a subscription, and then each of the calls to <code>proposal.state()</code> will create a new query and a separate subscription.</p>
+<p>The problem with this pattern is that it is very expensive. The (subscription to) <code>dao.proposals(..)</code> will send a query and create a subscription and then each of the calls to <code>proposal.state()</code> will create a new query and a separate subscription.</p>
 <p>Consider now the following pattern:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
