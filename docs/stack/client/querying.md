@@ -18,13 +18,12 @@ Now, in order to query the server we must subscribe
 ```javascript
 const observable = arc.daos()
   
-// only in the next line will a query be sent to the server
-const subscription = arc.daos.subscribe(
+const subscription = observable.subscribe(
     (daos) => console.log(`we found ${daos.length} results`)
     )
 
 const proposal = new Propsal('0x123abc....', arc)
-let stateObservable = proposal.state()
+let stateObservable = proposal.state({subscribe: true})
 
 stateObservable.subscribe(
     (proposal) => console.log(proposal)
@@ -38,7 +37,7 @@ Subscriptions will cause the server to send you an update each time the data cha
 
 By default, subscribing to an observable will do two things:
 
-  - send a query to the server to fetching the data
+  - send a query to the server to fetch the data
   - send a subscription query to the server for update events
 
 ## How to Query and Subscribe
@@ -71,19 +70,19 @@ To have more control over what gets fetched from the subgraph you can also custo
 After creating a query, as we did in the previous section, we need to cause the query to be executed, that is, be sent to the graphnode server.
 
 #### Entity Methods
-We can subscribe to an observable without passing `{subscribe: true}` parameter (refer to the [subscribing to a query section](#entity-methods_2)) for sending a one-time query without subscribing to further updates from the server for result of the query.
+We can subscribe to an observable without passing `{subscribe: true}` parameter (introduced in the [subscribing to a query section](#entity-methods_2)) for sending a one-time query without subscribing to further updates from the server for result of the query.
 
     // Get all proposals' Id of the DAO without subscribing to server
     const proposalsObs = dao.proposals()
     
-    // send query and open subscription only to the cache
+    // send query and subscribe to the cache updates
     proposalsObs.subscribe(() => {})
 
     // Unsubscribe to cache once done
     proposalsObs.unsubscribe()
 
 
-**Note**: Even though we are not subscribing to updates from the server, the observable still subscribes to the Apollo cache changes. The cache could change as a result of some other query and is discussed in detail in the [following section](#subscribe-to-apollo-cache-changes).
+**Note**: Refer to the [Subscribe to Apollo Cache changes](#subscribe-to-apollo-cache-changes) section to understand difference between cache and server update.
 
 #### Raw GraphQL queries
 You can submit raw GraphQL queries using the static method `arc.sendQuery`. Pass the query designed [above](#raw-graphql-queries) as the parameter to `sendQuery`.
@@ -96,17 +95,17 @@ You can submit raw GraphQL queries using the static method `arc.sendQuery`. Pass
 
 
 ### Subscribing to a Query
-Use *Subscriptions* to invoke a function that you supply to handle every time a new value is emitted by an observable stream. This is useful to keep the app data updated as the value changes.
+Use *Subscriptions* to invoke the handler that you supply to run every time a new value is emitted by an observable stream. This is useful to keep the app data updated as the value changes.
 
 #### Entity methods
 As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe by supplying `{subscribe: true}` as follows to send the query as well as subscribe for server updates.
 
 ```
-arc.daos({subscribe: true}).subscribe(() => {})
+arc.daos({}, {subscribe: true}).subscribe(() => {})
 dao.state({subscribe: true}).subscribe( () => {})
 ```
 
-**Note**: `{ subscribe: true }` is explicitly asking for updates from the graph-node server (and the results of those updates are added to the Apollo cache). This will send updates to observables subscribed to cache.
+**Note**: Refer to the [Subscribe to Apollo Cache changes](#subscribe-to-apollo-cache-changes) section to understand difference between cache and server updates. 
   
 #### Raw graphQL queries
 
@@ -122,8 +121,8 @@ new Proposal("0x1245").votes().subscribe(
 ```
 
 ## Optimizing How Subscriptions Use the Cache
-Since, subscriptions can be expensive, this behavior can be controlled/optimized in several ways.
-  
+Since, subscriptions can be expensive, this behavior can be controlled/optimized in several ways. The client library uses [Apollo](https://www.apollographql.com/) for data management which offers an intelligent caching and declarative approach to data fetching.
+
   - [Controlling fetchPolicy](#controlling-apollo-fetchpolicy): controlling cache interaction.
   - [Subscribing to Apollo Cache](#subscribe-to-apollo-cache-changes): getting updates from Apollo cache instead of graphnode server.
   - [FetchAllData and Nested subscription](#use-fetchalldata-with-nested-subscription): by querying larger set at top level and subscribing to Apollo cache for nested queries.
@@ -143,16 +142,28 @@ arc.daos({where: {stage: "Boosted"}}, { fetch-policy: 'network-only'}) // bypass
 ```
 
 ### Subscribe to Apollo Cache changes
-The creation of a subscription can be controlled by passing the `subscribe` parameter.
-In the following query we will not subscribe to the updates from network but will still watch changes in the Apollo cache and return updated results if the cache changes.
+As we have seen the client library offers two types of subscription that can be controlled by the `subscribe` parameter.
 
-```
-arc.daos({}, { subscribe: false}).subscribe(() => {})
-dao.state().subscribe( () => {})
-```
+  - **server and cache** `{ subscribe: true }`: explicitly ask for the updates from the graph-node server. Update the cache with the results of the query.
+  - **only cache** `{ subscribe: false }`: do not subscribe to the updates from the server but still subscribe to the Apollo cache changes.
+
 NOTE:
+
   - By default `subscribe` is set to false.
-  - Apollo cache could change as a result of another smaller query which does subscribe to server changes.
+  - Apollo cache could change as a result of another query which does subscribe to server changes.
+
+  e.g.
+  
+In _q1_ we will not subscribe to the updates from network but will still watch changes in the Apollo cache and return updated results if the cache changes.
+
+```javascript
+arc.daos({}, {fetchAllData: true}).subscribe(() => {}) // q1
+```
+
+ In _q2_  we subscribe to server updates. The results of these updates are added to the Apollo cache and the observable in _q1_ will also get the updates if cache changes.
+```javascript
+dao.state({subscribe: true}).subscribe( () => {}) // q2
+```
 
 ### Use fetchAllData with Nested subscription
 Most of the Entity methods are implemented in such a way that the queries will fetch (and subscribe to) just as much data as is needed to create the result set. For example, `dao.proposals()` will only fetch the proposal IDs. This can be controlled (in a limited way) by setting the parameter `fetchAllData` to true
@@ -161,15 +172,15 @@ dao.proposals({orderBy: "creationDate"}, {fetchAllData: true})
 ```
 This is useful for cache handling, where it may be useful to have more complete control over what data is being fetched. Consider the following example, which will get the list of proposals from the dao, and then get the state for each of the proposals.
 ```
-dao.proposals().subscribe(
+dao.proposals({subscribe: true}).subscribe(
   (props) => {
     for (let prop of props) {
-      prop.state().subscribe(.....)
+      prop.state({subscribe: true}).subscribe(.....)
     }
   }
 )
 ```
-The problem with this pattern is that it is very expensive. The (subscription to) `dao.proposals(..)` will send a query and create a subscription, and then each of the calls to `proposal.state()` will create a new query and a separate subscription.
+The problem with this pattern is that it is very expensive. The (subscription to) `dao.proposals(..)` will send a query and create a subscription and then each of the calls to `proposal.state()` will create a new query and a separate subscription.
 
 Consider now the following pattern:
 ```

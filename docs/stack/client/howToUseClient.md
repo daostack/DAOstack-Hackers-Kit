@@ -136,31 +136,45 @@ All entities have:
           (newState) => console.log(`This DAO has ${newState.memberCount} members`)
         )
 
-  - _**search()**_ <sup>[3],[4]</sup>: method which can be used to search for the entities on the subgraph.
+  - _**search()**_ <sup>[3]</sup>: method which can be used to search for the entities on the subgraph.
 
-    By default it will return an observable of `id(s)` of the subgraph Entity for the given filter query, but can be modified to fetch the `state()` by setting `fetchAllData`. Also refer to [Optimize subscription section](use-fetchalldata-with-nested-subscription)
+    Parameters:
+
+      - **context**: must be provided with an `Arc` instance with subgraph details, so it knows which service to send the queries. 
+      - **options** (optional): [query filter options](#search-filters-and-observables)
+      - **apolloQueryOptions** (optional): [apollo query options](../querying/#optimizing-how-subscriptions-use-the-cache)
+
+    By default it will return an observable of `id(s)` of the subgraph Entity for the given filter query, but can be modified to fetch the `state()` using `apolloQueryOptions`.
 
     eg. To get all DAOs that are called `Foo`, you can do:
 
-        DAO.search(arc, {where: { name: "Foo" }})
+        DAO.search(
+          arc,
+          {where: { name: "Foo" }}
+        )
         
-    eg. To get `currentState` of all DAOs that are called `Foo` ordered by `createdAt`, you can do:
+    eg. To get current state of all DAOs that are called `Foo` ordered by `createdAt`, you can do:
 
-        DAO.search(arc, {where: { name: "Foo" }, orderBy: "createdAt" }, {fetchAllData: true} )
+        DAO.search(
+          arc, // context
+          {where: 
+            { name: "Foo" },
+            orderBy: "createdAt"
+          }, // options
+          {fetchAllData: true} // apolloQueryOptions
+        )
       
 **Note:**
 
   1. `staticState`, `setStaticState` and `fetchStaticState` is not available for all Entities consistantly and might be discontinued or restructured in future versions.
-  2. There is a difference between `state().subscribe` and `state({subscribe: true})`. Refer [Types of Subscriptions](../querying/#types-of-subscriptions)
-  2. Search function must be provided with an `Arc` instance, so it knows which service to send the queries.
-  4. All queries return [rxjs.Observable](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html). [See below](#search-and-observables) for further explanation.
+  2. There is a difference between `state().subscribe` and `state({subscribe: true})`. Refer [Types of Subscriptions](../querying/#subscribe-to-apollo-cache-changes)
+  3. All queries return [rxjs.Observable](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html). [See below](#search-filters-and-observables) for further explanation.
 
-## Search and Observables
+## Search filters and Observables
 
-The search functions are wrappers around graphql queries and standard [graphql syntax](../../subgraph/queries/) can be used
-to filter and sort the queries, and for pagination:
+The search functions are wrappers around graphql queries and standard [graphql syntax](../../subgraph/queries/) can be used to filter and sort the queries, and for pagination:
 ```
-Proposal.search({ where: { dao: '0x1234..' }})
+Proposal.search(arc, { where: { dao: '0x1234..' }})
 ```
 
 ```
@@ -186,7 +200,7 @@ Observables are very flexible. Typically, an observable will be used by creating
 Please refer to [Subscriptions section](../querying/) for details on when and how to use it and the types of subscription.
 
 ```
-const observable =  dao.proposals() // all proposals in this dao
+const observable =  dao.proposals({subscribe: true}) // all proposals in this dao
 
 // a subscription
 const subscription = observable.subscribe(
