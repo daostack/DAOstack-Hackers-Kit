@@ -1,6 +1,6 @@
 # PeepDAO - The first DAO on social media
 
-This project is dapp for interacting with a DAO which has its own social media account on [Peepeth](Peepeth.com), a decentralized microblogging app. The Dapp allows to make decisions on posting Peeps on behalf of the DAO by decentralized voting of its participants.
+This project is dapp for interacting with a DAO which has its own social media account on [Peepeth](https://peepeth.com/welcome), a decentralized microblogging app. The Dapp allows to make decisions on posting Peeps on behalf of the DAO by decentralized voting of its participants.
 This project is an educational example demonstraiting the use of the DAOstack framework to build collaborative dapps and DAOs.
 You can use the code here to deploy and interact with a new DAO, or integrate in your own DAO project.
 
