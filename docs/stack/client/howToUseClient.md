@@ -55,7 +55,7 @@ await arc.fetchContractInfos()
 
 Entities are the basic building blocks of DAOstack ecosystem.
 
-The entity instance holds the `statoc` and `dynamic` state of the entity it represents and encapsulates graphql queries to retrieve data from subgraph. The client library caches entity data. Please refer to [Common properties and methods](#common-methods-and-properties) section for more information about what is cached and how to retrieve it.
+The entity instance holds the `static` and `dynamic` state of the entity it represents and encapsulates graphql queries to retrieve data from subgraph. The client library caches entity data. Please refer to [Common properties and methods](#common-methods-and-properties) section for more information about what is cached and how to retrieve it.
 
 
 While the entity classes provide nice helper methods that encapsulate graphql queries, you can also submit your own customized graphql queries using the static method `arc.apolloClient`. Please refer to the [Queries](../querying/#query) section about all the ways to query subgraph.
