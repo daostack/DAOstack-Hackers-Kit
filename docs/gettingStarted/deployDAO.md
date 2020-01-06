@@ -34,7 +34,7 @@ Limitations of current version:
 
 ### Migration package
 
-  Either from CLI or using javascript. Example and full reference guide can be found at [Migration Reame](https://github.com/daostack/migration#daostack-migration)
+  Either from CLI or using javascript. Example and full reference guide can be found at [Migration Readme](https://github.com/daostack/migration#daostack-migration)
 
   You can also find some example deployment setup and script in the DAOstacker Hacker Kit examples - [Starter Template](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template) and [FireStarter Kit](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/firestarter-example)
 
