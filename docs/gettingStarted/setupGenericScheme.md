@@ -2,20 +2,18 @@
 
 In DAOstack, "schemes" are smart contracts that enable various DAO actions, and "generic schemes" are schemes that enable nearly any kind of action possible for an Ethereum address.
 
-[GenericScheme](https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol) and [UGenericScheme](https://github.com/daostack/arc/blob/master/contracts/universalSchemes/UGenericScheme.sol) are both types of generic scheme. DAOs can use these schemes:
+DAOs can use [GenericScheme](https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol):
 
-  1. to enable truly generic DAO actions (letting proposers choose which contracts to interact with and how), or
-  2. to create specific, custom integrations for their DAO (actions that make particular calls to particular smart contracts that serve a particular purpose for the DAO).
+  1. to enable truly generic DAO actions (letting proposers choose which contracts to interact with and how),
+  2. to create specific, custom integrations (actions that make particular calls to particular smart contracts that serve a particular purpose for the DAO).
 
-## When to use GenericScheme and when to use UGenericScheme
+**NOTE**: 
 
-**UGenericScheme**: If a DAO only needs a single generic scheme and/or doesn't need to change the scheme's on-chain code at all, then the UGenericScheme is a good choice, since it is already deployed and can be used by any number of DAOs (the "U" stands for "universal").
+  - If a DAO wants to make multiple smart contracts available, with different labels and proposal types in the UI, then each contract should use its own GenericScheme instance, customized if required for the DAO's purpose.
+  -  _While at the contract level, generic schemes only need encoded call data to function, asking users to provide this data is not good UX. If you're using a generic scheme for anything except a truly generic action, which is only accessible to Ethereum experts, we ask that you add Alchemy support for the specific actions you intend. Please do not register your scheme on mainnet without adding alchemy support for it. [Here](https://alchemy.daostack.io/dao/0x519b70055af55a007110b4ff99b0ea33071c720a/scheme/0xeca5415360191a29f12e1da442b9b050adf22c81b08230f1dafba908767e604f/proposals/) is an example of a customized generic scheme on mainnet._
+  - _UGenericScheme_ i.e. the universal version of the generic scheme has been deprecated and removed from arc ( version > 33). Subgraph and Alchemy will be backward compatible and support old DAOs already deployed and using it.
 
-**GenericScheme**: If a DAO wants to make multiple smart contracts available, with different labels and proposal types in the UI, then each contract should use its own GenericScheme, customized if required for the DAO's purpose.
-
-  NOTE: _While at the contract level, both generic schemes only need encoded call data to function, asking users to provide this data is not good UX. If you're using a generic scheme for anything except a truly generic action, which is only accessible to Ethereum experts, we ask that you add Alchemy support for the specific actions you intend. Please do not register your scheme on mainnet without adding alchemy support for it. [Here](https://alchemy.daostack.io/dao/0x519b70055af55a007110b4ff99b0ea33071c720a/scheme/0xeca5415360191a29f12e1da442b9b050adf22c81b08230f1dafba908767e604f/proposals/) is an example of a customized generic scheme on mainnet._
-
-## How to register a generic scheme to a DAO
+## How to register a Generic Scheme to a DAO
 
 A DAO can only use schemes that are registered with its controller. There are two ways to register a scheme to a DAO's controller:
 
@@ -25,78 +23,14 @@ A DAO can only use schemes that are registered with its controller. There are tw
 
   NOTE: _In case of the Genesis DAO, you can propose new schemes to be registered using the aptly named Scheme Registrar scheme._
 
-### Register a generic scheme while deploying a DAO
+### Register a Generic Scheme while deploying a DAO
 
-While deploying DAO, "`UGenericScheme`" can be used to register the universal generic scheme.
-
-If are using the regular GenericScheme, then you can register multiple "`GenericScheme`" instances and mention each in the
+While deploying DAO you can register multiple "GenericScheme" instances and mention each in the
 `customSchemes` section of your `migration-dao-params.json`.
 
 Refer to the instructions for [how to deploy DAO](../deployDAO).
 
-#### Set UGenericScheme to interact with your contract
-
-NOTE: _Follow this if `UGenericScheme` is not already registered in your DAO or you need to update `UGenericScheme` with new parameters._
-
-You can use UGenericScheme's `setParameters` method to setup the `contractToCall`, the `votingMachine` to use, and the `voteParameters` used for voting on proposals for the generic scheme action.
-
-The following is a short script that shows how to do this:
-
-```javascript
-  const ugenericScheme = new web3.eth.Contract(
-    require('@daostack/arc/build/contracts/UGenericScheme.json').abi,
-    UGenericSchemeAddress, // address from https://github.com/daostack/migration/blob/master/migration.json
-    {
-      from,
-      gas,
-      gasPrice
-    }
-  )
-
-  // These are example values: please change appropriately.
-  // Refer to https://daostack.zendesk.com/hc/en-us/sections/360000535638-Genesis-Protocol
-  const voteParams = {
-        "boostedVotePeriodLimit": 345600,
-        "daoBountyConst": 10,
-        "minimumDaoBountyGWei": 150000000000,
-        "queuedVotePeriodLimit": 2592000,
-        "queuedVoteRequiredPercentage": 50,
-        "preBoostedVotePeriodLimit": 86400,
-        "proposingRepRewardGwei": 50000000000,
-        "quietEndingPeriod": 172800,
-        "thresholdConst": 1200,
-        "voteOnBehalf": "0x0000000000000000000000000000000000000000",
-        "votersReputationLossRatio": 4,
-        "activationTime": 0
-      }
-
-  // Get address from https://github.com/daostack/migration/blob/master/migration.json
-  const votingMachineAddress = "0xaddress-of-VotingMachine-of-DAO-on-given-network"
-
-  // If you want this Generic Scheme to enable DAO to interact with Bounties Network
-  // then targetContract would be the address of Bounties Network's respective contract
-  const targetContractAddress = "0xaddress-of-contract-this-will-interact-with"
-
-
-  // paramHash will be useful in later step so lets log it
-  const paramHash = ugenericScheme.methods.setParameters(
-      voteParams,
-      votingMachineAddress,
-      targetContractAddress
-      ).call()
-
-  console.log(paramHash)
-
-  ugenericScheme.methods.setParameters(
-        voteParams,
-        votingMachineAddress,
-        targetContractAddress
-      ).send()
-```
-
-OR
-
-#### Set GenericScheme to interact with your contract
+### Set Generic Scheme to interact with your contract
 
 First, you will have to deploy a new instance of `GenericScheme` and use its `initialize` method to setup its params: the DAO `Avatar` it connects to, the `contractToCall`, the `votingMachine` to use, and the `voteParameters` for voting on proposals that use the scheme.
 
@@ -177,7 +111,7 @@ The following is a short script that shows how to do this:
   3. Click `New Proposal` – this will open a popup.
   4. Select `Add Scheme` on the popup sidebar (on the left).
   5. Give the proposal an appropriate title, description, and url linking to a description of the proposal.
-  6. For `Scheme`,  put the address of your Generic Scheme contract (universal or not).
+  6. For `Scheme`,  put the address of your Generic Scheme contract.
   7. Enter the `paramHash` you got [here](#set-generic-scheme-to-interact-with-your-contract).
   8. In the permissions section, check `Call genericCall on behalf of` (this will allow your scheme to make generic calls, which is the whole point here).
   9. Submit the proposal and sign the transaction as normal.
@@ -186,11 +120,7 @@ The following is a short script that shows how to do this:
 ## How to get Generic Scheme indexed by DAOstack subgraph
 The DAOstack subgraph enables Alchemy's quick loading of cached blockchain data and is a huge part of creating a positive user experience in Alchemy.
 
-If you are using:
-
-  - UGenericScheme: the subgraph is already indexing the scheme, and you do not have to worry about it 😅
-
-  - GenericScheme: You will have to submit a PR [here](https://github.com/daostack/subgraph/tree/master/daos)
+You will have to submit a PR [here](https://github.com/daostack/subgraph/tree/master/daos)
 
     1. Make sure to choose the correct Ethereum network for your DAO
     2. If the scheme is for a new DAO, then add `YourDAO.json` in that network folder. eg.

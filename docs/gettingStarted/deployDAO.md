@@ -1,34 +1,43 @@
-# How to launch a new DAO?
+# Introduction
 
-  The core contracts required by a daostack DAO are already deployed by the DAOstack team on mainnet as well as testnet and the addresses are available in [Migration.json](https://github.com/daostack/migration/blob/master/migration.json). Though you need to deploy an Avatar, custom schemes (optional), native reputation and native token contract. Checkout [Structure of DAO](https://github.com/daostack/arc#arc) for details on Avatar, scheme, rep and token
+The core contracts required by a daostack DAO are already deployed by the DAOstack team on mainnet as well as testnet and the addresses are available in [Migration.json](https://github.com/daostack/migration/blob/master/migration.json).
+  
+Though, you will need to deploy following contracts:
+
+  - **Avatar**: The DAO's account that holds its assets.
+  - **Controller**: Access Control of the DAO.
+  - **Native Reputation**: Voting in Arc is done mainly using Reputation.
+  - **Native Token**: ERC20 token Can be used in any way DAO would like.
+  - **Custom schemes** (if any): Any new universal or non-universal scheme.
+
+  Refer [Structure of DAOstack DAO](../../stack/arc/arcIntro/).
  
-  DAO can be deployed using Migration package either from CLI or using javascript. Example deployment setup and scripts are available in [Starter-template](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template)
+## How to Deploy?
+There are 2 recommended ways to deploy DAOstack DAO
 
-  - Choose a name for your DAO and the native token and its symbol
-  - Do you want to use DAOcreator contract?
-      Deploying a DAO with DAOcreator contract saves number of transactions to be signed by bundling up founder rep and token distribution (upto 100 members) in single tx and initial scheme registration in single tx
+  - using Migration package
+  - using [dOrg DAOcreator](https://dorg.tech/#/dao-creator)
+  
+### dOrg DAOcreator
 
-  - Which schemes to include in the DAO?
+DAOcreator is a tool with user friendly guided interface to launch a new DAO created by [dOrg](https://dorg.tech/#/about).
 
-    Schemes are the actions a DAOstack DAO can take when a proposal passes/fails. Currently supported schemes in Migrations package are:
+Limitations of current version:
+  - cannot deploy custom schemes
+  - cannot add multiple generic actions using generic schemes
+  - in alpha stage
 
-    - ContributionReward: Enables fund management proposals that distribute funds to beneficiary once the proposal passes
-    - GenericScheme: Enables Avatar to make arbitrary function calls to a specific contract. For eg use Avatar to submit a proposal to Genesis Alpha on behalf of your DAO
-    - SchemeRegistrar: Lets you submit a proposal to register more schemes (apart from initial schemes set at time of deployment) to the DAO
-    - GlobalConstraintRegistrar: Lets you submit a proposal to register more GlobalConstraints
-    - UpgradeScheme: Lets you upgrade the controller. Since Controller is not a Scheme it cannot be changed via SchemeRegistrar
+#### Process
+  - Follow the instructions through the app to deploy the DAO.
+  - Copy the output of deployment process, along with a brief description of your DAO and its purpose, and send it to @shivgupt on Telegram or to the dOrg contact as displayed on the output screen.
+  - We will submit a PR to `github.com/daostack/subgraph` on your behalf.
 
-    Find detailed documentation re Schemes in [Arc Repo](https://github.com/daostack/arc)
+### Migration package
 
-  - Ucontroller vs Controller?
-    Refer to documentation on Controllers
-        
-  - Decide on which Voting Machine to use and the parameters
-    Set the voting machine parameters according to the needs of the organization. Currently you can deploy a DAO using migrations with only GenesisProtocol voting machine, which allows decision at timeout according to higher relative vote. You can find details about different voting machines supported by arc at https://github.com/daostack/arc/tree/master/docs/contracts/VotingMachines
+  Either from CLI or using javascript. Example and full reference guide can be found at [Migration Readme](https://github.com/daostack/migration#daostack-migration)
 
-  - Who gets the initial rep and token in DAO?
-    Edit the list of founder members’ address along with the rep and/or token to be distributed initially. You may choose to give equal rep to all or have differentiated rep.
+  You can also find some example deployment setup and script in the DAOstacker Hacker Kit examples - [Starter Template](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template) and [FireStarter Kit](https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/firestarter-example)
 
-    Once you have decided on *dao-params* follow the instruction in *Migrations* or one of the examples to deploy your dao
-
-
+  NOTE: Universal Controller and Universal Generic Scheme has been discontinued for arc Version > 33. Please make sure of the following:
+  - Set `"useUController": false`
+  - If registering Generic Scheme to the DAO mention it in Custom Scheme section.
