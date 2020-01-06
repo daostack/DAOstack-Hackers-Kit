@@ -1,9 +1,18 @@
-**[Client](https://github.com/daostack/client) is a library that facilitates access to Arc contracts without having to directly interact with the Ethereum blockchain.** It provides functions to interact with DAOstack contracts to vote, propose, stake and execute proposals.
+**[Client](https://github.com/daostack/client) is a nodejs library that provides a helpful set of tools to interact with the DAOstack ecosystem.**
 
-Client library is also a wrapper around [DAOstack subgraph](https://github.com/daostack/sugbraph). It enable developers to interact with subgraph and execute various generic graph queries to access proposals, daos and other complex entities
+In particular, the  library provides an interface to
 
-Using Client, JavaScript/TypeScript developers can easily write scripts or applications which can interact with existing DAOs, submit proposals to DAOs, vote and stake on proposals, execute the resulting decisions, manage agent reputations. This is particularly helpful for developers who want to get the advantages of decentralized governance on the blockchain without dealing directly with a smart contract language.
+ - [DAOstack contracts](https://github.com/daostack/arc) and
+ - [DAOstack subgraph](https://github.com/daostack/subgraph) (an index of on-chain data).
 
 ### Should I work at this level?
 
-You should use Client whenever you want to use JavaScript or TypeScript to interact with Arc contracts for voting, proposing etc or to execute generic GraphQL queries on subgraph for accessing blockchain data. If you are interacting with custom Arc contracts or custom subgraph, then you might have to write your own Web3 library to interact with contracts and/or query the subgraph.
+**You should import client package as a dependency, if you are**
+
+- developing a dApp in DAOstack platform (we are using it to build our [React App](https://github.com/daostack/alchemy) - [Alchemy](https://alchemy.daostack.io)) 
+- writing nodejs scripts that interact with the [Arc Contracts](https://github.com/daostack/arc) and query data from the [subgraph](https://github.com/daostack/subgraph)
+
+**You should extend the client package, if you are** 
+
+  - interacting with Arc contracts that are not yet supported by *Client.js*
+  - modifying/extending DAOstack subgraph
