@@ -19,6 +19,92 @@ The structure is basically as follows:
 - **subgraph** - This is based on graphprotocol and uses mappings defined in `src/mappings` to index the blockchain events and store them in a `postgres` database as Entities described by `graphQl` schema. The `subgraph` deploy script uses output of migrations in `data/migration.json` to get the contract addresses. You can find mappings for the base contracts here and can add more mappings and schema for your custom contracts
 -**data** - This folder contains the `testDaoSpec.json`, which is file used to specify details for the new DAO to be deployed, feel free to change it according to your project needs. It also contains an `example.env`, which has example environment variables set, copy this file to your project root i.e. `starter-template` folder as `.env` and edit the variables accordingly. Lastly, there is a `migration.json` file which will contain the output after running the migration
 
+## How to customize your DAO?
+ In order to customize your DAO you will modify `data/testDAOspec.json`, which has the DAO specifications.
+ ```
+  {
+    // Name of your DAO, Native token and Native token symbol
+    "orgName": "DevTest",
+    "tokenName": "Dev",
+    "tokenSymbol": "DEV",
+
+    // Whether you want to use universal controller or deploy your own controller
+    // Read more about controlers in Arc repo
+    "useUController": false,
+
+    // DaoCreater lets you bundle up tx to deploy Avatar, Reputation and Token contract
+    // and upto 100 founder member intitialization in single tx. You can have more founders
+    // and there will upto 100 batched in another tx and so on.
+    // It also bundle up the tx to register scheme
+    "useDaoCreator": true,
+    
+    // Select the schemes you want to register to your DAO and the votingMachine params
+    // to use with the scheme.
+    // Note if no params mentioned, then it defaults to using params VotingMachinesParams[0]
+    "schemes": {
+      "ContributionReward": true,
+      "GenericScheme": false,
+      "SchemeRegistrar": true,
+      "GlobalConstraintRegistrar": false,
+      "UpgradeScheme": false
+    }
+    "ContributionReward": {
+    },
+    "SchemeRegistrar": {
+        "voteRegisterParams": 0,
+        "voteRemoveParams": 0
+    },
+    "VotingMachinesParams": [
+      {
+        // Voting ratio required for instantly passing a proposal
+        "queuedVoteRequiredPercentage": 50,
+
+        // How long non-boosted proposal stays open 
+        "queuedVotePeriodLimit": 432000,
+
+        // How long boosted proposal stays open
+        "boostedVotePeriodLimit": 86400,
+
+        // How long proposal is open for predicting before it is boosted
+        "preBoostedVotePeriodLimit": 43200,
+
+        // Controls how quickly the boosting threshold goes up. Larger => fewer boosted proposals
+        "thresholdConst": 1200,
+
+        // Time added if there is a last minute flip in the DAO’s decision on boosted proposal
+        "quietEndingPeriod": 14400,
+
+        // Rep awarded to proposer
+        "proposingRepReward": 500,
+
+        // Voters voting on un-boosted proposal gain/loose this amount based on the outcome
+        "votersReputationLossRatio": 1,
+
+        // Amount automatically staked by DAO against the proposal. This incentivise pridictions
+        "minimumDaoBounty": 150,
+
+        // Auto Down-stake size
+        "daoBountyConst": 10,
+
+        // Time after which DAO will start accepting proposals
+        "activationTime": 0,
+
+        // If set allows only the following address to vote on behalf
+        "voteOnBehalf": "0x0000000000000000000000000000000000000000"
+      }
+    ],
+
+    // founder members
+    "founders": [
+      {
+        "address": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+        "reputation": 250,
+        "tokens": 2000
+      },
+    ],
+  }
+ ```
+
 ## Running your project on private network:
 
 ### Using docker
