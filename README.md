@@ -20,6 +20,8 @@
 
 Welcome to the DAOstack Hackers Kit! This repository was created to help you get started building on the DAOstack platform.
 
+Refer to developer docs and tutorials at [DAOstack dev portal](https://daostack.github.io/DAOstack-Hackers-Kit)
+
 [DAOstack](https://daostack.io) is a software stack for building Dapps (decentralized apps), DAOs (Decentralized Autonomous Organizations), and DAO tools.
 
 The DAO stack provides all infrastructure needed to build such projects, including: 
