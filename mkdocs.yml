@@ -1,6 +1,6 @@
-site_name: DAOstack Developer Egress
-repo_url: https://github.com/daostack/DAOstack-Hacker-Kit/
-repo_name: daostack/DAOstack-Hacker-Kit
+site_name: DAOstack Developer Portal
+repo_url: https://github.com/daostack/DAOstack-Hackers-Kit/
+repo_name: daostack/DAOstack-Hackers-Kit
 site_description: A platform for building DAOs
 docs_dir: docs
 markdown_extensions:
@@ -19,7 +19,7 @@ theme:
 extra:
   social:
   - type: 'github'
-    link: 'https://github.com/daostack/DAOstack-Hacker-Kit'
+    link: 'https://github.com/daostack/DAOstack-Hackers-Kit'
   - type: 'slack'
     link: 'https://daostack.slack.com'
   - type: 'telegram'
