@@ -38,7 +38,7 @@
     
     
       
-        <title>Quick Example - DAOstack Developer Egress</title>
+        <title>Quick Example - DAOstack Developer Portal</title>
       
     
     
@@ -96,7 +96,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../.." title="DAOstack Developer Egress" class="md-header-nav__button md-logo">
+        <a href="../../.." title="DAOstack Developer Portal" class="md-header-nav__button md-logo">
           
             <img src="../../../images/daostack-logoW.svg" width="24" height="24">
           
@@ -109,7 +109,7 @@
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
             <span class="md-header-nav__topic">
-              DAOstack Developer Egress
+              DAOstack Developer Portal
             </span>
             <span class="md-header-nav__topic">
               
@@ -155,7 +155,7 @@
 
   
 
-<a href="https://github.com/daostack/DAOstack-Hacker-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -164,7 +164,7 @@
     </div>
   
   <div class="md-source__repository">
-    daostack/DAOstack-Hacker-Kit
+    daostack/DAOstack-Hackers-Kit
   </div>
 </a>
           </div>
@@ -188,12 +188,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../../.." title="DAOstack Developer Egress" class="md-nav__button md-logo">
+    <a href="../../.." title="DAOstack Developer Portal" class="md-nav__button md-logo">
       
         <img src="../../../images/daostack-logoW.svg" width="48" height="48">
       
     </a>
-    DAOstack Developer Egress
+    DAOstack Developer Portal
   </label>
   
     <div class="md-nav__source">
@@ -202,7 +202,7 @@
 
   
 
-<a href="https://github.com/daostack/DAOstack-Hacker-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -211,7 +211,7 @@
     </div>
   
   <div class="md-source__repository">
-    daostack/DAOstack-Hacker-Kit
+    daostack/DAOstack-Hackers-Kit
   </div>
 </a>
     </div>
@@ -395,8 +395,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#initialize-arc-configuration" class="md-nav__link">
-    Initialize Arc configuration
+  <a href="#initialize-arc" class="md-nav__link">
+    Initialize Arc
   </a>
   
 </li>
@@ -865,6 +865,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -906,8 +918,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#initialize-arc-configuration" class="md-nav__link">
-    Initialize Arc configuration
+  <a href="#initialize-arc" class="md-nav__link">
+    Initialize Arc
   </a>
   
 </li>
@@ -975,12 +987,12 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/daostack/DAOstack-Hacker-Kit/edit/master/docs/stack/client/example.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/daostack/DAOstack-Hackers-Kit/edit/master/docs/stack/client/example.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                   <h1>Quick Example</h1>
                 
-                <p>In the following code we use client library to interact with Arc contracts and then query the subgraph to fetch DAOstack data.</p>
+                <p>In the following code we use the client library to interact with Arc contracts and then query the subgraph to fetch DAOstack data.</p>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
 <p>You can use development setup from <a href="https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/alchemy-starter">Alchemy Starter</a> or <a href="https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/starter-template">Starter-template</a></p>
 <h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
@@ -1003,7 +1015,7 @@
 </pre></div>
 </td></tr></table>
 
-<h3 id="initialize-arc-configuration">Initialize Arc configuration<a class="headerlink" href="#initialize-arc-configuration" title="Permanent link">&para;</a></h3>
+<h3 id="initialize-arc">Initialize Arc<a class="headerlink" href="#initialize-arc" title="Permanent link">&para;</a></h3>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1064,7 +1076,7 @@
   <span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span>
     <span class="p">(</span><span class="nx">daos</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Here are all the DAOS:&#39;</span><span class="p">)</span>
-      <span class="nx">daos</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">dao</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dao</span><span class="p">.</span><span class="nx">id</span><span class="p">))</span>
+      <span class="nx">daos</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">dao</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">dao</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> at address </span><span class="si">${</span><span class="nx">dao</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">))</span>
     <span class="p">}</span>
   <span class="p">)</span>
 <span class="p">}</span>
@@ -1108,12 +1120,24 @@
 34
 35
 36
-37</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">createProposal</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">createProposal</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="c1">// we get the first returned item from the obervable that returns a list of DAOs</span>
   <span class="kr">const</span> <span class="nx">daos</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">().</span><span class="nx">first</span><span class="p">()</span>
 
   <span class="c1">// given the id of a DAO, we can also create a fresh DAO instance</span>
-  <span class="kr">const</span> <span class="nx">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DAO</span><span class="p">(</span><span class="nx">daos</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">id</span><span class="p">,</span> <span class="nx">arc</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DAO</span><span class="p">(</span><span class="s2">&quot;0xdao-id&quot;</span><span class="p">,</span> <span class="nx">arc</span><span class="p">)</span>
+
+  <span class="c1">// or can get the dao from the dao list</span>
+  <span class="c1">// const dao = daos[0]</span>
+
+  <span class="c1">// or fetch the dao from arc by its ID</span>
+  <span class="c1">// const dao = await arc.dao(&quot;0xdao-id&quot;)</span>
 
 
   <span class="c1">// to create a proposal, we must first find the address of the Scheme in which to create the proposal</span>
@@ -1128,7 +1152,7 @@
 <span class="sb">      for Scheme: </span><span class="si">${</span><span class="nx">schemes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">staticState</span><span class="p">.</span><span class="nx">address</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
 
   <span class="c1">// Send Transaction to create new proposal</span>
-  <span class="nx">await</span> <span class="nx">dao</span><span class="p">.</span><span class="nx">createProposal</span><span class="p">({</span>
+  <span class="kd">let</span> <span class="nx">minedTx</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">dao</span><span class="p">.</span><span class="nx">createProposal</span><span class="p">({</span>
     <span class="nx">description</span><span class="o">:</span> <span class="s2">&quot;This is a Sample proposal&quot;</span><span class="p">,</span>
     <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Sample Proposal&quot;</span><span class="p">,</span>
     <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;http://localhost:3000&quot;</span><span class="p">,</span>
@@ -1163,12 +1187,12 @@
 11
 12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">showProposalDetails</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">daos</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">().</span><span class="nx">first</span><span class="p">()</span>
-  <span class="kr">const</span> <span class="nx">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DAO</span><span class="p">(</span><span class="nx">daos</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">id</span><span class="p">,</span> <span class="nx">arc</span><span class="p">)</span>
-  <span class="kr">const</span> <span class="nx">proposals</span> <span class="o">=</span> <span class="nx">dao</span><span class="p">.</span><span class="nx">proposals</span><span class="p">({},</span> <span class="p">{</span> <span class="nx">fetchAllData</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}).</span><span class="nx">subscribe</span><span class="p">(</span>
-    <span class="nx">async</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">prop</span> <span class="k">of</span> <span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">prop</span><span class="p">.</span><span class="nx">state</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span>
-          <span class="p">(</span><span class="nx">proposal</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">proposal</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">dao</span> <span class="o">=</span> <span class="nx">daos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">// or the index of whichever DAO you are interested in</span>
+  <span class="kr">const</span> <span class="nx">proposals</span> <span class="o">=</span> <span class="nx">dao</span><span class="p">.</span><span class="nx">proposals</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span>
+    <span class="nx">async</span> <span class="p">(</span><span class="nx">proposals</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">proposal</span> <span class="k">of</span> <span class="nx">proposals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">proposal</span><span class="p">.</span><span class="nx">state</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span>
+          <span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
         <span class="p">)</span>
       <span class="p">}</span>
     <span class="p">})</span>
@@ -1178,18 +1202,30 @@
 
 <h3 id="vote-on-proposal">Vote on Proposal<a class="headerlink" href="#vote-on-proposal" title="Permanent link">&para;</a></h3>
 <p>This will only succeed if the proposal is still open for voting and the account has reputation in the respective DAO.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">voteOnProposal</span> <span class="o">=</span> <span class="nv">async</span> <span class="ss">()</span> <span class="o">=&gt;</span> {
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">voteOnProposal</span> <span class="o">=</span> <span class="nv">async</span> <span class="ss">()</span> <span class="o">=&gt;</span> {
   <span class="nv">const</span> <span class="nv">proposal</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Proposal</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">0x123abc....</span><span class="s1">&#39;</span>, <span class="nv">arc</span><span class="ss">)</span>
-  <span class="nv">vote</span><span class="ss">(</span><span class="nv">IProposalOutcome</span>.<span class="nv">Pass</span><span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
+
+  <span class="nv">try</span> {
+      <span class="nv">await</span> <span class="nv">proposal</span>.<span class="nv">vote</span><span class="ss">(</span><span class="nv">IProposalOutcome</span>.<span class="nv">Pass</span><span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
+  } <span class="nv">catch</span><span class="ss">(</span><span class="nv">err</span><span class="ss">)</span> {
+     <span class="o">//</span> <span class="nv">an</span> <span class="nv">error</span> <span class="nv">occurred</span>, <span class="nv">perhaps</span> <span class="nv">the</span> <span class="nv">proposal</span> <span class="nv">voting</span> <span class="nv">period</span> <span class="nv">ended</span>, <span class="nv">or</span> <span class="nv">the</span> <span class="nv">sender</span><span class="s1">&#39;</span><span class="s">s account does no thave any reputation</span>
+      <span class="nv">console</span>.<span class="nv">log</span><span class="ss">(</span><span class="nv">err</span>.<span class="nv">message</span><span class="ss">)</span>
+  }
 }
 </pre></div>
 </td></tr></table>
 
 <h3 id="query-votes">Query Votes<a class="headerlink" href="#query-votes" title="Permanent link">&para;</a></h3>
-<p>We will query all the voters for the first DAO</p>
+<p>We will query all the voters for the given proposal</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1279,7 +1315,7 @@
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/daostack/DAOstack-Hacker-Kit" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" class="md-footer-social__link fa fa-github"></a>
     
       <a href="https://daostack.slack.com" class="md-footer-social__link fa fa-slack"></a>
     

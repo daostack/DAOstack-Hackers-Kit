@@ -38,7 +38,7 @@
     
     
       
-        <title>Query, Observables & Subscriptions - DAOstack Developer Egress</title>
+        <title>Query, Observables & Subscriptions - DAOstack Developer Portal</title>
       
     
     
@@ -96,7 +96,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../.." title="DAOstack Developer Egress" class="md-header-nav__button md-logo">
+        <a href="../../.." title="DAOstack Developer Portal" class="md-header-nav__button md-logo">
           
             <img src="../../../images/daostack-logoW.svg" width="24" height="24">
           
@@ -109,7 +109,7 @@
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
             <span class="md-header-nav__topic">
-              DAOstack Developer Egress
+              DAOstack Developer Portal
             </span>
             <span class="md-header-nav__topic">
               
@@ -155,7 +155,7 @@
 
   
 
-<a href="https://github.com/daostack/DAOstack-Hacker-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -164,7 +164,7 @@
     </div>
   
   <div class="md-source__repository">
-    daostack/DAOstack-Hacker-Kit
+    daostack/DAOstack-Hackers-Kit
   </div>
 </a>
           </div>
@@ -188,12 +188,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../../.." title="DAOstack Developer Egress" class="md-nav__button md-logo">
+    <a href="../../.." title="DAOstack Developer Portal" class="md-nav__button md-logo">
       
         <img src="../../../images/daostack-logoW.svg" width="48" height="48">
       
     </a>
-    DAOstack Developer Egress
+    DAOstack Developer Portal
   </label>
   
     <div class="md-nav__source">
@@ -202,7 +202,7 @@
 
   
 
-<a href="https://github.com/daostack/DAOstack-Hacker-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -211,7 +211,7 @@
     </div>
   
   <div class="md-source__repository">
-    daostack/DAOstack-Hacker-Kit
+    daostack/DAOstack-Hackers-Kit
   </div>
 </a>
     </div>
@@ -928,6 +928,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -1099,7 +1111,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/daostack/DAOstack-Hacker-Kit/edit/master/docs/stack/client/querying.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/daostack/DAOstack-Hackers-Kit/edit/master/docs/stack/client/querying.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                 <h1 id="query-observables-subscription">Query, Observables &amp; Subscription<a class="headerlink" href="#query-observables-subscription" title="Permanent link">&para;</a></h1>
@@ -1136,7 +1148,7 @@
     <span class="p">)</span>
 
 <span class="kr">const</span> <span class="nx">proposal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Propsal</span><span class="p">(</span><span class="s1">&#39;0x123abc....&#39;</span><span class="p">,</span> <span class="nx">arc</span><span class="p">)</span>
-<span class="kd">let</span> <span class="nx">stateObservable</span> <span class="o">=</span> <span class="nx">proposal</span><span class="p">.</span><span class="nx">state</span><span class="p">({</span><span class="nx">subscribe</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+<span class="kd">let</span> <span class="nx">stateObservable</span> <span class="o">=</span> <span class="nx">proposal</span><span class="p">.</span><span class="nx">state</span><span class="p">()</span>
 
 <span class="nx">stateObservable</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
     <span class="p">(</span><span class="nx">proposal</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">proposal</span><span class="p">)</span>
@@ -1188,7 +1200,7 @@
 <h3 id="executing-a-query">Executing a Query<a class="headerlink" href="#executing-a-query" title="Permanent link">&para;</a></h3>
 <p>After creating a query, as we did in the previous section, we need to cause the query to be executed, that is, be sent to the graphnode server.</p>
 <h4 id="entity-methods_1">Entity Methods<a class="headerlink" href="#entity-methods_1" title="Permanent link">&para;</a></h4>
-<p>We can subscribe to an observable without passing <code>{subscribe: true}</code> parameter (introduced in the <a href="#entity-methods_2">subscribing to a query section</a>) for sending a one-time query without subscribing to further updates from the server for result of the query.</p>
+<p>We can subscribe to an observable with <code>{subscribe: false}</code> parameter (introduced in the <a href="#entity-methods_2">subscribing to a query section</a>) for sending a one-time query without subscribing to further updates from the server for result of the query.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1197,7 +1209,7 @@
 6
 7
 8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">//</span> <span class="nv">Get</span> <span class="nv">all</span> <span class="nv">proposals</span><span class="s1">&#39;</span><span class="s"> Id of the DAO without subscribing to server</span>
-<span class="nv">const</span> <span class="nv">proposalsObs</span> <span class="o">=</span> <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span>
+<span class="nv">const</span> <span class="nv">proposalsObs</span> <span class="o">=</span> <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">(</span>{}, {<span class="nv">subscribe</span>: <span class="nv">false</span>}<span class="ss">)</span>
 
 <span class="o">//</span> <span class="k">send</span> <span class="nv">query</span> <span class="nv">and</span> <span class="nv">subscribe</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">cache</span> <span class="nv">updates</span>
 <span class="nv">proposalsObs</span>.<span class="nv">subscribe</span><span class="ss">(()</span> <span class="o">=&gt;</span> {}<span class="ss">)</span>
@@ -1225,10 +1237,10 @@
 <h3 id="subscribing-to-a-query">Subscribing to a Query<a class="headerlink" href="#subscribing-to-a-query" title="Permanent link">&para;</a></h3>
 <p>Use <em>Subscriptions</em> to invoke the handler that you supply to run every time a new value is emitted by an observable stream. This is useful to keep the app data updated as the value changes.</p>
 <h4 id="entity-methods_2">Entity methods<a class="headerlink" href="#entity-methods_2" title="Permanent link">&para;</a></h4>
-<p>As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe by supplying <code>{subscribe: true}</code> as follows to send the query as well as subscribe for server updates.</p>
+<p>As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe as follows to send the query as well as subscribe for server updates.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">(</span><span class="err">{}</span><span class="p">,</span> <span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
-<span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">(</span><span class="err">{</span><span class="n">subscribe</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span><span class="p">).</span><span class="n">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">arc</span><span class="p">.</span><span class="n">daos</span><span class="p">().</span><span class="n">subscribe</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
+<span class="n">dao</span><span class="p">.</span><span class="k">state</span><span class="p">().</span><span class="n">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">{}</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
@@ -1279,17 +1291,17 @@
 </ul>
 <p>NOTE:</p>
 <ul>
-<li>By default <code>subscribe</code> is set to false.</li>
+<li>By default <code>subscribe</code> is set to true.</li>
 <li>Apollo cache could change as a result of another query which does subscribe to server changes.</li>
 </ul>
 <p>e.g.</p>
 <p>In <em>q1</em> we will not subscribe to the updates from network but will still watch changes in the Apollo cache and return updated results if the cache changes.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">({},</span> <span class="p">{</span><span class="nx">fetchAllData</span><span class="o">:</span> <span class="kc">true</span><span class="p">}).</span><span class="nx">subscribe</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{})</span> <span class="c1">// q1</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">({},</span> <span class="p">{</span><span class="nx">fetchAllData</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">subscribe</span><span class="o">:</span> <span class="kc">false</span><span class="p">}).</span><span class="nx">subscribe</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{})</span> <span class="c1">// q1</span>
 </pre></div>
 </td></tr></table>
 
 <p>In <em>q2</em>  we subscribe to server updates. The results of these updates are added to the Apollo cache and the observable in <em>q1</em> will also get the updates if cache changes.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">dao</span><span class="p">.</span><span class="nx">state</span><span class="p">({</span><span class="nx">subscribe</span><span class="o">:</span> <span class="kc">true</span><span class="p">}).</span><span class="nx">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{})</span> <span class="c1">// q2</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">dao</span><span class="p">.</span><span class="nx">state</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{})</span> <span class="c1">// q2</span>
 </pre></div>
 </td></tr></table>
 
@@ -1306,10 +1318,10 @@
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">(</span>{<span class="nv">subscribe</span>: <span class="nv">true</span>}<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>
-  <span class="ss">(</span><span class="nv">props</span><span class="ss">)</span> <span class="o">=&gt;</span> {
-    <span class="k">for</span> <span class="ss">(</span><span class="nv">let</span> <span class="nv">prop</span> <span class="nv">of</span> <span class="nv">props</span><span class="ss">)</span> {
-      <span class="nv">prop</span>.<span class="nv">state</span><span class="ss">(</span>{<span class="nv">subscribe</span>: <span class="nv">true</span>}<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>.....<span class="ss">)</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span>.<span class="nv">subscribe</span><span class="ss">(</span>
+  <span class="ss">(</span><span class="nv">proposals</span><span class="ss">)</span> <span class="o">=&gt;</span> {
+    <span class="k">for</span> <span class="ss">(</span><span class="nv">let</span> <span class="nv">proposal</span> <span class="nv">of</span> <span class="nv">proposals</span><span class="ss">)</span> {
+      <span class="nv">proposal</span>.<span class="nv">state</span><span class="ss">()</span>.<span class="nv">subscribe</span><span class="ss">(</span>.....<span class="ss">)</span>
     }
   }
 <span class="ss">)</span>
@@ -1325,9 +1337,9 @@
 5
 6
 7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">(</span>{}, { <span class="nv">fetchAllData</span>: <span class="nv">true</span> }<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>
-  <span class="ss">(</span><span class="nv">props</span><span class="ss">)</span> <span class="o">=&gt;</span> {
-    <span class="k">for</span> <span class="ss">(</span><span class="nv">let</span> <span class="nv">prop</span> <span class="nv">of</span> <span class="nv">props</span><span class="ss">)</span> {
-      <span class="nv">prop</span>.<span class="nv">state</span><span class="ss">(</span> {<span class="nv">subscribe</span>: <span class="nv">false</span> }<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>.....<span class="ss">)</span>
+  <span class="ss">(</span><span class="nv">proposals</span><span class="ss">)</span> <span class="o">=&gt;</span> {
+    <span class="k">for</span> <span class="ss">(</span><span class="nv">let</span> <span class="nv">proposal</span> <span class="nv">of</span> <span class="nv">proposals</span><span class="ss">)</span> {
+      <span class="nv">proposal</span>.<span class="nv">state</span><span class="ss">(</span>{}, {<span class="nv">subscribe</span>: <span class="nv">false</span> }<span class="ss">)</span>.<span class="nv">subscribe</span><span class="ss">(</span>.....<span class="ss">)</span>
     }
   }
 <span class="ss">)</span>
@@ -1402,7 +1414,7 @@
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/daostack/DAOstack-Hacker-Kit" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" class="md-footer-social__link fa fa-github"></a>
     
       <a href="https://daostack.slack.com" class="md-footer-social__link fa fa-slack"></a>
     

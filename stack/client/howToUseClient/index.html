@@ -38,7 +38,7 @@
     
     
       
-        <title>How To Use - DAOstack Developer Egress</title>
+        <title>How To Use - DAOstack Developer Portal</title>
       
     
     
@@ -96,7 +96,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../.." title="DAOstack Developer Egress" class="md-header-nav__button md-logo">
+        <a href="../../.." title="DAOstack Developer Portal" class="md-header-nav__button md-logo">
           
             <img src="../../../images/daostack-logoW.svg" width="24" height="24">
           
@@ -109,7 +109,7 @@
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
             <span class="md-header-nav__topic">
-              DAOstack Developer Egress
+              DAOstack Developer Portal
             </span>
             <span class="md-header-nav__topic">
               
@@ -155,7 +155,7 @@
 
   
 
-<a href="https://github.com/daostack/DAOstack-Hacker-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -164,7 +164,7 @@
     </div>
   
   <div class="md-source__repository">
-    daostack/DAOstack-Hacker-Kit
+    daostack/DAOstack-Hackers-Kit
   </div>
 </a>
           </div>
@@ -188,12 +188,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../../.." title="DAOstack Developer Egress" class="md-nav__button md-logo">
+    <a href="../../.." title="DAOstack Developer Portal" class="md-nav__button md-logo">
       
         <img src="../../../images/daostack-logoW.svg" width="48" height="48">
       
     </a>
-    DAOstack Developer Egress
+    DAOstack Developer Portal
   </label>
   
     <div class="md-nav__source">
@@ -202,7 +202,7 @@
 
   
 
-<a href="https://github.com/daostack/DAOstack-Hacker-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -211,7 +211,7 @@
     </div>
   
   <div class="md-source__repository">
-    daostack/DAOstack-Hacker-Kit
+    daostack/DAOstack-Hackers-Kit
   </div>
 </a>
     </div>
@@ -874,6 +874,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -991,7 +1003,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/daostack/DAOstack-Hacker-Kit/edit/master/docs/stack/client/howToUseClient.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/daostack/DAOstack-Hackers-Kit/edit/master/docs/stack/client/howToUseClient.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                 <h1 id="how-to-use">How To Use<a class="headerlink" href="#how-to-use" title="Permanent link">&para;</a></h1>
@@ -1063,7 +1075,7 @@
 <h2 id="entities">Entities<a class="headerlink" href="#entities" title="Permanent link">&para;</a></h2>
 <p>Entities are the basic building blocks of DAOstack ecosystem.</p>
 <p>The entity instance holds the <code>static</code> and <code>dynamic</code> state of the entity it represents and encapsulates graphql queries to retrieve data from subgraph. The client library caches entity data. Please refer to <a href="#common-methods-and-properties">Common properties and methods</a> section for more information about what is cached and how to retrieve it.</p>
-<p>While the entity classes provide nice helper methods that encapsulate graphql queries, you can also submit your own customized graphql queries using the static method <code>arc.apolloClient</code>. Please refer to the <a href="../querying/#query">Queries</a> section about all the ways to query subgraph.</p>
+<p>While the entity classes provide nice helper methods that encapsulate graphql queries, you can also submit your own customized graphql queries using the static method <code>arc.apolloClient</code>. The client library uses <a href="https://www.apollographql.com/">Apollo</a> for data management which is discussed in <a href="../querying">Query and Cache section</a>. Please refer to the <a href="../querying/#query">Queries</a> section about all the ways to query subgraph.</p>
 <h3 id="instantiate">Instantiate<a class="headerlink" href="#instantiate" title="Permanent link">&para;</a></h3>
 <p>All Entity classes can be created by providing an instance of <code>Arc</code> and either of the following:</p>
 <ul>
@@ -1075,17 +1087,7 @@
 <p>Example</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">arc</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Arc</span><span class="ss">(</span>{
-  <span class="nv">graphqlHttpProvider</span>: <span class="s2">&quot;</span><span class="s">https://api.thegraph.com/subgraphs/name/daostack/alchemy</span><span class="s2">&quot;</span>,
-  <span class="nv">graphqlWsProvider</span>: <span class="s2">&quot;</span><span class="s">wss://api.thegraph.com/subgraphs/name/daostack/alchemy</span><span class="s2">&quot;</span>,
-  <span class="nv">web3Provider</span>: `<span class="nv">wss</span>:<span class="o">//</span><span class="nv">mainnet</span>.<span class="nv">infura</span>.<span class="nv">io</span><span class="o">/</span><span class="nv">ws</span><span class="o">/</span><span class="nv">v3</span><span class="o">/</span><span class="nv">e0cdf3bfda9b468fa908aa6ab03d5ba2</span>`,
-}<span class="ss">)</span>
-<span class="nv">const</span> <span class="nv">proposal</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Proposal</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">0x1234....</span><span class="s1">&#39;</span>, <span class="nv">arc</span><span class="ss">)</span>
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">proposal</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Proposal</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">0x1234....</span><span class="s1">&#39;</span>, <span class="nv">arc</span><span class="ss">)</span>
 
 <span class="nv">await</span> <span class="nv">proposal</span>.<span class="nv">vote</span><span class="ss">(</span>...<span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
 </pre></div>
@@ -1133,7 +1135,7 @@
 </li>
 <li>
 <p><em><strong>fetchStaticState()</strong></em> <sup>[1]</sup>: method that returns an observable of object that represent the <code>staticState</code> of the entity.
-    If the staticState is not set ( as <a href="#by-providing-id">here</a> ), then at first use it queries the subgraph and <code>setStaticState</code>.</p>
+    If the staticState is not set ( as <a href="#by-providing-entity-id">here</a> ), then at first use it queries the subgraph and <code>setStaticState</code>.</p>
 </li>
 <li>
 <p><em><strong>setStaticState()</strong></em> <sup>[1]</sup>: method that sets the static state to the state provided as parameter.</p>
@@ -1161,7 +1163,7 @@
 
 </li>
 <li>
-<p><em><strong>search()</strong></em> <sup>[3]</sup>: method which can be used to search for the entities on the subgraph.</p>
+<p><em><strong>search()</strong></em> <sup>[3]</sup>: static method which can be called from the Entity class and is used to search for the entities on the subgraph.</p>
 <p>Parameters:</p>
 <ul>
 <li><strong>context</strong>: must be provided with an <code>Arc</code> instance with subgraph details, so it knows which service to send the queries. </li>
@@ -1239,7 +1241,7 @@ Please refer to <a href="../querying/">Subscriptions section</a> for details on 
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">observable</span> <span class="o">=</span>  <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">(</span>{<span class="nv">subscribe</span>: <span class="nv">true</span>}<span class="ss">)</span> <span class="o">//</span> <span class="nv">all</span> <span class="nv">proposals</span> <span class="nv">in</span> <span class="nv">this</span> <span class="nv">dao</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">observable</span> <span class="o">=</span>  <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span> <span class="o">//</span> <span class="nv">all</span> <span class="nv">proposals</span> <span class="nv">in</span> <span class="nv">this</span> <span class="nv">dao</span>
 
 <span class="o">//</span> <span class="nv">a</span> <span class="nv">subscription</span>
 <span class="nv">const</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="nv">observable</span>.<span class="nv">subscribe</span><span class="ss">(</span>
@@ -1376,7 +1378,7 @@ with the first result</p>
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/daostack/DAOstack-Hacker-Kit" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" class="md-footer-social__link fa fa-github"></a>
     
       <a href="https://daostack.slack.com" class="md-footer-social__link fa fa-slack"></a>
     
