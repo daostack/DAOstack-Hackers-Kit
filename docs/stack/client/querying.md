@@ -23,7 +23,7 @@ const subscription = observable.subscribe(
     )
 
 const proposal = new Propsal('0x123abc....', arc)
-let stateObservable = proposal.state({subscribe: true})
+let stateObservable = proposal.state()
 
 stateObservable.subscribe(
     (proposal) => console.log(proposal)
@@ -70,10 +70,10 @@ To have more control over what gets fetched from the subgraph you can also custo
 After creating a query, as we did in the previous section, we need to cause the query to be executed, that is, be sent to the graphnode server.
 
 #### Entity Methods
-We can subscribe to an observable without passing `{subscribe: true}` parameter (introduced in the [subscribing to a query section](#entity-methods_2)) for sending a one-time query without subscribing to further updates from the server for result of the query.
+We can subscribe to an observable with `{subscribe: false}` parameter (introduced in the [subscribing to a query section](#entity-methods_2)) for sending a one-time query without subscribing to further updates from the server for result of the query.
 
     // Get all proposals' Id of the DAO without subscribing to server
-    const proposalsObs = dao.proposals()
+    const proposalsObs = dao.proposals({}, {subscribe: false})
     
     // send query and subscribe to the cache updates
     proposalsObs.subscribe(() => {})
@@ -98,11 +98,11 @@ You can submit raw GraphQL queries using the static method `arc.sendQuery`. Pass
 Use *Subscriptions* to invoke the handler that you supply to run every time a new value is emitted by an observable stream. This is useful to keep the app data updated as the value changes.
 
 #### Entity methods
-As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe by supplying `{subscribe: true}` as follows to send the query as well as subscribe for server updates.
+As we saw the Entity methods do not send the query to the server but return an observable. We must subscribe as follows to send the query as well as subscribe for server updates.
 
 ```
-arc.daos({}, {subscribe: true}).subscribe(() => {})
-dao.state({subscribe: true}).subscribe( () => {})
+arc.daos().subscribe(() => {})
+dao.state().subscribe( () => {})
 ```
 
 **Note**: Refer to the [Subscribe to Apollo Cache changes](#subscribe-to-apollo-cache-changes) section to understand difference between cache and server updates. 
@@ -149,7 +149,7 @@ As we have seen the client library offers two types of subscription that can be 
 
 NOTE:
 
-  - By default `subscribe` is set to false.
+  - By default `subscribe` is set to true.
   - Apollo cache could change as a result of another query which does subscribe to server changes.
 
   e.g.
@@ -157,12 +157,12 @@ NOTE:
 In _q1_ we will not subscribe to the updates from network but will still watch changes in the Apollo cache and return updated results if the cache changes.
 
 ```javascript
-arc.daos({}, {fetchAllData: true}).subscribe(() => {}) // q1
+arc.daos({}, {fetchAllData: true, subscribe: false}).subscribe(() => {}) // q1
 ```
 
  In _q2_  we subscribe to server updates. The results of these updates are added to the Apollo cache and the observable in _q1_ will also get the updates if cache changes.
 ```javascript
-dao.state({subscribe: true}).subscribe( () => {}) // q2
+dao.state().subscribe( () => {}) // q2
 ```
 
 ### Use fetchAllData with Nested subscription
@@ -172,10 +172,10 @@ dao.proposals({orderBy: "creationDate"}, {fetchAllData: true})
 ```
 This is useful for cache handling, where it may be useful to have more complete control over what data is being fetched. Consider the following example, which will get the list of proposals from the dao, and then get the state for each of the proposals.
 ```
-dao.proposals({subscribe: true}).subscribe(
-  (props) => {
-    for (let prop of props) {
-      prop.state({subscribe: true}).subscribe(.....)
+dao.proposals().subscribe(
+  (proposals) => {
+    for (let proposal of proposals) {
+      proposal.state().subscribe(.....)
     }
   }
 )
@@ -185,9 +185,9 @@ The problem with this pattern is that it is very expensive. The (subscription to
 Consider now the following pattern:
 ```
 dao.proposals({}, { fetchAllData: true }).subscribe(
-  (props) => {
-    for (let prop of props) {
-      prop.state( {subscribe: false }).subscribe(.....)
+  (proposals) => {
+    for (let proposal of proposals) {
+      proposal.state({}, {subscribe: false }).subscribe(.....)
     }
   }
 )

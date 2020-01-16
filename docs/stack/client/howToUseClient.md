@@ -58,7 +58,7 @@ Entities are the basic building blocks of DAOstack ecosystem.
 The entity instance holds the `static` and `dynamic` state of the entity it represents and encapsulates graphql queries to retrieve data from subgraph. The client library caches entity data. Please refer to [Common properties and methods](#common-methods-and-properties) section for more information about what is cached and how to retrieve it.
 
 
-While the entity classes provide nice helper methods that encapsulate graphql queries, you can also submit your own customized graphql queries using the static method `arc.apolloClient`. Please refer to the [Queries](../querying/#query) section about all the ways to query subgraph.
+While the entity classes provide nice helper methods that encapsulate graphql queries, you can also submit your own customized graphql queries using the static method `arc.apolloClient`. The client library uses [Apollo](https://www.apollographql.com/) for data management which is discussed in [Query and Cache section](../querying). Please refer to the [Queries](../querying/#query) section about all the ways to query subgraph.
 
 ### Instantiate
 
@@ -73,11 +73,6 @@ When using the client library with an `arc` instance which has subgraph configur
 
 Example
 ```
-const arc = new Arc({
-  graphqlHttpProvider: "https://api.thegraph.com/subgraphs/name/daostack/alchemy",
-  graphqlWsProvider: "wss://api.thegraph.com/subgraphs/name/daostack/alchemy",
-  web3Provider: `wss://mainnet.infura.io/ws/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2`,
-})
 const proposal = new Proposal('0x1234....', arc)
 
 await proposal.vote(...).send()
@@ -117,7 +112,7 @@ All entities have:
     e.g. In case of entity DAO, `address` of Avatar or Native `reputation` of DAO
 
   - _**fetchStaticState()**_ <sup>[1]</sup>: method that returns an observable of object that represent the `staticState` of the entity.
-    If the staticState is not set ( as [here](#by-providing-id) ), then at first use it queries the subgraph and `setStaticState`.
+    If the staticState is not set ( as [here](#by-providing-entity-id) ), then at first use it queries the subgraph and `setStaticState`.
 
   - _**setStaticState()**_ <sup>[1]</sup>: method that sets the static state to the state provided as parameter.
 
@@ -136,7 +131,7 @@ All entities have:
           (newState) => console.log(`This DAO has ${newState.memberCount} members`)
         )
 
-  - _**search()**_ <sup>[3]</sup>: method which can be used to search for the entities on the subgraph.
+  - _**search()**_ <sup>[3]</sup>: static method which can be called from the Entity class and is used to search for the entities on the subgraph.
 
     Parameters:
 
@@ -200,7 +195,7 @@ Observables are very flexible. Typically, an observable will be used by creating
 Please refer to [Subscriptions section](../querying/) for details on when and how to use it and the types of subscription.
 
 ```
-const observable =  dao.proposals({subscribe: true}) // all proposals in this dao
+const observable =  dao.proposals() // all proposals in this dao
 
 // a subscription
 const subscription = observable.subscribe(

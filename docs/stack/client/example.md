@@ -1,4 +1,4 @@
-In the following code we use client library to interact with Arc contracts and then query the subgraph to fetch DAOstack data.
+In the following code we use the client library to interact with Arc contracts and then query the subgraph to fetch DAOstack data.
 
 ## Setup
 
@@ -19,7 +19,7 @@ const utils = client.utils
 let arc;
 ```
 
-### Initialize Arc configuration
+### Initialize Arc
 
 ```javascript
 const initialize = async () => {
@@ -59,7 +59,7 @@ const showAllDAOs = () => {
   arc.daos().subscribe(
     (daos) => {
       console.log('Here are all the DAOS:')
-      daos.map(dao => console.log(dao.id))
+      daos.map(dao => console.log(`${dao.name} at address ${dao.id}`))
     }
   )
 }
@@ -73,7 +73,13 @@ const createProposal = async () => {
   const daos = await arc.daos().first()
 
   // given the id of a DAO, we can also create a fresh DAO instance
-  const dao = new DAO(daos[0].id, arc)
+  const dao = new DAO("0xdao-id", arc)
+
+  // or can get the dao from the dao list
+  // const dao = daos[0]
+  
+  // or fetch the dao from arc by its ID
+  // const dao = await arc.dao("0xdao-id")
 
 
   // to create a proposal, we must first find the address of the Scheme in which to create the proposal
@@ -88,7 +94,7 @@ const createProposal = async () => {
       for Scheme: ${schemes[0].staticState.address}`)
 
   // Send Transaction to create new proposal
-  await dao.createProposal({
+  let minedTx = await dao.createProposal({
     description: "This is a Sample proposal",
     title: "Sample Proposal",
     url: "http://localhost:3000",
@@ -114,12 +120,12 @@ Query the subgraph to get Details of all the proposals
 ```javascript
 const showProposalDetails = async () => {
   const daos = await arc.daos().first()
-  const dao = new DAO(daos[0].id, arc)
-  const proposals = dao.proposals({}, { fetchAllData: true }).subscribe(
-    async (props) => {
-      for (let prop of props) {
-        prop.state().subscribe(
-          (proposal) => console.log(proposal)
+  const dao = daos[0] // or the index of whichever DAO you are interested in
+  const proposals = dao.proposals().subscribe(
+    async (proposals) => {
+      for (let proposal of proposals) {
+        proposal.state().subscribe(
+          (p) => console.log(p)
         )
       }
     })
@@ -133,13 +139,19 @@ This will only succeed if the proposal is still open for voting and the account 
 ```
 const voteOnProposal = async () => {
   const proposal = new Proposal('0x123abc....', arc)
-  vote(IProposalOutcome.Pass).send()
+
+  try {
+      await proposal.vote(IProposalOutcome.Pass).send()
+  } catch(err) {
+     // an error occurred, perhaps the proposal voting period ended, or the sender's account does no thave any reputation
+      console.log(err.message)
+  }
 }
 ```
 
 ### Query Votes
 
-We will query all the voters for the first DAO
+We will query all the voters for the given proposal
 
 ```javascript
 const showAllVotes = async () => {

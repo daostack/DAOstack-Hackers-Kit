@@ -18,7 +18,7 @@ import { Arc } from '@daostack/client'
 
 //Or
 
-const client = require('@daostack/client')
+const { Arc } = require('@daostack/client')
 ```
 
 ## General Structure
