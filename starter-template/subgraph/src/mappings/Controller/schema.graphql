@@ -20,6 +20,7 @@ type ControllerScheme @entity {
 	version: String
 	alias: String
 	contributionRewardParams: ContributionRewardParam
+	contributionRewardExtParams: ContributionRewardExtParam
 	schemeRegistrarParams: SchemeRegistrarParam
 	uGenericSchemeParams: UGenericSchemeParam
 	genericSchemeParams: GenericSchemeParam
@@ -79,8 +80,15 @@ type ControllerRemoveGlobalConstraint @entity {
 
 type ContributionRewardParam @entity {
 	id: ID!
-	votingMachine : Bytes!
+	votingMachine: Bytes!
 	voteParams: GenesisProtocolParam!
+}
+
+type ContributionRewardExtParam @entity {
+	id: ID!
+	votingMachine: Bytes!
+	voteParams: GenesisProtocolParam!
+	rewarder: Bytes!
 }
 
 type SchemeRegistrarParam @entity {

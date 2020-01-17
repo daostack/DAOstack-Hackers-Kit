@@ -176,7 +176,11 @@ export function handleRegisterScheme(event: RegisterScheme): void {
   let org = uController.organizations(event.params._avatar);
   let paramsHash = uController.getSchemeParameters(event.params._scheme, event.params._avatar);
   insertScheme(event.address, event.params._avatar, event.params._scheme, paramsHash);
-  domain.handleRegisterScheme(event.params._avatar, org.value0 , org.value1, event.params._scheme, paramsHash);
+  domain.handleRegisterScheme(
+    event.params._avatar, org.value0,
+    org.value1, event.params._scheme,
+    paramsHash, event.block.timestamp,
+  );
 
   // Detect a new organization event by looking for the first register scheme event for that org.
   let isFirstRegister = FirstRegisterScheme.load(event.params._avatar.toHex());

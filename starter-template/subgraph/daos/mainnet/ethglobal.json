@@ -1,0 +1,15 @@
+{
+    "name": "ETHGlobal",
+    "Avatar": "0x2b8C70fffdA7F3D7667f7cFEde1429313886329c",
+    "DAOToken": "0xE5ac9a487F366b6092df1Ab59209c4Ee4f26236d",
+    "Reputation": "0x45413CCd9870C89980dBaE9C11315A8A1C1F3f2F",
+    "Controller": "0x574d32b4BB6C068B667b22698B9F0431d33F8310",
+    "Schemes": [
+      {
+        "name": "ReputationFromToken",
+        "alias": "ReputationFromToken",
+        "address": "0x2899094353DEFeF4376c5c7855062d1C3fc44a8A"
+      }
+    ],
+    "arcVersion": "0.0.1-rc.30"
+  }

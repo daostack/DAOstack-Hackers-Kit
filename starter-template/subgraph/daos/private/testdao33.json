@@ -1,0 +1,39 @@
+{
+  "name": "Judicious Mermaid eggs",
+  "Avatar": "0x2268317B403ADEc49Fde9241a977335aba406A55",
+  "DAOToken": "0x78B7beA9fB68616E4520DC2F522833616f6413d5",
+  "Reputation": "0x0819C56Db86FbC6Cb3e0ef63F7DF0c4d5e60d915",
+  "Controller": "0x26bc7F1d9642BB480B01dE689deA64b97Fdd332B",
+  "Schemes": [
+    {
+      "name": "GenericScheme",
+      "alias": "GenericSchemeAlias",
+      "address": "0x6884D17Fac0FBd05382cF562E86DE82c79e26117",
+      "arcVersion": "0.0.1-rc.33"
+    },
+    {
+      "name": "ContributionRewardExt",
+      "alias": "ContributionRewardExt",
+      "address": "0xFa117aD3aEC87df869C456d91f6731950Cfef6ee",
+      "arcVersion": "0.0.1-rc.36"
+    }
+  ],
+  "StandAloneContracts": [
+    {
+      "name": "Wallet",
+      "address": "0x44b2C55F5CAe26D328F047a547d766E6BE836eb9",
+      "arcVersion": "0.0.1-rc.33"
+    },
+    {
+      "name": "ContributionRewardExt",
+      "address": "0xFa117aD3aEC87df869C456d91f6731950Cfef6ee",
+      "arcVersion": "0.0.1-rc.36"
+    },
+    {
+      "name": "Competition",
+      "address": "0x017383Ddb609fdbf85B80910A34936a733DA0913",
+      "arcVersion": "0.0.1-rc.36"
+    }
+  ],
+  "arcVersion": "0.0.1-rc.33"
+}

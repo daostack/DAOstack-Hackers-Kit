@@ -66,6 +66,10 @@ export function getContractAddresses() {
   };
 }
 
+export function getArcVersion() {
+  return '0.0.1-rc.19';
+}
+
 export function getOrgName() {
   return require(`@daostack/migration/migration.json`).private.dao['0.0.1-rc.19'].name;
 }

@@ -4,6 +4,7 @@ import { Address, BigInt, crypto, store } from '@graphprotocol/graph-ts';
 import {
   Burn,
   Mint,
+  OwnershipTransferred,
   Reputation,
 } from '../../types/Reputation/Reputation';
 import { concat, eventId } from '../../utils';
@@ -89,4 +90,8 @@ export function handleBurn(event: Burn): void {
   ent.amount = event.params._amount;
 
   store.set('ReputationBurn', ent.id, ent);
+}
+
+export function handleOwnershipTransferred(event: OwnershipTransferred): void {
+  update(event.address, event.params.newOwner as Address, event.block.timestamp);
 }

@@ -1,0 +1,24 @@
+{
+  "templates": [
+    {
+      "name": "Avatar",
+      "mapping": "Avatar",
+      "start_arcVersion": "0.0.1-rc.16"
+    },
+    {
+      "name": "Controller",
+      "mapping": "Controller",
+      "start_arcVersion": "0.0.1-rc.16"
+    },
+    {
+      "name": "DAOToken",
+      "mapping": "DAOToken",
+      "start_arcVersion": "0.0.1-rc.16"
+    },
+    {
+      "name": "Reputation",
+      "mapping": "Reputation",
+      "start_arcVersion": "0.0.1-rc.16"
+    }
+  ]
+}

@@ -10,3 +10,5 @@ eventHandlers:
     handler: handleMint
   - event: Burn(indexed address,uint256)
     handler: handleBurn
+  - event: OwnershipTransferred(indexed address,indexed address)
+    handler: handleOwnershipTransferred

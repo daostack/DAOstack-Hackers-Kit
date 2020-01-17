@@ -1,4 +1,5 @@
 import {
+  getArcVersion,
   getContractAddresses,
   getOptions,
   getWeb3,
@@ -6,8 +7,8 @@ import {
   writeProposalIPFS,
 } from './util';
 
-const ContributionReward = require('@daostack/arc/build/contracts/ContributionReward.json');
-const Avatar = require('@daostack/arc/build/contracts/Avatar.json');
+const ContributionReward = require('@daostack/migration/contracts/' + getArcVersion() + '/ContributionReward.json');
+const Avatar = require('@daostack/migration/contracts/' + getArcVersion() + '/Avatar.json');
 describe('Domain Layer', () => {
   let web3;
   let addresses;
@@ -132,7 +133,7 @@ describe('Domain Layer', () => {
       id: p2,
       descriptionHash: descHash,
       title: proposalTitle,
-      description: null,
+      description: '',
       url: proposalUrl,
     });
 
@@ -167,8 +168,8 @@ describe('Domain Layer', () => {
       id: p3,
       descriptionHash: descHash,
       title: '',
-      description: null,
-      url: null,
+      description: '',
+      url: '',
     });
 
     // Invalid IPFS hash
@@ -200,8 +201,8 @@ describe('Domain Layer', () => {
       id: p4,
       descriptionHash: descHash,
       title: '',
-      description: null,
-      url: null,
+      description: '',
+      url: '',
     });
 
     // Invalid IPFS data1
@@ -235,8 +236,8 @@ describe('Domain Layer', () => {
       id: p5,
       descriptionHash: descHash,
       title: '',
-      description: null,
-      url: null,
+      description: '',
+      url: '',
     });
 
     // Invalid IPFS data2
@@ -270,8 +271,8 @@ describe('Domain Layer', () => {
       id: p6,
       descriptionHash: descHash,
       title: '',
-      description: null,
-      url: null,
+      description: '',
+      url: '',
     });
 
   }, 100000);

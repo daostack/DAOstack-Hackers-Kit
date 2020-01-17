@@ -4,5 +4,11 @@
   "DAOToken": "0xf88bfEab7217376F33db368A3d3DC11B1433bDFb",
   "Reputation": "0x30412F4c06343d65C06B5a0Bba6821cf37E605fa",
   "Controller": "0x211b9Bd0bCCACa64fB1d43093C75269bb84B3Be6",
+  "Schemes": [{
+    "name": "GenericScheme",
+    "alias": "StandardBounties",
+    "address": "0x0a2Aca6C100BC39bee4C6643a3A8e061F06a624f",
+    "arcVersion": "0.0.1-rc.33"
+  }],
   "arcVersion": "0.0.1-rc.16"
 }

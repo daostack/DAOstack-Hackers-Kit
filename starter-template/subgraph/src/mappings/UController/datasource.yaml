@@ -5,6 +5,7 @@ abis:
   - DAOToken
   - SchemeRegistrar
   - ContributionReward
+  - ContributionRewardExt
   - GenericScheme
   - UGenericScheme
   - GenesisProtocol

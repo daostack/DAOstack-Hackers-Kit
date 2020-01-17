@@ -1,0 +1,39 @@
+{
+  "name": "Feckless Engineering",
+  "Avatar": "0x98CcB5051fD767e2E89567bCCCA4Efc532250544",
+  "DAOToken": "0x30dB4905b474aff3e1EAfc60394ece85dC524A92",
+  "Reputation": "0x4992595a747d772bF291f64112735064BFc8878f",
+  "Controller": "0x5294fd6B7ee619548598ab1Ca24ED49064AaCf4c",
+  "Schemes": [
+    {
+      "name": "GenericScheme",
+      "alias": "GenericSchemeAlias",
+      "address": "0x353B67029c2B8D94E0a89Bfacd18B2e41152B661",
+      "arcVersion": "0.0.1-rc.32"
+    },
+    {
+      "name": "ContributionRewardExt",
+      "alias": "ContributionRewardExt",
+      "address": "0x5023deB3F76D484102c9650933541a90B528CBFF",
+      "arcVersion": "0.0.1-rc.36"
+    }
+  ],
+  "StandAloneContracts": [
+    {
+      "name": "Wallet",
+      "address": "0xbe74Dd781E1A3fAb6554A4934132649A5b858541",
+      "arcVersion": "0.0.1-rc.32"
+    },
+    {
+      "name": "ContributionRewardExt",
+      "address": "0x5023deB3F76D484102c9650933541a90B528CBFF",
+      "arcVersion": "0.0.1-rc.36"
+    },
+    {
+      "name": "Competition",
+      "address": "0xCb7126eC611fab65A1Fbd1253fd947634A4623Fa",
+      "arcVersion": "0.0.1-rc.36"
+    }
+  ],
+  "arcVersion": "0.0.1-rc.32"
+}

@@ -98,13 +98,18 @@ type Proposal @entity {
 	# Contribution Reward params
 	contributionReward: ContributionRewardProposal
 
+	# Competition params
+	competition: CompetitionProposal
+
 	# Generic Scheme params
-	genericScheme : GenericSchemeProposal
+	genericScheme: GenericSchemeProposal
 
 	# SchemeRegistrar proposal
-  	schemeRegistrar : SchemeRegistrarProposal
+  	schemeRegistrar: SchemeRegistrarProposal
 
-	genesisProtocolParams : GenesisProtocolParam!
+	genesisProtocolParams: GenesisProtocolParam!
+
+
 
 }
 
@@ -112,6 +117,8 @@ type Tag @entity {
 	id: ID!
 	proposals: [Proposal!]
 	numberOfProposals: BigInt!
+	competitionSuggestions: [CompetitionSuggestion!]
+	numberOfSuggestions: BigInt!
 }
 
 type ProposalStake @entity {
@@ -187,4 +194,19 @@ type ContractInfo @entity {
 	alias: String!
 	version: String!
 	address: Bytes!
+}
+
+type TemplateInfo @entity {
+	id: ID!
+	templateName: String!
+}
+
+type Event @entity {
+	id: ID!
+	type: String!
+	data: String!
+	proposal: Proposal
+	user: Bytes
+	dao: DAO
+	timestamp: BigInt!
 }

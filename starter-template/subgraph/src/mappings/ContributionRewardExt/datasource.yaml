@@ -1,0 +1,24 @@
+abis:
+  - ContributionRewardExt
+  - GenesisProtocol
+entities:
+  - ContributionRewardRedeemReputation
+  - ContributionRewardRedeemNativeToken
+  - ContributionRewardRedeemExternalToken
+  - ContributionRewardRedeemEther
+  - ContributionRewardProposalExecuted
+  - ContributionRewardNewContributionProposal
+  - ContributionRewardProposal
+eventHandlers:
+  - event: RedeemReputation(indexed address,indexed bytes32,indexed address,int256)
+    handler: handleRedeemReputation
+  - event: RedeemNativeToken(indexed address,indexed bytes32,indexed address,uint256)
+    handler: handleRedeemNativeToken
+  - event: RedeemExternalToken(indexed address,indexed bytes32,indexed address,uint256)
+    handler: handleRedeemExternalToken
+  - event: RedeemEther(indexed address,indexed bytes32,indexed address,uint256)
+    handler: handleRedeemEther
+  - event: ProposalExecuted(indexed address,indexed bytes32,int256)
+    handler: handleProposalExecuted
+  - event: NewContributionProposal(indexed address,indexed bytes32,indexed address,string,int256,uint256[3],address,address,address)
+    handler: handleNewContributionProposal

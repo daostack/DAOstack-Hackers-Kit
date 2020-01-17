@@ -3,7 +3,7 @@ import {
 } from './util';
 
 function getControllerDAOAddresses() {
-  const controllerDao = require(`../../daos/private/testdao.json`);
+  const controllerDao = require(`../../daos/private/testdao19.json`);
   return {
     Controller: controllerDao.Controller,
     ControllerAvatar: controllerDao.Avatar,

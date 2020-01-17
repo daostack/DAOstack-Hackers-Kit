@@ -1,6 +1,6 @@
 {
   "name": "@daostack/subgraph",
-  "version": "0.0.32-0",
+  "version": "0.0.36-7",
   "author": "DAOstack (https://www.daostack.io)",
   "license": "GPL-3.0",
   "description": "A caching layer for daostack using The Graph",
@@ -26,12 +26,13 @@
     "docker:logs": "docker-compose logs --follow",
     "jest": "jest --runInBand --forceExit",
     "lint": "tslint -c tslint.json 'src//**/*.ts' -e 'src//types/**/*.ts' && tslint -c tslint.json 'test/**/*.ts'",
+    "lint-fix": "tslint --fix -c tslint.json 'src//**/*.ts' -e 'src//types/**/*.ts' && tslint --fix -c tslint.json 'test/**/*.ts'",
     "migrate": "node ops/migrate.js",
     "test": "npm run deploy && jest --runInBand --forceExit",
     "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
-    "@daostack/migration": "0.0.1-rc.31-v0",
+    "@daostack/migration": "0.0.1-rc.37-v2",
     "@types/jest": "^23.3.7",
     "@types/mocha": "^5.2.5",
     "babel-eslint": "^10.0.1",
@@ -46,8 +47,8 @@
     "watch": "^1.0.2"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.16.0",
-    "@graphprotocol/graph-ts": "0.16.0",
+    "@graphprotocol/graph-cli": "0.17.1",
+    "@graphprotocol/graph-ts": "0.17.0",
     "@types/node": "^10.14.4",
     "apollo-client": "^2.4.5",
     "apollo-link-ws": "^1.0.9",
@@ -58,7 +59,7 @@
     "ethereumjs-wallet": "^0.6.0",
     "fs-extra": "^8.0.1",
     "fstream": "^1.0.12",
-    "ganache-cli": "6.4.1",
+    "ganache-cli": "^6.7.0",
     "glob": "^7.1.3",
     "graphql": "^14.2.1",
     "graphql-request": "^1.8.2",

@@ -1,4 +1,5 @@
 import {
+  getArcVersion,
   getContractAddresses,
   getOptions,
   getWeb3,
@@ -6,7 +7,7 @@ import {
   waitUntilTrue,
 } from './util';
 
-const DAOToken = require('@daostack/arc/build/contracts/DAOToken.json');
+const DAOToken = require('@daostack/migration/contracts/' + getArcVersion() + '/DAOToken.json');
 
 describe('DAOToken', () => {
   let web3;
@@ -78,9 +79,7 @@ describe('DAOToken', () => {
     const { allowances } = await sendQuery(`{
       allowances {
         token
-        owner {
-          address
-        }
+        owner
         spender
         amount
       }

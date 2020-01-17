@@ -1,4 +1,5 @@
 import {
+  getArcVersion,
   getContractAddresses,
   getOptions,
   getOrgName,
@@ -11,11 +12,11 @@ import {
   writeProposalIPFS,
 } from './util';
 
-const ContributionReward = require('@daostack/arc/build/contracts/ContributionReward.json');
-const GenesisProtocol = require('@daostack/arc/build/contracts/GenesisProtocol.json');
-const DAOToken = require('@daostack/arc/build/contracts/DAOToken.json');
-const Reputation = require('@daostack/arc/build/contracts/Reputation.json');
-const Avatar = require('@daostack/arc/build/contracts/Avatar.json');
+const ContributionReward = require('@daostack/migration/contracts/' + getArcVersion() + '/ContributionReward.json');
+const GenesisProtocol = require('@daostack/migration/contracts/' + getArcVersion() + '/GenesisProtocol.json');
+const DAOToken = require('@daostack/migration/contracts/' + getArcVersion() + '/DAOToken.json');
+const Reputation = require('@daostack/migration/contracts/' + getArcVersion() + '/Reputation.json');
+const Avatar = require('@daostack/migration/contracts/' + getArcVersion() + '/Avatar.json');
 const DAORegistry = require('@daostack/arc-hive/build/contracts/DAORegistry.json');
 const REAL_FBITS = 40;
 describe('Domain Layer', () => {
@@ -34,6 +35,8 @@ describe('Domain Layer', () => {
 
   it('migration dao', async () => {
     await waitUntilSynced();
+    const accounts = web3.eth.accounts.wallet;
+
     const getMigrationDao = `{
       dao(id: "${addresses.Avatar.toLowerCase()}") {
         id
@@ -72,6 +75,34 @@ describe('Domain Layer', () => {
       reputationHoldersCount: '6',
     });
 
+    // Can't test timestap for NewReputationHolder event
+    const getNewMemberEvents = `{
+      events(where: { type: "NewReputationHolder", dao: "${addresses.Avatar.toLowerCase()}" }) {
+        type
+        data
+        proposal {
+          id
+        }
+        user
+        dao {
+          id
+        }
+      }
+    }`;
+    let newMemberEvents = (await sendQuery(getNewMemberEvents, 5000)).events;
+    expect(newMemberEvents.length).toEqual(6);
+    for (let i = 0; i < 6; i++) {
+      expect(newMemberEvents).toContainEqual({
+        dao: {
+          id: addresses.Avatar.toLowerCase(),
+        },
+        data: '{ \"reputationAmount\": \"1000000000000000000000\" }',
+        proposal: null,
+        type: 'NewReputationHolder',
+        user: accounts[i].address.toLowerCase(),
+      });
+    }
+
     const getMigrationDaoMembers = `{
       dao(id: "${addresses.Avatar.toLowerCase()}") {
         reputationHolders {
@@ -83,13 +114,6 @@ describe('Domain Layer', () => {
     expect(reputationHolders).toContainEqual({
       balance: '1000000000000000000000',
     });
-    const getMigrationDaoMembersAddress = `{
-      dao(id: "${addresses.Avatar.toLowerCase()}") {
-        reputationHolders {
-          address
-        }
-      }
-    }`;
 
     const getRegister = `{
       dao(id: "${addresses.Avatar.toLowerCase()}") {
@@ -97,7 +121,6 @@ describe('Domain Layer', () => {
       }
     }`;
     let register;
-    const accounts = web3.eth.accounts.wallet;
 
     register = (await sendQuery(getRegister)).dao.register;
 
@@ -107,9 +130,6 @@ describe('Domain Layer', () => {
       opts,
     );
 
-    expect(register).toEqual('na');
-
-    await daoRegistry.methods.register(addresses.Avatar, 'test').send();
     register = (await sendQuery(getRegister, 2000)).dao.register;
     expect(register).toEqual('registered');
 
@@ -117,6 +137,32 @@ describe('Domain Layer', () => {
     register = (await sendQuery(getRegister, 2000)).dao.register;
     expect(register).toEqual('unRegistered');
 
+    // Can't test timestap for NewDAO event
+    const getDAOEvents = `{
+      events(where: { dao: "${addresses.Avatar.toLowerCase()}" }) {
+        id
+        type
+        data
+        proposal {
+          id
+        }
+        user
+        dao {
+          id
+        }
+      }
+    }`;
+    let newDAOEvents = (await sendQuery(getDAOEvents, 5000)).events;
+    expect(newDAOEvents).toContainEqual({
+      dao: {
+        id: addresses.Avatar.toLowerCase(),
+      },
+      data: '{ \"name\": \"' + orgName + '\" }',
+      id: addresses.Avatar.toLowerCase(),
+      proposal: null,
+      type: 'NewDAO',
+      user: null,
+    });
   }, 120000);
 
   it('Sanity', async () => {
@@ -317,7 +363,7 @@ describe('Domain Layer', () => {
 
     let proposalIPFSData = {
       description: 'Just eat them',
-      title: 'A modest proposal',
+      title: '"A modest proposal"',
       url: 'http://swift.org/modest',
       tags: ['test', 'proposal'],
     };
@@ -572,6 +618,32 @@ describe('Domain Layer', () => {
       },
     });
 
+    const getNewProposalsEvents = `{
+      events(where: { type: "NewProposal", dao: "${addresses.Avatar.toLowerCase()}", user: "${accounts[0].address.toLowerCase()}" }) {
+        type
+        data
+        proposal {
+          id
+        }
+        user
+        dao {
+          id
+        }
+        timestamp
+      }
+    }`;
+    let newProposalEvents = (await sendQuery(getNewProposalsEvents, 5000)).events;
+    expect(newProposalEvents).toContainEqual({
+      dao: {
+        id: addresses.Avatar.toLowerCase(),
+      },
+      data: '{ \"title\": \"' + proposalTitle + '\" }',
+      proposal: { id: p1 },
+      type: 'NewProposal',
+      user: accounts[0].address.toLowerCase(),
+      timestamp: `${p1Creation}`,
+    });
+
     const address0Rep = await reputation.methods.balanceOf(accounts[0].address).call();
     const address1Rep = await reputation.methods.balanceOf(accounts[1].address).call();
     const address2Rep = await reputation.methods.balanceOf(accounts[2].address).call();
@@ -622,7 +694,32 @@ describe('Domain Layer', () => {
       stakesAgainst: '100000000000000000000',
       confidenceThreshold: '0',
       confidence: '0',
+    });
 
+    const getVotesEvents = `{
+      events(where: { type: "Vote", dao: "${addresses.Avatar.toLowerCase()}", user: "${accounts[0].address.toLowerCase()}" }) {
+        type
+        data
+        proposal {
+          id
+        }
+        user
+        dao {
+          id
+        }
+        timestamp
+      }
+    }`;
+    let voteEvents = (await sendQuery(getVotesEvents, 5000)).events;
+    expect(voteEvents).toContainEqual({
+      dao: {
+        id: addresses.Avatar.toLowerCase(),
+      },
+      data: '{ \"outcome\": \"Pass\", \"reputationAmount\": \"' + address0Rep + '\" }',
+      proposal: { id: p1 },
+      type: 'Vote',
+      user: accounts[0].address.toLowerCase(),
+      timestamp: `${v1Timestamp}`,
     });
 
     const s1Timestamp = await stake({
@@ -684,6 +781,32 @@ describe('Domain Layer', () => {
       stakesFor: '0',
       stakesAgainst: '200000000000000000000',
       confidenceThreshold: '0',
+    });
+
+    const getStakessEvents = `{
+      events(where: { type: "Stake", dao: "${addresses.Avatar.toLowerCase()}", user: "${accounts[0].address.toLowerCase()}" }) {
+        type
+        data
+        proposal {
+          id
+        }
+        user
+        dao {
+          id
+        }
+        timestamp
+      }
+    }`;
+    let stakeEvents = (await sendQuery(getStakessEvents, 5000)).events;
+    expect(stakeEvents).toContainEqual({
+      dao: {
+        id: addresses.Avatar.toLowerCase(),
+      },
+      data: '{ \"outcome\": \"Fail\", \"stakeAmount\": \"100000000000000000000\" }',
+      proposal: { id: p1 },
+      type: 'Stake',
+      user: accounts[0].address.toLowerCase(),
+      timestamp: `${s1Timestamp}`,
     });
 
     const s2Timestamp = await stake({
@@ -786,6 +909,32 @@ describe('Domain Layer', () => {
     expect(proposal).toMatchObject({
       stage: 'Boosted',
       closingAt: (Number(gpParams.boostedVotePeriodLimit) + Number(v2Timestamp)).toString(),
+    });
+
+    const getProposalStageChangeEvents = `{
+      events(where: { type: "ProposalStageChange", dao: "${addresses.Avatar.toLowerCase()}" }) {
+        type
+        data
+        proposal {
+          id
+        }
+        user
+        dao {
+          id
+        }
+        timestamp
+      }
+    }`;
+    let proposalStageChangeEvents = (await sendQuery(getProposalStageChangeEvents, 5000)).events;
+    expect(proposalStageChangeEvents).toContainEqual({
+      dao: {
+        id: addresses.Avatar.toLowerCase(),
+      },
+      data: '{ \"stage\": \"Boosted\" }',
+      proposal: { id: p1 },
+      type: 'ProposalStageChange',
+      user: accounts[1].address.toLowerCase(),
+      timestamp: `${v2Timestamp}`,
     });
 
     expectedVotesCount++;
@@ -1137,6 +1286,33 @@ describe('Domain Layer', () => {
       outcome: FAIL,
       voter: accounts[2].address,
     });
+
+    const getVoteFlipsEvents = `{
+      events(where: { type: "VoteFlip", dao: "${addresses.Avatar.toLowerCase()}" }) {
+        type
+        data
+        proposal {
+          id
+        }
+        user
+        dao {
+          id
+        }
+        timestamp
+      }
+    }`;
+    let voteFlipEvents = (await sendQuery(getVoteFlipsEvents, 5000)).events;
+    expect(voteFlipEvents).toContainEqual({
+      dao: {
+        id: addresses.Avatar.toLowerCase(),
+      },
+      data: '{ \"outcome\": \"Fail\", \"votesFor\": \"' + address1Rep + '\", \"votesAgainst\": \"' + address2Rep + '\" }',
+      proposal: { id: p2 },
+      type: 'VoteFlip',
+      user: accounts[2].address.toLowerCase(),
+      timestamp: `${quietEndingPeriodBeganAt}`,
+    });
+
     expect((await sendQuery(getExpiredProposal)).proposal.stage).toEqual('QuietEndingPeriod');
     expect((await sendQuery(getExpiredProposal)).proposal.quietEndingPeriodBeganAt)
            .toEqual(quietEndingPeriodBeganAt.toString());

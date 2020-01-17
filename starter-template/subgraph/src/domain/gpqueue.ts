@@ -1,10 +1,12 @@
 import { Address, BigDecimal, BigInt, ByteArray, Bytes, crypto } from '@graphprotocol/graph-ts';
-import { setContributionRewardParams,
+import { setContributionRewardExtParams,
+         setContributionRewardParams,
          setGenericSchemeParams,
          setSchemeRegistrarParams,
          setUGenericSchemeParams,
         } from '../mappings/Controller/mapping';
 import {ContributionReward} from '../types/ContributionReward/ContributionReward';
+import { ContributionRewardExt } from '../types/ContributionRewardExt/ContributionRewardExt';
 import {GenericScheme} from '../types/GenericScheme/GenericScheme';
 import { GenesisProtocol } from '../types/GenesisProtocol/GenesisProtocol';
 import { ContractInfo, GPQueue } from '../types/schema';
@@ -37,14 +39,13 @@ export function updateThreshold(dao: string,
 
 export function create(dao: Address,
                        scheme: Address,
-                       paramsHash: Bytes ): void {
+                       paramsHash: Bytes): void {
    let contractInfo = ContractInfo.load(scheme.toHex());
    if (contractInfo ==  null) {
      return;
    }
    let gpAddress: Address;
    let isGPQue = false;
-   let gpParamsHash: Bytes;
    let addressZero = '0x0000000000000000000000000000000000000000';
    if (equalStrings(contractInfo.name, 'ContributionReward')) {
      let contributionReward =  ContributionReward.bind(scheme);
@@ -54,7 +55,16 @@ export function create(dao: Address,
        setContributionRewardParams(dao, scheme, gpAddress, parameters.value0);
        isGPQue = true;
      }
-
+   }
+   if (equalStrings(contractInfo.name, 'ContributionRewardExt')) {
+    let contributionRewardExt =  ContributionRewardExt.bind(scheme);
+    setContributionRewardExtParams(
+                    dao,
+                    scheme,
+                    contributionRewardExt.votingMachine(),
+                    contributionRewardExt.voteParams(),
+                    contributionRewardExt.rewarder());
+    isGPQue = true;
    }
    if (equalStrings(contractInfo.name, 'SchemeRegistrar')) {
      let schemeRegistrar =  SchemeRegistrar.bind(scheme);

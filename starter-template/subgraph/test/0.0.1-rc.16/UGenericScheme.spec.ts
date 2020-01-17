@@ -1,4 +1,5 @@
 import {
+  getArcVersion,
   getContractAddresses,
   getOptions,
   getWeb3,
@@ -6,9 +7,9 @@ import {
   waitUntilTrue,
 } from './util';
 
-const ActionMock = require('@daostack/arc/build/contracts/ActionMock.json');
-const GenericScheme = require('@daostack/arc/build/contracts/UGenericScheme.json');
-const GenesisProtocol = require('@daostack/arc/build/contracts/GenesisProtocol.json');
+const ActionMock = require('@daostack/migration/contracts/' + getArcVersion() + '/ActionMock.json');
+const GenericScheme = require('@daostack/migration/contracts/' + getArcVersion() + '/GenericScheme.json');
+const GenesisProtocol = require('@daostack/migration/contracts/' + getArcVersion() + '/GenesisProtocol.json');
 
 describe('UGeneric Scheme', () => {
   let web3;

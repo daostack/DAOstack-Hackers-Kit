@@ -1,15 +1,16 @@
 import {
   createSubscriptionObservable,
+  getArcVersion,
   getContractAddresses,
   getOptions,
   getWeb3,
   waitUntilTrue,
 } from './util';
 
-const Reputation = require('@daostack/arc/build/contracts/Reputation.json');
-const UController = require('@daostack/arc/build/contracts/UController.json');
-const Avatar = require('@daostack/arc/build/contracts/Avatar.json');
-const DAOToken = require('@daostack/arc/build/contracts/DAOToken.json');
+const Reputation = require('@daostack/migration/contracts/' + getArcVersion() + '/Reputation.json');
+const UController = require('@daostack/migration/contracts/' + getArcVersion() + '/UController.json');
+const Avatar = require('@daostack/migration/contracts/' + getArcVersion() + '/Avatar.json');
+const DAOToken = require('@daostack/migration/contracts/' + getArcVersion() + '/DAOToken.json');
 const gql = require('graphql-tag');
 
 describe('Subscriptions Loop', () => {

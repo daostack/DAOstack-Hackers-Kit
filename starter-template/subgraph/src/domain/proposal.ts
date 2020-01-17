@@ -1,10 +1,19 @@
-import { Address, BigDecimal, BigInt, Bytes, crypto, ipfs, json, JSONValueKind, store } from '@graphprotocol/graph-ts';
+import { Address, BigDecimal, BigInt, ByteArray, Bytes, crypto, ipfs, json, JSONValue, JSONValueKind, store } from '@graphprotocol/graph-ts';
 import { GenesisProtocol } from '../types/GenesisProtocol/GenesisProtocol';
 import { ControllerScheme, DAO, GenesisProtocolParam, Proposal, Tag } from '../types/schema';
 import { concat, equalsBytes, equalStrings } from '../utils';
 import { getDAO, saveDAO } from './dao';
+import { addNewProposalEvent, addVoteFlipEvent } from './event';
 import { updateThreshold } from './gpqueue';
 import { getReputation } from './reputation';
+
+export class IPFSData {
+  public title: string;
+  public description: string;
+  public url: string;
+  public fulltext: string[];
+  public tags: JSONValue[];
+}
 
 export function parseOutcome(num: BigInt): string {
   if (num.toI32() === 1) {
@@ -38,6 +47,13 @@ export function getProposal(id: string): Proposal {
     proposal.scheme = null;
     proposal.descriptionHash = '';
     proposal.title = '';
+    proposal.proposer = Address.fromString('0x0000000000000000000000000000000000000000');
+    proposal.votingMachine = Address.fromString('0x0000000000000000000000000000000000000000');
+    proposal.createdAt = BigInt.fromI32(0);
+    proposal.expiresInQueueAt = BigInt.fromI32(0);
+    proposal.gpQueue = '';
+    proposal.dao = '';
+    proposal.genesisProtocolParams = '';
   }
 
   getProposalIPFSData(proposal);
@@ -46,51 +62,73 @@ export function getProposal(id: string): Proposal {
 }
 
 export function getProposalIPFSData(proposal: Proposal): Proposal {
-    // IPFS reading
-    if (!equalStrings(proposal.descriptionHash, '') && equalStrings(proposal.title, '')) {
-      let ipfsData = ipfs.cat('/ipfs/' + proposal.descriptionHash);
-      if (ipfsData != null && ipfsData.toString() !== '{}') {
-        let descJson = json.fromBytes(ipfsData as Bytes);
-        if (descJson.kind !== JSONValueKind.OBJECT) {
-          return proposal;
-        }
-        if (descJson.toObject().get('title') != null) {
-          proposal.title = descJson.toObject().get('title').toString();
-          proposal.fulltext = proposal.title.split(' ');
-        }
-        if (descJson.toObject().get('description') != null) {
-          proposal.description = descJson.toObject().get('description').toString();
-          proposal.fulltext = proposal.fulltext.concat(proposal.description.split(' '));
-        }
-        if (descJson.toObject().get('url') != null) {
-          proposal.url = descJson.toObject().get('url').toString();
-        }
-        let tags: string[] = [];
-        let tagsData =  descJson.toObject().get('tags');
-        if (tagsData != null && tagsData.kind === JSONValueKind.ARRAY) {
-          let tagsObjects = tagsData.toArray();
-          let tagsLength = tagsObjects.length < 100 ? tagsObjects.length : 100;
-          for (let i = 0; i < tagsLength; i++) {
-            if (tags.indexOf(tagsObjects[i].toString()) === -1) {
-              tags.push(tagsObjects[i].toString());
-              let tagEnt = Tag.load(tagsObjects[i].toString());
-              if (tagEnt == null) {
-                tagEnt = new Tag(tagsObjects[i].toString());
-                tagEnt.numberOfProposals = BigInt.fromI32(0);
-                tagEnt.proposals = [];
-              }
-              let tagProposals = tagEnt.proposals;
-              tagProposals.push(proposal.id);
-              tagEnt.proposals = tagProposals;
-              tagEnt.numberOfProposals = tagEnt.numberOfProposals.plus(BigInt.fromI32(1));
-              tagEnt.save();
-            }
+  // IPFS reading
+  if (!equalStrings(proposal.descriptionHash, '') && equalStrings(proposal.title, '')) {
+    let data = getIPFSData(proposal.descriptionHash);
+    proposal.title = data.title;
+    proposal.description = data.description;
+    proposal.url = data.url;
+    proposal.fulltext = data.fulltext;
+    let tagsObjects = data.tags;
+    if (tagsObjects.length > 0) {
+      let tags: string[] = [];
+      let tagsLength = tagsObjects.length < 100 ? tagsObjects.length : 100;
+      for (let i = 0; i < tagsLength; i++) {
+        if (tags.indexOf(tagsObjects[i].toString()) === -1) {
+          tags.push(tagsObjects[i].toString());
+          let tagEnt = Tag.load(tagsObjects[i].toString());
+          if (tagEnt == null) {
+            tagEnt = new Tag(tagsObjects[i].toString());
+            tagEnt.numberOfProposals = BigInt.fromI32(0);
+            tagEnt.proposals = [];
+            tagEnt.numberOfSuggestions = BigInt.fromI32(0);
+            tagEnt.competitionSuggestions = [];
           }
-          proposal.tags = tags;
+          let tagProposals = tagEnt.proposals;
+          tagProposals.push(proposal.id);
+          tagEnt.proposals = tagProposals;
+          tagEnt.numberOfProposals = tagEnt.numberOfProposals.plus(BigInt.fromI32(1));
+          tagEnt.save();
         }
       }
+      proposal.tags = tags;
     }
-    return proposal;
+  }
+  return proposal;
+}
+
+export function getIPFSData(descHash: string): IPFSData {
+  // IPFS reading
+  let result = new IPFSData();
+  result.title = '';
+  result.description = '';
+  result.url = '';
+  result.fulltext = [];
+  result.tags = [];
+
+  let ipfsData = ipfs.cat('/ipfs/' + descHash);
+  if (ipfsData != null && ipfsData.toString() !== '{}') {
+    let descJson = json.fromBytes(ipfsData as Bytes);
+    if (descJson.kind !== JSONValueKind.OBJECT) {
+      return result;
+    }
+    if (descJson.toObject().get('title') != null) {
+      result.title = descJson.toObject().get('title').toString();
+      result.fulltext = result.title.split(' ');
+    }
+    if (descJson.toObject().get('description') != null) {
+      result.description = descJson.toObject().get('description').toString();
+      result.fulltext = result.fulltext.concat(result.description.split(' '));
+    }
+    if (descJson.toObject().get('url') != null) {
+      result.url = descJson.toObject().get('url').toString();
+    }
+    let tagsData = descJson.toObject().get('tags');
+    if (tagsData != null && tagsData.kind === JSONValueKind.ARRAY) {
+      result.tags = tagsData.toArray();
+    }
+  }
+  return result;
 }
 
 export function saveProposal(proposal: Proposal): void {
@@ -101,6 +139,8 @@ export function updateProposalAfterVote(
   proposal: Proposal,
   gpAddress: Address,
   proposalId: Bytes,
+  voter: Address,
+  timestamp: BigInt,
 ): void {
   let gp = GenesisProtocol.bind(gpAddress);
   let gpProposal = gp.proposals(proposalId);
@@ -108,8 +148,11 @@ export function updateProposalAfterVote(
   proposal.votingMachine = gpAddress;
   // proposal.winningVote
   proposal.winningOutcome = parseOutcome(gpProposal.value3);
-  if ((gpProposal.value2 === 6) && !equalStrings(proposal.winningOutcome, prevOutcome)) {
-    setProposalState(proposal, 6, gp.getProposalTimes(proposalId));
+  if (!equalStrings(proposal.winningOutcome, prevOutcome)) {
+    if ((gpProposal.value2 === 6)) {
+      setProposalState(proposal, 6, gp.getProposalTimes(proposalId));
+    }
+    addVoteFlipEvent(proposalId, proposal, voter, timestamp);
   }
 }
 
@@ -281,6 +324,8 @@ export function updateGPProposal(
     controllerScheme.save();
   }
 
+  addNewProposalEvent(proposalId, proposal, timestamp);
+
   saveProposal(proposal);
 }
 
@@ -290,7 +335,6 @@ export function updateCRProposal(
   avatarAddress: Address,
   votingMachine: Address,
   descriptionHash: string,
-  beneficiary: Address,
   schemeAddress: Address,
 ): void {
   let proposal = getProposal(proposalId.toHex());

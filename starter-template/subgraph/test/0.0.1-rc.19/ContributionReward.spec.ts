@@ -1,11 +1,11 @@
-import { getContractAddresses, getOptions, getWeb3, sendQuery } from './util';
+import { getArcVersion, getContractAddresses, getOptions, getWeb3, sendQuery } from './util';
 
-const AbsoluteVote = require('@daostack/arc/build/contracts/AbsoluteVote.json');
-const Avatar = require('@daostack/arc/build/contracts/Avatar.json');
-const ContributionReward = require('@daostack/arc/build/contracts/ContributionReward.json');
-const DAOToken = require('@daostack/arc/build/contracts/DAOToken.json');
-const Reputation = require('@daostack/arc/build/contracts/Reputation.json');
-const UController = require('@daostack/arc/build/contracts/UController.json');
+const AbsoluteVote = require('@daostack/migration/contracts/' + getArcVersion() + '/AbsoluteVote.json');
+const Avatar = require('@daostack/migration/contracts/' + getArcVersion() + '/Avatar.json');
+const ContributionReward = require('@daostack/migration/contracts/' + getArcVersion() + '/ContributionReward.json');
+const DAOToken = require('@daostack/migration/contracts/' + getArcVersion() + '/DAOToken.json');
+const Reputation = require('@daostack/migration/contracts/' + getArcVersion() + '/Reputation.json');
+const UController = require('@daostack/migration/contracts/' + getArcVersion() + '/UController.json');
 
 describe('ContributionReward', () => {
     let web3;

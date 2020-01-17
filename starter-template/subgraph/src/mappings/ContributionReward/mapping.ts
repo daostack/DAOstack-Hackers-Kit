@@ -145,8 +145,6 @@ function updateProposalAfterRedemption(
 }
 
 export function handleProposalExecuted(event: ProposalExecuted): void {
-  domain.handleProposalExecuted(event);
-
   let cr = ContributionReward.bind(event.address);
   let proposalId = event.params._proposalId;
   let proposalEnt = store.get(
@@ -171,7 +169,14 @@ export function handleProposalExecuted(event: ProposalExecuted): void {
 export function handleNewContributionProposal(
   event: NewContributionProposal,
 ): void {
-  domain.handleNewContributionProposal(event);
+  domain.handleNewContributionProposal(
+    event.params._proposalId,
+    event.params._avatar,
+    event.block.timestamp,
+    event.params._intVoteInterface,
+    event.params._descriptionHash,
+    event.address,
+  );
 
   insertNewProposal(event);
   let ent = new ContributionRewardNewContributionProposal(eventId(event));

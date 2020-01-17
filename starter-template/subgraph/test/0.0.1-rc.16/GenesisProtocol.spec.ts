@@ -1,4 +1,5 @@
 import {
+  getArcVersion,
   getContractAddresses,
   getOptions,
   getWeb3,
@@ -7,10 +8,10 @@ import {
   sendQuery,
 } from './util';
 
-const DAOToken = require('@daostack/arc/build/contracts/DAOToken.json');
-const GenesisProtocol = require('@daostack/arc/build/contracts/GenesisProtocol.json');
-const GenesisProtocolCallbacks = require('@daostack/arc/build/contracts/GenesisProtocolCallbacksMock.json');
-const Reputation = require('@daostack/arc/build/contracts/Reputation.json');
+const DAOToken = require('@daostack/migration/contracts/' + getArcVersion() + '/DAOToken.json');
+const GenesisProtocol = require('@daostack/migration/contracts/' + getArcVersion() + '/GenesisProtocol.json');
+const GenesisProtocolCallbacks = require('@daostack/migration/contracts/' + getArcVersion() + '/GenesisProtocolCallbacksMock.json');
+const Reputation = require('@daostack/migration/contracts/' + getArcVersion() + '/Reputation.json');
 
 describe('GenesisProtocol', () => {
   let web3;

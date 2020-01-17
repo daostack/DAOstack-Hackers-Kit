@@ -4,11 +4,17 @@ import {
   ByteArray,
   Bytes,
   crypto,
+  DataSourceTemplate,
   EthereumEvent,
   store,
   Value,
 } from '@graphprotocol/graph-ts';
-import { ContractInfo, Debug } from './types/schema';
+import {
+  BlacklistedDAO,
+  ContractInfo,
+  Debug,
+  TemplateInfo,
+} from './types/schema';
 
 export function concat(a: ByteArray, b: ByteArray): ByteArray {
   let out = new Uint8Array(a.length + b.length);
@@ -74,11 +80,56 @@ export function equalStrings(a: string, b: string): boolean {
 export function setContractInfo(address: string, name: string, alias: string, version: string): void {
     let contractInfo = ContractInfo.load(address);
     if (contractInfo == null) {
-        contractInfo = new  ContractInfo(address);
+        contractInfo = new ContractInfo(address);
         contractInfo.address = Address.fromString(address);
         contractInfo.name =  name;
         contractInfo.alias =  alias;
         contractInfo.version = version;
         contractInfo.save();
     }
+}
+
+export function setTemplateInfo(name: string, version: string, templateName: string): void {
+  let id = name.concat(version);
+  let templateInfo = TemplateInfo.load(id);
+  if (templateInfo == null) {
+    templateInfo = new TemplateInfo(id);
+    templateInfo.templateName = templateName;
+    templateInfo.save();
+  }
+}
+
+export function fetchTemplateName(name: string, version: string): string | null {
+  let id = name.concat(version);
+  let templateInfo = TemplateInfo.load(id);
+  if (templateInfo == null) {
+    return null;
+  } else {
+    return templateInfo.templateName;
+  }
+}
+
+export function createTemplate(templateName: string, address: Address): void {
+  DataSourceTemplate.create(templateName, [address.toHex()]);
+}
+
+export function setBlacklistedDAO(address: string): void {
+  let blacklistedDAO = BlacklistedDAO.load(address);
+  if (blacklistedDAO == null) {
+    blacklistedDAO = new BlacklistedDAO(address);
+    blacklistedDAO.save();
+  }
+}
+
+export function fixJsonQuotes(target: string): string {
+     let targetIndex = 0;
+     let result = '';
+     for (targetIndex = 0; targetIndex < target.length; targetIndex++) {
+       if (target[targetIndex] === '"') {
+         result += '\\"';
+       } else {
+         result += target[targetIndex];
+       }
+     }
+     return result;
 }

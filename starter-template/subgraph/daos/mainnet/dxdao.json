@@ -4,5 +4,17 @@
   "DAOToken": "0x643b14F6EA235668278DA5974930105852F2B7C4",
   "Reputation": "0x7a927A93F221976AAE26d5D077477307170f0b7c",
   "Controller": "0x9f828AC3baA9003e8a4e0b24bcaE7b027B6740b0",
-  "arcVersion": "0.0.1-rc.19"
+  "arcVersion": "0.0.1-rc.19",
+  "Schemes": [{
+    "name": "GenericScheme",
+    "alias": "GenericSchemeENSPublicProvider",
+    "address": "0x9a543aef934c21da5814785e38f9a7892d3cde6e",
+    "arcVersion": "0.0.1-rc.36"
+  },
+  {
+    "name": "GenericScheme",
+    "alias": "GenericSchemeENSRegistry",
+    "address": "0x46df3ea38a680fbc84e744d92b0a8ec717b2ea7e",
+    "arcVersion": "0.0.1-rc.36"
+  }]
 }

@@ -1,6 +1,6 @@
-import { getContractAddresses, getOptions, getOrgName, getWeb3, sendQuery } from './util';
+import { getArcVersion, getContractAddresses, getOptions, getOrgName, getWeb3, sendQuery } from './util';
 
-const Avatar = require('@daostack/arc/build/contracts/Avatar.json');
+const Avatar = require('@daostack/migration/contracts/' + getArcVersion() + '/Avatar.json');
 
 describe('Avatar', () => {
   let web3;

@@ -19,6 +19,7 @@ import * as domain from '../../domain';
 import {
   AvatarContract,
   ContractInfo,
+  ContributionRewardExtParam,
   ContributionRewardParam,
   ControllerAddGlobalConstraint,
   ControllerGlobalConstraint,
@@ -181,7 +182,7 @@ export function handleRegisterScheme(event: RegisterScheme): void {
   let paramsHash = controller.getSchemeParameters(event.params._scheme, avatar);
   insertScheme(event.address, avatar, event.params._scheme , paramsHash);
 
-  domain.handleRegisterScheme(avatar, token, reputation, event.params._scheme, paramsHash);
+  domain.handleRegisterScheme(avatar, token, reputation, event.params._scheme, paramsHash, event.block.timestamp);
 
   // Detect a new organization event by looking for the first register scheme event for that org.
   let isFirstRegister = FirstRegisterScheme.load(avatar.toHex());
@@ -304,6 +305,22 @@ export function setContributionRewardParams(avatar: Address,
     contributionRewardParams.voteParams = vmParamsHash.toHex();
     contributionRewardParams.save();
     controllerScheme.contributionRewardParams = contributionRewardParams.id;
+    controllerScheme.save();
+}
+
+export function setContributionRewardExtParams(avatar: Address,
+                                               scheme: Address,
+                                               vmAddress: Address,
+                                               vmParamsHash: Bytes,
+                                               rewarder: Address): void {
+    setGPParams(vmAddress, vmParamsHash);
+    let controllerScheme =  ControllerScheme.load(crypto.keccak256(concat(avatar, scheme)).toHex());
+    let contributionRewardExtParams = new ContributionRewardExtParam(scheme.toHex());
+    contributionRewardExtParams.votingMachine = vmAddress;
+    contributionRewardExtParams.voteParams = vmParamsHash.toHex();
+    contributionRewardExtParams.rewarder = rewarder;
+    contributionRewardExtParams.save();
+    controllerScheme.contributionRewardExtParams = contributionRewardExtParams.id;
     controllerScheme.save();
 }
 
