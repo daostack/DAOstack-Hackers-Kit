@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 import "./IFireStarter.sol";
-import "@daostack/arc/contracts/controller/ControllerInterface.sol";
+import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./VotingMachineCallback.sol";
 
@@ -38,7 +38,7 @@ contract FireStarter is IFireStarter, Ownable {
         projects[_id].funds += msg.value;
         projects[_id].balances[msg.sender] += msg.value;
         uint256 reputation = msg.value % 1000;
-        ControllerInterface(avatar.owner()).mintReputation(uint(reputation), msg.sender, address(avatar));
+        Controller(avatar.owner()).mintReputation(uint(reputation), msg.sender, address(avatar));
 
         emit ProjectFunded(_id, msg.value, msg.sender);
     }
