@@ -22,7 +22,7 @@ services:
       - 8545:8545
 
   graph-node:
-    image: 'graphprotocol/graph-node@sha256:9441c934312ee087061f4a9849afba524890da98e67e4285eb7883407108cc66'
+    image: 'graphprotocol/graph-node:v0.17.0'
     ports:
       - 8000:8000
       - 8001:8001

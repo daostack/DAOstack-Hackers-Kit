@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "build": "npm run build:app",
+    "build": "npm run build:app && npm run build:ipfs && npm run build:postgres",
     "build-testnet": "npm run build:app && npm run build:ipfs && npm run build:postgres",
     "build:app": "docker build --file starter-app/Dockerfile --tag starter_template_app ./starter-app",
     "build:ganache": "docker build --file ops/Dockerfile --tag starter_template_ganache .",
@@ -24,7 +24,7 @@
     "stop": "docker-compose down",
     "ganache:docker": "docker run -p 8545:8545 -v `pwd`/data/:/app/data daostack/test-env:ganache-0.0.1-rc.23-v0-3.0.0",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate": "npm i && node migrations/deployDao.js"
+    "migrate": "npm ci && node migrations/deployDao.js"
   },
   "keywords": [
     "DAO",

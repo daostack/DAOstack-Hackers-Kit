@@ -116,43 +116,32 @@ After downloading the project and docker:
 
   ```
   npm run launch:docker
-  npm run logs:graph
   ```
 
   This would build the docker images and start the docker container for `ganache`, `starter-app` with webpack server, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
 
-- Wait for the logs screen to say *Starting JSON-RPC admin server at: ....*, then you can either exit the logs or in a different terminal window type
-
   ```
   npm run migrate
-  npm run logs:ganache
   ```
 
   Make sure the DAO is deployed and output is written to output file. You should see the following in the ganache logs:
   ```
-  { name: 'DevTest',
-  Avatar: '0xE7A2C59e134ee81D4035Ae6DB2254f79308e334f',
-  DAOToken: '0xcDbe8b52A6c60A5f101d4A0F1f049f19a9e1D35F',
-  Reputation: '0x93cdbf39fB9e13BD253CA5819247D52fbabf0F2f',
-  Controller: '0x5109F62E4e0CA152f5543E59E42dc0360C3aeD25' }
-  eth_getBlockByHash
-  eth_getBalance
-  eth_getTransactionReceipt
-  ℹ Finished in a few seconds and costed 0.019947492000006144ETH
-  ✔ Wrote results to data/migration.json.
-  eth_getBlockByHash
-  eth_getTransactionReceipt
-  eth_getBlockByNumber
-  ...
+  {
+  "name": "DevTest",
+  "Avatar": "0x5095a0B6BA789D4c0f4499788BE0901e018d2e59",
+  "DAOToken": "0x47dAfDb3cA13C95490047624b2202CcC2E6eF90F",
+  "Reputation": "0x15A75af9D4035Ddd2274ddDe061e8B651A8C1efd",
+  "Controller": "0x8318cF81516b964f71a32EbEe1B229973c77e0e0",
+  "Schemes": [],
+  "StandAloneContracts": [],
+  "arcVersion": "0.0.1-rc.37"
+  }
+  ✔ DAO Migration has Finished Successfully!
   ```
-
-  Exit the logs and from the project directory i.e. `starter-template` type:
 
   ```
   npm run deploy-graph
   ```
-
-  This will deploy the subgraph and if you are still following the graph-node logs you can see it syncing the blockchain events
 
 - Open your web browser and type *http://localhost:3000/* This is your react Dapp. You can edit the `starter-app` code to modify frontend and the webpack watcher will rebuild the app
 
