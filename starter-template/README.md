@@ -156,7 +156,6 @@ _To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com
 - Open terminal at the project folder and run the following commands:
 
   ```
-  npm i
   npm run migrate
   ```
   
