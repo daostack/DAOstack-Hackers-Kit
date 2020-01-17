@@ -24,32 +24,32 @@ services:
   graph-node:
     image: 'graphprotocol/graph-node:v0.17.0'
     ports:
-      - 8000:8000
-      - 8001:8001
-      - 8020:8020
+      - '8000:8000'
+      - '8001:8001'
+      - '8020:8020'
     links:
       - ipfs
       - postgres
       - ganache
     environment:
       postgres_host: 'postgres:5432'
-      postgres_user: 'postgres'
-      postgres_pass: 'letmein'
+      postgres_user: postgres
+      postgres_pass: letmein
       postgres_db: postgres
       ipfs: 'ipfs:5001'
       ethereum: 'private:http://ganache:8545'
       GRAPH_LOG: "graph.log"
       GRAPH_GRAPHQL_MAX_FIRST: 1000
-      GRAPH_IPFS_TIMEOUT: '4'
-      GRAPH_MAX_IPFS_FILE_BYTES: '102400'
+      GRAPH_IPFS_TIMEOUT: '2'
+      GRAPH_GRAPHQL_MAX_FIRST: '1000'
 
   ipfs:
-    image: daostack/test-env-ipfs:3.0.23
+    image: starter_template_ipfs:latest
     ports:
       - 5001:5001
 
   postgres:
-    image: daostack/test-env-postgres:3.0.23
+    image: starter_template_postgres:latest
     ports:
       - 5432:5432
     environment:
