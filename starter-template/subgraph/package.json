@@ -1,6 +1,6 @@
 {
   "name": "@daostack/subgraph",
-  "version": "0.0.36-7",
+  "version": "0.0.36-8",
   "author": "DAOstack (https://www.daostack.io)",
   "license": "GPL-3.0",
   "description": "A caching layer for daostack using The Graph",

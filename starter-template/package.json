@@ -24,7 +24,7 @@
     "stop": "docker-compose down",
     "ganache:docker": "docker run -p 8545:8545 -v `pwd`/data/:/app/data daostack/test-env:ganache-0.0.1-rc.23-v0-3.0.0",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate": "node migrations/deployDao.js"
+    "migrate": "npm i && node migrations/deployDao.js"
   },
   "keywords": [
     "DAO",

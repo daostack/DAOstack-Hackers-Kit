@@ -1,0 +1,10 @@
+{
+  "name": "DevTest",
+  "Avatar": "0x6C9730d9D35418DB1670625118381DCD897786dD",
+  "DAOToken": "0xef8f27C97EC55e513C8A26e863d9CbDe459EC2e5",
+  "Reputation": "0x2Db0a496B5BddC213874B6aC1714019604fA95Ff",
+  "Controller": "0xA859d1481793645b067d5A56358011254e3b3de7",
+  "Schemes": [],
+  "StandAloneContracts": [],
+  "arcVersion": "0.0.1-rc.37"
+}
