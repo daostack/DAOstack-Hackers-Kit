@@ -15,14 +15,14 @@ services:
       - 3000:3000
 
   ganache:
-    image: 'daostack/migration:0.0.1-rc.31-v0'
+    image: daostack/test-env-ganache:3.0.23
     volumes:
       - ./data:/app/data
     ports:
       - 8545:8545
 
   graph-node:
-    image: 'graphprotocol/graph-node:v0.15.1'
+    image: 'graphprotocol/graph-node@sha256:9441c934312ee087061f4a9849afba524890da98e67e4285eb7883407108cc66'
     ports:
       - 8000:8000
       - 8001:8001
@@ -44,12 +44,12 @@ services:
       GRAPH_MAX_IPFS_FILE_BYTES: '102400'
 
   ipfs:
-    image: starter_template_ipfs:latest
+    image: daostack/test-env-ipfs:3.0.23
     ports:
       - 5001:5001
 
   postgres:
-    image: starter_template_postgres:latest
+    image: daostack/test-env-postgres:3.0.23
     ports:
       - 5432:5432
     environment:
