@@ -1,8 +1,8 @@
-pragma solidity ^0.4.24;
+pragma solidity 0.5.13;
 
 import "@daostack/infra/contracts/votingMachines/ProposalExecuteInterface.sol";
 import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol";
-import "@daostack/arc/contracts/controller/ControllerInterface.sol";
+import "@daostack/arc/contracts/controller/Controller.sol";
 import "@daostack/arc/contracts/votingMachines/VotingMachineCallbacks.sol";
 import "./PeepethInterface.sol";
 
@@ -16,13 +16,13 @@ import "./PeepethInterface.sol";
 contract PeepScheme is UniversalScheme, VotingMachineCallbacks, ProposalExecuteInterface {
 
     // Peepeth contract address on the Ethereum mainnet
-    address public constant PEEPETH = 0xfa28eC7198028438514b49a3CF353BcA5541ce1d;
+    // address public constant PEEPETH = 0xfa28eC7198028438514b49a3CF353BcA5541ce1d;
     
     // Peepeth contract address on the Ethereum Rinkeby testnet
-    address public constant PEEPETH_RINKEBY = 0xfA804eED9405f89CF48Da33e23ea4BE48de933C5;
+    // address public constant PEEPETH_RINKEBY = 0xfA804eED9405f89CF48Da33e23ea4BE48de933C5;
 
     // Peepeth contract address on the Ethereum Kovan testnet
-    address public constant PEEPETH_KOVAN =  0xb704a46B605277c718A68D30Cb731c8818217eC7;
+    // address public constant PEEPETH_KOVAN =  0xb704a46B605277c718A68D30Cb731c8818217eC7;
 
     address public peepethContract;
     
@@ -105,29 +105,30 @@ contract PeepScheme is UniversalScheme, VotingMachineCallbacks, ProposalExecuteI
     * @param _name the username for the avatar's account
     * @param _ipfsHash the IPFS hash for the registration message on IPFS. An example for this message can be found at: https://ipfs.io/ipfs/QmQg5xX9RCWT8dxNnJV6WLSC3qQJXgac2vfcALh8ymmrL3
     */
-    function registerPeepethAccount(address _avatar, bytes16 _name, string _ipfsHash) public {
+    function registerPeepethAccount(Avatar _avatar, bytes16 _name, string memory _ipfsHash) public {
         // Check that the avater did not already register to Peepeth.
-        require(peepethAccounts[_avatar] == bytes16(0), " Specified avatar is already registered");
+        require(peepethAccounts[address(_avatar)] == bytes16(0), " Specified avatar is already registered");
         
         // Saves the avatar Peepeth username
-        peepethAccounts[_avatar] = _name;
+        peepethAccounts[address(_avatar)] = _name;
         
-        ControllerInterface controller = ControllerInterface(Avatar(_avatar).owner());
+        Controller controller = Controller(_avatar.owner());
         // Sends a call to the Peepeth contract to create an account.
         // The call will be made from the avatar address such that when received by the Peepeth contract, the msg.sender value will be the avatar's address
         controller.genericCall(
             peepethContract, 
             abi.encodeWithSelector(PeepethInterface(peepethContract).createAccount.selector, _name, _ipfsHash),
-            _avatar
+            _avatar,
+            0
         );
         
-        emit PeepethAccountRegistered(_avatar, _name, _ipfsHash);
+        emit PeepethAccountRegistered(address(_avatar), _name, _ipfsHash);
     }
 
    
     function proposePeep(
         Avatar _avatar,
-        string _peepHash,
+        string memory _peepHash,
         uint _reputationChange
     ) public
       returns(bytes32)
@@ -138,7 +139,7 @@ contract PeepScheme is UniversalScheme, VotingMachineCallbacks, ProposalExecuteI
             3,
             controllerParams.voteApproveParams,
             msg.sender,
-            _avatar
+            address(_avatar)
         );
 
         // Set the struct:
@@ -147,12 +148,12 @@ contract PeepScheme is UniversalScheme, VotingMachineCallbacks, ProposalExecuteI
             peepHash: _peepHash,
             reputationChange: _reputationChange
         });
-        organizationsProposals[_avatar][peepId] = proposal;
+        organizationsProposals[address(_avatar)][peepId] = proposal;
 
         emit NewPeepProposal(
-            _avatar,
+            address(_avatar),
             peepId,
-            controllerParams.intVote,
+            address(controllerParams.intVote),
             msg.sender,
             _peepHash,
             _reputationChange
@@ -166,34 +167,29 @@ contract PeepScheme is UniversalScheme, VotingMachineCallbacks, ProposalExecuteI
     * @param _proposalId the ID of the voting in the voting machine
     * @param _param a parameter of the voting result, 1 yes and 2 is no.
     */
-    function executeProposal(bytes32 _proposalId, int _param)  public returns(bool) {
-        address avatar = proposalsInfo[_proposalId].avatar;
-
-        // Check the caller is indeed the voting machine:
-        require(
-            parameters[getParametersFromController(Avatar(avatar))].intVote == msg.sender, 
-            "Only the voting machine can execute proposal"
-        );
+    function executeProposal(bytes32 _proposalId, int _param) external onlyVotingMachine(_proposalId) returns(bool) {
+        Avatar avatar = proposalsInfo[msg.sender][_proposalId].avatar;
+        //address avatar = proposalsInfo[_proposalId].avatar;
 
         // Check if vote was successful:
         if (_param == 1) {
-            PeepProposal memory proposal = organizationsProposals[avatar][_proposalId];
+            PeepProposal memory proposal = organizationsProposals[address(avatar)][_proposalId];
             
-            ControllerInterface controller = ControllerInterface(Avatar(avatar).owner());
+            Controller controller = Controller(Avatar(avatar).owner());
             // Sends a call to the Peepeth contract to post a new peep.
             // The call will be made from the avatar address such that when received by the Peepeth contract, the msg.sender value will be the avatar's address
-            controller.genericCall(peepethContract, abi.encodeWithSelector(PeepethInterface(peepethContract).post.selector, proposal.peepHash), avatar);
+            controller.genericCall(peepethContract, abi.encodeWithSelector(PeepethInterface(peepethContract).post.selector, proposal.peepHash), avatar, 0);
             
             // Mints reputation for the proposer of the Peep.
             require(
-                ControllerInterface(Avatar(avatar).owner()).mintReputation(uint(proposal.reputationChange), proposal.proposer, avatar),
+                Controller(Avatar(avatar).owner()).mintReputation(uint(proposal.reputationChange), proposal.proposer, address(avatar)),
                 "Failed to mint reputation to proposer"
             );
         } else {
-            delete organizationsProposals[avatar][_proposalId];
+            delete organizationsProposals[address(avatar)][_proposalId];
         }
 
-        emit ProposalExecuted(avatar, _proposalId, _param);
+        emit ProposalExecuted(address(avatar), _proposalId, _param);
 
         return true;
     }
