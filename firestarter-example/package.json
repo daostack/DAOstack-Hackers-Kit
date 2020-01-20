@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "compile": "truffle compile",
-    "ganache": "npm explore @daostack/migration -- npm run ganache",
+    "ganache": "docker-compose up -d",
     "migrate": "node migrations/deployDao.js"
   },
   "author": "",
