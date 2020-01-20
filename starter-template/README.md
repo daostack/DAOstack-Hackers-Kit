@@ -201,4 +201,4 @@ _To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com
 
 #### Using MetaMask with ganache:
   - Open metamask and import using private key
-  - You can find the private keys from ganache logs by running `docker container logs starter-template_ganache_1`
+  - You can find the private keys from ganache logs by running `docker container logs <container_name>`
