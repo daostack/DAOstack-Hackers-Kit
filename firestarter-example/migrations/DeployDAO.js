@@ -20,6 +20,16 @@ async function migrate() {
     },
   };
 
+  // If not using ganache docker image by DAOstack un-comment this portion
+  // to migrate base contracts
+  /*
+    switch (process.env.NETWORK) {
+      case "private":
+        const migrationBaseResult = await DAOstackMigration.migrateBase(options);
+        options.prevmigration = options.output;
+        break;
+    }
+  */
   const migrationDAOResult = await DAOstackMigration.migrateDAO(options);
 }
 

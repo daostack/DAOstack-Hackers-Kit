@@ -1080,15 +1080,15 @@
       },
       "0.0.1-rc.37": {
         "name": "FireStarter",
-        "Avatar": "0x6866FDD5D4415AffC5c31360f4F85d1245a274e8",
-        "DAOToken": "0xE9488698f72D23caDB75263Af515953E17E78681",
-        "Reputation": "0xcbd0806F5479eD1628b537A89C1ddD949088D4aa",
-        "Controller": "0xB5FdBA76b5D331B8B849486d7F1A83051Ff4EF1A",
+        "Avatar": "0xfa5966293008f68A8D9066229b88660f63Db033D",
+        "DAOToken": "0xA1f8A26E77332E751D63573da5D0e02ca9985EB1",
+        "Reputation": "0x1DF86450e1aCeb6fcD874eAcF1720DDe94bf806e",
+        "Controller": "0x999ca6588B5E562D18EA78dFA59E836Fd8F870C7",
         "Schemes": [
           {
             "name": "FireStarter",
             "alias": "ProjectFunding",
-            "address": "0x73530F673B829B58CfFeb23d4809a4179f60367B",
+            "address": "0xAF541Df70B2E5Bb8b94Bf3463763169d5967e765",
             "arcVersion": "0.0.1-rc.37"
           }
         ],
