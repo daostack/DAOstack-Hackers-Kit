@@ -4,8 +4,10 @@
   "description": "",
   "scripts": {
     "compile": "truffle compile",
-    "ganache": "docker-compose up -d",
-    "migrate": "node migrations/deployDao.js"
+    "ganache": "npm explore @daostack/migration -- npm run ganache",
+    "ganache:docker": "docker-compose up -d",
+    "migrate": "node migrations/deployDao.js",
+    "stop": "docker-compose down"
   },
   "author": "",
   "license": "YOUR_LICENSE",
