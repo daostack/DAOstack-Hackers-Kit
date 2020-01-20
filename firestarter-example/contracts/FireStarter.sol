@@ -1,7 +1,6 @@
 pragma solidity ^0.5.0;
 
 import "./IFireStarter.sol";
-import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./VotingMachineCallback.sol";
 
