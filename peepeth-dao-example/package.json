@@ -2,10 +2,6 @@
   "name": "peepdao",
   "version": "1.0.0",
   "description": "DAO for peeping on Peepeth",
-  "private": true,
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "compile": "truffle compile",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
