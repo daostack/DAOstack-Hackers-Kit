@@ -1,0 +1,12 @@
+{
+  "packages": [
+    "daico",
+    "dutchx-bootstrap",
+    "firestarter-example",
+    "peepeth-dao-example",
+    "peepeth-dao-example/peepeth-app",
+    "starter-template",
+    "starter-template/starter-app"
+  ],
+  "version": "0.0.0"
+}
