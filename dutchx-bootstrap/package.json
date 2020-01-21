@@ -24,11 +24,11 @@
   "author": "Ben Kaufman",
   "license": "ISC",
   "dependencies": {
-    "@daostack/arc": "0.0.1-rc.23",
-    "@daostack/migration": "0.0.1-rc.23-v2",
+    "@daostack/arc": "0.0.1-rc.37",
+    "@daostack/infra": "0.0.1-rc.15",
+    "@daostack/migration": "0.0.1-rc.37-v3",
     "@gnosis.pm/dx-contracts": "^2.0.0",
-    "express": "^4.16.4",
-    "truffle": "^4.1.14"
+    "truffle": "5.1.9"
   },
   "devDependencies": {
     "webpack": "^4.39.3",
