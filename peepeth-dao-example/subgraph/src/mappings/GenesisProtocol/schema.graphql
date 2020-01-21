@@ -1,0 +1,74 @@
+type GenesisProtocolProposal @entity {
+	id: ID!
+	proposalId: Bytes!
+	submittedTime: BigInt!
+	proposer: Bytes!
+	daoAvatarAddress: Bytes!
+	numOfChoices: BigInt
+	executionState: Int
+	state: Int
+	decision: BigInt
+	executionTime: BigInt
+	totalReputation: BigInt
+	paramsHash: Bytes!
+	address: Bytes!
+}
+
+type GenesisProtocolVote @entity {
+	id: ID!
+	avatarAddress: Bytes!
+	voterAddress: Bytes!
+	reputation: BigInt!
+	voteOption: BigInt!
+	proposalId: GenesisProtocolProposal!
+}
+
+type GenesisProtocolStake @entity {
+	id: ID!
+	avatarAddress: Bytes!
+	stakerAddress: Bytes!
+	prediction: BigInt!
+	stakeAmount: BigInt!
+	proposalId: GenesisProtocolProposal!
+}
+
+type GenesisProtocolRedemption @entity {
+	id: ID!
+	rewardId: GenesisProtocolReward!
+	proposalId: ID!
+	redeemer: Bytes!
+}
+
+type GenesisProtocolReward @entity {
+	id: ID!
+	type: GenesisProtocolRewardType
+	amount: BigInt!
+}
+
+type GenesisProtocolExecuteProposal @entity {
+	id: ID!
+	txHash: Bytes!
+	contract: Bytes!
+	proposalId: Bytes!
+	organization: Bytes!
+	decision: BigInt!
+	totalReputation: BigInt!
+}
+
+type GenesisProtocolGPExecuteProposal @entity {
+	id: ID!
+	txHash: Bytes!
+	contract: Bytes!
+	proposalId: Bytes!
+	executionState: Int
+}
+
+enum GenesisProtocolRewardType @entity {
+	beneficiaryEth
+	beneficiaryNativeToken
+	beneficiaryReputation
+	beneficiaryExternalToken
+	gpRep
+	gpGen
+	gpBounty
+}

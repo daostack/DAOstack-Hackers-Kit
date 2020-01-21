@@ -1,0 +1,22 @@
+abis:
+  - Competition
+  - ContributionRewardExt
+entities:
+  - ContributionRewardRedeemReputation
+  - ContributionRewardRedeemNativeToken
+  - ContributionRewardRedeemExternalToken
+  - ContributionRewardRedeemEther
+  - ContributionRewardProposalExecuted
+  - ContributionRewardNewContributionProposal
+  - ContributionRewardProposal
+eventHandlers:
+  - event: NewCompetitionProposal(indexed bytes32,uint256,uint256[],uint256,uint256,uint256,uint256,uint256,address)
+    handler: handleNewCompetitionProposal
+  - event: Redeem(indexed bytes32,indexed uint256,uint256)
+    handler: handleRedeem
+  - event: NewSuggestion(indexed bytes32,indexed uint256,string,indexed address)
+    handler: handleNewSuggestion
+  - event: NewVote(indexed bytes32,indexed uint256,indexed address,uint256)
+    handler: handleNewVote
+  - event: SnapshotBlock(indexed bytes32,uint256)
+    handler: handleSnapshotBlock

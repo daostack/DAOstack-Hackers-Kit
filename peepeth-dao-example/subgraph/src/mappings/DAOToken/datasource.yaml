@@ -1,0 +1,13 @@
+abis:
+  - DAOToken
+entities:
+  - TokenHolder
+  - TokenTransfer
+  - TokenApproval
+eventHandlers:
+  - event: Approval(indexed address,indexed address,uint256)
+    handler: handleApproval
+  - event: Transfer(indexed address,indexed address,uint256)
+    handler: handleTransfer
+  - event: OwnershipTransferred(indexed address,indexed address)
+    handler: handleOwnershipTransferred
