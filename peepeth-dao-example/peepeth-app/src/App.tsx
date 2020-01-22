@@ -42,7 +42,7 @@ const App: React.FC = () => {
           The DAO address is: {dao.id}
           
           <CreateProposal dao={dao}/>
-          <DAOproposals dao={dao}/>
+          <DAOproposals dao={dao} arc={arc}/>
         </main>
       </Container>
     </div>

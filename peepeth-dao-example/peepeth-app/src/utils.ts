@@ -1,12 +1,14 @@
 import {
   Arc,
   DAO,
+  Proposal,
   IProposalOutcome,
 } from "@daostack/client";
 
 import { ethers as eth } from 'ethers';
 import PeepScheme from './contracts/PeepScheme.json'
 import IPFS from 'ipfs-mini';
+import gql from 'graphql-tag';
 
 const settings = {
   dev: {
@@ -58,21 +60,50 @@ const createProposal = async (dao: DAO, peepHash: string) => {
   }
 }
 
-const getProposasl = async () => {
+export const getProposals = async (dao: DAO) => {
 
-    /*
-    tx.wait().then((receipt: any) => {
-      console.log(receipt);
+  let query = gql`query{
+    genesisProtocolProposals (
+      where: {
+        daoAvatarAddress: "${dao.id}"
+      }
+    ){
+      id
+    }
+  }`
+
+  let result = await dao.context.sendQuery(query);
+  let proposalsWithData = result.data.genesisProtocolProposals.map(async (proposal: Proposal) => {
+    let blockChainData = await getPeepProposalData(dao, proposal.id);
+    let ipfsData = await getPeepData(blockChainData[1]);
+    return { id: proposal.id, blockChainData, ipfsData };
+  });
+  //console.log(proposalsWithData);
+  return Promise.all(proposalsWithData);
+}
+
+export const getPeepProposalData = async (dao: DAO, proposalId: string) => {
+  const PeepSchemeContract = await getPeepSchemeContractWithSigner(dao);
+  return PeepSchemeContract.organizationsProposals(dao.id, proposalId);
+}
+
+export const getPeepData = async (peepHash: string) => {
+
+  return new Promise((resolve, reject) => {
+    ipfs.catJSON(peepHash, (err: any, result: any) => {
+      if (err) {
+        
+        reject(err);
+      } else {
+        resolve(result);
+      }
     });
-    PeepSchemeContract.on("NewPeepProposal", (_avatar, _proposalId, _intVoteInterface, _proposer, _peepHash, _reputationChange, event) => {
-      console.log(_proposalId);
-      console.log(event);
-    });
-     */
+  });
+
+
 }
 
 export const proposeNewPeep = async (proposalData: any, dao: DAO) => {
-  console.log(proposalData);
 
   if (proposalData) {
     ipfs.addJSON(
@@ -92,9 +123,17 @@ export const proposeNewPeep = async (proposalData: any, dao: DAO) => {
           // Send transaction to create the a proposal to the Peep Scheme
           createProposal(dao, peepHash);
 
-          //ipfs.cat(peepHash, (err: any, result: string) => console.log(err, result))
         }
       }
     );
   }
 }
+    /*
+    tx.wait().then((receipt: any) => {
+      console.log(receipt);
+    });
+    PeepSchemeContract.on("NewPeepProposal", (_avatar, _proposalId, _intVoteInterface, _proposer, _peepHash, _reputationChange, event) => {
+      console.log(_proposalId);
+      console.log(event);
+    });
+     */

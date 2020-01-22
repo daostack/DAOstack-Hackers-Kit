@@ -9,24 +9,39 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import {
+  getProposals,
+  getPeepData,
+} from '../utils';
 
 export const DAOproposals = (props: any) => {
   const [proposals, setProposals] = useState();
+  //const [proposalData, 
 
   useEffect(() => {
     (async () => {
-      props.dao.proposals().subscribe(
-        async (proposals: Proposal[]) => {
-          await setProposals(proposals);
-        }
-      )})();
+      //let proposals = await getProposals(props.dao)
+      setProposals(await getProposals(props.dao));
+      })();
   }, [props.dao]);
 
-  const result = proposals && proposals.length > 0 ? (
-    proposals.map((proposal: Proposal) => {
-      console.log("Here");
-      return (<li key={proposal.id}> proposal.id </li>)
+  /*
+  useEffect(() => {
+    (async () => {
+    if (proposals) {
+      for(let p of proposals) {
+        console.log(await getPeepData(p.data[1]));
+      }
+    }
+    })();
+  }, [proposals]);
+*/
+
+  console.log(proposals);
+  return proposals && proposals.length > 0 ? (
+    proposals.map((proposal: any) => {
+      console.log(proposal);
+      return (<li key={proposal.id}> {proposal.blockChainData[1]} </li>)
     })
   ) : (<Typography> Loading </Typography>);
-  return result;
 };
