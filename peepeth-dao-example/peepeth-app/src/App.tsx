@@ -3,11 +3,20 @@ import logo from './logo.svg';
 import './App.css';
 import { ethers as eth } from 'ethers';
 import {
-  initializeArc
+  initializeArc,
+  proposeNewPeep,
 } from './utils';
+import {
+  Button,
+  CssBaseline,
+  Container
+} from '@material-ui/core';
+import {DAOproposals} from './components/DAOProposals';
+import { CreateProposal } from './components/CreateProposal';
 
 const App: React.FC = () => {
   const [arc, setArc] = useState();
+  const [dao, setDao] = useState();
 
   useEffect(() => {
     (async () => {
@@ -15,23 +24,27 @@ const App: React.FC = () => {
     })();
   }, []);
 
-  console.log(arc);
+  useEffect(() => {
+    (async () => {
+      if (arc) {
+        setDao((await arc.daos({where: {name: 'PeepDAO'}}).first())[0]);
+      }
+    })();
+  }, [arc]);
+
+  console.log(dao);
+  if (!dao) return <div> Loading </div>
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CssBaseline />
+      <Container maxWidth="lg">
+        <main className="App-header">
+          The DAO address is: {dao.id}
+          
+          <CreateProposal dao={dao}/>
+          <DAOproposals dao={dao}/>
+        </main>
+      </Container>
     </div>
   );
 }

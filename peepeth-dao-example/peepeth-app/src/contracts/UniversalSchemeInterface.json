@@ -1,0 +1,292 @@
+{
+  "contractName": "UniversalSchemeInterface",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.13+commit.5b0b510c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"@daostack/arc/contracts/universalSchemes/UniversalSchemeInterface.sol\":\"UniversalSchemeInterface\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@daostack/arc/contracts/controller/Avatar.sol\":{\"keccak256\":\"0xdc75e96aca5c6aeaa3bbf97d2a3a1d305c1c168b74f1d5a6b151648e1b71086f\",\"urls\":[\"bzz-raw://425e5a7e0d27fe14af052e826a1757135afc30cf6941986dcd2c336e34c5d24c\",\"dweb:/ipfs/QmR9Jn4ZNx8LNyzSRWhdNh7rG8pccSHLX3iqdSk26VYw3R\"]},\"@daostack/arc/contracts/controller/DAOToken.sol\":{\"keccak256\":\"0x567235b3ec3884704725a775559a2c60b46c56d144072929035dbadeeb65e884\",\"urls\":[\"bzz-raw://8944f3ffa3f1fbc1aa6bfddf5f055a15bec79f51dcca655d5a8698aa9dfd38d4\",\"dweb:/ipfs/QmUZWJVgaXkMVMGiXAHkiETCHGptt6wCRLUiaGrzxk7Lv4\"]},\"@daostack/arc/contracts/libs/SafeERC20.sol\":{\"keccak256\":\"0x1e91e541a9e835c05372a53eb7879e05bc47f6355602d6d3bf4bbdd8f660fc95\",\"urls\":[\"bzz-raw://ba9d1c3e68e38adc57e3097d191e7328816839ca918aff208338fb447b0792d8\",\"dweb:/ipfs/QmWisfDaqBSoYjg2U93VsZL43Lba4Ko7mbe6YS2wZpgvDR\"]},\"@daostack/arc/contracts/universalSchemes/UniversalSchemeInterface.sol\":{\"keccak256\":\"0x6a7c12fc1106653ff0d61981f34a5466da4e8b5acd2f8f6128144a6177f85267\",\"urls\":[\"bzz-raw://b7b33ed8cee7197e763f6a04dd82761cf416e55e1494e2b56831d503c022a1f0\",\"dweb:/ipfs/QmfMahtFUXMw3s1mt3nYaUGqLbYru2EmumsVJ3WudmnSWX\"]},\"@daostack/infra/contracts/Reputation.sol\":{\"keccak256\":\"0xec21bc058552cae458e68fa91aad7219d11be2bc9710183696d828065f03d6ea\",\"urls\":[\"bzz-raw://a3262e0088c924072428cfe69d78c06e93cec3caeee410af8ab36eee2c8f8d66\",\"dweb:/ipfs/QmNhcQd2pxWXYJrMz8kVsZUfFVYUSgKjZCUcFseyBSjZiq\"]},\"openzeppelin-solidity/contracts/GSN/Context.sol\":{\"keccak256\":\"0x90a3995645af7562d84b9d69363ffa5ae7217714ab61e951bf7bc450f40e4061\",\"urls\":[\"bzz-raw://216ef9d6b614db4eb46970b4e84903f2534a45572dd30a79f0041f1a5830f436\",\"dweb:/ipfs/QmNPrJ4MWKUAWzKXpUqeyKRUfosaoANZAqXgvepdrCwZAG\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzz-raw://31113152e1ddb78fe7a4197f247591ca894e93f916867beb708d8e747b6cc74f\",\"dweb:/ipfs/QmbZaJyXdpsYGykVhHH9qpVGQg9DGCxE2QufbCUy3daTgq\"]},\"openzeppelin-solidity/contracts/ownership/Ownable.sol\":{\"keccak256\":\"0xecd8ab29d9a5771c3964d0cd1788c4a5098a0081b20fb275da850a22b1c59806\",\"urls\":[\"bzz-raw://696a75bc2c55407ce8251ccc7d19ecb1b7b2be1796a160a6524312babcc7e3d4\",\"dweb:/ipfs/QmQViKEp3y99h9uhRssE29TmjBKRnFMaoz3eJZ4eggggg2\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x65a4078c03875c25413a068ce9cfdd7e68a90f8786612d1189c89341e6e3b802\",\"urls\":[\"bzz-raw://45c0d95495b944fbb1aa09d900b0ab530903a432125ab8fddfa05064a7988991\",\"dweb:/ipfs/Qma2VeknkKA1THeubGzshWFk44BktXkXP1UKp9Un2uDSsu\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol\":{\"keccak256\":\"0x9b94356691f3cbf90a5d83ae3fdf6a5a662bb004d2bd8b034160d60221807e64\",\"urls\":[\"bzz-raw://14a9d33db455302b8bb9fdb28998efefbe5a1cb41b29e31391609f646b2ab351\",\"dweb:/ipfs/Qmd4wFr6GEMZnnxgXeq3gmp7cs8tqDuHp3TVNhCbjnux2V\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzz-raw://59fd025151435da35faa8093a5c7a17de02de9d08ad27275c5cdf05050820d91\",\"dweb:/ipfs/QmQMvwEcPhoRXzbXyrdoeRtvLoifUW9Qh7Luho7bmUPRkc\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0x70df50e240407aa50915ad14f61b1a901fa335b37de20955b99ed647be756af0\",\"urls\":[\"bzz-raw://9404711f3206610c08ea97fa52c7b6b4d2e9d536e96fc4b7210aa7e24f796c36\",\"dweb:/ipfs/QmZDzpVzjoap13SuPEq5pVCrmdjoKVZnTsQPLKXAbynTTW\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity 0.5.13;\n\nimport \"../controller/Avatar.sol\";\n\ncontract UniversalSchemeInterface {\n\n    function getParametersFromController(Avatar _avatar) internal view returns(bytes32);\n    \n}\n",
+  "sourcePath": "@daostack/arc/contracts/universalSchemes/UniversalSchemeInterface.sol",
+  "ast": {
+    "absolutePath": "@daostack/arc/contracts/universalSchemes/UniversalSchemeInterface.sol",
+    "exportedSymbols": {
+      "UniversalSchemeInterface": [
+        2564
+      ]
+    },
+    "id": 2565,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2555,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:9"
+      },
+      {
+        "absolutePath": "@daostack/arc/contracts/controller/Avatar.sol",
+        "file": "../controller/Avatar.sol",
+        "id": 2556,
+        "nodeType": "ImportDirective",
+        "scope": 2565,
+        "sourceUnit": 717,
+        "src": "25:34:9",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2564,
+        "linearizedBaseContracts": [
+          2564
+        ],
+        "name": "UniversalSchemeInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2563,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getParametersFromController",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2559,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2558,
+                  "name": "_avatar",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2563,
+                  "src": "139:14:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Avatar_$716",
+                    "typeString": "contract Avatar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2557,
+                    "name": "Avatar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 716,
+                    "src": "139:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Avatar_$716",
+                      "typeString": "contract Avatar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "138:16:9"
+            },
+            "returnParameters": {
+              "id": 2562,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2561,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2563,
+                  "src": "177:7:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2560,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "177:7:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "176:9:9"
+            },
+            "scope": 2564,
+            "src": "102:84:9",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 2565,
+        "src": "61:132:9"
+      }
+    ],
+    "src": "0:194:9"
+  },
+  "legacyAST": {
+    "absolutePath": "@daostack/arc/contracts/universalSchemes/UniversalSchemeInterface.sol",
+    "exportedSymbols": {
+      "UniversalSchemeInterface": [
+        2564
+      ]
+    },
+    "id": 2565,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2555,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:9"
+      },
+      {
+        "absolutePath": "@daostack/arc/contracts/controller/Avatar.sol",
+        "file": "../controller/Avatar.sol",
+        "id": 2556,
+        "nodeType": "ImportDirective",
+        "scope": 2565,
+        "sourceUnit": 717,
+        "src": "25:34:9",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2564,
+        "linearizedBaseContracts": [
+          2564
+        ],
+        "name": "UniversalSchemeInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 2563,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getParametersFromController",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2559,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2558,
+                  "name": "_avatar",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2563,
+                  "src": "139:14:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Avatar_$716",
+                    "typeString": "contract Avatar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2557,
+                    "name": "Avatar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 716,
+                    "src": "139:6:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Avatar_$716",
+                      "typeString": "contract Avatar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "138:16:9"
+            },
+            "returnParameters": {
+              "id": 2562,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2561,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2563,
+                  "src": "177:7:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2560,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "177:7:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "176:9:9"
+            },
+            "scope": 2564,
+            "src": "102:84:9",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 2565,
+        "src": "61:132:9"
+      }
+    ],
+    "src": "0:194:9"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.13+commit.5b0b510c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.21",
+  "updatedAt": "2020-01-20T12:28:04.535Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
