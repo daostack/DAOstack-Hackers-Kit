@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Button,
+  Paper,
   TextField,
 } from '@material-ui/core';
 import {
@@ -16,18 +17,19 @@ export const CreateProposal = (props: any) => {
   };
 
   return (
-    <form>
-      <TextField
-        required
-        id="peepContent"
-        label="Required"
-        onChange={handleChange}
-        defaultValue="Hello World"
-      />
-      <Button variant="contained" onClick={() => proposeNewPeep(proposalData, props.dao)}>
-        Propose New peep
-      </Button>
-            
-    </form>
+    <Paper>
+      <form>
+        <TextField
+          required
+          id="peepContent"
+          label="Required"
+          onChange={handleChange}
+          defaultValue="Hello World"
+        />
+        <Button variant="contained" onClick={() => proposeNewPeep(proposalData, props.dao)}>
+          Propose New peep
+        </Button>
+      </form>
+    </Paper>
   )
 }

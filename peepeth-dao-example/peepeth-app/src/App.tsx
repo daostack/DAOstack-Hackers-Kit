@@ -9,7 +9,8 @@ import {
 import {
   Button,
   CssBaseline,
-  Container
+  Container,
+  Typography,
 } from '@material-ui/core';
 import {DAOproposals} from './components/DAOProposals';
 import { CreateProposal } from './components/CreateProposal';
@@ -32,16 +33,22 @@ const App: React.FC = () => {
     })();
   }, [arc]);
 
-  console.log(dao);
   if (!dao) return <div> Loading </div>
   return (
     <div className="App">
       <CssBaseline />
       <Container maxWidth="lg">
         <main className="App-header">
-          The DAO address is: {dao.id}
-          
+          <Typography variant={'h4'} align={'left'}>
+            The DAO address is: {dao.id}
+          </Typography>
+          <Typography variant={'h6'}>
+            Create New Proposal to Peep
+          </Typography>
           <CreateProposal dao={dao}/>
+          <Typography variant={'h6'}>
+            All Peep Proposals in the DAO
+          </Typography>
           <DAOproposals dao={dao} arc={arc}/>
         </main>
       </Container>

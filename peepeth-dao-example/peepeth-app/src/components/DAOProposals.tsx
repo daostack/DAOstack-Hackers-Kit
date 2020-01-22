@@ -6,7 +6,14 @@ import {
 } from "@daostack/client";
 
 import {
+  Paper,
   Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from '@material-ui/core';
 
 import {
@@ -20,28 +27,46 @@ export const DAOproposals = (props: any) => {
 
   useEffect(() => {
     (async () => {
-      //let proposals = await getProposals(props.dao)
       setProposals(await getProposals(props.dao));
       })();
   }, [props.dao]);
 
-  /*
-  useEffect(() => {
-    (async () => {
-    if (proposals) {
-      for(let p of proposals) {
-        console.log(await getPeepData(p.data[1]));
-      }
-    }
-    })();
-  }, [proposals]);
-*/
-
-  console.log(proposals);
   return proposals && proposals.length > 0 ? (
-    proposals.map((proposal: any) => {
-      console.log(proposal);
-      return (<li key={proposal.id}> {proposal.blockChainData[1]} </li>)
-    })
+    <TableContainer component={Paper}>
+      <Table size="small">
+        <TableHead>
+          <TableCell size="small">
+            Proposal Id
+          </TableCell>
+          <TableCell>
+            Peep Hash
+          </TableCell>
+          <TableCell>
+            Proposer
+          </TableCell>
+          <TableCell>
+            Peep Content
+          </TableCell>
+        </TableHead>
+        <TableBody>
+          {proposals.map((proposal: any) => (
+            <TableRow>
+              <TableCell>
+                {proposal.blockChainData[0]}
+              </TableCell>
+              <TableCell>
+                {proposal.blockChainData[1]}
+              </TableCell>
+              <TableCell>
+                {proposal.blockChainData[0]}
+              </TableCell>
+              <TableCell>
+                {proposal.ipfsData.content}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   ) : (<Typography> Loading </Typography>);
 };
