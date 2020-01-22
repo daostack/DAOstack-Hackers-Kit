@@ -60,7 +60,7 @@ const createProposal = async (dao: DAO, peepHash: string) => {
   }
 }
 
-export const getProposals = async (dao: DAO) => {
+export const getProposalObservable = async (dao: DAO) => {
 
   let query = gql`query{
     genesisProtocolProposals (
@@ -72,9 +72,15 @@ export const getProposals = async (dao: DAO) => {
     }
   }`
 
-  let result = await dao.context.sendQuery(query);
-  let proposalsWithData = result.data.genesisProtocolProposals.map(async (proposal: Proposal) => {
+  let result = await dao.context.getObservableList(query, (r:any) => new Proposal(r.id, dao.context));
+  return result;
+}
+
+export const getProposalsData = async (dao: DAO, proposals: Proposal[]) => {
+
+  let proposalsWithData = proposals.map(async (proposal: Proposal) => {
     let blockChainData = await getPeepProposalData(dao, proposal.id);
+    console.log(blockChainData);
     let ipfsData = await getPeepData(blockChainData[1]);
     return { id: proposal.id, blockChainData, ipfsData };
   });
@@ -82,17 +88,17 @@ export const getProposals = async (dao: DAO) => {
   return Promise.all(proposalsWithData);
 }
 
-export const getPeepProposalData = async (dao: DAO, proposalId: string) => {
+const getPeepProposalData = async (dao: DAO, proposalId: string) => {
   const PeepSchemeContract = await getPeepSchemeContractWithSigner(dao);
   return PeepSchemeContract.organizationsProposals(dao.id, proposalId);
 }
 
-export const getPeepData = async (peepHash: string) => {
+const getPeepData = async (peepHash: string) => {
 
+  if (!peepHash) return;
   return new Promise((resolve, reject) => {
     ipfs.catJSON(peepHash, (err: any, result: any) => {
       if (err) {
-        
         reject(err);
       } else {
         resolve(result);
@@ -128,12 +134,3 @@ export const proposeNewPeep = async (proposalData: any, dao: DAO) => {
     );
   }
 }
-    /*
-    tx.wait().then((receipt: any) => {
-      console.log(receipt);
-    });
-    PeepSchemeContract.on("NewPeepProposal", (_avatar, _proposalId, _intVoteInterface, _proposer, _peepHash, _reputationChange, event) => {
-      console.log(_proposalId);
-      console.log(event);
-    });
-     */

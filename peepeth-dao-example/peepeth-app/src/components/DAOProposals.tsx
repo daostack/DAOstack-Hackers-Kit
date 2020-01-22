@@ -17,21 +17,33 @@ import {
 } from '@material-ui/core';
 
 import {
-  getProposals,
-  getPeepData,
+  getProposalsData,
+  getProposalObservable,
 } from '../utils';
 
 export const DAOproposals = (props: any) => {
   const [proposals, setProposals] = useState();
+  const [proposalsData, setProposalsData] = useState();
   //const [proposalData, 
 
   useEffect(() => {
     (async () => {
-      setProposals(await getProposals(props.dao));
-      })();
+      let o = await getProposalObservable(props.dao);
+      o.subscribe((r: any) => setProposals(r));
+    })();
   }, [props.dao]);
 
-  return proposals && proposals.length > 0 ? (
+  useEffect(() => {
+    (async () => {
+      if (proposals) {
+        let data = await getProposalsData(props.dao, proposals);
+        setProposalsData(data);
+      }
+      //setProposals(await getProposalObservable(props.dao));
+    })();
+  }, [proposals]);
+
+  return proposalsData && proposalsData.length > 0 ? (
     <TableContainer component={Paper}>
       <Table size="small">
         <TableHead>
@@ -49,7 +61,7 @@ export const DAOproposals = (props: any) => {
           </TableCell>
         </TableHead>
         <TableBody>
-          {proposals.map((proposal: any) => (
+          {proposalsData.map((proposal: any) => (
             <TableRow>
               <TableCell>
                 {proposal.blockChainData[0]}
@@ -61,7 +73,7 @@ export const DAOproposals = (props: any) => {
                 {proposal.blockChainData[0]}
               </TableCell>
               <TableCell>
-                {proposal.ipfsData.content}
+                {proposal.ipfsData ? proposal.ipfsData.content : 'Loading'}
               </TableCell>
             </TableRow>
           ))}
