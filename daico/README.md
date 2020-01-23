@@ -1,6 +1,6 @@
 # DAICO - Responsible Decentralized Fund Raising
 
-<ADD-DESCRIPTION>
+This project is and example implementation for launching an ICO with a DAO.
 
 **Notice: the code here was not profesionally audited, please use the code with caution and don't use with real money (unless you are willing to take the assosiated risks)**
 
@@ -16,10 +16,10 @@ npm install -g nps
 npm install -g npx
 ```
 
-- _Note: to configure different founder accounts or any other change to the DAO, go to `migrations/2_deploy_dao.js` and follow the instructions in the comments._
+### Run on a local testnet (without docker):
 
-### Run on a local testnet:
-
+Copy the `example.env` from
+Uncomment the Base migration
 ```
 npm run ganache
 ```
