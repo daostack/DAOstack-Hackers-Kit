@@ -1,27 +1,38 @@
 {
-  "name": "PeepDAO",
-  "Avatar": "0xfa5966293008f68A8D9066229b88660f63Db033D",
-  "DAOToken": "0xA1f8A26E77332E751D63573da5D0e02ca9985EB1",
-  "Reputation": "0x1DF86450e1aCeb6fcD874eAcF1720DDe94bf806e",
-  "Controller": "0x999ca6588B5E562D18EA78dFA59E836Fd8F870C7",
+  "name": "Verdant Stick figures",
+  "Avatar": "0x66301c44C22E0AEcd8ee8e6073A8300dC138A7af",
+  "DAOToken": "0xa6b58AE81c37b45BbeAC4C86866fA4b48e378139",
+  "Reputation": "0xB9e9DfAcb27f42357215aC3942810786C0cb75e2",
+  "Controller": "0xf577703d169b02e6807f80a4fCe029f7F91124CB",
   "Schemes": [
     {
-      "name": "PeepScheme",
-      "alias": "PeepethScheme",
-      "address": "0x8B1226fCfc51bf2344F2F99C6A5aD984F5176DdC",
+      "name": "GenericScheme",
+      "alias": "GenericSchemeAlias",
+      "address": "0xCE792fA3A9cd660fFD1be077CB1358A08Cf9106B",
       "arcVersion": "0.0.1-rc.37"
+    },
+    {
+      "name": "ContributionRewardExt",
+      "alias": "ContributionRewardExt",
+      "address": "0xA10f1c26d7D4BCB1a93F84652177D2E2b320378B",
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "StandAloneContracts": [
     {
-      "name": "Peepeth",
-      "address": "0xAF541Df70B2E5Bb8b94Bf3463763169d5967e765",
+      "name": "Wallet",
+      "address": "0x0E1598278e34793C83A4B1989d410DD0D7652b92",
       "arcVersion": "0.0.1-rc.37"
     },
     {
-      "name": "PeepScheme",
-      "address": "0x8B1226fCfc51bf2344F2F99C6A5aD984F5176DdC",
-      "arcVersion": "0.0.1-rc.37"
+      "name": "ContributionRewardExt",
+      "address": "0xA10f1c26d7D4BCB1a93F84652177D2E2b320378B",
+      "arcVersion": "0.0.1-rc.38"
+    },
+    {
+      "name": "Competition",
+      "address": "0xD65d9Cb0fC54c95Ed021D74cB5164b5B30bB4B86",
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "arcVersion": "0.0.1-rc.37"

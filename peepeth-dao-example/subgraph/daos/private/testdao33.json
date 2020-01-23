@@ -1,5 +1,5 @@
 {
-  "name": "Insolent Opera singer",
+  "name": "Sagacious Moldmaker",
   "Avatar": "0x2268317B403ADEc49Fde9241a977335aba406A55",
   "DAOToken": "0x78B7beA9fB68616E4520DC2F522833616f6413d5",
   "Reputation": "0x0819C56Db86FbC6Cb3e0ef63F7DF0c4d5e60d915",
@@ -15,7 +15,7 @@
       "name": "ContributionRewardExt",
       "alias": "ContributionRewardExt",
       "address": "0xFa117aD3aEC87df869C456d91f6731950Cfef6ee",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "StandAloneContracts": [
@@ -27,12 +27,12 @@
     {
       "name": "ContributionRewardExt",
       "address": "0xFa117aD3aEC87df869C456d91f6731950Cfef6ee",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     },
     {
       "name": "Competition",
       "address": "0x017383Ddb609fdbf85B80910A34936a733DA0913",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "arcVersion": "0.0.1-rc.33"

@@ -1,0 +1,17 @@
+{
+  "name": "DAICO TEMP",
+  "Avatar": "0xB91b3Cf9fDC63A0c2B736C4DB7E16bCD1e205002",
+  "DAOToken": "0xf2b44820D0097dA8eFA71aF519AFF92E4eD7E4D1",
+  "Reputation": "0x037e5fD108c12D4149594E6bE2Ea0884E7f4Ec95",
+  "Controller": "0x79EFDf097F674207f50CB4Ae5D0077B293EEa986",
+  "Schemes": [
+    {
+      "name": "ICOScheme",
+      "alias": "PeepethScheme",
+      "address": "0x6B3b771f791406CF8A0538469a777e49ec0f931E",
+      "arcVersion": "0.0.1-rc.38"
+    }
+  ],
+  "StandAloneContracts": [],
+  "arcVersion": "0.0.1-rc.38"
+}

@@ -1,5 +1,5 @@
 {
-  "name": "Incendiary Panel beater",
+  "name": "Voracious Ninja",
   "Avatar": "0x98CcB5051fD767e2E89567bCCCA4Efc532250544",
   "DAOToken": "0x30dB4905b474aff3e1EAfc60394ece85dC524A92",
   "Reputation": "0x4992595a747d772bF291f64112735064BFc8878f",
@@ -15,7 +15,7 @@
       "name": "ContributionRewardExt",
       "alias": "ContributionRewardExt",
       "address": "0x5023deB3F76D484102c9650933541a90B528CBFF",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "StandAloneContracts": [
@@ -27,12 +27,12 @@
     {
       "name": "ContributionRewardExt",
       "address": "0x5023deB3F76D484102c9650933541a90B528CBFF",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     },
     {
       "name": "Competition",
       "address": "0xCb7126eC611fab65A1Fbd1253fd947634A4623Fa",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "arcVersion": "0.0.1-rc.32"

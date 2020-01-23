@@ -1,0 +1,45 @@
+{
+    "name": "Noxious Glitter",
+    "Avatar": "0x4cDfb8aD27da8c24c0f25eEc3caF32d4Eaf63AeD",
+    "DAOToken": "0x7a23575676548089fAF16F0e63D5A3d3AAA9fa89",
+    "Reputation": "0xa05B094a4e177E83dAb0eE6a0cE3B2561f5468b9",
+    "Controller": "0x04eC11B90EE3759a6D9361F185FA388391e77548",
+    "Schemes": [
+      {
+        "name": "ReputationFromToken",
+        "alias": "ReputationFromToken",
+        "address": "0x460fc26cA6D931E724Fc423704A8bCb0A6C7E9e5",
+        "arcVersion": "0.0.1-rc.37"
+      },
+      {
+        "name": "ContributionRewardExt",
+        "alias": "ContributionRewardExt",
+        "address": "0xeF58e78c8c0e74d0BE9f69f1f5f61CE1757EC420",
+        "arcVersion": "0.0.1-rc.36"
+      },
+      {
+        "name": "AuthorizedMintRep",
+        "alias": "AuthorizedMintRep",
+        "address": "0x64f096Be1D912725246e781496d19815F0E9D5Da",
+        "arcVersion": "0.0.1-rc.37"
+      }
+    ],
+    "StandAloneContracts": [
+      {
+        "name": "RepAllocation",
+        "address": "0x6105c9e895C7601d5b63ce3EaA65670745Bd72fb",
+        "arcVersion": "0.0.1-rc.37"
+      },
+      {
+        "name": "ContributionRewardExt",
+        "address": "0xeF58e78c8c0e74d0BE9f69f1f5f61CE1757EC420",
+        "arcVersion": "0.0.1-rc.36"
+      },
+      {
+        "name": "Competition",
+        "address": "0x9652C31BFfA8e2235d05Cded3175891BE63884E9",
+        "arcVersion": "0.0.1-rc.36"
+      }
+    ],
+    "arcVersion": "0.0.1-rc.37"
+  }

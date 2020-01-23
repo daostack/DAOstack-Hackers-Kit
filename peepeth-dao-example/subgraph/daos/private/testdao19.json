@@ -1,5 +1,5 @@
 {
-  "name": "Salubrious Model",
+  "name": "Dilatory Director",
   "Avatar": "0xf88E4C158298323a85dD7678eD60DBfF6DA71007",
   "DAOToken": "0xa09Cd74C747bf9DDB9154B1C75e271Dd12E45224",
   "Reputation": "0x5E06A0d7BA9728E3B3140857B26fFD6626D66793",
@@ -9,7 +9,7 @@
       "name": "ContributionRewardExt",
       "alias": "ContributionRewardExt",
       "address": "0x405fC0EE23C7fcd0a41A864505Fe8c969ca3eF6A",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "StandAloneContracts": [
@@ -21,12 +21,12 @@
     {
       "name": "ContributionRewardExt",
       "address": "0x405fC0EE23C7fcd0a41A864505Fe8c969ca3eF6A",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     },
     {
       "name": "Competition",
       "address": "0x4A1D2A5060C782049Ef966d9412f1239E95183b7",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "arcVersion": "0.0.1-rc.19"

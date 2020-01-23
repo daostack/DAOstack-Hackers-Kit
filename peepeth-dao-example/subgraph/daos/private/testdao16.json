@@ -1,5 +1,5 @@
 {
-  "name": "Corpulent Musician",
+  "name": "Intransigent Chair",
   "Avatar": "0xE7A2C59e134ee81D4035Ae6DB2254f79308e334f",
   "DAOToken": "0xcDbe8b52A6c60A5f101d4A0F1f049f19a9e1D35F",
   "Reputation": "0x93cdbf39fB9e13BD253CA5819247D52fbabf0F2f",
@@ -9,7 +9,7 @@
       "name": "ContributionRewardExt",
       "alias": "ContributionRewardExt",
       "address": "0xEC5d4F247aF81A843612eb1371CBCfa88b762119",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "StandAloneContracts": [
@@ -21,12 +21,12 @@
     {
       "name": "ContributionRewardExt",
       "address": "0xEC5d4F247aF81A843612eb1371CBCfa88b762119",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     },
     {
       "name": "Competition",
       "address": "0xDDb64fE46a91D46ee29420539FC25FD07c5FEa3E",
-      "arcVersion": "0.0.1-rc.36"
+      "arcVersion": "0.0.1-rc.38"
     }
   ],
   "arcVersion": "0.0.1-rc.16"
