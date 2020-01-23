@@ -30,14 +30,14 @@ contract ICOScheme is Pausable {
     event ReputationRedeemed(address indexed _beneficiary, uint _reputationAmount);
 
 
-    constructor (
+    function initialize (
         Avatar _avatar,
         uint _cap,
         uint _price,
         uint _startBlock,
         uint _endBlock,
         uint _totalRepForDonators
-    ) public
+    ) external
     {
         require(_cap != 0, "cap must be greater than zero");
         avatar = _avatar;
