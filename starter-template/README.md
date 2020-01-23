@@ -10,12 +10,9 @@ You can then go ahead and edit the template to fit your needs.
 
 ## Project Structure:
 
-In this template, we use: `npm`, `truffle` and `webpack`, as well as DAOstack Arc, Client and Subgraph.
-The structure is basically as follows:
-
-- **contracts** - Your custom smart contracts should be located under here. You can use any Arc contract simply by importing it. This is an example import `import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol"`
-- **migrations** - This is a truffle migration scripts folder. You can write Truffle migration script for deploying your DAO or smart contracts and place the script under that folder. We already created a file for you to deploy a new DAO using @daostack/migration library.
-- **starter-app** - This folder is initialized with React App which uses DAOstack client library `@daostack/client` to interact with contracts and the subgraph. These will be your Dapp front-end files. In development environment we have a `webpack` server running which looks for the changes made in `starter-app/src` folder and compiles them into client side JS files. You can can find the starting file `App.js` which you can use for your project.
+- **contracts** - Your custom smart contracts should be located under here. You can use any Arc contract simply by importing it. For example `import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol"`
+- **migrations** - This is migration scripts folder. We are using @daostack/migration package for deploying new DAO, Custom Schemes and any Stand Alone contracts that might be required by the DAO.
+- **starter-app** - This folder is initialized with React App which uses `@daostack/client` library to interact with contracts and the subgraph. These will be your Dapp front-end files. In development environment we have a `webpack` server running which looks for the changes made in `starter-app/src` folder and compiles them into client side JS files. You can can find the starting file `App.js` which you can use for your project.
 - **subgraph** - This is based on graphprotocol and uses mappings defined in `src/mappings` to index the blockchain events and store them in a `postgres` database as Entities described by `graphQl` schema. The `subgraph` deploy script uses output of migrations in `data/migration.json` to get the contract addresses. You can find mappings for the base contracts here and can add more mappings and schema for your custom contracts
 -**data** - This folder contains the `testDaoSpec.json`, which is file used to specify details for the new DAO to be deployed, feel free to change it according to your project needs. It also contains an `example.env`, which has example environment variables set, copy this file to your project root i.e. `starter-template` folder as `.env` and edit the variables accordingly. Lastly, there is a `migration.json` file which will contain the output after running the migration
 
@@ -149,7 +146,26 @@ After downloading the project and docker:
 
 _To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com/daostack/subgraph), [TheGraph Project](https://thegraph.com/docs/quick-start)_
 
-### Deploy and use on test network:
+### Without docker
+
+If you not using the Ganache docker image provided by DAOstack, then you will have to update the `migrations/DeployDAO.js` to migrate the base contract.
+
+  ```
+  npm run ganache
+  npm run migrate
+  ```
+
+Make sure all the base contracts and the DAO contracts are deployed.
+
+Running graph-node without docker would be difficult but, you can refer [Graph Protocol](https://github.com/graphprotocol/graph-node) to see how to.
+
+Once you have graph-node running same subgraph-deploy script would work.
+
+```
+npm run deploy-graph
+```
+
+## Deploy and use on test network:
 
 - Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `starter-template` directory. Use `data/example.env` for reference
 - Update the `.env` file in `starter-template/subgraph` directory. Use `subgraph/example.env` or `subgraph/readme.md` for reference
