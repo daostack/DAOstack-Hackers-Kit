@@ -15,7 +15,7 @@ services:
       - 3000:3000
 
   ganache:
-    image: daostack/test-env-ganache:3.0.23
+    image: 'daostack/migration:0.0.1-rc.38-v2'
     volumes:
       - ./data:/app/data
     ports:
@@ -44,12 +44,13 @@ services:
       GRAPH_GRAPHQL_MAX_FIRST: '1000'
 
   ipfs:
+    image: 'daostack/subgraph-ipfs:ganache-0.0.1-rc.38-v2-0.0.36-10'
     image: starter_template_ipfs:latest
     ports:
       - 5001:5001
 
   postgres:
-    image: starter_template_postgres:latest
+    image: 'daostack/subgraph-postgres:ganache-0.0.1-rc.38-v2-0.0.36-10'
     ports:
       - 5432:5432
     environment:

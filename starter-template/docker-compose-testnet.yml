@@ -33,12 +33,12 @@ services:
       GRAPH_MAX_IPFS_FILE_BYTES: '102400'
 
   ipfs:
-    image: starter_template_ipfs:latest
+    image: 'daostack/subgraph-ipfs:0.0.1-rc.36-v1-3.0.22'
     ports:
       - 5001:5001
 
   postgres:
-    image: starter_template_postgres:latest
+    image: 'daostack/subgraph-postgres:0.0.1-rc.36-v1-3.0.22'
     ports:
       - 5432:5432
     environment:
