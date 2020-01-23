@@ -1,0 +1,45 @@
+# This is for DEVELOPMENT, not production
+
+version: "3"
+services:
+  ganache:
+    image: 'daostack/migration:0.0.1-rc.38-v2'
+    volumes:
+      - ./data:/app/data
+    ports:
+      - 8545:8545
+
+  graph-node:
+    image: 'graphprotocol/graph-node:v0.17.0'
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+      - '8020:8020'
+    links:
+      - ipfs
+      - postgres
+      - ganache
+    environment:
+      postgres_host: 'postgres:5432'
+      postgres_user: postgres
+      postgres_pass: letmein
+      postgres_db: postgres
+      ipfs: 'ipfs:5001'
+      ethereum: 'private:http://ganache:8545'
+      GRAPH_LOG: "graph.log"
+      GRAPH_GRAPHQL_MAX_FIRST: 1000
+      GRAPH_IPFS_TIMEOUT: '2'
+      GRAPH_GRAPHQL_MAX_FIRST: '1000'
+
+  ipfs:
+    image: peepdao_ipfs:latest
+    ports:
+      - 5001:5001
+
+  postgres:
+    image: peepdao_postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: letmein
+      POSTGRES_USER: postgres
