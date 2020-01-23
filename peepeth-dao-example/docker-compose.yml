@@ -3,7 +3,7 @@
 version: "3"
 services:
   ganache:
-    image: 'daostack/migration:0.0.1-rc.37-v3'
+    image: 'daostack/migration:0.0.1-rc.38-v2'
     volumes:
       - ./data:/app/data
     ports:
@@ -32,12 +32,12 @@ services:
       GRAPH_GRAPHQL_MAX_FIRST: '1000'
 
   ipfs:
-    image: peepdao_ipfs:latest
+    image: starter_template_ipfs:latest
     ports:
       - 5001:5001
 
   postgres:
-    image: peepdao_postgres:latest
+    image: starter_template_postgres:latest
     ports:
       - 5432:5432
     environment:

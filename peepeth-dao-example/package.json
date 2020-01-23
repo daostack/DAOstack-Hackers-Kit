@@ -4,14 +4,11 @@
   "description": "DAO for peeping on Peepeth",
   "scripts": {
     "build": "npm run build:ipfs && npm run build:postgres",
-    "build:ipfs": "docker build --file subgraph/docker/ipfs/Dockerfile --tag peepdao_ipfs ./subgraph/docker/ipfs",
-    "build:postgres": "docker build --file subgraph/docker/postgres/Dockerfile --tag peepdao_postgres ./subgraph/docker/postgres",
     "compile": "truffle compile && cp -rf build/contracts peepeth-app/src/",
-    "deploy-graph": "bash ops/deploy-graph.sh",
+    "deploy-graph": "bash ops/hackyDeploy.sh",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate": "rm -rf ./node_modules/web3-providers-ws/node_modules/websocket && node migrations/DeployDao.js",
+    "migrate": "rm -rf ./node_modules/web3-providers-ws/node_modules/websocket && npm ci && node migrations/DeployDao.js",
     "webpack": "npx webpack --config webpack.config.js",
-    "launch-local": "npm ci && npm run ganache:docker && npm run migrate",
     "launch:docker": "npm run build && docker-compose up -d",
     "stop": "docker-compose down"
   },
@@ -27,9 +24,8 @@
   "dependencies": {
     "@daostack/arc": "0.0.1-rc.38",
     "@daostack/infra": "0.0.1-rc.15",
-    "@daostack/migration": "0.0.1-rc.37-v3",
-    "@daostack/subgraph": "0.0.36-8",
-    "@material-ui/core": "^4.8.3",
+    "@daostack/migration": "0.0.1-rc.38-v2",
+    "@daostack/subgraph": "0.0.36-10",
     "dotenv": "^8.0.0",
     "openzeppelin-solidity": "^2.1.3",
     "truffle": "5.1.9"
