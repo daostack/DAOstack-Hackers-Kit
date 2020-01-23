@@ -19,7 +19,7 @@
     "logs:postgres": "docker container logs starter-template_postgres_1 --follow",
     "stop": "docker-compose down",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate": "npm i && node migrations/deployDao.js"
+    "migrate": "rm -rf /Users/shivgupt/Backup/Documents/projects/Github/DAOstack/DAOstack-Hackers-Kit/starter-template/node_modules/websocket && npm i && node migrations/deployDao.js"
   },
   "keywords": [
     "DAO",
