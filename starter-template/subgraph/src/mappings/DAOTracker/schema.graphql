@@ -1,9 +1,0 @@
-type DAOTrackerContract @entity {
-  id: ID!
-  address: Bytes!
-  owner: Bytes!
-}
-
-type BlacklistedDAO @entity {
-  id: ID!
-}

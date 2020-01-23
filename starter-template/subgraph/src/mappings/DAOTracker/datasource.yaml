@@ -1,8 +1,0 @@
-abis:
-  - DAOTracker
-entities:
-  - DAOTrackerContract
-  - BlacklistedDAO
-eventHandlers:
-  - event: TrackDAO(indexed address,address,address,address,address,string)
-    handler: handleTrackDAO

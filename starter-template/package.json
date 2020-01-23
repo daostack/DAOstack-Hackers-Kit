@@ -7,24 +7,19 @@
     "test": "test"
   },
   "scripts": {
-    "build": "npm run build:app && npm run build:ipfs && npm run build:postgres",
-    "build-testnet": "npm run build:app && npm run build:ipfs && npm run build:postgres",
+    "build": "npm run build:app",
     "build:app": "docker build --file starter-app/Dockerfile --tag starter_template_app ./starter-app",
-    "build:ganache": "docker build --file ops/Dockerfile --tag starter_template_ganache .",
-    "build:ipfs": "docker build --file subgraph/docker/ipfs/Dockerfile --tag starter_template_ipfs ./subgraph/docker/ipfs",
-    "build:postgres": "docker build --file subgraph/docker/postgres/Dockerfile --tag starter_template_postgres ./subgraph/docker/postgres",
-    "deploy-graph": "bash ops/deploy-graph.sh",
+    "deploy-graph": "bash ops/hackyDeploy.sh",
     "launch:docker": "npm run build && docker-compose up -d",
-    "launch-testnet:docker": "npm run build-testnet && docker-compose -f docker-compose-testnet.yml up -d",
+    "launch-testnet:docker": "npm run build && docker-compose -f docker-compose-testnet.yml up -d",
     "logs:app": "docker container logs starter-template_app_1 --follow",
     "logs:ganache": "docker container logs starter-template_ganache_1 --follow",
     "logs:graph": "docker container logs starter-template_graph-node_1 --follow",
     "logs:ipfs": "docker container logs starter-starter_template_ipfs_1 --follow",
     "logs:postgres": "docker container logs starter-template_postgres_1 --follow",
     "stop": "docker-compose down",
-    "ganache:docker": "docker run -p 8545:8545 -v `pwd`/data/:/app/data daostack/test-env:ganache-0.0.1-rc.23-v0-3.0.0",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate": "npm ci && node migrations/deployDao.js"
+    "migrate": "npm i && node migrations/deployDao.js"
   },
   "keywords": [
     "DAO",
@@ -35,7 +30,8 @@
   "author": "YOUR_NAME",
   "license": "YOUR_LICENSE",
   "dependencies": {
-    "@daostack/migration": "0.0.1-rc.37-v3",
+    "@daostack/migration": "0.0.1-rc.38-v2",
+    "@daostack/subgraph": "0.0.36-10",
     "dotenv": "^8.0.0"
   }
 }
