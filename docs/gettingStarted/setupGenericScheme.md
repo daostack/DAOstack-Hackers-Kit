@@ -28,11 +28,100 @@ A DAO can only use schemes that are registered with its controller. There are tw
 While deploying DAO you can register multiple "GenericScheme" instances and mention each in the
 `customSchemes` section of your `migration-dao-params.json`.
 
+Example
+```json
+"CustomSchemes":[
+    {
+       "name":"GenericScheme",
+       "schemeName":"GenericScheme",
+       "params":[
+          "GenesisProtocolAddress",
+          {
+             "voteParams":1
+          },
+          "ENS_PUBLIC_RESOLVER"
+       ],
+       "permissions":"0x00000010",
+       "alias":"GenericSchemeENSPublicProvider",
+       "fromArc":true
+    }
+],
+```
+
 Refer to the instructions for [how to deploy DAO](../deployDAO).
 
-### Set Generic Scheme to interact with your contract
+### Register Generic Scheme to an already deployed DAO
 
-First, you will have to deploy a new instance of `GenericScheme` and use its `initialize` method to setup its params: the DAO `Avatar` it connects to, the `contractToCall`, the `votingMachine` to use, and the `voteParameters` for voting on proposals that use the scheme.
+If the DAO has a Scheme Registrar scheme, then you can register new schemes to DAO via a proposal.
+
+Registering a new scheme via registrar requires:
+  - Set voting Machine Parameters (if other than already saved)
+  - Submit proposal to Scheme Registrar
+
+#### Set Voting Machine Parameters
+
+If your Generic Scheme use vote parameters other than the ones already registered with Genesis Protocol (voting machine), then use `setParameter` to register new vote parameters.
+
+```javascript
+  const genesisProtocolJson = require('@daostack/arc/build/contracts/GenesisProtocol.json')
+
+  const genesisProtocolContract = new web3.eth.Contract(
+    genesisProtocolJson.abi,
+    GenesisProtocolAddress, // Get this from migration.json file
+    {
+      from,
+      gas,
+      gasPrice
+    }
+  )
+
+  // Following are example values, Please change appropriately
+  // Refer https://daostack.zendesk.com/hc/en-us/sections/360000535638-Genesis-Protocol
+  const voteParams = {
+        "boostedVotePeriodLimit": 345600,
+        "daoBountyConst": 10,
+        "minimumDaoBountyGWei": 150000000000,
+        "queuedVotePeriodLimit": 2592000,
+        "queuedVoteRequiredPercentage": 50,
+        "preBoostedVotePeriodLimit": 86400,
+        "proposingRepRewardGwei": 50000000000,
+        "quietEndingPeriod": 172800,
+        "thresholdConst": 1200,
+        "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+        "votersReputationLossRatio": 4,
+        "activationTime": 0
+      }
+
+  const parameters = [
+       [
+          voteParams.queuedVoteRequiredPercentage.toString(),
+          voteOnBehalf.queuedVotePeriodLimit.toString(),
+          votersReputationLossRatio.boostedVotePeriodLimit.toString(),
+          voteParams.preBoostedVotePeriodLimit.toString(),
+          voteOnBehalf.thresholdConst.toString(),
+          votersReputationLossRatio.quietEndingPeriod.toString(),
+          voteParams.proposingRepRewardGwei.toString(),
+          voteOnBehalf.votersReputationLossRatio.toString(),
+          voteParams.minimumDaoBountyGWei.toString(),
+          voteOnBehalf.daoBountyConst.toString(),
+          votersReputationLossRatio.activationTime.toString(),
+        ],
+        voteParams.voteOnBehalf,
+      ]
+
+  const genesisProtocolSetParams = genesisProtocolContract.methods.setParameters(...parameters)
+
+  genesisProtocolSetParams.send()
+```
+
+#### Set Generic Scheme to interact with your contract
+
+Now, you will have to deploy a new instance of `GenericScheme` and use its `initialize` method to setup its params:
+
+  - the DAO `Avatar` it connects to,
+  - the `contractToCall`,
+  - the `votingMachine` to use, 
+  - the `voteParameters` for voting on proposals that use the scheme.
 
 The following is a short script that shows how to do this:
 
@@ -60,23 +149,6 @@ The following is a short script that shows how to do this:
   // Log Address of new instance to use in next step while registering the scheme to DAO
   console.log(`Deployed new GenericScheme instance at ${genericScheme.options.address}`)
 
-  // Following are example values, Please change appropriately
-  // Refer https://daostack.zendesk.com/hc/en-us/sections/360000535638-Genesis-Protocol
-  const voteParams = {
-        "boostedVotePeriodLimit": 345600,
-        "daoBountyConst": 10,
-        "minimumDaoBountyGWei": 150000000000,
-        "queuedVotePeriodLimit": 2592000,
-        "queuedVoteRequiredPercentage": 50,
-        "preBoostedVotePeriodLimit": 86400,
-        "proposingRepRewardGwei": 50000000000,
-        "quietEndingPeriod": 172800,
-        "thresholdConst": 1200,
-        "voteOnBehalf": "0x0000000000000000000000000000000000000000",
-        "votersReputationLossRatio": 4,
-        "activationTime": 0
-      }
-
   // Get address from https://github.com/daostack/migration/blob/master/migration.json
   const votingMachineAddress = "0xaddress-of-VotingMachine-of-DAO-on-given-network"
 
@@ -86,24 +158,16 @@ The following is a short script that shows how to do this:
 
   const avatar = "0xaddres-of-DAO"
 
-  // paramHash will be useful in later step so lets log it
-  const paramHash = genericScheme.methods.initialize(
-      avatar,
-      voteParams,
-      votingMachineAddress,
-      targetContractAddress
-      ).call()
-
-  console.log(paramHash)
+  const paramHash = "0xVote-Param-Hash-from-previous-step"
 
   genericScheme.methods.initialize(
         avatar,
-        voteParams,
+        paramHash,
         votingMachineAddress,
         targetContractAddress
       ).send()
 ```
-
+  
 #### Submit a new proposal to the Scheme Registrar via Alchemy UI
 
   1. On Alchemy's landing page, choose the DAO to which you wish to register the scheme.
@@ -112,7 +176,7 @@ The following is a short script that shows how to do this:
   4. Select `Add Scheme` on the popup sidebar (on the left).
   5. Give the proposal an appropriate title, description, and url linking to a description of the proposal.
   6. For `Scheme`,  put the address of your Generic Scheme contract.
-  7. Enter the `paramHash` you got [here](#set-generic-scheme-to-interact-with-your-contract).
+  7. The`paramHash` can be null for non universal scheme.
   8. In the permissions section, check `Call genericCall on behalf of` (this will allow your scheme to make generic calls, which is the whole point here).
   9. Submit the proposal and sign the transaction as normal.
   10. If the DAO passes your proposal, then your Generic Scheme with the ability to interact with the `targetContract` will be registered to the DAO, and people will be able to submit proposals for the DAO to take your custom generic action.
