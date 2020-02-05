@@ -32,12 +32,12 @@ services:
       GRAPH_GRAPHQL_MAX_FIRST: '1000'
 
   ipfs:
-    image: peepdao_ipfs:latest
+    image: 'daostack/subgraph-ipfs:ganache-0.0.1-rc.38-v2-0.0.36-10'
     ports:
       - 5001:5001
 
   postgres:
-    image: peepdao_postgres:latest
+    image: 'daostack/subgraph-postgres:ganache-0.0.1-rc.38-v2-0.0.36-10'
     ports:
       - 5432:5432
     environment:

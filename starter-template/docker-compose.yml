@@ -45,7 +45,6 @@ services:
 
   ipfs:
     image: 'daostack/subgraph-ipfs:ganache-0.0.1-rc.38-v2-0.0.36-10'
-    image: starter_template_ipfs:latest
     ports:
       - 5001:5001
 
