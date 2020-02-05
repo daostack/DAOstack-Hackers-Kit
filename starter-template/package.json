@@ -19,7 +19,8 @@
     "logs:postgres": "docker container logs starter-template_postgres_1 --follow",
     "stop": "docker-compose down",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate": "rm -rf /Users/shivgupt/Backup/Documents/projects/Github/DAOstack/DAOstack-Hackers-Kit/starter-template/node_modules/websocket && npm i && node migrations/deployDao.js"
+    "migrate": "rm -rf /Users/shivgupt/Backup/Documents/projects/Github/DAOstack/DAOstack-Hackers-Kit/starter-template/node_modules/websocket && npm i && node migrations/deployDao.js",
+    "migrate:noinstall": "node migrations/deployDao.js"
   },
   "keywords": [
     "DAO",
@@ -32,6 +33,7 @@
   "dependencies": {
     "@daostack/migration": "0.0.1-rc.38-v2",
     "@daostack/subgraph": "0.0.36-10",
-    "dotenv": "^8.0.0"
+    "dotenv": "^8.0.0",
+    "node": "^10.16.3"
   }
 }
