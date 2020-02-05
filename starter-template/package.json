@@ -7,11 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "build": "npm run build:app",
-    "build:app": "docker build --file starter-app/Dockerfile --tag starter_template_app ./starter-app",
     "deploy-graph": "bash ops/hackyDeploy.sh",
     "launch:docker": "npm run build && docker-compose up -d",
-    "launch-testnet:docker": "npm run build && docker-compose -f docker-compose-testnet.yml up -d",
+    "launch-testnet:docker": "docker-compose -f docker-compose-testnet.yml up -d",
     "logs:app": "docker container logs starter-template_app_1 --follow",
     "logs:ganache": "docker container logs starter-template_ganache_1 --follow",
     "logs:graph": "docker container logs starter-template_graph-node_1 --follow",
@@ -19,8 +17,7 @@
     "logs:postgres": "docker container logs starter-template_postgres_1 --follow",
     "stop": "docker-compose down",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate": "rm -rf /Users/shivgupt/Backup/Documents/projects/Github/DAOstack/DAOstack-Hackers-Kit/starter-template/node_modules/websocket && npm i && node migrations/deployDao.js",
-    "migrate:noinstall": "node migrations/deployDao.js"
+    "migrate": "node migrations/deployDao.js"
   },
   "keywords": [
     "DAO",
@@ -31,8 +28,8 @@
   "author": "YOUR_NAME",
   "license": "YOUR_LICENSE",
   "dependencies": {
-    "@daostack/migration": "0.0.1-rc.38-v2",
-    "@daostack/subgraph": "0.0.36-10",
+    "@daostack/migration": "0.0.1-rc.39-v3",
+    "@daostack/subgraph": "0.0.37-3",
     "dotenv": "^8.0.0",
     "node": "^10.16.3"
   }

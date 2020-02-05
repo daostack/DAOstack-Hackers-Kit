@@ -2,19 +2,8 @@
 
 version: "3"
 services:
-  app:
-    image: starter_template_app:latest
-    volumes:
-      - ./starter-app/src:/app/src
-      - ./starter-app/public:/app/public
-    links:
-      - graph-node
-    working_dir: /app/
-    ports:
-      - 3000:3000
-
   graph-node:
-    image: 'graphprotocol/graph-node:v0.12.0'
+    image: 'graphprotocol/graph-node:v0.17.0'
     ports:
       - 8000:8000
       - 8001:8001
@@ -33,12 +22,12 @@ services:
       GRAPH_MAX_IPFS_FILE_BYTES: '102400'
 
   ipfs:
-    image: 'daostack/subgraph-ipfs:0.0.1-rc.36-v1-3.0.22'
+    image: 'daostack/subgraph-ipfs:ganache-0.0.1-rc.39-v3-0.0.37-3'
     ports:
       - 5001:5001
 
   postgres:
-    image: 'daostack/subgraph-postgres:0.0.1-rc.36-v1-3.0.22'
+    image: 'daostack/subgraph-postgres:ganache-0.0.1-rc.39-v3-0.0.37-3'
     ports:
       - 5432:5432
     environment:
