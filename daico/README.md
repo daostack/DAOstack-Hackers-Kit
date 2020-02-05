@@ -12,14 +12,11 @@ The structure is basically as follows:
 - **contracts** - Contains ICO scheme contract. You can use any Arc contract simply by importing it. For example `import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol"`
 - **migrations** - This is migration scripts folder. We are using @daostack/migration package for deploying new DAO and Custom Schemes and that is required by the DAO.
 - **daico-app** - This folder is initialized with React App which uses `@daostack/client` library to interact with contracts and the subgraph. These will be your Dapp front-end files. In development environment we have a `webpack` server running which looks for the changes made in `peepeth-app/src` folder and compiles them into client side JS files. You can can find the starting file `App.js` which you can use for your project.
-- **subgraph** - This is based on graphprotocol and uses mappings defined in `src/mappings` to index the blockchain events and store them in a `postgres` database as Entities described by `graphQl` schema. The `subgraph` deploy script uses output of migrations in `data/migration.json` to get the contract addresses. You can find mappings for the base contracts here and can add more mappings and schema for your custom contracts
 -**data** - This folder contains the `daicoSpec.json`, which is the file used to specify details for the new DAO to be deployed, feel free to change it according to your project needs. It also contains an `example.env`, which has example environment variables set, copy this file to your project root i.e. `daico` folder as `.env` and edit the variables accordingly. Lastly, there is a `migration.json` file which will contain the output after running the migration
 
 ## How to use?
 
-Enter the project folder from the terminal and type the following:
-
-After downloading the project:
+- Enter the project folder from the terminal and Install package
 
 ```
 npm install
@@ -27,20 +24,19 @@ npm install -g nps
 npm install -g npx
 ```
 
+- Update the `.env` file with your `SEED_PHRASE` or `PRIVATE_KEY`, `PROVIDER`, `CUSTOM_ABI_LOCATION` and `NETWORK`. Use `data/example.env` for reference
+
 ### Running your project on private network (Using docker)
 
-After downloading the project and docker:
+After downloading the docker:
 
-- Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `peepeth-dao-example` directory. Use `data/example.env` for reference
-- Enter the project folder from the terminal (i.e. peepeth-dao-example) and follow:
-
-#### Launch Docker
+- Launch Docker
 
 ```
 npm run launch:docker
 ```
 
-  This would build the docker images and start the docker container for `ganache`, `peepeth-app` with webpack server, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
+  This will start the docker container for `ganache`, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
 
 #### Build and Migrate Contracts
 

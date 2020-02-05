@@ -10,7 +10,7 @@
     "compile": "truffle compile && cp -rf build/contracts daico-app/src/",
     "deploy-graph": "bash ops/hackyDeploy.sh",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate": "rm -rf ./node_modules/web3-providers-ws/node_modules/websocket && node migrations/DeployDao.js",
+    "migrate": "node migrations/DeployDao.js",
     "launch:app": "cd daico-app && npm i && npm run start",
     "launch:docker": "docker-compose up -d",
     "stop": "docker-compose down"
@@ -24,10 +24,10 @@
   "author": "Ben Kaufman",
   "license": "ISC",
   "dependencies": {
-    "@daostack/arc": "0.0.1-rc.38",
-    "@daostack/infra": "0.0.1-rc.15",
-    "@daostack/migration": "0.0.1-rc.38-v2",
-    "@daostack/subgraph": "0.0.36-10",
+    "@daostack/arc": "0.0.1-rc.39",
+    "@daostack/infra": "0.0.1-rc.17",
+    "@daostack/migration": "0.0.1-rc.39-v3",
+    "@daostack/subgraph": "0.0.37-3",
     "dotenv": "^8.0.0",
     "node": "^10.16.3",
     "openzeppelin-solidity": "^2.1.3",
