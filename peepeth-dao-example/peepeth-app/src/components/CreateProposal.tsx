@@ -24,9 +24,11 @@ export const CreateProposal = (props: any) => {
           id="peepContent"
           label="Required"
           onChange={handleChange}
-          defaultValue="Hello World"
+          defaultValue="Please add your peep here"
         />
-        <Button variant="contained" onClick={() => proposeNewPeep(proposalData, props.dao)}>
+        <Button variant="contained" onClick={() => {
+          proposeNewPeep(proposalData, props.dao)
+        }}>
           Propose New peep
         </Button>
       </form>

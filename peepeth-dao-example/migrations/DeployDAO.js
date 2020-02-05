@@ -20,7 +20,7 @@ async function migrate() {
     },
   };
 
-  // If not using ganache docker image by DAOstack un-comment this portion
+  // TODO: If not using ganache docker image by DAOstack un-comment this portion
   // to migrate base contracts
   /*
     switch (process.env.NETWORK) {

@@ -4,7 +4,6 @@ import './App.css';
 import { ethers as eth } from 'ethers';
 import {
   initializeArc,
-  proposeNewPeep,
 } from './utils';
 import {
   Button,
