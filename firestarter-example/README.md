@@ -26,12 +26,11 @@ The structure is basically as follows:
 First, please change the `package.json` file to fit your project.
 You can then go ahead and edit the template to fit your needs.
 
-### Install and Compile
+### Install and Setup
 - Update the `.env` file with your `SEED_PHRASE` or `PRIVATE_KEY`, `PROVIDER`, `CUSTOM_ABI_LOCATION` and `NETWORK` in `firestarter-example` directory. Use `data/example.env` for reference
 
   ```
   npm i
-  npm run compile
   ```
 
 ### Running your project on private network (docker):
@@ -40,11 +39,12 @@ It is advisable to use the Ganache docker image provided by the DAOstack since, 
 - From the project folder from the terminal (i.e. firestarter-example) run the following:
 
   ```
-  npm run ganache:docker
+  npm run launch:docker
+  npm run compile
   npm run migrate
   ```
 
-  Make sure the DAO is deployed and output is written to output file. You should see the following:
+  Make sure the DAO is deployed and output is written to output file. Example output screen:
   ```
   {
     "name": "FireStarter",

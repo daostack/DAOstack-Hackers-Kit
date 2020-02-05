@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "compile": "truffle compile",
+    "deploy-graph": "bash ops/hackyDeploy.sh",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
     "launch:docker": "docker-compose up -d",
     "migrate": "node migrations/deployDao.js",
@@ -15,6 +16,7 @@
     "@daostack/arc": "0.0.1-rc.38",
     "@daostack/infra": "0.0.1-rc.15",
     "@daostack/migration": "0.0.1-rc.38-v2",
+    "@daostack/subgraph": "0.0.36-10",
     "dotenv": "^8.0.0",
     "node": "^10.16.3",
     "openzeppelin-solidity": "^2.1.3",
