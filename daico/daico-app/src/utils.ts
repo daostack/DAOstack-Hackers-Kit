@@ -50,29 +50,17 @@ const getICOSchemeContractWithSigner = async (dao: DAO) => {
   }
 }
 
-export const getBeneficiaries = async (dao: DAO) => {
-
-  return null;
-}
-
-  /*
-export const getProposalsData = async (dao: DAO, proposals: Proposal[]) => {
-
-  let proposalsWithData = proposals.map(async (proposal: Proposal) => {
-    let blockChainData = await getPeepProposalData(dao, proposal.id);
-    console.log(blockChainData);
-    let ipfsData = await getPeepData(blockChainData[1]);
-    return { id: proposal.id, blockChainData, ipfsData };
-  });
-  //console.log(proposalsWithData);
-  return Promise.all(proposalsWithData);
-}
-
-const getPeepProposalData = async (dao: DAO, proposalId: string) => {
+export const getReputation = async (dao: DAO) => {
   const ICOSchemeContract = await getICOSchemeContractWithSigner(dao);
-  return ICOSchemeContract.organizationsProposals(dao.id, proposalId);
+  console.log("Getting Beneficiaries");
+
+  try {
+    return (await ICOSchemeContract.beneficiaries((window as any).ethereum.selectedAddress)).toString();
+    
+  } catch (err) {
+    console.log(err);
+  }
 }
-   */
 
 export const isActive = async (dao: DAO) => {
   const ICOSchemeContract = await getICOSchemeContractWithSigner(dao);
@@ -91,13 +79,11 @@ export const redeem = async (dao: DAO) => {
 
   if (ICOSchemeContract) {
     try {
-      let tx = await ICOSchemeContract.redeemReputation(
-        (window as any).ethereum.selectedAddress,
-        {
-          gasLimit: 7300000,
-        }
-      );
-      console.log(tx);
+      ICOSchemeContract.redeemReputation(
+      (window as any).ethereum.selectedAddress,
+      {
+        gasLimit: 7300000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -112,14 +98,12 @@ export const donate = async (donation: number, dao: DAO) => {
 
     if (ICOSchemeContract) {
       try {
-        let tx = await ICOSchemeContract.donate(
-          (window as any).ethereum.selectedAddress,
-          {
-            gasLimit: 7300000,
-            value: eth.utils.parseEther(donation.toString())
-          }
-        );
-        console.log(tx);
+        ICOSchemeContract.donate(
+        (window as any).ethereum.selectedAddress,
+        {
+          gasLimit: 7300000,
+          value: eth.utils.parseEther(donation.toString())
+        });
       } catch (err) {
         console.log(err);
       }
