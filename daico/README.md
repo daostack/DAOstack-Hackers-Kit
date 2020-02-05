@@ -38,19 +38,20 @@ npm run launch:docker
 
   This will start the docker container for `ganache`, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
 
-#### Build and Migrate Contracts
+- Build and Migrate Contracts
 
 ```
 npm run compile
 npm run migrate
 ```
 
-#### Migrate subgraph for indexing DAO
+- Deploy new subgraph for indexing DAO
+
 ```
 npm run deploy-graph
 ```
 
-#### Develop / Play with App
+- After deploying the graph and getting it synced you can start playing/developing your app with webpack watcher running:
 
 ```
 npm run launch:app
@@ -91,7 +92,7 @@ npm run launch:app
 
 ### Deploy and use on Test network:
 
-- Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `daico` directory. Use `data/example.env` for reference
+- Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in project directory. Use `data/example.env` for reference
 - Open terminal at the project folder and run the following commands:
 
   ```
@@ -99,11 +100,12 @@ npm run launch:app
   npm run migrate
   ```
   
-  From `daico-app` directory run app with webpack for development
+  - Update `docker-compose.yml` for testnet if running graph-node locally.
+  - Update `App.tsx` to use testnet settings and launch.
 
-```
-npm run start
-```
+  ```
+  npm run launch:app
+  ```
 
 ### Use the web interface:
 

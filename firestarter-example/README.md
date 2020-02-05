@@ -27,6 +27,14 @@ First, please change the `package.json` file to fit your project.
 You can then go ahead and edit the template to fit your needs.
 
 ### Install and Setup
+- Enter the project folder from the terminal and Install package
+
+```
+npm install
+npm install -g nps
+npm install -g npx
+```
+
 - Update the `.env` file with your `SEED_PHRASE` or `PRIVATE_KEY`, `PROVIDER`, `CUSTOM_ABI_LOCATION` and `NETWORK` in `firestarter-example` directory. Use `data/example.env` for reference
 
   ```
@@ -84,6 +92,13 @@ If you not using the Ganache docker image provided by DAOstack, then you will ha
 
   ```
   npm run migrate
+  ```
+
+  - Update `docker-compose.yml` for testnet if running graph-node locally.
+  - Update `App.tsx` to use testnet settings and launch.
+
+  ```
+  npm run launch:app
   ```
 
 #### Using MetaMask with ganache:

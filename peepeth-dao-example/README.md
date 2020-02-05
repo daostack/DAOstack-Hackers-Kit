@@ -10,15 +10,12 @@ You can use the code here to deploy and interact with a new DAO, or integrate in
 
 - **contracts** - Contains PeepScheme contract and also a simplified Peepeth app contract for local development. You can use any Arc contract simply by importing it. For example `import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol"`
 - **migrations** - This is migration scripts folder. We are using @daostack/migration package for deploying new DAO, Custom Schemes and any Stand Alone contracts that might be required by the DAO.
-- **starter-app** - This folder is initialized with React App which uses `@daostack/client` library to interact with contracts and the subgraph. These will be your Dapp front-end files. In development environment we have a `webpack` server running which looks for the changes made in `peepeth-app/src` folder and compiles them into client side JS files. You can can find the starting file `App.js` which you can use for your project.
-- **subgraph** - This is based on graphprotocol and uses mappings defined in `src/mappings` to index the blockchain events and store them in a `postgres` database as Entities described by `graphQl` schema. The `subgraph` deploy script uses output of migrations in `data/migration.json` to get the contract addresses. You can find mappings for the base contracts here and can add more mappings and schema for your custom contracts
--**data** - This folder contains the `testDaoSpec.json`, which is file used to specify details for the new DAO to be deployed, feel free to change it according to your project needs. It also contains an `example.env`, which has example environment variables set, copy this file to your project root i.e. `starter-template` folder as `.env` and edit the variables accordingly. Lastly, there is a `migration.json` file which will contain the output after running the migration
+- **peepeth-app** - This folder is initialized with React App which uses `@daostack/client` library to interact with contracts and the subgraph. These will be your Dapp front-end files. In development environment we have a `webpack` server running which looks for the changes made in `peepeth-app/src` folder and compiles them into client side JS files. You can can find the starting file `App.js` which you can use for your project.
+-**data** - This folder contains the `peepDAOspec.json`, which is file used to specify details for the new DAO to be deployed, feel free to change it according to your project needs. It also contains an `example.env`, which has example environment variables set, copy this file to your project root i.e. `starter-template` folder as `.env` and edit the variables accordingly. Lastly, there is a `migration.json` file which will contain the output after running the migration
 
 ## How to use?
 
-Enter the project folder from the terminal and type the following:
-
-After downloading the project:
+Enter the project folder from the terminal and Install package
 
 ```
 npm install
@@ -26,53 +23,44 @@ npm install -g nps
 npm install -g npx
 ```
 
-## Running your project on private network:
-
-### Using docker
-After downloading the project and docker:
-
 - Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `peepeth-dao-example` directory. Use `data/example.env` for reference
-- Enter the project folder from the terminal (i.e. peepeth-dao-example) and follow:
 
-#### Launch Docker
+### Running your project on private network (Using docker)
+
+After downloading docker
+
+- Launch Docker
 
 ```
 npm run launch:docker
 ```
 
-  This would build the docker images and start the docker container for `ganache`, `peepeth-app` with webpack server, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
+  This will start the docker container for `ganache`, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
 
-#### Migrate Contracts
+- Build and Migrate Contracts and DAO
 
 ```
+npm run compile
 npm run migrate
 ```
 
-  Make sure the DAO is deployed and output is written to output file. You should see the following in the ganache logs:
-  ```
-  {
-  "name": "DevTest",
-  "Avatar": "0x5095a0B6BA789D4c0f4499788BE0901e018d2e59",
-  "DAOToken": "0x47dAfDb3cA13C95490047624b2202CcC2E6eF90F",
-  "Reputation": "0x15A75af9D4035Ddd2274ddDe061e8B651A8C1efd",
-  "Controller": "0x8318cF81516b964f71a32EbEe1B229973c77e0e0",
-  "Schemes": [],
-  "StandAloneContracts": [],
-  "arcVersion": "0.0.1-rc.37"
-  }
-  ✔ DAO Migration has Finished Successfully!
-  ```
+- Deploy new subgraph for indexing DAO
 
-#### Migrate subgraph for indexing DAO
 ```
 npm run deploy-graph
 ```
 
-#### Develop / Play with App
+- After deploying the graph and getting it synced you can start playing/developing your app with webpack watcher running:
+
+```
+npm run launch:app
+```
 
 - Open your web browser and type *http://localhost:3000/* This is your react Dapp. You can edit the `peepeth-app` code to modify frontend and the webpack watcher will rebuild the app
 
-### Without docker
+- In another browser window/tab type *http://localhost:8000/subgraphs/name/<subgraph_name_from_example.env>/graphql* or *http://localhost:8000/* This is an interface to the subgraph and you can type graphQL queries here to fetch data from the `postgres` database
+
+### Running your project on private network (Without docker)
 
 If you not using the Ganache docker image provided by DAOstack, then you will have to update the `migrations/DeployDAO.js` to migrate the base contract.
 
@@ -91,10 +79,21 @@ Once you have graph-node running same subgraph-deploy script would work.
 npm run deploy-graph
 ```
 
+After deploying the graph and getting it synced you can start playing/developing your app with webpack watcher running:
+
+```
+npm run launch:app
+```
+
+- Open your web browser and type *http://localhost:3000/* This is your react Dapp. You can edit the `peepeth-app` code to modify frontend and the webpack watcher will rebuild the app
+
+- In another browser window/tab type *http://localhost:8000/subgraphs/name/<subgraph_name_from_example.env>/graphql* or *http://localhost:8000/* This is an interface to the subgraph and you can type graphQL queries here to fetch data from the `postgres` database
+
+_To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com/daostack/subgraph), [TheGraph Project](https://thegraph.com/docs/quick-start)_
+
 ### Deploy and use on Test network:
 
-- Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `starter-template` directory. Use `data/example.env` for reference
-- Update the `.env` file in `starter-template/subgraph` directory. Use `subgraph/example.env` or `subgraph/readme.md` for reference
+- Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in project directory. Use `data/example.env` for reference
 - Open terminal at the project folder and run the following commands:
 
   ```
@@ -102,11 +101,19 @@ npm run deploy-graph
   npm run migrate
   ```
   
-  From `peepeth-app` directory run app with webpack
+  - Update `docker-compose.yml` for testnet if running graph-node locally.
+  - Update `App.tsx` to use testnet settings and launch.
 
-```
-npm run start
-```
+  ```
+  npm run launch:app
+  ```
+
+### Stop the project:
+- From the project directory type:
+
+  ```
+  npm run stop
+  ```
 
 ### Use the web interface:
 
