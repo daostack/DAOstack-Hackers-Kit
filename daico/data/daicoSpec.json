@@ -23,10 +23,10 @@
         "name":"ICOScheme",
         "isUniversal": false,
         "params": [
-          850000,
+          "85000000000000000000",
           1,
           0,
-          500,
+          500000000,
           50
         ],
         "permissions": "0x00000001",
