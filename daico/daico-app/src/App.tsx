@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { ethers as eth } from 'ethers';
 import {
   donate,
   getReputation,

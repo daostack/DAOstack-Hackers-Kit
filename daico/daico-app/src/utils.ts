@@ -1,13 +1,10 @@
 import {
   Arc,
   DAO,
-  Proposal,
-  IProposalOutcome,
 } from "@daostack/client";
 
 import { ethers as eth } from 'ethers';
 import ICOScheme from './contracts/ICOScheme.json'
-import gql from 'graphql-tag';
 
 const settings = {
   dev: {
