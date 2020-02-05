@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "compile": "truffle compile",
+    "compile": "truffle compile && cp -rf build/contracts daico-app/src/",
     "deploy-graph": "bash ops/hackyDeploy.sh",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
     "migrate": "rm -rf ./node_modules/web3-providers-ws/node_modules/websocket && node migrations/DeployDao.js",
