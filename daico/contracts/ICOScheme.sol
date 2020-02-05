@@ -16,7 +16,7 @@ contract ICOScheme is Pausable {
     
     Avatar public avatar; // Avatar of the organization raising funds
 
-    uint public cap; // Cap in Eth
+    uint public cap; // Cap in Wei
     uint public price; // Price represents tokens per 1 Eth
     uint public startBlock;
     uint public endBlock;
