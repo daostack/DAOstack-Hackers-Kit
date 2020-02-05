@@ -11,6 +11,7 @@
     "deploy-graph": "bash ops/hackyDeploy.sh",
     "ganache": "npm explore @daostack/migration -- npm run ganache",
     "migrate": "rm -rf ./node_modules/web3-providers-ws/node_modules/websocket && node migrations/DeployDao.js",
+    "launch:app": "cd daico-app && npm i && npm run start",
     "launch:docker": "docker-compose up -d",
     "stop": "docker-compose down"
   },

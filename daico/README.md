@@ -56,6 +56,10 @@ npm run deploy-graph
 
 #### Develop / Play with App
 
+```
+npm run launch:app
+```
+
 - Open your web browser and type *http://localhost:3000/* This is your react Dapp. You can edit the `peepeth-app` code to modify frontend and the webpack watcher will rebuild the app
 
 #### Stop docker containers
@@ -86,8 +90,7 @@ npm run deploy-graph
 After deploying the graph and getting it synced you can start playing/developing your app with webpack watcher running:
 
 ```
-cd daico-app
-npm run start
+npm run launch:app
 ```
 
 ### Deploy and use on Test network:
