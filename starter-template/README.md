@@ -10,13 +10,9 @@ You can then go ahead and edit the template to fit your needs.
 
 ## Project Structure:
 
-In this template, we use: `npm`, `truffle` and `webpack`, as well as DAOstack Arc, Client and Subgraph.
-The structure is basically as follows:
-
-- **contracts** - Your custom smart contracts should be located under here. You can use any Arc contract simply by importing it. This is an example import `import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol"`
-- **migrations** - This is a truffle migration scripts folder. You can write Truffle migration script for deploying your DAO or smart contracts and place the script under that folder. We already created a file for you to deploy a new DAO using @daostack/migration library.
-- **starter-app** - This folder is initialized with React App which uses DAOstack client library `@daostack/client` to interact with contracts and the subgraph. These will be your Dapp front-end files. In development environment we have a `webpack` server running which looks for the changes made in `starter-app/src` folder and compiles them into client side JS files. You can can find the starting file `App.js` which you can use for your project.
-- **subgraph** - This is based on graphprotocol and uses mappings defined in `src/mappings` to index the blockchain events and store them in a `postgres` database as Entities described by `graphQl` schema. The `subgraph` deploy script uses output of migrations in `data/migration.json` to get the contract addresses. You can find mappings for the base contracts here and can add more mappings and schema for your custom contracts
+- **contracts** - Your custom smart contracts should be located under here. You can use any Arc contract simply by importing it. For example `import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol"`
+- **migrations** - This is migration scripts folder. We are using @daostack/migration package for deploying new DAO, Custom Schemes and any Stand Alone contracts that might be required by the DAO.
+- **starter-app** - This folder is initialized with React App which uses `@daostack/client` library to interact with contracts and the subgraph. These will be your Dapp front-end files. In development environment we have a `webpack` server running which looks for the changes made in `starter-app/src` folder and compiles them into client side JS files. You can can find the starting file `App.js` which you can use for your project.
 -**data** - This folder contains the `testDaoSpec.json`, which is file used to specify details for the new DAO to be deployed, feel free to change it according to your project needs. It also contains an `example.env`, which has example environment variables set, copy this file to your project root i.e. `starter-template` folder as `.env` and edit the variables accordingly. Lastly, there is a `migration.json` file which will contain the output after running the migration
 
 ## How to customize your DAO?
@@ -105,54 +101,73 @@ The structure is basically as follows:
   }
  ```
 
-## Running your project on private network:
+## How to use?
 
-### Using docker
-After downloading the project and docker:
+- Enter the project folder from the terminal and Install package
 
-- Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `starter-template` directory. Use `data/example.env` for reference
-- Update the `.env` file in `starter-template/subgraph` directory. Use `subgraph/example.env` or `subgraph/readme.md` for reference
-- Enter the project folder from the terminal (i.e. starter-template) and type the following:
+```
+npm install
+npm install -g nps
+npm install -g npx
+```
+
+- Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in project directory. Use `data/example.env` for reference
+
+### Running your project on private network (Using docker)
+
+NOTE: It takes sometime to sync subgraph so please let it sync and then refresh the app. You can check sync status at `localhost:8000`
+
+After downloading docker
+
+You can run/start project via single command
+```
+npm run start
+```
+
+OR
+
+Follow the steps below:
+
+- Launch Docker
 
   ```
   npm run launch:docker
-  npm run logs:graph
   ```
 
-  This would build the docker images and start the docker container for `ganache`, `starter-app` with webpack server, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
+  This will start the docker container for `ganache`, `graph-node` for indexing blockchain events, `ipfs` where subgraph mappings reside and `postgres` database where blockchain events are stored as described by the schema
 
-- Wait for the logs screen to say *Starting JSON-RPC admin server at: ....*, then you can either exit the logs or in a different terminal window type
+- Migrate DAO
 
   ```
   npm run migrate
-  npm run logs:ganache
   ```
 
   Make sure the DAO is deployed and output is written to output file. You should see the following in the ganache logs:
   ```
-  { name: 'DevTest',
-  Avatar: '0xE7A2C59e134ee81D4035Ae6DB2254f79308e334f',
-  DAOToken: '0xcDbe8b52A6c60A5f101d4A0F1f049f19a9e1D35F',
-  Reputation: '0x93cdbf39fB9e13BD253CA5819247D52fbabf0F2f',
-  Controller: '0x5109F62E4e0CA152f5543E59E42dc0360C3aeD25' }
-  eth_getBlockByHash
-  eth_getBalance
-  eth_getTransactionReceipt
-  ℹ Finished in a few seconds and costed 0.019947492000006144ETH
-  ✔ Wrote results to data/migration.json.
-  eth_getBlockByHash
-  eth_getTransactionReceipt
-  eth_getBlockByNumber
-  ...
+  {
+  "name": "DevTest",
+  "Avatar": "0x5095a0B6BA789D4c0f4499788BE0901e018d2e59",
+  "DAOToken": "0x47dAfDb3cA13C95490047624b2202CcC2E6eF90F",
+  "Reputation": "0x15A75af9D4035Ddd2274ddDe061e8B651A8C1efd",
+  "Controller": "0x8318cF81516b964f71a32EbEe1B229973c77e0e0",
+  "Schemes": [],
+  "StandAloneContracts": [],
+  "arcVersion": "0.0.1-rc.37"
+  }
+  ✔ DAO Migration has Finished Successfully!
   ```
 
-  Exit the logs and from the project directory i.e. `starter-template` type:
+- Deploy new subgraph for indexing DAO
 
   ```
   npm run deploy-graph
   ```
 
-  This will deploy the subgraph and if you are still following the graph-node logs you can see it syncing the blockchain events
+- After deploying the graph and getting it synced you can start playing/developing your app with webpack watcher running:
+
+```
+npm run launch:app
+```
 
 - Open your web browser and type *http://localhost:3000/* This is your react Dapp. You can edit the `starter-app` code to modify frontend and the webpack watcher will rebuild the app
 
@@ -160,14 +175,43 @@ After downloading the project and docker:
 
 _To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com/daostack/subgraph), [TheGraph Project](https://thegraph.com/docs/quick-start)_
 
-### Deploy and use on test network:
+### Without docker
+
+If you not using the Ganache docker image provided by DAOstack, then you will have to update the `migrations/DeployDAO.js` to migrate the base contract.
+
+  ```
+  npm run ganache
+  npm run migrate
+  ```
+
+Make sure all the base contracts and the DAO contracts are deployed.
+
+Running graph-node without docker would be difficult but, you can refer [Graph Protocol](https://github.com/graphprotocol/graph-node) to see how to.
+
+Once you have graph-node running same subgraph-deploy script would work.
+
+```
+npm run deploy-graph
+```
+
+After deploying the graph and getting it synced you can start playing/developing your app with webpack watcher running:
+
+```
+npm run launch:app
+```
+
+- Open your web browser and type *http://localhost:3000/* This is your react Dapp. You can edit the `peepeth-app` code to modify frontend and the webpack watcher will rebuild the app
+
+- In another browser window/tab type *http://localhost:8000/subgraphs/name/<subgraph_name_from_example.env>/graphql* or *http://localhost:8000/* This is an interface to the subgraph and you can type graphQL queries here to fetch data from the `postgres` database
+
+_To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com/daostack/subgraph), [TheGraph Project](https://thegraph.com/docs/quick-start)_
+
+## Deploy and use on test network:
 
 - Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `starter-template` directory. Use `data/example.env` for reference
-- Update the `.env` file in `starter-template/subgraph` directory. Use `subgraph/example.env` or `subgraph/readme.md` for reference
 - Open terminal at the project folder and run the following commands:
 
   ```
-  npm i
   npm run migrate
   ```
   
@@ -195,12 +239,9 @@ _To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com
 
   ```
 
-  To launch the development environment (react app and subgraph) for testnet DAO, You will have to make appropriate changes in following files:
+  - Update `docker-compose.yml` for testnet if running graph-node locally.
 
-  **docker-compose-testnet.yml**
-    - update ethereum url in graph-node service to testnet url eg `rinkeby:https://rinkeby.infura.io/<INFURA-KEY>`
-
-  **App.js**
+  - update `App.js` to use testnet settings
     - add `settings.<TESTNET>` eg. `settings.rinkeby` with `web3Provider` set to testnet url
     - initialize Arc with `settings.<TESTNET>` eg. `settings.rinkeby`
 
@@ -213,4 +254,4 @@ _To learn more about subgraphs check out: [DAOstack Subgraph](https://github.com
 
 #### Using MetaMask with ganache:
   - Open metamask and import using private key
-  - You can find the private keys from ganache logs by running `docker container logs starter-template_ganache_1`
+  - You can find the private keys from ganache logs by running `docker container logs <container_name>`

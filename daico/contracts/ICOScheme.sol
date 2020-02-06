@@ -1,7 +1,7 @@
-pragma solidity ^0.4.24;
+pragma solidity 0.5.13;
 
 import "@daostack/arc/contracts/controller/Avatar.sol";
-import "@daostack/arc/contracts/controller/ControllerInterface.sol";
+import "@daostack/arc/contracts/controller/Controller.sol";
 import "openzeppelin-solidity/contracts/lifecycle/Pausable.sol";
 
 
@@ -16,7 +16,7 @@ contract ICOScheme is Pausable {
     
     Avatar public avatar; // Avatar of the organization raising funds
 
-    uint public cap; // Cap in Eth
+    uint public cap; // Cap in Wei
     uint public price; // Price represents tokens per 1 Eth
     uint public startBlock;
     uint public endBlock;
@@ -30,14 +30,14 @@ contract ICOScheme is Pausable {
     event ReputationRedeemed(address indexed _beneficiary, uint _reputationAmount);
 
 
-    constructor (
+    function initialize (
         Avatar _avatar,
         uint _cap,
         uint _price,
         uint _startBlock,
         uint _endBlock,
         uint _totalRepForDonators
-    ) public
+    ) external
     {
         require(_cap != 0, "cap must be greater than zero");
         avatar = _avatar;
@@ -52,7 +52,7 @@ contract ICOScheme is Pausable {
     * @dev Fallback function, when ether is sent it will donate to the ICO.
     * The ether will be returned if the donation is failed.
     */
-    function () public payable {
+    function () external payable {
         // Return ether if couldn't donate.
         require(donate(msg.sender) != 0, "Donation must be greater than 0");
     } 
@@ -84,7 +84,7 @@ contract ICOScheme is Pausable {
      * @param _beneficiary The donator's address - which will receive the ICO's tokens.
      * @return uint number of tokens minted for the donation.
      */
-    function donate(address _beneficiary) public payable whenNotPaused returns(uint) {
+    function donate(address payable _beneficiary) public payable whenNotPaused returns(uint) {
 
         // Check ICO is active:
         require(isActive(), "ICO is not active");
@@ -112,10 +112,10 @@ contract ICOScheme is Pausable {
         // Send ether to the defined address, mint, and send change to beneficiary:
         address(avatar).transfer(incomingEther);
 
-        // require(
-        //     ControllerInterface(avatar.owner()).mintTokens(tokens, _beneficiary, address(avatar)),
-        //     "Failed to mint tokens"
-        // );
+        require(
+            Controller(avatar.owner()).mintTokens(tokens, _beneficiary, address(avatar)),
+            "Failed to mint tokens"
+        );
         
         if (change != 0) {
             _beneficiary.transfer(change);
@@ -144,10 +144,10 @@ contract ICOScheme is Pausable {
 
         beneficiaries[_beneficiary] = 0;
 
-        // require(
-        //     ControllerInterface(avatar.owner()).mintReputation(reputation, _beneficiary, address(avatar)),
-        //     "Failed to mint reputation"
-        // );
+        require(
+            Controller(avatar.owner()).mintReputation(reputation, _beneficiary, address(avatar)),
+            "Failed to mint reputation"
+        );
 
         emit ReputationRedeemed(_beneficiary, reputation);
 

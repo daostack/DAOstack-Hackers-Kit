@@ -2,23 +2,32 @@
    "orgName":"FireStarter",
    "tokenName":"FireStarterToken",
    "tokenSymbol":"FST",
-   "ContributionReward":{
-   },
-   "SchemeRegistrar":{  
-       "voteRegisterParams": 1,
-       "voteRemoveParams": 1
-   },
-   "UpgradeScheme":{
+    "ContributionReward": [
+      {
+        "voteParams": 0
+      }
+    ],
+    "SchemeRegistrar": [
+      {
+          "voteRegisterParams": 1,
+          "voteRemoveParams": 1
+      }
+    ],
+   "UpgradeScheme": [
+     {
        "voteParams": 1
-   },
-   "CustomSchemes": {
-      "FireStarter": {
+     }
+   ],
+   "CustomSchemes": [
+     {
+        "name":"FireStarter",
         "isUniversal": false,
         "params": [
         ],
-        "permissions": "0x00000001"
-      }
-   },
+        "permissions": "0x00000001",
+        "alias": "ProjectFunding"
+     }
+   ],
    "VotingMachinesParams":[
       {
          "activationTime": 0,
