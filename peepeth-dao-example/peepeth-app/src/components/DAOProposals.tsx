@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Arc,
-  DAO,
-  Proposal,
+  IProposalOutcome,
 } from "@daostack/client";
 
 import {
+  Button,
   Paper,
   Typography,
   Table,
@@ -24,7 +23,6 @@ import {
 export const DAOproposals = (props: any) => {
   const [proposals, setProposals] = useState();
   const [proposalsData, setProposalsData] = useState();
-  //const [proposalData, 
 
   useEffect(() => {
     (async () => {
@@ -41,8 +39,16 @@ export const DAOproposals = (props: any) => {
       }
       //setProposals(await getProposalObservable(props.dao));
     })();
-  }, [proposals]);
+  }, [proposals, props.dao]);
 
+  const handleVote = async (id: string, vote: IProposalOutcome) => {
+
+    // TODO: Implement vote. Update subgraph if want to use client library else import voting machine contract and call vote function
+      
+  }
+
+  console.log(proposals);
+  console.log(proposalsData);
   return proposalsData && proposalsData.length > 0 ? (
     <TableContainer component={Paper}>
       <Table size="small">
@@ -74,6 +80,11 @@ export const DAOproposals = (props: any) => {
               </TableCell>
               <TableCell>
                 {proposal.ipfsData ? proposal.ipfsData.content : 'Loading'}
+              </TableCell>
+              <TableCell>
+                <Button onClick={() => handleVote(proposal.id, IProposalOutcome.Pass)}>
+                  Vote Up
+                </Button>
               </TableCell>
             </TableRow>
           ))}

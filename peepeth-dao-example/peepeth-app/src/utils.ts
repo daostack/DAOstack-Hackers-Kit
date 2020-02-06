@@ -2,7 +2,6 @@ import {
   Arc,
   DAO,
   Proposal,
-  IProposalOutcome,
 } from "@daostack/client";
 
 import { ethers as eth } from 'ethers';
@@ -56,7 +55,7 @@ const createProposal = async (dao: DAO, peepHash: string) => {
   const PeepSchemeContract = await getPeepSchemeContractWithSigner(dao);
 
   if (PeepSchemeContract) {
-    let tx = await PeepSchemeContract.proposePeep(dao.id, peepHash, 0);
+    await PeepSchemeContract.proposePeep(dao.id, peepHash, 0);
   }
 }
 
@@ -80,11 +79,9 @@ export const getProposalsData = async (dao: DAO, proposals: Proposal[]) => {
 
   let proposalsWithData = proposals.map(async (proposal: Proposal) => {
     let blockChainData = await getPeepProposalData(dao, proposal.id);
-    console.log(blockChainData);
     let ipfsData = await getPeepData(blockChainData[1]);
     return { id: proposal.id, blockChainData, ipfsData };
   });
-  //console.log(proposalsWithData);
   return Promise.all(proposalsWithData);
 }
 
