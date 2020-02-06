@@ -26,8 +26,18 @@ npm install -g npx
 - Update the `.env` file with your `PRIVATE_KEY`  `PROVIDER` and `NETWORK` in `peepeth-dao-example` directory. Use `data/example.env` for reference
 
 ### Running your project on private network (Using docker)
+NOTE: It takes sometime to sync subgraph so please let it sync and then refresh the app. You can check sync status at `localhost:8000`
 
-After downloading docker
+After downloading docker:
+
+You can run/start project via single command
+```
+npm run start
+```
+
+OR
+
+Follow the steps below:
 
 - Launch Docker
 

@@ -8,6 +8,7 @@
     "ganache": "npm explore @daostack/migration -- npm run ganache",
     "launch:docker": "docker-compose up -d",
     "migrate": "node migrations/deployDao.js",
+    "start": "npm run launch:docker && npm run compile && npm run migrate && npm run deploy-graph",
     "stop": "docker-compose down"
   },
   "author": "",

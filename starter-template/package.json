@@ -8,16 +8,18 @@
   },
   "scripts": {
     "deploy-graph": "bash ops/hackyDeploy.sh",
-    "launch:docker": "npm run build && docker-compose up -d",
+    "ganache": "npm explore @daostack/migration -- npm run ganache",
+    "migrate": "node migrations/deployDao.js",
+    "launch:app": "cd starter-app && npm i && npm run start",
+    "launch:docker": "docker-compose up -d",
     "launch-testnet:docker": "docker-compose -f docker-compose-testnet.yml up -d",
     "logs:app": "docker container logs starter-template_app_1 --follow",
     "logs:ganache": "docker container logs starter-template_ganache_1 --follow",
     "logs:graph": "docker container logs starter-template_graph-node_1 --follow",
     "logs:ipfs": "docker container logs starter-starter_template_ipfs_1 --follow",
     "logs:postgres": "docker container logs starter-template_postgres_1 --follow",
-    "stop": "docker-compose down",
-    "ganache": "npm explore @daostack/migration -- npm run ganache",
-    "migrate": "node migrations/deployDao.js"
+    "start": "npm run launch:docker && sleep 10 && npm run migrate && npm run deploy-graph && npm run launch:app",
+    "stop": "docker-compose down"
   },
   "keywords": [
     "DAO",

@@ -28,7 +28,18 @@ npm install -g npx
 
 ### Running your project on private network (Using docker)
 
+NOTE: It takes sometime to sync subgraph so please let it sync and then refresh the app. You can check sync status at `localhost:8000`
+
 After downloading the docker:
+
+You can run/start project via single command
+```
+npm run start
+```
+
+OR
+
+Follow the steps below:
 
 - Launch Docker
 
@@ -58,6 +69,8 @@ npm run launch:app
 ```
 
 - Open your web browser and type *http://localhost:3000/* This is your react Dapp. You can edit the `peepeth-app` code to modify frontend and the webpack watcher will rebuild the app
+
+- In another browser window/tab type *http://localhost:8000/subgraphs/name/<subgraph_name_from_example.env>/graphql* or *http://localhost:8000/* This is an interface to the subgraph and you can type graphQL queries here to fetch data from the `postgres` database
 
 #### Stop docker containers
 
@@ -89,6 +102,10 @@ After deploying the graph and getting it synced you can start playing/developing
 ```
 npm run launch:app
 ```
+
+- Open your web browser and type *http://localhost:3000/* This is your react Dapp. You can edit the `peepeth-app` code to modify frontend and the webpack watcher will rebuild the app
+
+- In another browser window/tab type *http://localhost:8000/subgraphs/name/<subgraph_name_from_example.env>/graphql* or *http://localhost:8000/* This is an interface to the subgraph and you can type graphQL queries here to fetch data from the `postgres` database
 
 ### Deploy and use on Test network:
 

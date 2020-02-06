@@ -15,13 +15,13 @@ const settings = {
     graphqlHttpProvider: "http://127.0.0.1:8000/subgraphs/name/daostack",
     graphqlWsProvider: "ws://127.0.0.1:8001/subgraphs/name/daostack",
     web3Provider: "ws://127.0.0.1:8545",
-    ipfsProvider: "localhost",
+    ipfsProvider: "http://localhost:5001/api/v0",
   }, 
   testnet: {
     graphqlHttpProvider: "http://127.0.0.1:8000/subgraphs/name/daostack",
     graphqlWsProvider: "ws://127.0.0.1:8001/subgraphs/name/daostack",
     web3Provider: "testnet-url",
-    ipfsProvider: "localhost",
+    ipfsProvider: "http://localhost:5001/api/v0",
   }
 };
 

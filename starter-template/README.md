@@ -115,7 +115,20 @@ npm install -g npx
 
 ### Running your project on private network (Using docker)
 
+NOTE: It takes sometime to sync subgraph so please let it sync and then refresh the app. You can check sync status at `localhost:8000`
+
 After downloading docker
+
+You can run/start project via single command
+```
+npm run start
+```
+
+OR
+
+Follow the steps below:
+
+- Launch Docker
 
   ```
   npm run launch:docker

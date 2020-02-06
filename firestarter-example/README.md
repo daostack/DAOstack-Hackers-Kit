@@ -19,7 +19,7 @@ The structure is basically as follows:
 
 - **contracts** - Your custom smart contracts should be located under here. You can use any Arc contract simply by importing it. This is an example import `import "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol"`
 - **migrations** -  This contains migration script for deploying your DAO and custom scheme smart contracts. The script uses @daostack/migration package.
--**data** - This folder contains the `fireStarterDAOspec.json`, which is file used to specify details for the new DAO to be deployed, feel free to change it according to your project needs. It also contains an `example.env`, which has example environment variables set, copy this file to your project root i.e. `firestarter-example` folder as `.env` and edit the variables accordingly. Lastly, there is a `migration.json` file which will contain the output after running the migration
+- **data** - This folder contains the `fireStarterDAOspec.json`, which is file used to specify details for the new DAO to be deployed, feel free to change it according to your project needs. It also contains an `example.env`, which has example environment variables set, copy this file to your project root i.e. `firestarter-example` folder as `.env` and edit the variables accordingly. Lastly, there is a `migration.json` file which will contain the output after running the migration
 
 ## How to get started:
 
@@ -43,7 +43,21 @@ npm install -g npx
 
 ### Running your project on private network (docker):
 
+NOTE: It takes sometime to sync subgraph so please let it sync and then refresh the app. You can check sync status at `localhost:8000`
+
 It is advisable to use the Ganache docker image provided by the DAOstack since, it already includes all the base contracts needed for getting started.
+
+After downloading docker:
+
+You can run/start project via single command
+```
+npm run start
+```
+
+OR
+
+Follow the steps below:
+
 - From the project folder from the terminal (i.e. firestarter-example) run the following:
 
   ```
@@ -73,6 +87,14 @@ It is advisable to use the Ganache docker image provided by the DAOstack since, 
   }
   ```
 
+- Deploy Subgraph
+
+  ```
+  npm run deploy-graph
+  ```
+
+- In browser type *http://localhost:8000/subgraphs/name/<subgraph_name_from_example.env>/graphql* or *http://localhost:8000/* This is an interface to the subgraph and you can type graphQL queries here to fetch data from the `postgres` database
+
 ### Running your project on private network (without docker):
 
 If you not using the Ganache docker image provided by DAOstack, then you will have to update the `migrations/DeployDAO.js` to migrate the base contract.
@@ -84,6 +106,14 @@ If you not using the Ganache docker image provided by DAOstack, then you will ha
   ```
 
   Make sure all the base contracts and the DAO contracts are deployed.
+
+- Deploy Subgraph
+
+  ```
+  npm run deploy-graph
+  ```
+
+- In browser type *http://localhost:8000/subgraphs/name/<subgraph_name_from_example.env>/graphql* or *http://localhost:8000/* This is an interface to the subgraph and you can type graphQL queries here to fetch data from the `postgres` database
 
 ### Deploy and use on test network:
 
