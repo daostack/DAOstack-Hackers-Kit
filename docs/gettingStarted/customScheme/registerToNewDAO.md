@@ -50,6 +50,7 @@ Following is `CommunityDaoSpec.json` using custom scheme designed in previous st
             "params": [
             ],
             "permissions": "0x00000000"
+            "alias": "DonationScheme"
          }
        ],
        "VotingMachinesParams":[
@@ -136,6 +137,7 @@ Following is `CommunityDaoSpec.json` using custom scheme designed in previous st
         gasPrice: process.env.DEFAULT_GAS,
         quiet: false,
         force: true,
+        restart: true,
         output: process.env.OUTPUT_FILE,
         privateKey: process.env.PRIVATE_KEY,
         customabislocation: process.env.CUSTOM_ABI_LOCATION,

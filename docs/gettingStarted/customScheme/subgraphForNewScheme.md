@@ -4,10 +4,8 @@
 
 ## Pre Work
 
-  1. Make sure you have cloned subgraph submodule, if you have not already
+  1. Make sure you have cloned [DAOstack subgraph repo](https://github.com/daostack/subgraph), if you have not already
 
-        git submodule update --init
-  
   2. Create a new directory with your `scheme-name` in mappings
 
         cd subgraph

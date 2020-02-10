@@ -15,7 +15,7 @@ To register the new Scheme to an existing DAOstack DAO you can submit a new prop
   7. Enter the `paramHash` for your scheme.
 
      - *universal scheme* : `paramHash` returned by `setParameters` method
-     - *non-universal scheme* : `paramHash` (if any) returned by the `initialize` method
+     - *non-universal scheme* : can be left null, since only one parameter set is registered to non-universal schemes at the time of deployment.
 
   8. In the permissions section, check the appropriate permissions required by the scheme.
 

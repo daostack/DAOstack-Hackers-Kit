@@ -4,9 +4,7 @@ In this client tutorial we will extend client library to interact with the previ
 
 ## Pre Work
 
-Make sure you have cloned client submodule, if you have not already
-
-        git submodule update --init
+Make sure you have cloned [DAOstack client repo](https://github.com/daostack/client), if you have not already
   
 ## Update Client
 
