@@ -28,7 +28,9 @@ extra:
 nav:
 - Home: 'index.md'
 - Stack:
-  - Infra: 'stack/infra/infraIntro.md'
+  - Infra:
+    - Intro: 'stack/infra/infraIntro.md'
+    - Holographic Consensus: 'stack/infra/genesisProtocol.md'
   - Arc: 'stack/arc/arcIntro.md'
   - Client:
     - Intro: 'stack/client/clientIntro.md'
