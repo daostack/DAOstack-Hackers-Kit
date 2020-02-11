@@ -1,1 +1,1 @@
-[Migration](https://github.com/daostack/migration) package is useful for handling the migrations of DAOstack contracts and DAOs. You can use this tool to migrate DAOstack base contracts and DAOstack DAOs in production, test or developer mode
+[Migration](https://github.com/daostack/migration) package is useful for handling the deployment of contracts in DAOstack ecosystem. You can use this tool to migrate DAOstack base contracts, new DAOstack DAOs along with custom new schemes and stand alone contracts in production, test or developer mode
