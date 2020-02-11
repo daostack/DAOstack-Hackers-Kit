@@ -725,18 +725,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../alchemyIntegrationForNewScheme/" title="Alchemy: integrate with DAOstack interface" class="md-nav__link">
-      Alchemy: integrate with DAOstack interface
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -750,18 +738,6 @@
   <li class="md-nav__item">
     <a href="../../deployDAO/" title="Deploy a DAO" class="md-nav__link">
       Deploy a DAO
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../createNewInterface/" title="Create your own interface for DAOstack DAOs" class="md-nav__link">
-      Create your own interface for DAOstack DAOs
     </a>
   </li>
 
@@ -1018,7 +994,8 @@
 62
 63
 64
-65</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="err">{</span>
+65
+66</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="err">{</span>
    <span class="ss">&quot;orgName&quot;</span><span class="p">:</span><span class="ss">&quot;CommunityDAO&quot;</span><span class="p">,</span>
    <span class="ss">&quot;tokenName&quot;</span><span class="p">:</span><span class="ss">&quot;Commune&quot;</span><span class="p">,</span>
    <span class="ss">&quot;tokenSymbol&quot;</span><span class="p">:</span><span class="ss">&quot;CDT&quot;</span><span class="p">,</span>
@@ -1041,6 +1018,7 @@
         <span class="ss">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">],</span>
         <span class="ss">&quot;permissions&quot;</span><span class="p">:</span> <span class="ss">&quot;0x00000000&quot;</span>
+        <span class="ss">&quot;alias&quot;</span><span class="p">:</span> <span class="ss">&quot;DonationScheme&quot;</span>
      <span class="err">}</span>
    <span class="p">],</span>
    <span class="ss">&quot;VotingMachinesParams&quot;</span><span class="p">:[</span>
@@ -1150,7 +1128,8 @@
 21
 22
 23
-24</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;dotenv&#39;</span><span class="p">).</span><span class="n">config</span><span class="p">();</span><span class="w"></span>
+24
+25</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;dotenv&#39;</span><span class="p">).</span><span class="n">config</span><span class="p">();</span><span class="w"></span>
 <span class="n">const</span><span class="w"> </span><span class="n">DAOstackMigration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;@daostack/migration&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="n">const</span><span class="w"> </span><span class="n">migrationSpec</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">require</span><span class="p">(</span><span class="n">process</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">DAO_SPEC</span><span class="p">)</span><span class="w"></span>
 
@@ -1161,6 +1140,7 @@
 <span class="w">    </span><span class="nl">gasPrice</span><span class="p">:</span><span class="w"> </span><span class="n">process</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">DEFAULT_GAS</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="nl">quiet</span><span class="p">:</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="nl">force</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nl">restart</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="k">output</span><span class="err">:</span><span class="w"> </span><span class="n">process</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">OUTPUT_FILE</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="nl">privateKey</span><span class="p">:</span><span class="w"> </span><span class="n">process</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">PRIVATE_KEY</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="nl">customabislocation</span><span class="p">:</span><span class="w"> </span><span class="n">process</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">CUSTOM_ABI_LOCATION</span><span class="p">,</span><span class="w"></span>

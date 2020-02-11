@@ -568,36 +568,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pre-work" class="md-nav__link">
-    Pre Work
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-scheme-contract-and-deploy" class="md-nav__link">
-    Add scheme contract and deploy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update-subgraph-and-deploy" class="md-nav__link">
-    Update subgraph and deploy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update-client-and-build" class="md-nav__link">
-    Update client and build
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update-alchemy" class="md-nav__link">
-    Update alchemy
+  <a href="#overview" class="md-nav__link">
+    Overview
   </a>
   
 </li>
@@ -738,18 +710,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../alchemyIntegrationForNewScheme/" title="Alchemy: integrate with DAOstack interface" class="md-nav__link">
-      Alchemy: integrate with DAOstack interface
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -763,18 +723,6 @@
   <li class="md-nav__item">
     <a href="../../deployDAO/" title="Deploy a DAO" class="md-nav__link">
       Deploy a DAO
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../createNewInterface/" title="Create your own interface for DAOstack DAOs" class="md-nav__link">
-      Create your own interface for DAOstack DAOs
     </a>
   </li>
 
@@ -890,36 +838,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pre-work" class="md-nav__link">
-    Pre Work
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-scheme-contract-and-deploy" class="md-nav__link">
-    Add scheme contract and deploy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update-subgraph-and-deploy" class="md-nav__link">
-    Update subgraph and deploy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update-client-and-build" class="md-nav__link">
-    Update client and build
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update-alchemy" class="md-nav__link">
-    Update alchemy
+  <a href="#overview" class="md-nav__link">
+    Overview
   </a>
   
 </li>
@@ -961,7 +881,7 @@
 <li><strong>Non Universal</strong>: do not follow any standard and do not inherit from UniversalSchemeInterface. A non universal scheme has to be deployed for each DAO separately.</li>
 </ul>
 <h2 id="which-layer-to-customize">Which layer to customize<a class="headerlink" href="#which-layer-to-customize" title="Permanent link">&para;</a></h2>
-<p>To Enable DAO with some custom actions, you will have to work on multiple layers of the stack</p>
+<p>To Enable DAO with some custom actions, you might need to work on multiple layers of the stack</p>
 <ul>
 <li><strong>Arc</strong>: Design and Deploy the scheme contract which has the action DAO will execute.</li>
 <li><strong>Migration</strong>: deploy + register custom scheme to new DAO using migration script or deploy independently and register via another Scheme</li>
@@ -970,62 +890,47 @@
 <li><strong>Alchemy</strong>: enable user friendly interface for your scheme in Alchemy</li>
 </ul>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
-<p>In following section we will see some sample code for adding a custom scheme to the DAO and enable Alchemy to interact with it.
-We will be using <a href="https://github.com/daostack/DAOstack-Hackers-Kit/tree/master/alchemy-starter">Alchemy-starter</a> for this tutorial</p>
-<p>If you have not cloned the <em>DAOstack Hacker kit repo</em>, then clone it recursively to get the submodules</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="c1">--recursive git@github.com:daostack/DAOstack-Hackers-Kit.git</span>
-</pre></div>
-</td></tr></table>
-
-<p>If you have already cloned the <em>DAOstack Hackers kit repo</em>, then make sure you have the latest submodules too</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">git</span> <span class="n">submodule</span> <span class="k">update</span> <span class="c1">--init</span>
-</pre></div>
-</td></tr></table>
-
+<p>In following section we will see some sample code for adding a custom scheme to the DAO and enabling graph-node to cache the events from the scheme and client to interact with the scheme.</p>
 <p>Depending on your requirements all or some parts of the tutorial might be useful for you.</p>
-<h3 id="pre-work">Pre Work<a class="headerlink" href="#pre-work" title="Permanent link">&para;</a></h3>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">cd</span> <span class="n">alchemy</span><span class="o">-</span><span class="n">starter</span>
-<span class="n">npm</span> <span class="n">i</span>
-<span class="n">npm</span> <span class="n">run</span> <span class="n">launch</span><span class="p">:</span><span class="n">docker</span>
+<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h3>
+<p>Choose the project setup from any of the <a href="https://github.com/daostack/DAOstack-Hackers-Kit">Hacker-kit Examples</a></p>
+<ul>
+<li>Follow the tutorial for <a href="../developCustomUniScheme/">Universal Scheme</a> or <a href="../developCustomNonUniScheme/">Non-Universal Scheme</a></li>
+<li>
+<p>Add your custom scheme contract to <code>contracts</code> folder. Compile using truffle</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">compile</span>
 </pre></div>
 </td></tr></table>
 
-<h3 id="add-scheme-contract-and-deploy">Add scheme contract and deploy<a class="headerlink" href="#add-scheme-contract-and-deploy" title="Permanent link">&para;</a></h3>
-<p>Follow tutorial for <a href="../developCustomUniScheme/">Universal Scheme</a> or <a href="../developCustomNonUniScheme/">Non-Universal Scheme</a></p>
-<p>Deploy with <a href="../registerToNewDAO">New DAO</a></p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">migrate</span>
-</pre></div>
-</td></tr></table>
-
+</li>
+<li>
+<p><strong>Deploy with <a href="../registerToNewDAO">New DAO</a></strong></p>
+<p>npm run migrate</p>
+</li>
+</ul>
 <p>OR</p>
-<p>Deploy and register to <a href="../registerToExistingDAO/">Existing DAO</a></p>
-<h3 id="update-subgraph-and-deploy">Update subgraph and deploy<a class="headerlink" href="#update-subgraph-and-deploy" title="Permanent link">&para;</a></h3>
-<p>Make changes to subgraph refer <a href="../subgraphForNewScheme/">Update subgraph</a> tutorial and deploy graph</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">deploy</span><span class="p">:</span><span class="n">graph</span>
-</pre></div>
-</td></tr></table>
-
-<h3 id="update-client-and-build">Update client and build<a class="headerlink" href="#update-client-and-build" title="Permanent link">&para;</a></h3>
-<p>Update client to interact with your scheme, refer <a href="../clientForNewScheme/">Update client</a> tutorial</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">build</span><span class="p">:</span><span class="n">client</span>
-<span class="n">npm</span> <span class="n">run</span> <span class="n">link</span><span class="p">:</span><span class="n">client</span>
-</pre></div>
-</td></tr></table>
-
+<ul>
+<li>
+<p><strong>Deploy and register to <a href="../registerToExistingDAO/">Existing DAO</a></strong></p>
+</li>
+<li>
+<p><strong>Update subgraph and deploy</strong>: Make changes to subgraph refer <a href="../subgraphForNewScheme/">Update subgraph</a> tutorial and deploy graph</p>
+<p>npm run deploy:graph</p>
+</li>
+<li>
+<p><strong>Update client and build</strong>: Update client to interact with your scheme, refer <a href="../clientForNewScheme/">Update client</a> tutorial</p>
+<p>npm run build:client
+npm run link:client</p>
+</li>
+</ul>
 <p>To develop on the client in tandem with alchemy, start watcher</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">watch</span><span class="p">:</span><span class="n">client</span>
 </pre></div>
 </td></tr></table>
 
-<h3 id="update-alchemy">Update alchemy<a class="headerlink" href="#update-alchemy" title="Permanent link">&para;</a></h3>
-<p>Add front-end support for you scheme, refer to <a href="../alchemyIntegrationForNewScheme/">Update alchemy</a> tutorial for some basics</p>
-<p>Launch alchemy in dev mode</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="k">start</span><span class="p">:</span><span class="n">alchemy</span>
-</pre></div>
-</td></tr></table>
+<ul>
+<li>Work on your own front-end or update alchemy to support your scheme as you desire</li>
+</ul>
                 
                   
                 

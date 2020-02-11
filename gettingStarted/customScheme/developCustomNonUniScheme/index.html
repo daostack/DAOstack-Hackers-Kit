@@ -593,8 +593,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    Setup
+  <a href="#example" class="md-nav__link">
+    Example
   </a>
   
 </li>
@@ -699,18 +699,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../alchemyIntegrationForNewScheme/" title="Alchemy: integrate with DAOstack interface" class="md-nav__link">
-      Alchemy: integrate with DAOstack interface
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -724,18 +712,6 @@
   <li class="md-nav__item">
     <a href="../../deployDAO/" title="Deploy a DAO" class="md-nav__link">
       Deploy a DAO
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../createNewInterface/" title="Create your own interface for DAOstack DAOs" class="md-nav__link">
-      Create your own interface for DAOstack DAOs
     </a>
   </li>
 
@@ -843,8 +819,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    Setup
+  <a href="#example" class="md-nav__link">
+    Example
   </a>
   
 </li>
@@ -879,29 +855,145 @@
 <ul>
 <li>should include a one time called public initialize function which gets the avatar as its first parameters (This will assist with the common migration process)</li>
 </ul>
-<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p>We will use <em>Alchemy-starter</em> for this tutorial, enter the directory and install starter-package</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">cd</span> <span class="n">alchemy</span><span class="o">-</span><span class="n">starter</span><span class="o">/</span>
-<span class="n">npm</span> <span class="n">i</span>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>You can refer to the non-universal schemes developed by the DAOstack team <a href="https://github.com/daostack/arc/tree/master/contracts/schemes">here</a></p>
+<p>Following is another non-universal scheme example that we will also use in subgraph and client part of this tutorial.</p>
+<p><em>BuyInWithRageQuitOpt</em>: A non-universal scheme to allow people to <em>buy reputation</em> by donating money to the DAO and if their goals no more align with the DAO, have the ability to <em>quit reputation</em> at some later time and receive propotional funds back.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="s2">&quot;@daostack/arc/contracts/controller/ControllerInterface.sol&quot;</span><span class="p">;</span>
+
+<span class="o">/**</span>
+ <span class="o">*</span> <span class="nd">@title</span> <span class="n">BuyIn</span>
+ <span class="o">*</span> <span class="nd">@dev</span> <span class="n">A</span> <span class="n">scheme</span> <span class="k">for</span> <span class="n">buying</span> <span class="ow">in</span> <span class="n">reputation</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">DAO</span> <span class="k">with</span> <span class="n">option</span> <span class="n">to</span> <span class="n">rage</span> <span class="n">quit</span>
+ <span class="o">*/</span>
+
+<span class="n">contract</span> <span class="n">BuyInWithRageQuitOpt</span><span class="p">{</span>
+  <span class="n">using</span> <span class="n">SafeMath</span> <span class="k">for</span> <span class="n">uint256</span><span class="p">;</span>
+
+  <span class="n">event</span> <span class="n">buyIn</span><span class="p">(</span><span class="n">address</span> <span class="n">indexed</span> <span class="n">_avatar</span><span class="p">,</span> <span class="n">address</span> <span class="n">indexed</span> <span class="n">_member</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_amount</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_rep</span><span class="p">);</span>
+  <span class="n">event</span> <span class="n">rageQuit</span><span class="p">(</span><span class="n">address</span> <span class="n">indexed</span> <span class="n">_avatar</span><span class="p">,</span> <span class="n">address</span> <span class="n">indexed</span> <span class="n">_member</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_amount</span><span class="p">,</span> <span class="n">uint256</span> <span class="n">_rep</span><span class="p">);</span>
+
+  <span class="n">Avatar</span> <span class="n">public</span> <span class="n">avatar</span><span class="p">;</span>
+  <span class="n">Reputation</span> <span class="n">public</span> <span class="n">reputation</span><span class="p">;</span>
+
+  <span class="n">function</span> <span class="n">initialize</span><span class="p">(</span>
+    <span class="n">Avatar</span> <span class="n">_avatar</span>
+  <span class="p">)</span>
+  <span class="n">external</span>
+  <span class="p">{</span>
+        <span class="n">require</span><span class="p">(</span><span class="n">avatar</span> <span class="o">==</span> <span class="n">Avatar</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;can be called only one time&quot;</span><span class="p">);</span>
+        <span class="n">require</span><span class="p">(</span><span class="n">_avatar</span> <span class="o">!=</span> <span class="n">Avatar</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;avatar cannot be zero&quot;</span><span class="p">);</span>
+        <span class="n">avatar</span> <span class="o">=</span> <span class="n">_avatar</span><span class="p">;</span>
+        <span class="n">reputation</span> <span class="o">=</span> <span class="n">avatar</span><span class="o">.</span><span class="n">nativeReputation</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="n">function</span> <span class="n">deposit</span><span class="p">()</span> <span class="n">payable</span> <span class="n">external</span><span class="p">{</span>
+    <span class="o">//</span> <span class="n">Transfer</span> <span class="n">buy</span> <span class="ow">in</span> <span class="n">amount</span> <span class="n">to</span> <span class="n">DAO</span>
+    <span class="n">require</span><span class="p">(</span><span class="n">address</span><span class="p">(</span><span class="n">avatar</span><span class="p">)</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">value</span><span class="p">));</span>
+
+    <span class="o">//</span> <span class="n">Mint</span> <span class="n">Equivalent</span> <span class="n">Rep</span> <span class="n">to</span> <span class="n">the</span> <span class="n">buyer</span>
+    <span class="n">require</span><span class="p">(</span><span class="n">ControllerInterface</span><span class="p">(</span><span class="n">avatar</span><span class="o">.</span><span class="n">owner</span><span class="p">())</span><span class="o">.</span><span class="n">mintReputation</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">address</span><span class="p">(</span><span class="n">avatar</span><span class="p">)),</span> <span class="s2">&quot;mint reputation should succeed&quot;</span><span class="p">);</span>
+
+    <span class="n">emit</span> <span class="n">buyIn</span><span class="p">(</span><span class="n">address</span><span class="p">(</span><span class="n">avatar</span><span class="p">),</span> <span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">value</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">function</span> <span class="n">quit</span><span class="p">()</span> <span class="n">public</span> <span class="n">returns</span><span class="p">(</span><span class="n">uint256</span><span class="p">){</span>
+    <span class="o">//</span> <span class="n">Get</span> <span class="n">current</span> <span class="n">reputation</span> <span class="n">of</span> <span class="n">the</span> <span class="n">quitter</span>
+    <span class="n">uint256</span> <span class="n">rep</span> <span class="o">=</span> <span class="n">reputation</span><span class="o">.</span><span class="n">balanceOfAt</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">block</span><span class="o">.</span><span class="n">number</span><span class="p">);</span>
+
+    <span class="n">require</span><span class="p">(</span> <span class="n">rep</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Only members can quit&quot;</span><span class="p">);</span>
+
+
+    <span class="o">//</span> <span class="n">Calculate</span> <span class="n">proportionate</span> <span class="n">amount</span> <span class="n">to</span> <span class="n">refund</span> <span class="n">to</span> <span class="n">the</span> <span class="n">quitter</span>
+    <span class="n">uint256</span> <span class="n">totalSupply</span> <span class="o">=</span> <span class="n">reputation</span><span class="o">.</span><span class="n">totalSupplyAt</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">number</span><span class="p">);</span>
+    <span class="n">uint256</span> <span class="n">amount</span> <span class="o">=</span> <span class="p">(</span><span class="n">address</span><span class="p">(</span><span class="n">avatar</span><span class="p">)</span><span class="o">.</span><span class="n">balance</span><span class="p">)</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">totalSupply</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">burn</span> <span class="n">reputation</span>
+    <span class="n">require</span><span class="p">(</span>
+      <span class="n">ControllerInterface</span><span class="p">(</span><span class="n">avatar</span><span class="o">.</span><span class="n">owner</span><span class="p">())</span><span class="o">.</span><span class="n">burnReputation</span><span class="p">(</span>
+        <span class="n">rep</span><span class="p">,</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span>
+        <span class="n">address</span><span class="p">(</span><span class="n">avatar</span><span class="p">))</span>
+    <span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">transfer</span> <span class="n">proportionate</span> <span class="n">funds</span>
+    <span class="n">require</span><span class="p">(</span><span class="n">ControllerInterface</span><span class="p">(</span><span class="n">avatar</span><span class="o">.</span><span class="n">owner</span><span class="p">())</span><span class="o">.</span><span class="n">sendEther</span><span class="p">(</span>
+      <span class="n">amount</span><span class="p">,</span>
+      <span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span>
+      <span class="n">avatar</span><span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="n">emit</span> <span class="n">rageQuit</span><span class="p">(</span><span class="n">address</span><span class="p">(</span><span class="n">avatar</span><span class="p">),</span> <span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">rep</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">rep</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </td></tr></table>
-
-</li>
-<li>
-<p>Add your custom scheme contract to <code>contracts</code> folder.</p>
-<p>Refer to example <a href="https://github.com/daostack/DAOstack-Hackers-Kit/blob/master/alchemy-starter/contracts/BuyInWithRageQuitOpt.sol"><em>BuyInWithRageQuitOpt.sol</em></a>: A non-universal scheme to allow people to <em>buy reputation</em> by donating money to the DAO and if their goals no more align with the DAO, have the ability to <em>quit reputation</em> at some later time and receive propotional funds back.</p>
-</li>
-<li>
-<p>Compile your contracts</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">npm</span> <span class="n">run</span> <span class="n">compile</span>
-</pre></div>
-</td></tr></table>
-
-</li>
-</ul>
                 
                   
                 
