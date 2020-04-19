@@ -1,3 +1,4 @@
+# Custom Schemes
 Scheme is an action a DAO on DAOstack platform can be enabled to take. Schemes might be used to help a DAO: propose and make investments, give reputation to agents, upgrade the DAO's contracts, register new schemes and constraints, etc.
 
 Apart from the schemes already designed by DAOstack team - [Arc](https://github.com/daostack/arc/tree/master/contracts/), you can also deploy your own `Custom Schemes` and register them to the DAO.

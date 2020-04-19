@@ -1,4 +1,5 @@
 ## Design Principle
+*Note: The Universal Schemes approach is deprecated and will be phased out in the future. It is now recommended to use a [Non-Universal Scheme](../developCustomNonUniScheme/)*
 
 *Universal* scheme is more **complex** than a non-universal one, since it serves multiple DAO (avatar)
 
