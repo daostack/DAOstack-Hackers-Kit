@@ -34,6 +34,7 @@ Example
     {
        "name":"GenericScheme",
        "schemeName":"GenericScheme",
+       "isUniversal":false,
        "params":[
           "GenesisProtocolAddress",
           {
@@ -80,11 +81,11 @@ If your Generic Scheme use vote parameters other than the ones already registere
   const voteParams = {
         "boostedVotePeriodLimit": 345600,
         "daoBountyConst": 10,
-        "minimumDaoBountyGWei": 150000000000,
+        "minimumDaoBounty": 150,
         "queuedVotePeriodLimit": 2592000,
         "queuedVoteRequiredPercentage": 50,
         "preBoostedVotePeriodLimit": 86400,
-        "proposingRepRewardGwei": 50000000000,
+        "proposingRepReward": 50,
         "quietEndingPeriod": 172800,
         "thresholdConst": 1200,
         "voteOnBehalf": "0x0000000000000000000000000000000000000000",
@@ -95,23 +96,38 @@ If your Generic Scheme use vote parameters other than the ones already registere
   const parameters = [
        [
           voteParams.queuedVoteRequiredPercentage.toString(),
-          voteOnBehalf.queuedVotePeriodLimit.toString(),
-          votersReputationLossRatio.boostedVotePeriodLimit.toString(),
+          voteParams.queuedVotePeriodLimit.toString(),
+          voteParams.boostedVotePeriodLimit.toString(),
           voteParams.preBoostedVotePeriodLimit.toString(),
-          voteOnBehalf.thresholdConst.toString(),
-          votersReputationLossRatio.quietEndingPeriod.toString(),
-          voteParams.proposingRepRewardGwei.toString(),
-          voteOnBehalf.votersReputationLossRatio.toString(),
-          voteParams.minimumDaoBountyGWei.toString(),
-          voteOnBehalf.daoBountyConst.toString(),
-          votersReputationLossRatio.activationTime.toString(),
+          voteParams.thresholdConst.toString(),
+          voteParams.quietEndingPeriod.toString(),
+          web3.utils.toWei(voteParams.proposingRepReward.toString()),
+          voteParams.votersReputationLossRatio.toString(),
+          web3.utils.toWei(voteParams.minimumDaoBounty.toString()),
+          voteParams.daoBountyConst.toString(),
+          voteParams.activationTime.toString(),
         ],
         voteParams.voteOnBehalf,
       ]
 
+  // Prepare the call to set the parameters
   const genesisProtocolSetParams = genesisProtocolContract.methods.setParameters(...parameters)
 
-  genesisProtocolSetParams.send()
+  // Get the parameters hash to use for deploying the Generic Scheme
+  const votingMachinesParamsHash = await genesisProtocolSetParams.call()
+
+  // Try reading the parameters from the GenesisProtocol contract to check if they already exist
+  const votingMachineCheckParams = await genesisProtocolContract.methods.parameters(votingMachinesParamsHash).call()
+  if (votingMachineCheckParams.minimumDaoBounty === '0') {
+    // If the parameters were not yet set before, send a transaction to set them.
+    // This will be needed only once per parameters set.
+    genesisProtocolSetParams.send()
+  }
+
+  // This is the parameters hash needed for the next step of deploying and initializing the new scheme.
+  // This should print out something like: "GenesisProtocol parameters hash: 0x20fbc717aca8a5df5a9f592082d733810a70a0404352332b33d30c7a2ffe2043"
+  // The actual hash will change based on the parameters you chose.
+  console.log("GenesisProtocol parameters hash: " + votingMachinesParamsHash)
 ```
 
 #### Set Generic Scheme to interact with your contract
@@ -121,7 +137,7 @@ Now, you will have to deploy a new instance of `GenericScheme` and use its `init
   - the DAO `Avatar` it connects to,
   - the `contractToCall`,
   - the `votingMachine` to use, 
-  - the `voteParameters` for voting on proposals that use the scheme.
+  - the `voteParameters` for voting on proposals that use the scheme (taken from the previous step).
 
 The following is a short script that shows how to do this:
 
@@ -152,7 +168,7 @@ The following is a short script that shows how to do this:
   // Get address from https://github.com/daostack/migration/blob/master/migration.json
   const votingMachineAddress = "0xaddress-of-VotingMachine-of-DAO-on-given-network"
 
-  // For eg if you want this Generic Scheme to enable DAO to interact with Bounties Network
+  // For example if you want this Generic Scheme to enable DAO to interact with Bounties Network
   // then targetContract would be the address of Bounties Network's respective contract
   const targetContractAddress = "0xaddress-of-contract-this-will-interact-with"
 
@@ -161,11 +177,11 @@ The following is a short script that shows how to do this:
   const paramHash = "0xVote-Param-Hash-from-previous-step"
 
   genericScheme.methods.initialize(
-        avatar,
-        paramHash,
-        votingMachineAddress,
-        targetContractAddress
-      ).send()
+    avatar,
+    votingMachineAddress,
+    paramHash,
+    targetContractAddress
+  ).send()
 ```
   
 #### Submit a new proposal to the Scheme Registrar via Alchemy UI
@@ -176,7 +192,7 @@ The following is a short script that shows how to do this:
   4. Select `Add Scheme` on the popup sidebar (on the left).
   5. Give the proposal an appropriate title, description, and url linking to a description of the proposal.
   6. For `Scheme`,  put the address of your Generic Scheme contract.
-  7. The`paramHash` can be null for non universal scheme.
+  7. The `paramHash` can be null for non universal scheme.
   8. In the permissions section, check `Call genericCall on behalf of` (this will allow your scheme to make generic calls, which is the whole point here).
   9. Submit the proposal and sign the transaction as normal.
   10. If the DAO passes your proposal, then your Generic Scheme with the ability to interact with the `targetContract` will be registered to the DAO, and people will be able to submit proposals for the DAO to take your custom generic action.
@@ -195,18 +211,26 @@ You will have to submit a PR [here](https://github.com/daostack/subgraph/tree/ma
               "DAOToken": "0xaddress-of-daotoken-on-this-network",
               "Reputation": "0xaddress-of-nativereputation-on-this-network",
               "Controller": "0xaddress-of-controller-on-this-network",
-              "Schemes": {
-                "GenesisScheme": "0xaddress-of-genericScheme-on-this-network"
-                },
+              "Schemes": [
+                {
+                  "name": "GenericScheme",
+                  "alias": "Your-GenericScheme-Alias",
+                  "address": "0xaddress-of-generic-scheme"
+                }
+              ],
               "arcVersion": "0.0.1-rc.22" # choose the correct arc version
             }
 
      3. If the scheme is for an already existing DAO, then edit `<existing-DAO>.json` for the correct network.
         Add to the schemes section, eg.
 
-              "Schemes": {
-                "GenesisScheme": "0xaddress-of-genericScheme-on-this-network"
-                },
+              "Schemes": [
+                {
+                  "name": "GenericScheme",
+                  "alias": "Your-GenericScheme-Alias",
+                  "address": "0xaddress-of-generic-scheme"
+                }
+              ],
               "arcVersion": "0.0.1-rc.22" # choose the correct arc version
 
 

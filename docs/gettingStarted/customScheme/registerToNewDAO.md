@@ -50,7 +50,8 @@ Following is `CommunityDaoSpec.json` using custom scheme designed in previous st
             "params": [
             ],
             "permissions": "0x00000000"
-            "alias": "DonationScheme"
+            "alias": "DonationScheme",
+            "fromArc": true
          }
        ],
        "VotingMachinesParams":[
@@ -91,6 +92,11 @@ Following is `CommunityDaoSpec.json` using custom scheme designed in previous st
        "useUController":false,
        "useDaoCreator":true,
        "founders":[
+         {
+          "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
+          "tokens": 1000,
+          "reputation": 1000
+         }
        ]
     }
 
