@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.2">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -53,12 +53,12 @@
       
     
     
-      <script src="../../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -87,7 +87,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#setup" tabindex="1" class="md-skip">
+      <a href="#setup" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -96,9 +96,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../.." title="DAOstack Developer Portal" class="md-header-nav__button md-logo">
+        <a href="../../.." title="DAOstack Developer Portal" aria-label="DAOstack Developer Portal" class="md-header-nav__button md-logo">
           
-            <img src="../../../images/daostack-logoW.svg" width="24" height="24">
+            <img alt="logo" src="../../../images/daostack-logoW.svg" width="24" height="24">
           
         </a>
       </div>
@@ -127,7 +127,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -190,7 +190,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <a href="../../.." title="DAOstack Developer Portal" class="md-nav__button md-logo">
       
-        <img src="../../../images/daostack-logoW.svg" width="48" height="48">
+        <img alt="logo" src="../../../images/daostack-logoW.svg" width="48" height="48">
       
     </a>
     DAOstack Developer Portal
@@ -1016,7 +1016,7 @@
 5
 6
 7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@daostack/client&#39;</span><span class="p">)</span>
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@daostack/client&#39;</span><span class="p">)</span>
 
 <span class="kr">const</span> <span class="nx">Arc</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">Arc</span>
 <span class="kr">const</span> <span class="nx">DAO</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">DAO</span>
@@ -1024,7 +1024,7 @@
 <span class="kr">const</span> <span class="nx">utils</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">utils</span>
 
 <span class="kd">let</span> <span class="nx">arc</span><span class="p">;</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
 
 <h3 id="initialize-arc">Initialize Arc<a class="headerlink" href="#initialize-arc" title="Permanent link">&para;</a></h3>
@@ -1044,7 +1044,7 @@
 14
 15
 16
-17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">initialize</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">initialize</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="c1">// &quot;Arc&quot; is the main class that handles configuration and connections</span>
   <span class="c1">// to various services. Create an Arc instance with settings to connect</span>
   <span class="c1">// to the local docker images</span>
@@ -1061,17 +1061,17 @@
   <span class="nx">await</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">fetchContractInfos</span><span class="p">()</span>
 
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
 
 <h3 id="add-your-private-key">Add your private key<a class="headerlink" href="#add-your-private-key" title="Permanent link">&para;</a></h3>
 <p>While using Ganache, by default it will be set to <code>account[0]</code></p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">//</span> <span class="k">Add</span> <span class="n">your</span> <span class="n">private</span> <span class="k">key</span> <span class="k">or</span> <span class="n">you</span> <span class="n">can</span> <span class="n">use</span> <span class="n">metamask</span> <span class="n">web3Provider</span> <span class="n">above</span>
-<span class="n">const</span> <span class="n">account</span> <span class="o">=</span> <span class="n">arc</span><span class="p">.</span><span class="n">web3</span><span class="p">.</span><span class="n">eth</span><span class="p">.</span><span class="n">accounts</span><span class="p">.</span><span class="n">privateKeyToAccount</span><span class="p">(</span><span class="n">PRIVATE_KEY</span><span class="p">)</span>
-<span class="n">arc</span><span class="p">.</span><span class="n">web3</span><span class="p">.</span><span class="n">eth</span><span class="p">.</span><span class="n">accounts</span><span class="p">.</span><span class="n">wallet</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>
-</pre></div>
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">// Add your private key or you can use metamask web3Provider above</span>
+<span class="err">const account = arc.web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY)</span>
+<span class="err">arc.web3.eth.accounts.wallet.add(account)</span>
+</code></pre></div>
 </td></tr></table>
 
 <h3 id="query-all-daos">Query All DAOs<a class="headerlink" href="#query-all-daos" title="Permanent link">&para;</a></h3>
@@ -1083,7 +1083,7 @@
 6
 7
 8
-9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">showAllDAOs</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">showAllDAOs</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="c1">// we subscribe to the data needed to create resultant set i.e. DAO id in this case</span>
   <span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span>
     <span class="p">(</span><span class="nx">daos</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
@@ -1092,7 +1092,7 @@
     <span class="p">}</span>
   <span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
 
 <h3 id="create-proposal">Create Proposal<a class="headerlink" href="#create-proposal" title="Permanent link">&para;</a></h3>
@@ -1138,7 +1138,7 @@
 40
 41
 42
-43</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">createProposal</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+43</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">createProposal</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="c1">// we get the first returned item from the obervable that returns a list of DAOs</span>
   <span class="kr">const</span> <span class="nx">daos</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">().</span><span class="nx">first</span><span class="p">()</span>
 
@@ -1181,7 +1181,7 @@
 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Tx Hash: </span><span class="si">${</span><span class="nx">minedTx</span><span class="p">.</span><span class="nx">receipt</span><span class="p">.</span><span class="nx">transactionHash</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
 
 <h3 id="query-proposals">Query Proposals<a class="headerlink" href="#query-proposals" title="Permanent link">&para;</a></h3>
@@ -1197,7 +1197,7 @@
  9
 10
 11
-12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">showProposalDetails</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">showProposalDetails</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">daos</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">daos</span><span class="p">().</span><span class="nx">first</span><span class="p">()</span>
   <span class="kr">const</span> <span class="nx">dao</span> <span class="o">=</span> <span class="nx">daos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">// or the index of whichever DAO you are interested in</span>
   <span class="kr">const</span> <span class="nx">proposals</span> <span class="o">=</span> <span class="nx">dao</span><span class="p">.</span><span class="nx">proposals</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span>
@@ -1209,7 +1209,7 @@
       <span class="p">}</span>
     <span class="p">})</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
 
 <h3 id="vote-on-proposal">Vote on Proposal<a class="headerlink" href="#vote-on-proposal" title="Permanent link">&para;</a></h3>
@@ -1223,17 +1223,17 @@
  7
  8
  9
-10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">voteOnProposal</span> <span class="o">=</span> <span class="nv">async</span> <span class="ss">()</span> <span class="o">=&gt;</span> {
-  <span class="nv">const</span> <span class="nv">proposal</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Proposal</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">0x123abc....</span><span class="s1">&#39;</span>, <span class="nv">arc</span><span class="ss">)</span>
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="n">const</span> <span class="n">voteOnProposal</span> <span class="o">=</span> <span class="n">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="err">{</span>
+  <span class="n">const</span> <span class="n">proposal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Proposal</span><span class="p">(</span><span class="s1">&#39;0x123abc....&#39;</span><span class="p">,</span> <span class="n">arc</span><span class="p">)</span>
 
-  <span class="nv">try</span> {
-      <span class="nv">await</span> <span class="nv">proposal</span>.<span class="nv">vote</span><span class="ss">(</span><span class="nv">IProposalOutcome</span>.<span class="nv">Pass</span><span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
-  } <span class="nv">catch</span><span class="ss">(</span><span class="nv">err</span><span class="ss">)</span> {
-     <span class="o">//</span> <span class="nv">an</span> <span class="nv">error</span> <span class="nv">occurred</span>, <span class="nv">perhaps</span> <span class="nv">the</span> <span class="nv">proposal</span> <span class="nv">voting</span> <span class="nv">period</span> <span class="nv">ended</span>, <span class="nv">or</span> <span class="nv">the</span> <span class="nv">sender</span><span class="s1">&#39;</span><span class="s">s account does no thave any reputation</span>
-      <span class="nv">console</span>.<span class="nv">log</span><span class="ss">(</span><span class="nv">err</span>.<span class="nv">message</span><span class="ss">)</span>
-  }
-}
-</pre></div>
+  <span class="n">try</span> <span class="err">{</span>
+      <span class="n">await</span> <span class="n">proposal</span><span class="p">.</span><span class="n">vote</span><span class="p">(</span><span class="n">IProposalOutcome</span><span class="p">.</span><span class="n">Pass</span><span class="p">).</span><span class="n">send</span><span class="p">()</span>
+  <span class="err">}</span> <span class="n">catch</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="err">{</span>
+     <span class="o">//</span> <span class="n">an</span> <span class="n">error</span> <span class="n">occurred</span><span class="p">,</span> <span class="n">perhaps</span> <span class="n">the</span> <span class="n">proposal</span> <span class="n">voting</span> <span class="n">period</span> <span class="n">ended</span><span class="p">,</span> <span class="k">or</span> <span class="n">the</span> <span class="n">sender</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">account</span> <span class="n">does</span> <span class="k">no</span> <span class="n">thave</span> <span class="k">any</span> <span class="n">reputation</span>
+      <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">err</span><span class="p">.</span><span class="n">message</span><span class="p">)</span>
+  <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>
 </td></tr></table>
 
 <h3 id="query-votes">Query Votes<a class="headerlink" href="#query-votes" title="Permanent link">&para;</a></h3>
@@ -1248,7 +1248,7 @@
  8
  9
 10
-11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">showAllVotes</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">showAllVotes</span> <span class="o">=</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">proposal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">client</span><span class="p">.</span><span class="nx">Proposal</span><span class="p">(</span><span class="s1">&#39;0xfa06e538a0ecb32c1cd1eaad2102a8104180b56b6f088fab298c1ce86f582b8e&#39;</span><span class="p">,</span> <span class="nx">arc</span><span class="p">)</span>
   <span class="nx">proposal</span><span class="p">.</span><span class="nx">votes</span><span class="p">({},</span> <span class="p">{</span> <span class="nx">fetchAllData</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}).</span><span class="nx">subscribe</span><span class="p">(</span>
     <span class="nx">async</span> <span class="p">(</span><span class="nx">votes</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
@@ -1259,10 +1259,11 @@
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="sb">`Vote id: </span><span class="si">${</span><span class="nx">vote</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">, voter: </span><span class="si">${</span><span class="nx">vote</span><span class="p">.</span><span class="nx">voter</span><span class="si">}</span><span class="sb">, proposal: </span><span class="si">${</span><span class="nx">proposal</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
           <span class="p">})}})</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
                 
                   
+                
                 
               
               
@@ -1318,20 +1319,20 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
-      <a href="https://daostack.slack.com" class="md-footer-social__link fa fa-slack"></a>
+      <a href="https://daostack.slack.com" target="_blank" rel="noopener" title="slack" class="md-footer-social__link fa fa-slack"></a>
     
-      <a href="https://t.me/daostackcommunity" class="md-footer-social__link fa fa-telegram"></a>
+      <a href="https://t.me/daostackcommunity" target="_blank" rel="noopener" title="telegram" class="md-footer-social__link fa fa-telegram"></a>
     
   </div>
 
@@ -1341,7 +1342,7 @@
       
     </div>
     
-      <script src="../../../assets/javascripts/application.c648116f.js"></script>
+      <script src="../../../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
       

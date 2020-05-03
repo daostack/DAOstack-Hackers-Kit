@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.2">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -53,12 +53,12 @@
       
     
     
-      <script src="../../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -87,7 +87,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#how-to-use" tabindex="1" class="md-skip">
+      <a href="#how-to-use" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -96,9 +96,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../.." title="DAOstack Developer Portal" class="md-header-nav__button md-logo">
+        <a href="../../.." title="DAOstack Developer Portal" aria-label="DAOstack Developer Portal" class="md-header-nav__button md-logo">
           
-            <img src="../../../images/daostack-logoW.svg" width="24" height="24">
+            <img alt="logo" src="../../../images/daostack-logoW.svg" width="24" height="24">
           
         </a>
       </div>
@@ -127,7 +127,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -190,7 +190,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <a href="../../.." title="DAOstack Developer Portal" class="md-nav__button md-logo">
       
-        <img src="../../../images/daostack-logoW.svg" width="48" height="48">
+        <img alt="logo" src="../../../images/daostack-logoW.svg" width="48" height="48">
       
     </a>
     DAOstack Developer Portal
@@ -1053,7 +1053,7 @@
 15
 16
 17
-18</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="p">{</span> <span class="n">Arc</span> <span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@daostack/client&#39;</span>
+18</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="p">{</span> <span class="n">Arc</span> <span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@daostack/client&#39;</span>
 
 <span class="n">const</span> <span class="n">arc</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Arc</span><span class="p">({</span>
   <span class="n">graphqlHttpProvider</span><span class="p">:</span> <span class="s2">&quot;https://subgraph.daostack.io/subgraphs/name/v23&quot;</span><span class="p">,</span>
@@ -1071,7 +1071,7 @@
 <span class="o">//</span> <span class="k">with</span> <span class="n">information</span> <span class="n">on</span> <span class="n">where</span> <span class="n">the</span> <span class="n">contracts</span> <span class="n">can</span> <span class="n">be</span> <span class="n">found</span>
 <span class="o">//</span> <span class="n">query</span> <span class="n">the</span> <span class="n">subgraph</span> <span class="k">for</span> <span class="n">the</span> <span class="n">contract</span> <span class="n">addresses</span><span class="p">,</span> <span class="ow">and</span> <span class="n">use</span> <span class="n">those</span>
 <span class="n">await</span> <span class="n">arc</span><span class="o">.</span><span class="n">fetchContractInfos</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
 
 <p><strong>Note:</strong></p>
@@ -1099,10 +1099,10 @@
 <p>Example</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">proposal</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Proposal</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">0x1234....</span><span class="s1">&#39;</span>, <span class="nv">arc</span><span class="ss">)</span>
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="n">const</span> <span class="n">proposal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Proposal</span><span class="p">(</span><span class="s1">&#39;0x1234....&#39;</span><span class="p">,</span> <span class="n">arc</span><span class="p">)</span>
 
-<span class="nv">await</span> <span class="nv">proposal</span>.<span class="nv">vote</span><span class="ss">(</span>...<span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
-</pre></div>
+<span class="n">await</span> <span class="n">proposal</span><span class="p">.</span><span class="n">vote</span><span class="p">(...).</span><span class="n">send</span><span class="p">()</span>
+</code></pre></div>
 </td></tr></table>
 
 <h4 id="by-providing-static-entity-state">By providing static entity state<a class="headerlink" href="#by-providing-static-entity-state" title="Permanent link">&para;</a></h4>
@@ -1115,15 +1115,15 @@
 5
 6
 7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">arc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Arc</span><span class="p">(</span><span class="err">{</span>
-  <span class="n">web3Provider</span><span class="p">:</span> <span class="o">`</span><span class="n">wss</span><span class="p">:</span><span class="o">//</span><span class="n">mainnet</span><span class="p">.</span><span class="n">infura</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">ws</span><span class="o">/</span><span class="n">v3</span><span class="o">/</span><span class="n">e0cdf3bfda9b468fa908aa6ab03d5ba2</span><span class="o">`</span><span class="p">,</span>
-<span class="err">}</span><span class="p">)</span>
-<span class="n">const</span> <span class="n">proposal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Proposal</span><span class="p">(</span><span class="err">{</span>
-  <span class="n">id</span><span class="p">:</span> <span class="s1">&#39;0x12455..&#39;</span><span class="p">,</span>
-  <span class="n">votingMachine</span><span class="p">:</span> <span class="s1">&#39;0x1111..&#39;</span><span class="p">,</span>
-  <span class="n">scheme</span><span class="p">:</span> <span class="s1">&#39;0x12345...&#39;</span>
-<span class="err">}</span><span class="p">,</span> <span class="n">arc</span><span class="p">)</span>
-</pre></div>
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">const arc = new Arc({</span>
+<span class="err">  web3Provider: `wss://mainnet.infura.io/ws/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2`,</span>
+<span class="err">})</span>
+<span class="err">const proposal = new Proposal({</span>
+<span class="err">  id: &#39;0x12455..&#39;,</span>
+<span class="err">  votingMachine: &#39;0x1111..&#39;,</span>
+<span class="err">  scheme: &#39;0x12345...&#39;</span>
+<span class="err">}, arc)</span>
+</code></pre></div>
 </td></tr></table>
 
 <h3 id="common-methods-and-properties">Common methods and properties<a class="headerlink" href="#common-methods-and-properties" title="Permanent link">&para;</a></h3>
@@ -1163,14 +1163,14 @@
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">proposal</span>.<span class="k">state</span>().<span class="n">subscribe</span>(
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="n">proposal</span>.<span class="k">state</span>().<span class="n">subscribe</span>(
   (<span class="n">newState</span>) =&gt; <span class="n">console</span>.<span class="nb">log</span>(`<span class="n">This</span> <span class="n">proposal</span> <span class="k">has</span> ${<span class="n">newState</span>.<span class="n">votesFor</span>} <span class="n">upvotes</span>`)
 )
 
 <span class="n">dao</span>.<span class="k">state</span>().<span class="n">subscribe</span>(
   (<span class="n">newState</span>) =&gt; <span class="n">console</span>.<span class="nb">log</span>(`<span class="n">This</span> <span class="n">DAO</span> <span class="k">has</span> ${<span class="n">newState</span>.<span class="n">memberCount</span>} <span class="n">members</span>`)
 )
-</pre></div>
+</code></pre></div>
 </td></tr></table>
 
 </li>
@@ -1187,11 +1187,11 @@
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">DAO</span><span class="p">.</span><span class="k">search</span><span class="p">(</span>
-  <span class="n">arc</span><span class="p">,</span>
-  <span class="err">{</span><span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">name</span><span class="p">:</span> <span class="ss">&quot;Foo&quot;</span> <span class="err">}}</span>
-<span class="p">)</span>
-</pre></div>
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">DAO.search(</span>
+<span class="err">  arc,</span>
+<span class="err">  {where: { name: &quot;Foo&quot; }}</span>
+<span class="err">)</span>
+</code></pre></div>
 </td></tr></table>
 
 <p>eg. To get current state of all DAOs that are called <code>Foo</code> ordered by <code>createdAt</code>, you can do:</p>
@@ -1202,15 +1202,15 @@
 5
 6
 7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">DAO</span><span class="p">.</span><span class="k">search</span><span class="p">(</span>
-  <span class="n">arc</span><span class="p">,</span> <span class="o">//</span> <span class="n">context</span>
-  <span class="err">{</span><span class="k">where</span><span class="p">:</span> 
-    <span class="err">{</span> <span class="n">name</span><span class="p">:</span> <span class="ss">&quot;Foo&quot;</span> <span class="err">}</span><span class="p">,</span>
-    <span class="n">orderBy</span><span class="p">:</span> <span class="ss">&quot;createdAt&quot;</span>
-  <span class="err">}</span><span class="p">,</span> <span class="o">//</span> <span class="k">options</span>
-  <span class="err">{</span><span class="n">fetchAllData</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span> <span class="o">//</span> <span class="n">apolloQueryOptions</span>
-<span class="p">)</span>
-</pre></div>
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">DAO.search(</span>
+<span class="err">  arc, // context</span>
+<span class="err">  {where: </span>
+<span class="err">    { name: &quot;Foo&quot; },</span>
+<span class="err">    orderBy: &quot;createdAt&quot;</span>
+<span class="err">  }, // options</span>
+<span class="err">  {fetchAllData: true} // apolloQueryOptions</span>
+<span class="err">)</span>
+</code></pre></div>
 </td></tr></table>
 
 </li>
@@ -1223,24 +1223,24 @@
 </ol>
 <h2 id="search-filters-and-observables">Search filters and Observables<a class="headerlink" href="#search-filters-and-observables" title="Permanent link">&para;</a></h2>
 <p>The search functions are wrappers around graphql queries and standard <a href="../../subgraph/queries/">graphql syntax</a> can be used to filter and sort the queries, and for pagination:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Proposal</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">dao</span><span class="p">:</span> <span class="s1">&#39;0x1234..&#39;</span> <span class="err">}}</span><span class="p">)</span>
-</pre></div>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">Proposal.search(arc, { where: { dao: &#39;0x1234..&#39; }})</span>
+</code></pre></div>
 </td></tr></table>
 
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">scheme</span><span class="p">:</span> <span class="s1">&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;</span><span class="err">}}</span><span class="p">)</span>
-  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">scheme_in</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;</span><span class="p">]</span><span class="err">}}</span><span class="p">)</span>
-</pre></div>
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">  dao.proposals({ where: { scheme: &#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;}})</span>
+<span class="err">  dao.proposals({ where: { scheme_in: [&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;]}})</span>
+</code></pre></div>
 </td></tr></table>
 
 <p>Paging</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="n">skip</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="k">first</span><span class="p">:</span> <span class="mi">100</span><span class="err">}</span><span class="p">)</span>
-</pre></div>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">  dao.proposals({ skip: 100, first: 100})</span>
+</code></pre></div>
 </td></tr></table>
 
 <p>Sorting:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="n">orderBy</span><span class="p">:</span> <span class="s1">&#39;createdAt&#39;</span><span class="p">,</span> <span class="n">orderDirection</span><span class="p">:</span> <span class="s1">&#39;desc&#39;</span><span class="err">}</span><span class="p">)</span>
-</pre></div>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">  dao.proposals({ orderBy: &#39;createdAt&#39;, orderDirection: &#39;desc&#39;})</span>
+</code></pre></div>
 </td></tr></table>
 
 <p>All these queries return an <a href="https://rxjs-dev.firebaseapp.com/guide/observable">rxjs <code>Observable</code></a> object.</p>
@@ -1253,22 +1253,22 @@ Please refer to <a href="../querying/">Subscriptions section</a> for details on 
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">observable</span> <span class="o">=</span>  <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span> <span class="o">//</span> <span class="nv">all</span> <span class="nv">proposals</span> <span class="nv">in</span> <span class="nv">this</span> <span class="nv">dao</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>const observable =  dao.proposals() // all proposals in this dao
 
-<span class="o">//</span> <span class="nv">a</span> <span class="nv">subscription</span>
-<span class="nv">const</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="nv">observable</span>.<span class="nv">subscribe</span><span class="ss">(</span>
-  <span class="ss">(</span><span class="k">next</span><span class="ss">)</span> <span class="o">=&gt;</span> <span class="nv">console</span>.<span class="nv">log</span><span class="ss">(</span>`<span class="nv">Now</span> <span class="nv">there</span> <span class="nv">are</span> ${<span class="k">next</span>.<span class="nv">length</span>} <span class="nv">proposals</span>`<span class="ss">)</span> <span class="o">//</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">called</span> <span class="nv">each</span> <span class="nv">time</span> <span class="nv">the</span> <span class="nv">data</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">qeury</span> <span class="nv">changes</span>
-<span class="ss">)</span>
-<span class="nv">subscription</span>.<span class="nv">unsubscribe</span><span class="ss">()</span> <span class="o">//</span> <span class="k">do</span> <span class="nv">not</span> <span class="nv">forget</span> <span class="nv">to</span> <span class="nv">unsubscribe</span>
-</pre></div>
+// a subscription
+const subscription = observable.subscribe(
+  (next) =&gt; console.log(`Now there are <span class="cp">${</span><span class="nb">next</span><span class="o">.</span><span class="n">length</span><span class="cp">}</span> proposals`) // will be called each time the data from the qeury changes
+)
+subscription.unsubscribe() // do not forget to unsubscribe
+</code></pre></div>
 </td></tr></table>
 
 <p>If you are only interested in the first result, but do not want to get further updates when the data is changed, there is a helper function that returns a Promise
 with the first result</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">observable</span> <span class="o">=</span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">()</span> <span class="o">//</span> <span class="k">all</span> <span class="n">proposals</span> <span class="k">in</span> <span class="n">this</span> <span class="n">dao</span>
-<span class="n">const</span> <span class="n">proposals</span> <span class="o">=</span> <span class="n">await</span> <span class="n">observable</span><span class="p">.</span><span class="k">first</span><span class="p">()</span> <span class="o">//</span> <span class="k">returns</span> <span class="n">a</span> <span class="n">list</span> <span class="k">of</span> <span class="n">Proposal</span> <span class="n">instances</span>
-</pre></div>
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">const observable =  dao.proposals() // all proposals in this dao</span>
+<span class="err">const proposals = await observable.first() // returns a list of Proposal instances</span>
+</code></pre></div>
 </td></tr></table>
 
 <h2 id="sending-transactions">Sending transactions<a class="headerlink" href="#sending-transactions" title="Permanent link">&para;</a></h2>
@@ -1283,17 +1283,17 @@ with the first result</p>
  7
  8
  9
-10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">DAO</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DAO</span><span class="p">(</span><span class="s1">&#39;0x123DAOADDRESS&#39;</span><span class="p">)</span>
-<span class="n">const</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">dao</span><span class="p">.</span><span class="n">createProposal</span><span class="p">(</span><span class="err">{</span>
-  <span class="n">beneficiary</span><span class="p">:</span> <span class="s1">&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;</span><span class="p">,</span>
-  <span class="n">ethReward</span><span class="p">:</span> <span class="n">toWei</span><span class="p">(</span><span class="s1">&#39;300&#39;</span><span class="p">),</span>
-  <span class="n">nativeTokenReward</span><span class="p">:</span> <span class="n">toWei</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),</span>
-  <span class="n">periodLength</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="n">periods</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="n">reputationReward</span><span class="p">:</span> <span class="n">toWei</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">),</span>
-  <span class="n">scheme</span><span class="p">:</span> <span class="s1">&#39;0xContributionRewardAddress&#39;</span> <span class="o">//</span> <span class="n">address</span> <span class="k">of</span> <span class="n">a</span> <span class="n">contribution</span> <span class="n">reward</span> <span class="n">scheme</span> <span class="n">that</span> <span class="k">is</span> <span class="n">registered</span> <span class="k">with</span> <span class="n">this</span> <span class="n">DAO</span>
-<span class="err">}</span><span class="p">)</span>
-</pre></div>
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">const DAO = new DAO(&#39;0x123DAOADDRESS&#39;)</span>
+<span class="err">const tx = dao.createProposal({</span>
+<span class="err">  beneficiary: &#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;,</span>
+<span class="err">  ethReward: toWei(&#39;300&#39;),</span>
+<span class="err">  nativeTokenReward: toWei(&#39;1&#39;),</span>
+<span class="err">  periodLength: 0,</span>
+<span class="err">  periods: 1,</span>
+<span class="err">  reputationReward: toWei(&#39;10&#39;),</span>
+<span class="err">  scheme: &#39;0xContributionRewardAddress&#39; // address of a contribution reward scheme that is registered with this DAO</span>
+<span class="err">})</span>
+</code></pre></div>
 </td></tr></table>
 
 <p>All functions that send a transaction to the blockchain (like <code>DAO.createProposal</code>, <code>Proposal.vote</code>, <code>Token.mint</code>, etc, etc) return an rxjs Observable. This observable returns a stream of updates about the state of the transaction: first when it is sent, then when it is mined and confirmed.</p>
@@ -1305,7 +1305,7 @@ with the first result</p>
 5
 6
 7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">tx</span>.<span class="n">subscribe</span>(
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="n">tx</span>.<span class="n">subscribe</span>(
   (<span class="k">next</span>) =&gt; {
     <span class="n">console</span>.<span class="nb">log</span>(<span class="k">next</span>.<span class="k">state</span>) // <span class="n">sending</span>, <span class="n">sent</span>, <span class="o">or</span> <span class="n">mined</span>
     <span class="k">if</span> (<span class="k">next</span>.<span class="n">stage</span> === <span class="n">ITransactionStage</span>.<span class="n">Mined</span>) {
@@ -1313,19 +1313,20 @@ with the first result</p>
       <span class="n">console</span>.<span class="nb">log</span>(<span class="k">next</span>.<span class="n">result</span>)
     }
   })
-</pre></div>
+</code></pre></div>
 </td></tr></table>
 
 <p>All operations also provide a convenience function <code>send()</code> that returns a promise that resolves when the transaction is mined</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">voteTransaction</span> <span class="o">=</span> <span class="nv">await</span> <span class="nv">proposal</span>.<span class="nv">vote</span><span class="ss">(</span>...<span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
-<span class="nv">const</span> <span class="nv">vote</span> <span class="o">=</span> <span class="nv">voteTransaction</span>.<span class="nb">result</span> <span class="o">//</span> <span class="nv">an</span> <span class="nv">instance</span> <span class="nv">of</span> <span class="nv">Vote</span>
-</pre></div>
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">const voteTransaction = await proposal.vote(...).send()</span>
+<span class="err">const vote = voteTransaction.result // an instance of Vote</span>
+</code></pre></div>
 </td></tr></table>
 
 <p>For details, checkout complete <a href="https://daostack.github.io/client/docs/globals.html">API reference</a></p>
                 
                   
+                
                 
               
               
@@ -1381,20 +1382,20 @@ with the first result</p>
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
-      <a href="https://daostack.slack.com" class="md-footer-social__link fa fa-slack"></a>
+      <a href="https://daostack.slack.com" target="_blank" rel="noopener" title="slack" class="md-footer-social__link fa fa-slack"></a>
     
-      <a href="https://t.me/daostackcommunity" class="md-footer-social__link fa fa-telegram"></a>
+      <a href="https://t.me/daostackcommunity" target="_blank" rel="noopener" title="telegram" class="md-footer-social__link fa fa-telegram"></a>
     
   </div>
 
@@ -1404,7 +1405,7 @@ with the first result</p>
       
     </div>
     
-      <script src="../../../assets/javascripts/application.c648116f.js"></script>
+      <script src="../../../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
       

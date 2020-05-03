@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.2">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -53,12 +53,12 @@
       
     
     
-      <script src="../../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -87,7 +87,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#create-dao-spec" tabindex="1" class="md-skip">
+      <a href="#create-dao-spec" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -96,9 +96,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../.." title="DAOstack Developer Portal" class="md-header-nav__button md-logo">
+        <a href="../../.." title="DAOstack Developer Portal" aria-label="DAOstack Developer Portal" class="md-header-nav__button md-logo">
           
-            <img src="../../../images/daostack-logoW.svg" width="24" height="24">
+            <img alt="logo" src="../../../images/daostack-logoW.svg" width="24" height="24">
           
         </a>
       </div>
@@ -127,7 +127,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -190,7 +190,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <a href="../../.." title="DAOstack Developer Portal" class="md-nav__button md-logo">
       
-        <img src="../../../images/daostack-logoW.svg" width="48" height="48">
+        <img alt="logo" src="../../../images/daostack-logoW.svg" width="48" height="48">
       
     </a>
     DAOstack Developer Portal
@@ -1031,73 +1031,85 @@
 63
 64
 65
-66</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="err">{</span>
-   <span class="ss">&quot;orgName&quot;</span><span class="p">:</span><span class="ss">&quot;CommunityDAO&quot;</span><span class="p">,</span>
-   <span class="ss">&quot;tokenName&quot;</span><span class="p">:</span><span class="ss">&quot;Commune&quot;</span><span class="p">,</span>
-   <span class="ss">&quot;tokenSymbol&quot;</span><span class="p">:</span><span class="ss">&quot;CDT&quot;</span><span class="p">,</span>
-   <span class="ss">&quot;ContributionReward&quot;</span><span class="p">:[</span>
-     <span class="err">{</span>
-       <span class="ss">&quot;voteParams&quot;</span><span class="p">:</span> <span class="mi">0</span>
-     <span class="err">}</span>
-   <span class="p">],</span>
-   <span class="ss">&quot;SchemeRegistrar&quot;</span><span class="p">:</span> <span class="p">[</span>
-     <span class="err">{</span>  
-       <span class="ss">&quot;voteRegisterParams&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-       <span class="ss">&quot;voteRemoveParams&quot;</span><span class="p">:</span> <span class="mi">1</span>
-     <span class="err">}</span>
-   <span class="p">],</span>
-   <span class="ss">&quot;CustomSchemes&quot;</span><span class="p">:</span> <span class="p">[</span>
-     <span class="err">{</span>
-        <span class="ss">&quot;name&quot;</span><span class="p">:</span> <span class="ss">&quot;BuyInWithRageQuitOpt&quot;</span><span class="p">,</span>
-        <span class="ss">&quot;schemeName&quot;</span><span class="p">:</span> <span class="ss">&quot;BuyInWithRageQuitOpt&quot;</span><span class="p">,</span>
-        <span class="ss">&quot;isUniversal&quot;</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
-        <span class="ss">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">],</span>
-        <span class="ss">&quot;permissions&quot;</span><span class="p">:</span> <span class="ss">&quot;0x00000000&quot;</span>
-        <span class="ss">&quot;alias&quot;</span><span class="p">:</span> <span class="ss">&quot;DonationScheme&quot;</span>
-     <span class="err">}</span>
-   <span class="p">],</span>
-   <span class="ss">&quot;VotingMachinesParams&quot;</span><span class="p">:[</span>
-      <span class="err">{</span>
-         <span class="ss">&quot;activationTime&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-         <span class="ss">&quot;boostedVotePeriodLimit&quot;</span><span class="p">:</span> <span class="mi">345600</span><span class="p">,</span>
-         <span class="ss">&quot;daoBountyConst&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-         <span class="ss">&quot;minimumDaoBounty&quot;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
-         <span class="ss">&quot;preBoostedVotePeriodLimit&quot;</span><span class="p">:</span> <span class="mi">86400</span><span class="p">,</span>
-         <span class="ss">&quot;proposingRepReward&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-         <span class="ss">&quot;queuedVotePeriodLimit&quot;</span><span class="p">:</span> <span class="mi">2592000</span><span class="p">,</span>
-         <span class="ss">&quot;queuedVoteRequiredPercentage&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-         <span class="ss">&quot;quietEndingPeriod&quot;</span><span class="p">:</span> <span class="mi">172800</span><span class="p">,</span>
-         <span class="ss">&quot;thresholdConst&quot;</span><span class="p">:</span> <span class="mi">1200</span><span class="p">,</span>
-         <span class="ss">&quot;voteOnBehalf&quot;</span><span class="p">:</span> <span class="ss">&quot;0x0000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
-         <span class="ss">&quot;votersReputationLossRatio&quot;</span><span class="p">:</span> <span class="mi">0</span>
-      <span class="err">}</span><span class="p">,</span>
-      <span class="err">{</span>
-         <span class="ss">&quot;activationTime&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-         <span class="ss">&quot;boostedVotePeriodLimit&quot;</span><span class="p">:</span> <span class="mi">691200</span><span class="p">,</span>
-         <span class="ss">&quot;daoBountyConst&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-         <span class="ss">&quot;minimumDaoBounty&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
-         <span class="ss">&quot;preBoostedVotePeriodLimit&quot;</span><span class="p">:</span> <span class="mi">172800</span><span class="p">,</span>
-         <span class="ss">&quot;proposingRepReward&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-         <span class="ss">&quot;queuedVotePeriodLimit&quot;</span><span class="p">:</span> <span class="mi">5184000</span><span class="p">,</span>
-         <span class="ss">&quot;queuedVoteRequiredPercentage&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-         <span class="ss">&quot;quietEndingPeriod&quot;</span><span class="p">:</span> <span class="mi">345600</span><span class="p">,</span>
-         <span class="ss">&quot;thresholdConst&quot;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">,</span>
-         <span class="ss">&quot;voteOnBehalf&quot;</span><span class="p">:</span> <span class="ss">&quot;0x0000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
-         <span class="ss">&quot;votersReputationLossRatio&quot;</span><span class="p">:</span> <span class="mi">0</span>
-      <span class="err">}</span>
-   <span class="p">],</span>
-   <span class="ss">&quot;schemes&quot;</span><span class="p">:</span><span class="err">{</span>
-      <span class="ss">&quot;ContributionReward&quot;</span><span class="p">:</span><span class="k">true</span><span class="p">,</span>
-      <span class="ss">&quot;SchemeRegistrar&quot;</span><span class="p">:</span><span class="k">true</span>
-   <span class="err">}</span><span class="p">,</span>
-   <span class="ss">&quot;unregisterOwner&quot;</span><span class="p">:</span><span class="k">true</span><span class="p">,</span>
-   <span class="ss">&quot;useUController&quot;</span><span class="p">:</span><span class="k">false</span><span class="p">,</span>
-   <span class="ss">&quot;useDaoCreator&quot;</span><span class="p">:</span><span class="k">true</span><span class="p">,</span>
-   <span class="ss">&quot;founders&quot;</span><span class="p">:[</span>
-   <span class="p">]</span>
+66
+67
+68
+69
+70
+71
+72</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">   &quot;orgName&quot;:&quot;CommunityDAO&quot;,</span>
+<span class="err">   &quot;tokenName&quot;:&quot;Commune&quot;,</span>
+<span class="err">   &quot;tokenSymbol&quot;:&quot;CDT&quot;,</span>
+<span class="err">   &quot;ContributionReward&quot;:[</span>
+<span class="err">     {</span>
+<span class="err">       &quot;voteParams&quot;: 0</span>
+<span class="err">     }</span>
+<span class="err">   ],</span>
+<span class="err">   &quot;SchemeRegistrar&quot;: [</span>
+<span class="err">     {  </span>
+<span class="err">       &quot;voteRegisterParams&quot;: 1,</span>
+<span class="err">       &quot;voteRemoveParams&quot;: 1</span>
+<span class="err">     }</span>
+<span class="err">   ],</span>
+<span class="err">   &quot;CustomSchemes&quot;: [</span>
+<span class="err">     {</span>
+<span class="err">        &quot;name&quot;: &quot;BuyInWithRageQuitOpt&quot;,</span>
+<span class="err">        &quot;schemeName&quot;: &quot;BuyInWithRageQuitOpt&quot;,</span>
+<span class="err">        &quot;isUniversal&quot;: false,</span>
+<span class="err">        &quot;params&quot;: [</span>
+<span class="err">        ],</span>
+<span class="err">        &quot;permissions&quot;: &quot;0x00000000&quot;</span>
+<span class="err">        &quot;alias&quot;: &quot;DonationScheme&quot;,</span>
+<span class="err">        &quot;fromArc&quot;: true</span>
+<span class="err">     }</span>
+<span class="err">   ],</span>
+<span class="err">   &quot;VotingMachinesParams&quot;:[</span>
+<span class="err">      {</span>
+<span class="err">         &quot;activationTime&quot;: 0,</span>
+<span class="err">         &quot;boostedVotePeriodLimit&quot;: 345600,</span>
+<span class="err">         &quot;daoBountyConst&quot;: 10,</span>
+<span class="err">         &quot;minimumDaoBounty&quot;: 150,</span>
+<span class="err">         &quot;preBoostedVotePeriodLimit&quot;: 86400,</span>
+<span class="err">         &quot;proposingRepReward&quot;: 0,</span>
+<span class="err">         &quot;queuedVotePeriodLimit&quot;: 2592000,</span>
+<span class="err">         &quot;queuedVoteRequiredPercentage&quot;: 50,</span>
+<span class="err">         &quot;quietEndingPeriod&quot;: 172800,</span>
+<span class="err">         &quot;thresholdConst&quot;: 1200,</span>
+<span class="err">         &quot;voteOnBehalf&quot;: &quot;0x0000000000000000000000000000000000000000&quot;,</span>
+<span class="err">         &quot;votersReputationLossRatio&quot;: 0</span>
+<span class="err">      },</span>
+<span class="err">      {</span>
+<span class="err">         &quot;activationTime&quot;: 0,</span>
+<span class="err">         &quot;boostedVotePeriodLimit&quot;: 691200,</span>
+<span class="err">         &quot;daoBountyConst&quot;: 10,</span>
+<span class="err">         &quot;minimumDaoBounty&quot;: 500,</span>
+<span class="err">         &quot;preBoostedVotePeriodLimit&quot;: 172800,</span>
+<span class="err">         &quot;proposingRepReward&quot;: 0,</span>
+<span class="err">         &quot;queuedVotePeriodLimit&quot;: 5184000,</span>
+<span class="err">         &quot;queuedVoteRequiredPercentage&quot;: 50,</span>
+<span class="err">         &quot;quietEndingPeriod&quot;: 345600,</span>
+<span class="err">         &quot;thresholdConst&quot;: 1500,</span>
+<span class="err">         &quot;voteOnBehalf&quot;: &quot;0x0000000000000000000000000000000000000000&quot;,</span>
+<span class="err">         &quot;votersReputationLossRatio&quot;: 0</span>
+<span class="err">      }</span>
+<span class="err">   ],</span>
+<span class="err">   &quot;schemes&quot;:{</span>
+<span class="err">      &quot;ContributionReward&quot;:true,</span>
+<span class="err">      &quot;SchemeRegistrar&quot;:true</span>
+<span class="err">   },</span>
+<span class="err">   &quot;unregisterOwner&quot;:true,</span>
+<span class="err">   &quot;useUController&quot;:false,</span>
+<span class="err">   &quot;useDaoCreator&quot;:true,</span>
+<span class="err">   &quot;founders&quot;:[</span>
+<span class="err">     {</span>
+<span class="err">      &quot;address&quot;: &quot;0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1&quot;,</span>
+<span class="err">      &quot;tokens&quot;: 1000,</span>
+<span class="err">      &quot;reputation&quot;: 1000</span>
+<span class="err">     }</span>
+<span class="err">   ]</span>
 <span class="err">}</span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
 
 <h2 id="create-dao-deploy-file">Create DAO-deploy file<a class="headerlink" href="#create-dao-deploy-file" title="Permanent link">&para;</a></h2>
@@ -1126,13 +1138,13 @@
 3
 4
 5
-6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">CUSTOM_ABI_LOCATION</span><span class="o">=</span><span class="s1">&#39;build/contracts&#39;</span>
-<span class="n">DAO_SPEC</span><span class="o">=</span><span class="s1">&#39;../data/testDaoSpec.json&#39;</span>
-<span class="n">DEFAULT_GAS</span><span class="o">=</span><span class="mi">3</span><span class="p">.</span><span class="mi">0</span>
-<span class="n">OUTPUT_FILE</span><span class="o">=</span><span class="s1">&#39;data/migration.json&#39;</span>
-<span class="n">PRIVATE_KEY</span><span class="o">=</span><span class="s1">&#39;0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d&#39;</span>
-<span class="n">PROVIDER</span><span class="o">=</span><span class="s1">&#39;http://localhost:8545&#39;</span>
-</pre></div>
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="err">CUSTOM_ABI_LOCATION=&#39;build/contracts&#39;</span>
+<span class="err">DAO_SPEC=&#39;../data/testDaoSpec.json&#39;</span>
+<span class="err">DEFAULT_GAS=3.0</span>
+<span class="err">OUTPUT_FILE=&#39;data/migration.json&#39;</span>
+<span class="err">PRIVATE_KEY=&#39;0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d&#39;</span>
+<span class="err">PROVIDER=&#39;http://localhost:8545&#39;</span>
+</code></pre></div>
 </td></tr></table>
 
 </li>
@@ -1165,7 +1177,7 @@
 22
 23
 24
-25</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;dotenv&#39;</span><span class="p">).</span><span class="n">config</span><span class="p">();</span><span class="w"></span>
+25</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="n">require</span><span class="p">(</span><span class="s1">&#39;dotenv&#39;</span><span class="p">).</span><span class="n">config</span><span class="p">();</span><span class="w"></span>
 <span class="n">const</span><span class="w"> </span><span class="n">DAOstackMigration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;@daostack/migration&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="n">const</span><span class="w"> </span><span class="n">migrationSpec</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">require</span><span class="p">(</span><span class="n">process</span><span class="p">.</span><span class="n">env</span><span class="p">.</span><span class="n">DAO_SPEC</span><span class="p">)</span><span class="w"></span>
 
@@ -1190,10 +1202,11 @@
 <span class="err">}</span><span class="w"></span>
 
 <span class="n">migrate</span><span class="p">()</span><span class="w"></span>
-</pre></div>
+</code></pre></div>
 </td></tr></table>
                 
                   
+                
                 
               
               
@@ -1249,20 +1262,20 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
-      <a href="https://daostack.slack.com" class="md-footer-social__link fa fa-slack"></a>
+      <a href="https://daostack.slack.com" target="_blank" rel="noopener" title="slack" class="md-footer-social__link fa fa-slack"></a>
     
-      <a href="https://t.me/daostackcommunity" class="md-footer-social__link fa fa-telegram"></a>
+      <a href="https://t.me/daostackcommunity" target="_blank" rel="noopener" title="telegram" class="md-footer-social__link fa fa-telegram"></a>
     
   </div>
 
@@ -1272,7 +1285,7 @@
       
     </div>
     
-      <script src="../../../assets/javascripts/application.c648116f.js"></script>
+      <script src="../../../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
       
