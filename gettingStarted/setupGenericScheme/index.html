@@ -1,0 +1,1630 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="A platform for building DAOs">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Setup Generic Scheme for a DAO - DAOstack Developer Portal</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="pink">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#generic-schemes" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="DAOstack Developer Portal" class="md-header-nav__button md-logo">
+          
+            <img src="../../images/daostack-logoW.svg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              DAOstack Developer Portal
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Setup Generic Scheme for a DAO
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    daostack/DAOstack-Hackers-Kit
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="DAOstack Developer Portal" class="md-nav__button md-logo">
+      
+        <img src="../../images/daostack-logoW.svg" width="48" height="48">
+      
+    </a>
+    DAOstack Developer Portal
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    daostack/DAOstack-Hackers-Kit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Stack
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Stack
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Infra
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Infra
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/infra/infraIntro/" title="Intro" class="md-nav__link">
+      Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/infra/genesisProtocol/" title="Holographic Consensus" class="md-nav__link">
+      Holographic Consensus
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/arc/arcIntro/" title="Arc" class="md-nav__link">
+      Arc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Client
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/client/clientIntro/" title="Intro" class="md-nav__link">
+      Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/client/GettingStarted/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/client/howToUseClient/" title="How To Use" class="md-nav__link">
+      How To Use
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/client/querying/" title="Query, Observables & Subscriptions" class="md-nav__link">
+      Query, Observables & Subscriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/client/example/" title="Quick Example" class="md-nav__link">
+      Quick Example
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://daostack.github.io/client/docs/globals.html" title="API Reference" class="md-nav__link">
+      API Reference
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      Subgraph
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        Subgraph
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/subgraph/subgraphIntro/" title="Intro" class="md-nav__link">
+      Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/subgraph/queries/" title="GraphQL queries" class="md-nav__link">
+      GraphQL queries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/subgraph/entities/" title="Entities" class="md-nav__link">
+      Entities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../stack/alchemy/alchemyIntro/" title="DApps/Alchemy" class="md-nav__link">
+      DApps/Alchemy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../migration/" title="Migration" class="md-nav__link">
+      Migration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../setupAlchemyDevMode/" title="Add features to Alchemy interface" class="md-nav__link">
+      Add features to Alchemy interface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Setup Generic Scheme for a DAO
+      </label>
+    
+    <a href="./" title="Setup Generic Scheme for a DAO" class="md-nav__link md-nav__link--active">
+      Setup Generic Scheme for a DAO
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-register-a-generic-scheme-to-a-dao" class="md-nav__link">
+    How to register a Generic Scheme to a DAO
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-a-generic-scheme-while-deploying-a-dao" class="md-nav__link">
+    Register a Generic Scheme while deploying a DAO
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-generic-scheme-to-an-already-deployed-dao" class="md-nav__link">
+    Register Generic Scheme to an already deployed DAO
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-voting-machine-parameters" class="md-nav__link">
+    Set Voting Machine Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-generic-scheme-to-interact-with-your-contract" class="md-nav__link">
+    Set Generic Scheme to interact with your contract
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submit-a-new-proposal-to-the-scheme-registrar-via-alchemy-ui" class="md-nav__link">
+    Submit a new proposal to the Scheme Registrar via Alchemy UI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-get-generic-scheme-indexed-by-daostack-subgraph" class="md-nav__link">
+    How to get Generic Scheme indexed by DAOstack subgraph
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-get-your-generic-scheme-showing-up-in-alchemy" class="md-nav__link">
+    How to get your Generic Scheme showing up in Alchemy
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proposal-creation-interface" class="md-nav__link">
+    Proposal Creation Interface
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-known-schemes" class="md-nav__link">
+    Update Known Schemes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proposal-display-interface" class="md-nav__link">
+    Proposal Display Interface
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-proposal-summary-render" class="md-nav__link">
+    Update Proposal Summary render
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-tests" class="md-nav__link">
+    Integration tests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-change-the-scheme-ui" class="md-nav__link">
+    (Optional) Change the Scheme UI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Add custom scheme to the DAO
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Add custom scheme to the DAO
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../customScheme/intro/" title="Intro" class="md-nav__link">
+      Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Arc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Arc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../customScheme/developCustomNonUniScheme/" title="Non-Universal Scheme" class="md-nav__link">
+      Non-Universal Scheme
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../customScheme/developCustomUniScheme/" title="Universal Scheme" class="md-nav__link">
+      Universal Scheme
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Migration
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Migration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../customScheme/registerToNewDAO/" title="Register scheme to new DAO" class="md-nav__link">
+      Register scheme to new DAO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../customScheme/registerToExistingDAO/" title="Register scheme to existing DAO" class="md-nav__link">
+      Register scheme to existing DAO
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../customScheme/subgraphForNewScheme/" title="Subgraph: enable cache for new scheme" class="md-nav__link">
+      Subgraph: enable cache for new scheme
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../customScheme/clientForNewScheme/" title="Client: interact with new Scheme" class="md-nav__link">
+      Client: interact with new Scheme
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deployDAO/" title="Deploy a DAO" class="md-nav__link">
+      Deploy a DAO
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hackerkit/" title="Hacker-kit" class="md-nav__link">
+      Hacker-kit
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Want to contribute?
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Want to contribute?
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../feature-requests/" title="Feature Requests" class="md-nav__link">
+      Feature Requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../how-to-propose/" title="Propose to Genesis DAO" class="md-nav__link">
+      Propose to Genesis DAO
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-register-a-generic-scheme-to-a-dao" class="md-nav__link">
+    How to register a Generic Scheme to a DAO
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-a-generic-scheme-while-deploying-a-dao" class="md-nav__link">
+    Register a Generic Scheme while deploying a DAO
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-generic-scheme-to-an-already-deployed-dao" class="md-nav__link">
+    Register Generic Scheme to an already deployed DAO
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-voting-machine-parameters" class="md-nav__link">
+    Set Voting Machine Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-generic-scheme-to-interact-with-your-contract" class="md-nav__link">
+    Set Generic Scheme to interact with your contract
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submit-a-new-proposal-to-the-scheme-registrar-via-alchemy-ui" class="md-nav__link">
+    Submit a new proposal to the Scheme Registrar via Alchemy UI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-get-generic-scheme-indexed-by-daostack-subgraph" class="md-nav__link">
+    How to get Generic Scheme indexed by DAOstack subgraph
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-get-your-generic-scheme-showing-up-in-alchemy" class="md-nav__link">
+    How to get your Generic Scheme showing up in Alchemy
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proposal-creation-interface" class="md-nav__link">
+    Proposal Creation Interface
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-known-schemes" class="md-nav__link">
+    Update Known Schemes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proposal-display-interface" class="md-nav__link">
+    Proposal Display Interface
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-proposal-summary-render" class="md-nav__link">
+    Update Proposal Summary render
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-tests" class="md-nav__link">
+    Integration tests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-change-the-scheme-ui" class="md-nav__link">
+    (Optional) Change the Scheme UI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/daostack/DAOstack-Hackers-Kit/edit/master/docs/gettingStarted/setupGenericScheme.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="generic-schemes">Generic Schemes<a class="headerlink" href="#generic-schemes" title="Permanent link">&para;</a></h1>
+<p>In DAOstack, "schemes" are smart contracts that enable various DAO actions, and "generic schemes" are schemes that enable nearly any kind of action possible for an Ethereum address.</p>
+<p>DAOs can use <a href="https://github.com/daostack/arc/blob/master/contracts/schemes/GenericScheme.sol">GenericScheme</a>:</p>
+<ol>
+<li>to enable truly generic DAO actions (letting proposers choose which contracts to interact with and how),</li>
+<li>to create specific, custom integrations (actions that make particular calls to particular smart contracts that serve a particular purpose for the DAO).</li>
+</ol>
+<p><strong>NOTE</strong>: </p>
+<ul>
+<li>If a DAO wants to make multiple smart contracts available, with different labels and proposal types in the UI, then each contract should use its own GenericScheme instance, customized if required for the DAO's purpose.</li>
+<li><em>While at the contract level, generic schemes only need encoded call data to function, asking users to provide this data is not good UX. If you're using a generic scheme for anything except a truly generic action, which is only accessible to Ethereum experts, we ask that you add Alchemy support for the specific actions you intend. Please do not register your scheme on mainnet without adding alchemy support for it. <a href="https://alchemy.daostack.io/dao/0x519b70055af55a007110b4ff99b0ea33071c720a/scheme/0xeca5415360191a29f12e1da442b9b050adf22c81b08230f1dafba908767e604f/proposals/">Here</a> is an example of a customized generic scheme on mainnet.</em></li>
+<li><em>UGenericScheme</em> i.e. the universal version of the generic scheme has been deprecated and removed from arc ( version &gt; 33). Subgraph and Alchemy will be backward compatible and support old DAOs already deployed and using it.</li>
+</ul>
+<h2 id="how-to-register-a-generic-scheme-to-a-dao">How to register a Generic Scheme to a DAO<a class="headerlink" href="#how-to-register-a-generic-scheme-to-a-dao" title="Permanent link">&para;</a></h2>
+<p>A DAO can only use schemes that are registered with its controller. There are two ways to register a scheme to a DAO's controller:</p>
+<ul>
+<li>
+<p>During the DAO's creation, while deploying the DAO's contracts</p>
+</li>
+<li>
+<p>Through a proposal that uses a scheme with permission to register schemes to the DAO.</p>
+</li>
+</ul>
+<p>NOTE: <em>In case of the Genesis DAO, you can propose new schemes to be registered using the aptly named Scheme Registrar scheme.</em></p>
+<h3 id="register-a-generic-scheme-while-deploying-a-dao">Register a Generic Scheme while deploying a DAO<a class="headerlink" href="#register-a-generic-scheme-while-deploying-a-dao" title="Permanent link">&para;</a></h3>
+<p>While deploying DAO you can register multiple "GenericScheme" instances and mention each in the
+<code>customSchemes</code> section of your <code>migration-dao-params.json</code>.</p>
+<p>Example</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="s2">&quot;CustomSchemes&quot;</span><span class="err">:</span><span class="p">[</span>
+    <span class="p">{</span>
+       <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;GenericScheme&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;schemeName&quot;</span><span class="p">:</span><span class="s2">&quot;GenericScheme&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;params&quot;</span><span class="p">:[</span>
+          <span class="s2">&quot;GenesisProtocolAddress&quot;</span><span class="p">,</span>
+          <span class="p">{</span>
+             <span class="nt">&quot;voteParams&quot;</span><span class="p">:</span><span class="mi">1</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;ENS_PUBLIC_RESOLVER&quot;</span>
+       <span class="p">],</span>
+       <span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="s2">&quot;0x00000010&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="s2">&quot;GenericSchemeENSPublicProvider&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;fromArc&quot;</span><span class="p">:</span><span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">]</span><span class="err">,</span>
+</pre></div>
+</td></tr></table>
+
+<p>Refer to the instructions for <a href="../deployDAO">how to deploy DAO</a>.</p>
+<h3 id="register-generic-scheme-to-an-already-deployed-dao">Register Generic Scheme to an already deployed DAO<a class="headerlink" href="#register-generic-scheme-to-an-already-deployed-dao" title="Permanent link">&para;</a></h3>
+<p>If the DAO has a Scheme Registrar scheme, then you can register new schemes to DAO via a proposal.</p>
+<p>Registering a new scheme via registrar requires:
+  - Set voting Machine Parameters (if other than already saved)
+  - Submit proposal to Scheme Registrar</p>
+<h4 id="set-voting-machine-parameters">Set Voting Machine Parameters<a class="headerlink" href="#set-voting-machine-parameters" title="Permanent link">&para;</a></h4>
+<p>If your Generic Scheme use vote parameters other than the ones already registered with Genesis Protocol (voting machine), then use <code>setParameter</code> to register new vote parameters.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kr">const</span> <span class="nx">genesisProtocolJson</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@daostack/arc/build/contracts/GenesisProtocol.json&#39;</span><span class="p">)</span>
+
+  <span class="kr">const</span> <span class="nx">genesisProtocolContract</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">Contract</span><span class="p">(</span>
+    <span class="nx">genesisProtocolJson</span><span class="p">.</span><span class="nx">abi</span><span class="p">,</span>
+    <span class="nx">GenesisProtocolAddress</span><span class="p">,</span> <span class="c1">// Get this from migration.json file</span>
+    <span class="p">{</span>
+      <span class="nx">from</span><span class="p">,</span>
+      <span class="nx">gas</span><span class="p">,</span>
+      <span class="nx">gasPrice</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+
+  <span class="c1">// Following are example values, Please change appropriately</span>
+  <span class="c1">// Refer https://daostack.zendesk.com/hc/en-us/sections/360000535638-Genesis-Protocol</span>
+  <span class="kr">const</span> <span class="nx">voteParams</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;boostedVotePeriodLimit&quot;</span><span class="o">:</span> <span class="mi">345600</span><span class="p">,</span>
+        <span class="s2">&quot;daoBountyConst&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s2">&quot;minimumDaoBountyGWei&quot;</span><span class="o">:</span> <span class="mi">150000000000</span><span class="p">,</span>
+        <span class="s2">&quot;queuedVotePeriodLimit&quot;</span><span class="o">:</span> <span class="mi">2592000</span><span class="p">,</span>
+        <span class="s2">&quot;queuedVoteRequiredPercentage&quot;</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="s2">&quot;preBoostedVotePeriodLimit&quot;</span><span class="o">:</span> <span class="mi">86400</span><span class="p">,</span>
+        <span class="s2">&quot;proposingRepRewardGwei&quot;</span><span class="o">:</span> <span class="mi">50000000000</span><span class="p">,</span>
+        <span class="s2">&quot;quietEndingPeriod&quot;</span><span class="o">:</span> <span class="mi">172800</span><span class="p">,</span>
+        <span class="s2">&quot;thresholdConst&quot;</span><span class="o">:</span> <span class="mi">1200</span><span class="p">,</span>
+        <span class="s2">&quot;voteOnBehalf&quot;</span><span class="o">:</span> <span class="s2">&quot;0x0000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;votersReputationLossRatio&quot;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;activationTime&quot;</span><span class="o">:</span> <span class="mi">0</span>
+      <span class="p">}</span>
+
+  <span class="kr">const</span> <span class="nx">parameters</span> <span class="o">=</span> <span class="p">[</span>
+       <span class="p">[</span>
+          <span class="nx">voteParams</span><span class="p">.</span><span class="nx">queuedVoteRequiredPercentage</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">voteOnBehalf</span><span class="p">.</span><span class="nx">queuedVotePeriodLimit</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">votersReputationLossRatio</span><span class="p">.</span><span class="nx">boostedVotePeriodLimit</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">voteParams</span><span class="p">.</span><span class="nx">preBoostedVotePeriodLimit</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">voteOnBehalf</span><span class="p">.</span><span class="nx">thresholdConst</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">votersReputationLossRatio</span><span class="p">.</span><span class="nx">quietEndingPeriod</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">voteParams</span><span class="p">.</span><span class="nx">proposingRepRewardGwei</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">voteOnBehalf</span><span class="p">.</span><span class="nx">votersReputationLossRatio</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">voteParams</span><span class="p">.</span><span class="nx">minimumDaoBountyGWei</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">voteOnBehalf</span><span class="p">.</span><span class="nx">daoBountyConst</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+          <span class="nx">votersReputationLossRatio</span><span class="p">.</span><span class="nx">activationTime</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span>
+        <span class="p">],</span>
+        <span class="nx">voteParams</span><span class="p">.</span><span class="nx">voteOnBehalf</span><span class="p">,</span>
+      <span class="p">]</span>
+
+  <span class="kr">const</span> <span class="nx">genesisProtocolSetParams</span> <span class="o">=</span> <span class="nx">genesisProtocolContract</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">setParameters</span><span class="p">(...</span><span class="nx">parameters</span><span class="p">)</span>
+
+  <span class="nx">genesisProtocolSetParams</span><span class="p">.</span><span class="nx">send</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<h4 id="set-generic-scheme-to-interact-with-your-contract">Set Generic Scheme to interact with your contract<a class="headerlink" href="#set-generic-scheme-to-interact-with-your-contract" title="Permanent link">&para;</a></h4>
+<p>Now, you will have to deploy a new instance of <code>GenericScheme</code> and use its <code>initialize</code> method to setup its params:</p>
+<ul>
+<li>the DAO <code>Avatar</code> it connects to,</li>
+<li>the <code>contractToCall</code>,</li>
+<li>the <code>votingMachine</code> to use, </li>
+<li>the <code>voteParameters</code> for voting on proposals that use the scheme.</li>
+</ul>
+<p>The following is a short script that shows how to do this:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="kr">const</span> <span class="nx">genericSchemeJson</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@daostack/arc/build/contracts/GenericScheme.json&#39;</span><span class="p">)</span>
+
+  <span class="kr">const</span> <span class="nx">genericSchemeContract</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">Contract</span><span class="p">(</span>
+    <span class="nx">genericSchemeJson</span><span class="p">.</span><span class="nx">abi</span><span class="p">,</span>
+    <span class="kc">undefined</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nx">from</span><span class="p">,</span>
+      <span class="nx">gas</span><span class="p">,</span>
+      <span class="nx">gasPrice</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+
+  <span class="c1">// Deploy New GenericScheme Instance</span>
+  <span class="kr">const</span> <span class="nx">genericSchemeDeployedContract</span> <span class="o">=</span> <span class="nx">genericSchemeContract</span><span class="p">.</span><span class="nx">deploy</span><span class="p">({</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="nx">genericSchemeJson</span><span class="p">.</span><span class="nx">bytecode</span><span class="p">,</span>
+        <span class="nx">arguments</span><span class="o">:</span> <span class="kc">null</span>
+      <span class="p">}).</span><span class="nx">send</span><span class="p">()</span>
+
+  <span class="kd">let</span> <span class="nx">genericScheme</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">genericSchemeDeployedContract</span>
+
+  <span class="c1">// Log Address of new instance to use in next step while registering the scheme to DAO</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Deployed new GenericScheme instance at </span><span class="si">${</span><span class="nx">genericScheme</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">address</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+
+  <span class="c1">// Get address from https://github.com/daostack/migration/blob/master/migration.json</span>
+  <span class="kr">const</span> <span class="nx">votingMachineAddress</span> <span class="o">=</span> <span class="s2">&quot;0xaddress-of-VotingMachine-of-DAO-on-given-network&quot;</span>
+
+  <span class="c1">// For eg if you want this Generic Scheme to enable DAO to interact with Bounties Network</span>
+  <span class="c1">// then targetContract would be the address of Bounties Network&#39;s respective contract</span>
+  <span class="kr">const</span> <span class="nx">targetContractAddress</span> <span class="o">=</span> <span class="s2">&quot;0xaddress-of-contract-this-will-interact-with&quot;</span>
+
+  <span class="kr">const</span> <span class="nx">avatar</span> <span class="o">=</span> <span class="s2">&quot;0xaddres-of-DAO&quot;</span>
+
+  <span class="kr">const</span> <span class="nx">paramHash</span> <span class="o">=</span> <span class="s2">&quot;0xVote-Param-Hash-from-previous-step&quot;</span>
+
+  <span class="nx">genericScheme</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span>
+        <span class="nx">avatar</span><span class="p">,</span>
+        <span class="nx">paramHash</span><span class="p">,</span>
+        <span class="nx">votingMachineAddress</span><span class="p">,</span>
+        <span class="nx">targetContractAddress</span>
+      <span class="p">).</span><span class="nx">send</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<h4 id="submit-a-new-proposal-to-the-scheme-registrar-via-alchemy-ui">Submit a new proposal to the Scheme Registrar via Alchemy UI<a class="headerlink" href="#submit-a-new-proposal-to-the-scheme-registrar-via-alchemy-ui" title="Permanent link">&para;</a></h4>
+<ol>
+<li>On Alchemy's landing page, choose the DAO to which you wish to register the scheme.</li>
+<li>Visit the DAO's <code>Home</code> page and choose <code>Scheme Registrar</code>.</li>
+<li>Click <code>New Proposal</code> – this will open a popup.</li>
+<li>Select <code>Add Scheme</code> on the popup sidebar (on the left).</li>
+<li>Give the proposal an appropriate title, description, and url linking to a description of the proposal.</li>
+<li>For <code>Scheme</code>,  put the address of your Generic Scheme contract.</li>
+<li>The<code>paramHash</code> can be null for non universal scheme.</li>
+<li>In the permissions section, check <code>Call genericCall on behalf of</code> (this will allow your scheme to make generic calls, which is the whole point here).</li>
+<li>Submit the proposal and sign the transaction as normal.</li>
+<li>If the DAO passes your proposal, then your Generic Scheme with the ability to interact with the <code>targetContract</code> will be registered to the DAO, and people will be able to submit proposals for the DAO to take your custom generic action.</li>
+</ol>
+<h2 id="how-to-get-generic-scheme-indexed-by-daostack-subgraph">How to get Generic Scheme indexed by DAOstack subgraph<a class="headerlink" href="#how-to-get-generic-scheme-indexed-by-daostack-subgraph" title="Permanent link">&para;</a></h2>
+<p>The DAOstack subgraph enables Alchemy's quick loading of cached blockchain data and is a huge part of creating a positive user experience in Alchemy.</p>
+<p>You will have to submit a PR <a href="https://github.com/daostack/subgraph/tree/master/daos">here</a></p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="mi">1</span>. <span class="nv">Make</span> <span class="nv">sure</span> <span class="nv">to</span> <span class="nv">choose</span> <span class="nv">the</span> <span class="nv">correct</span> <span class="nv">Ethereum</span> <span class="nv">network</span> <span class="k">for</span> <span class="nv">your</span> <span class="nv">DAO</span>
+<span class="mi">2</span>. <span class="k">If</span> <span class="nv">the</span> <span class="nv">scheme</span> <span class="nv">is</span> <span class="k">for</span> <span class="nv">a</span> <span class="nv">new</span> <span class="nv">DAO</span>, <span class="k">then</span> <span class="nv">add</span> `<span class="nv">YourDAO</span>.<span class="nv">json</span>` <span class="nv">in</span> <span class="nv">that</span> <span class="nv">network</span> <span class="nv">folder</span>. <span class="nv">eg</span>.
+
+        {
+          <span class="s2">&quot;</span><span class="s">name</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">New DAO</span><span class="s2">&quot;</span>,
+          <span class="s2">&quot;</span><span class="s">Avatar</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">0xaddress-of-avatar-on-this-network</span><span class="s2">&quot;</span>,
+          <span class="s2">&quot;</span><span class="s">DAOToken</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">0xaddress-of-daotoken-on-this-network</span><span class="s2">&quot;</span>,
+          <span class="s2">&quot;</span><span class="s">Reputation</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">0xaddress-of-nativereputation-on-this-network</span><span class="s2">&quot;</span>,
+          <span class="s2">&quot;</span><span class="s">Controller</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">0xaddress-of-controller-on-this-network</span><span class="s2">&quot;</span>,
+          <span class="s2">&quot;</span><span class="s">Schemes</span><span class="s2">&quot;</span>: {
+            <span class="s2">&quot;</span><span class="s">GenesisScheme</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">0xaddress-of-genericScheme-on-this-network</span><span class="s2">&quot;</span>
+            },
+          <span class="s2">&quot;</span><span class="s">arcVersion</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">0.0.1-rc.22</span><span class="s2">&quot;</span> # <span class="nv">choose</span> <span class="nv">the</span> <span class="nv">correct</span> <span class="nv">arc</span> <span class="nv">version</span>
+        }
+
+ <span class="mi">3</span>. <span class="k">If</span> <span class="nv">the</span> <span class="nv">scheme</span> <span class="nv">is</span> <span class="k">for</span> <span class="nv">an</span> <span class="nv">already</span> <span class="nv">existing</span> <span class="nv">DAO</span>, <span class="k">then</span> <span class="nv">edit</span> `<span class="o">&lt;</span><span class="nv">existing</span><span class="o">-</span><span class="nv">DAO</span><span class="o">&gt;</span>.<span class="nv">json</span>` <span class="k">for</span> <span class="nv">the</span> <span class="nv">correct</span> <span class="nv">network</span>.
+    <span class="nv">Add</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">schemes</span> <span class="nv">section</span>, <span class="nv">eg</span>.
+
+          <span class="s2">&quot;</span><span class="s">Schemes</span><span class="s2">&quot;</span>: {
+            <span class="s2">&quot;</span><span class="s">GenesisScheme</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">0xaddress-of-genericScheme-on-this-network</span><span class="s2">&quot;</span>
+            },
+          <span class="s2">&quot;</span><span class="s">arcVersion</span><span class="s2">&quot;</span>: <span class="s2">&quot;</span><span class="s">0.0.1-rc.22</span><span class="s2">&quot;</span> # <span class="nv">choose</span> <span class="nv">the</span> <span class="nv">correct</span> <span class="nv">arc</span> <span class="nv">version</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="how-to-get-your-generic-scheme-showing-up-in-alchemy">How to get your Generic Scheme showing up in Alchemy<a class="headerlink" href="#how-to-get-your-generic-scheme-showing-up-in-alchemy" title="Permanent link">&para;</a></h2>
+<p>To help you get a user-friendly interface for your generic scheme, we have created a way to customize Alchemy's UI for specific generic schemes.</p>
+<p>The customization has a few pieces, and you will have to submit a PR to the Alchemy repo once you're finished with it.</p>
+<h3 id="proposal-creation-interface">Proposal Creation Interface<a class="headerlink" href="#proposal-creation-interface" title="Permanent link">&para;</a></h3>
+<p>Customize the "create proposal" popup to present the different functions the scheme can call on the contract. This requires adding the contracts’ ABI and customizing things like the titles of the labels and placeholders.</p>
+<p>If this was a generic scheme for interacting with the Bounties Network, you would create a file named something like <code>Bounties.json</code> and add it <a href="https://github.com/daostack/alchemy/tree/dev/src/genericSchemeRegistry/schemes">here</a>.</p>
+<p>Use the following example or refer to an example using the <a href="https://github.com/daostack/alchemy/blob/dev/src/genericSchemeRegistry/schemes/DutchX.json">DutchX</a> integration.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="c1">// Bounties.json</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Bounties&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;main&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;0xtarget-contract-address-on-mainnet&quot;</span> <span class="p">],</span>
+      <span class="s2">&quot;rinkeby&quot;</span><span class="o">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;private&quot;</span><span class="o">:</span> <span class="p">[]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;actions&quot;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;createBountyMethod-from-contract&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="s2">&quot;Create Bounty&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;This method will create a bounty with the DAO as the issuer&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notes&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fields&quot;</span><span class="o">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="s2">&quot;bounty title&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;name-of-field-in-abi&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;placeholder&quot;</span><span class="o">:</span> <span class="s2">&quot;Osam Bin-Laden - dead or alive&quot;</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="c1">// more feilds if any</span>
+          <span class="p">},</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;abi&quot;</span><span class="o">:</span> <span class="p">{},</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="c1">// more methods of contract if any</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+  <span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<h4 id="update-known-schemes">Update Known Schemes<a class="headerlink" href="#update-known-schemes" title="Permanent link">&para;</a></h4>
+<p>Once you have customised the proposal create interface update the <a href="https://github.com/daostack/alchemy/blob/dev/src/genericSchemeRegistry/index.ts">genericSchemeRegistry</a></p>
+<p>For eg. In case of StandardBounty scheme we will add:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">standardBountiesInfo</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="ss">&quot;./schemes/StandardBounties.json&quot;</span><span class="p">)</span>
+
+<span class="n">const</span> <span class="n">KNOWNSCHEMES</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">...,</span>
+  <span class="n">standardBountiesInfo</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="proposal-display-interface">Proposal Display Interface<a class="headerlink" href="#proposal-display-interface" title="Permanent link">&para;</a></h3>
+<p>You will also have to customise the description summary for your scheme to explain what it does.</p>
+<p>Refer to the <a href="https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/ProposalSummaryDutchX.tsx">ProposalSummaryDutchX</a> and add your own proposal summary file, say <code>ProposalSummaryBountiesNetwork.tsx</code>, <a href="https://github.com/daostack/alchemy/blob/dev/src/components/Proposal/ProposalSummary/">here</a>.</p>
+<h4 id="update-proposal-summary-render">Update Proposal Summary render<a class="headerlink" href="#update-proposal-summary-render" title="Permanent link">&para;</a></h4>
+<p>Once you have created the proposal summary make sure that it gets rendered by updating <a href="https://github.com/daostack/alchemy/blob/d9557ca98ab18f1eb41e2d6d5159370ebfa2d9db/src/components/Proposal/ProposalSummary/ProposalSummaryKnownGenericScheme.tsx#L27">ProposalSummaryKnownGenericScheme.tsx</a></p>
+<p>For eg. In case of StandardBounty scheme we will add:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">ProposalSummaryStandardBounties</span> <span class="nn">from</span> <span class="s2">&quot;./ProposalSummaryStandardBounties&quot;</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">genericSchemeInfo</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">name</span> <span class="o">===</span> <span class="s2">&quot;StandardBounties&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="o">&lt;</span><span class="n">ProposalSummaryStandardBounties</span> <span class="p">{</span><span class="o">...</span><span class="n">this</span><span class="o">.</span><span class="n">props</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">;</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="integration-tests">Integration tests<a class="headerlink" href="#integration-tests" title="Permanent link">&para;</a></h3>
+<p>Please add the relevant integration test for your scheme. You can refer to <a href="https://github.com/daostack/alchemy/blob/dev/test/integration/proposal-genericSchemeDutchx.ts">genericSchemeDutchx</a> tests.</p>
+<h3 id="optional-change-the-scheme-ui">(Optional) Change the Scheme UI<a class="headerlink" href="#optional-change-the-scheme-ui" title="Permanent link">&para;</a></h3>
+<p>Right now, Alchemy’s UI is only focused on currently open proposals (it does not show past proposals). But based on the scheme you are adding, there might be some different UI features/tabs that are required. For a bounties scheme, for example, it would be helpful to have a new tab that shows open bounties (from proposals that have already been passed).</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../setupAlchemyDevMode/" title="Add features to Alchemy interface" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Add features to Alchemy interface
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../customScheme/intro/" title="Intro" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Intro
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://daostack.slack.com" class="md-footer-social__link fa fa-slack"></a>
+    
+      <a href="https://t.me/daostackcommunity" class="md-footer-social__link fa fa-telegram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

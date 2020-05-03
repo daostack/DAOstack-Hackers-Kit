@@ -1,0 +1,1413 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="A platform for building DAOs">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>How To Use - DAOstack Developer Portal</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="pink">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#how-to-use" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../../.." title="DAOstack Developer Portal" class="md-header-nav__button md-logo">
+          
+            <img src="../../../images/daostack-logoW.svg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              DAOstack Developer Portal
+            </span>
+            <span class="md-header-nav__topic">
+              
+                How To Use
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    daostack/DAOstack-Hackers-Kit
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../../.." title="DAOstack Developer Portal" class="md-nav__button md-logo">
+      
+        <img src="../../../images/daostack-logoW.svg" width="48" height="48">
+      
+    </a>
+    DAOstack Developer Portal
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/daostack/DAOstack-Hackers-Kit/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    daostack/DAOstack-Hackers-Kit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Stack
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Stack
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Infra
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Infra
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../infra/infraIntro/" title="Intro" class="md-nav__link">
+      Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../infra/genesisProtocol/" title="Holographic Consensus" class="md-nav__link">
+      Holographic Consensus
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../arc/arcIntro/" title="Arc" class="md-nav__link">
+      Arc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3" checked>
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Client
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Client
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../clientIntro/" title="Intro" class="md-nav__link">
+      Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../GettingStarted/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        How To Use
+      </label>
+    
+    <a href="./" title="How To Use" class="md-nav__link md-nav__link--active">
+      How To Use
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-arc" class="md-nav__link">
+    Configuration: Arc
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    Configuration Options
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entities" class="md-nav__link">
+    Entities
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instantiate" class="md-nav__link">
+    Instantiate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#by-providing-entity-id" class="md-nav__link">
+    By providing entity id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#by-providing-static-entity-state" class="md-nav__link">
+    By providing static entity state
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-methods-and-properties" class="md-nav__link">
+    Common methods and properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-filters-and-observables" class="md-nav__link">
+    Search filters and Observables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-transactions" class="md-nav__link">
+    Sending transactions
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../querying/" title="Query, Observables & Subscriptions" class="md-nav__link">
+      Query, Observables & Subscriptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../example/" title="Quick Example" class="md-nav__link">
+      Quick Example
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://daostack.github.io/client/docs/globals.html" title="API Reference" class="md-nav__link">
+      API Reference
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      Subgraph
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        Subgraph
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../subgraph/subgraphIntro/" title="Intro" class="md-nav__link">
+      Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../subgraph/queries/" title="GraphQL queries" class="md-nav__link">
+      GraphQL queries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../subgraph/entities/" title="Entities" class="md-nav__link">
+      Entities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../alchemy/alchemyIntro/" title="DApps/Alchemy" class="md-nav__link">
+      DApps/Alchemy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../migration/" title="Migration" class="md-nav__link">
+      Migration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/setupAlchemyDevMode/" title="Add features to Alchemy interface" class="md-nav__link">
+      Add features to Alchemy interface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/setupGenericScheme/" title="Setup Generic Scheme for a DAO" class="md-nav__link">
+      Setup Generic Scheme for a DAO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Add custom scheme to the DAO
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Add custom scheme to the DAO
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/customScheme/intro/" title="Intro" class="md-nav__link">
+      Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Arc
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Arc
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/customScheme/developCustomNonUniScheme/" title="Non-Universal Scheme" class="md-nav__link">
+      Non-Universal Scheme
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/customScheme/developCustomUniScheme/" title="Universal Scheme" class="md-nav__link">
+      Universal Scheme
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Migration
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Migration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/customScheme/registerToNewDAO/" title="Register scheme to new DAO" class="md-nav__link">
+      Register scheme to new DAO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/customScheme/registerToExistingDAO/" title="Register scheme to existing DAO" class="md-nav__link">
+      Register scheme to existing DAO
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/customScheme/subgraphForNewScheme/" title="Subgraph: enable cache for new scheme" class="md-nav__link">
+      Subgraph: enable cache for new scheme
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/customScheme/clientForNewScheme/" title="Client: interact with new Scheme" class="md-nav__link">
+      Client: interact with new Scheme
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../gettingStarted/deployDAO/" title="Deploy a DAO" class="md-nav__link">
+      Deploy a DAO
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../hackerkit/" title="Hacker-kit" class="md-nav__link">
+      Hacker-kit
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Want to contribute?
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Want to contribute?
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../feature-requests/" title="Feature Requests" class="md-nav__link">
+      Feature Requests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../how-to-propose/" title="Propose to Genesis DAO" class="md-nav__link">
+      Propose to Genesis DAO
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-arc" class="md-nav__link">
+    Configuration: Arc
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    Configuration Options
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entities" class="md-nav__link">
+    Entities
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instantiate" class="md-nav__link">
+    Instantiate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#by-providing-entity-id" class="md-nav__link">
+    By providing entity id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#by-providing-static-entity-state" class="md-nav__link">
+    By providing static entity state
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-methods-and-properties" class="md-nav__link">
+    Common methods and properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-filters-and-observables" class="md-nav__link">
+    Search filters and Observables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-transactions" class="md-nav__link">
+    Sending transactions
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/daostack/DAOstack-Hackers-Kit/edit/master/docs/stack/client/howToUseClient.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="how-to-use">How To Use<a class="headerlink" href="#how-to-use" title="Permanent link">&para;</a></h1>
+<p>In the following guide we describe how to instantiate classes and discuss the common methods shared by all Entities. Please refer to <a href="https://daostack.github.io/client/docs/globals.html">complete API reference</a> for detailed list of properties and methods</p>
+<h2 id="configuration-arc">Configuration: Arc<a class="headerlink" href="#configuration-arc" title="Permanent link">&para;</a></h2>
+<p>The <code>Arc</code> class holds the basic configuration and serves as the main entrypoint when using the library. The user of the library must provide some basic configuration options.</p>
+<h3 id="configuration-options">Configuration Options<a class="headerlink" href="#configuration-options" title="Permanent link">&para;</a></h3>
+<p>Please see the <a href="https://daostack.github.io/client/docs/classes/arc.html#constructor">API Reference</a> for details of Configuration Options and their types.</p>
+<ul>
+<li><em><strong>contractInfos[]</strong></em>: contracts details. Can be set/fetch using subgraph by <code>setContractInfos</code>/<code>fetchContractInfos</code>.</li>
+<li><em><strong>graphqlHttpProvider</strong></em>: http connection to the subgraph of TheGraph protocol. Needed for graphQL queries.</li>
+<li><em><strong>graphqlPrefetchHook()</strong></em>: function executed before sending graphQL query.</li>
+<li><em><strong>graphqlSubscribeToQueries</strong></em>: determines if query should subscribe to updates from the graphProvider. Default True.</li>
+<li><em><strong>graphqlWsProvider</strong></em>: web socket connection to subgraph of TheGraph protocol. Needed for subscriptions.</li>
+<li><em><strong>ipfsProvider</strong></em>: connection to ipfs provider which is used as the data storage layer by DAOstack. The configuration is either a string or an object as
+  <a href="https://github.com/ipfs/js-ipfs-http-client#importing-the-module-and-usage">used here</a></li>
+<li><em><strong>web3Provider</strong></em>: connection to ethereum node which it is presumed has a default account enabling transactions to be sent. Required to create and send transactions to the blockchain.</li>
+<li><em><strong>web3ProviderRead</strong></em>: connection to ethereum node to read Arc data. If provided arc will read all data from this provider, else if null/not provided it is set same as <code>web3Provider</code>. This is readonly and won't enable the user to submit transactions.</li>
+</ul>
+<p>Example</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="p">{</span> <span class="n">Arc</span> <span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@daostack/client&#39;</span>
+
+<span class="n">const</span> <span class="n">arc</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Arc</span><span class="p">({</span>
+  <span class="n">graphqlHttpProvider</span><span class="p">:</span> <span class="s2">&quot;https://subgraph.daostack.io/subgraphs/name/v23&quot;</span><span class="p">,</span>
+  <span class="n">graphqlWsProvider</span><span class="p">:</span> <span class="s2">&quot;wss://ws.subgraph.daostack.io/subgraphs/name/v23&quot;</span><span class="p">,</span>
+  <span class="n">web3Provider</span><span class="p">:</span> <span class="sb">`wss://mainnet.infura.io/ws/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2`</span><span class="p">,</span>
+  <span class="n">ipfsProvider</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;subgraph.daostack.io&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="s2">&quot;443&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;https&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;api-path&quot;</span><span class="p">:</span> <span class="s2">&quot;/ipfs/api/v0/&quot;</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="o">//</span> <span class="n">before</span> <span class="n">we</span> <span class="n">can</span> <span class="n">use</span> <span class="n">the</span> <span class="n">Arc</span> <span class="n">instance</span> <span class="n">to</span> <span class="n">send</span> <span class="n">transactions</span><span class="p">,</span> <span class="n">we</span> <span class="n">need</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">it</span>
+<span class="o">//</span> <span class="k">with</span> <span class="n">information</span> <span class="n">on</span> <span class="n">where</span> <span class="n">the</span> <span class="n">contracts</span> <span class="n">can</span> <span class="n">be</span> <span class="n">found</span>
+<span class="o">//</span> <span class="n">query</span> <span class="n">the</span> <span class="n">subgraph</span> <span class="k">for</span> <span class="n">the</span> <span class="n">contract</span> <span class="n">addresses</span><span class="p">,</span> <span class="ow">and</span> <span class="n">use</span> <span class="n">those</span>
+<span class="n">await</span> <span class="n">arc</span><span class="o">.</span><span class="n">fetchContractInfos</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<p><strong>Note:</strong></p>
+<ul>
+<li>If you instantiate arc with ipfs configuration, then <code>arc.ipfs</code> will have all the methods of the ipfslcient api available. Refer to <a href="https://github.com/ipfs/js-ipfs-http-client#api">ipfs client api</a></li>
+<li>Some of these configuration settings are <em><strong>optional</strong></em> while using <code>@daostack/client</code>. For example:<ul>
+<li>For using client to only create and send transactions to the blockchain, it is sufficient to provide the <code>web3Provider</code>.</li>
+<li>For using client to only read blockchain data, it is sufficient to provide the <code>web3ProviderRead</code>.</li>
+<li>When using client only to interact with subgraph, it is sufficient to provide <code>graphqlHttpProvider</code> and/or <code>graphqlWsProvider</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="entities">Entities<a class="headerlink" href="#entities" title="Permanent link">&para;</a></h2>
+<p>Entities are the basic building blocks of DAOstack ecosystem.</p>
+<p>The entity instance holds the <code>static</code> and <code>dynamic</code> state of the entity it represents and encapsulates graphql queries to retrieve data from subgraph. The client library caches entity data. Please refer to <a href="#common-methods-and-properties">Common properties and methods</a> section for more information about what is cached and how to retrieve it.</p>
+<p>While the entity classes provide nice helper methods that encapsulate graphql queries, you can also submit your own customized graphql queries using the static method <code>arc.apolloClient</code>. The client library uses <a href="https://www.apollographql.com/">Apollo</a> for data management which is discussed in <a href="../querying">Query and Cache section</a>. Please refer to the <a href="../querying/#query">Queries</a> section about all the ways to query subgraph.</p>
+<h3 id="instantiate">Instantiate<a class="headerlink" href="#instantiate" title="Permanent link">&para;</a></h3>
+<p>All Entity classes can be created by providing an instance of <code>Arc</code> and either of the following:</p>
+<ul>
+<li><code>id</code>: in this case a query to the subgraph is used to hydrate the entity.</li>
+<li><code>staticState</code>: here entity's desired "static state" is provided at initialization and the subgraph query is bypassed.</li>
+</ul>
+<h4 id="by-providing-entity-id">By providing entity id<a class="headerlink" href="#by-providing-entity-id" title="Permanent link">&para;</a></h4>
+<p>When using the client library with an <code>arc</code> instance which has subgraph configuration, it is sufficient to provide just an <code>id</code>. In this case, to vote or stake, the proposal object will need additional information (stored by the <code>staticState</code> of Entity) such as the address of the voting machine contract to which votes will be sent. The client will query the subgraph for this minimal set of information.</p>
+<p>Example</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">proposal</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Proposal</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">0x1234....</span><span class="s1">&#39;</span>, <span class="nv">arc</span><span class="ss">)</span>
+
+<span class="nv">await</span> <span class="nv">proposal</span>.<span class="nv">vote</span><span class="ss">(</span>...<span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
+</pre></div>
+</td></tr></table>
+
+<h4 id="by-providing-static-entity-state">By providing static entity state<a class="headerlink" href="#by-providing-static-entity-state" title="Permanent link">&para;</a></h4>
+<p>To make the client usable without having subgraph service available, all Entities can also be created by providing the 'static state'. This will provide the instance with enough information to send transactions without having to query the subgraph for additional information.</p>
+<p>Example</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">arc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Arc</span><span class="p">(</span><span class="err">{</span>
+  <span class="n">web3Provider</span><span class="p">:</span> <span class="o">`</span><span class="n">wss</span><span class="p">:</span><span class="o">//</span><span class="n">mainnet</span><span class="p">.</span><span class="n">infura</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">ws</span><span class="o">/</span><span class="n">v3</span><span class="o">/</span><span class="n">e0cdf3bfda9b468fa908aa6ab03d5ba2</span><span class="o">`</span><span class="p">,</span>
+<span class="err">}</span><span class="p">)</span>
+<span class="n">const</span> <span class="n">proposal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Proposal</span><span class="p">(</span><span class="err">{</span>
+  <span class="n">id</span><span class="p">:</span> <span class="s1">&#39;0x12455..&#39;</span><span class="p">,</span>
+  <span class="n">votingMachine</span><span class="p">:</span> <span class="s1">&#39;0x1111..&#39;</span><span class="p">,</span>
+  <span class="n">scheme</span><span class="p">:</span> <span class="s1">&#39;0x12345...&#39;</span>
+<span class="err">}</span><span class="p">,</span> <span class="n">arc</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="common-methods-and-properties">Common methods and properties<a class="headerlink" href="#common-methods-and-properties" title="Permanent link">&para;</a></h3>
+<p>All entities have:</p>
+<ul>
+<li><em><strong>context</strong></em>: arc configuration described <a href="#initialization-arc-configuration">above</a></li>
+<li>
+<p><em><strong>id</strong></em>: unique identifier of the entity instance. Various Entity class Id represents the information as described below:</p>
+<ul>
+<li><code>address</code>: DAO, Reputation, Token</li>
+<li><code>hash(ReputationAddress, RepHolderAddress)</code>: Members</li>
+<li><code>proposalId</code> as on blockchain: Proposal</li>
+<li><code>hash(proposalId, beneficiaryAddress)</code>: Reward</li>
+<li><code>hash(daoAddress, schemeAddress)</code>: Scheme</li>
+<li><code>eventId</code>: Stake, Vote</li>
+</ul>
+</li>
+<li>
+<p><em><strong>staticState</strong></em> <sup>[1]</sup>: object representing properties of the entity that does not change over time.
+    e.g. In case of entity DAO, <code>address</code> of Avatar or Native <code>reputation</code> of DAO</p>
+</li>
+<li>
+<p><em><strong>fetchStaticState()</strong></em> <sup>[1]</sup>: method that returns an observable of object that represent the <code>staticState</code> of the entity.
+    If the staticState is not set ( as <a href="#by-providing-entity-id">here</a> ), then at first use it queries the subgraph and <code>setStaticState</code>.</p>
+</li>
+<li>
+<p><em><strong>setStaticState()</strong></em> <sup>[1]</sup>: method that sets the static state to the state provided as parameter.</p>
+</li>
+<li>
+<p><strong><strong>state()</strong></strong>: method that returns an observable of objects that represent the current dynamic state of the entity. </br>
+    The dynamic state extends the static state to include properties that may change over time.</p>
+<p>e.g. <em>IDAOState</em> is dynamic state that would contain <code>numberOfBoostedProposals</code> or <code>reputationTotalSupply</code> along with the base static state of the DAO entity.</p>
+<p>e.g. Subscribe <sup>[2]</sup> to current state of the Proposal or DAO</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">proposal</span>.<span class="k">state</span>().<span class="n">subscribe</span>(
+  (<span class="n">newState</span>) =&gt; <span class="n">console</span>.<span class="nb">log</span>(`<span class="n">This</span> <span class="n">proposal</span> <span class="k">has</span> ${<span class="n">newState</span>.<span class="n">votesFor</span>} <span class="n">upvotes</span>`)
+)
+
+<span class="n">dao</span>.<span class="k">state</span>().<span class="n">subscribe</span>(
+  (<span class="n">newState</span>) =&gt; <span class="n">console</span>.<span class="nb">log</span>(`<span class="n">This</span> <span class="n">DAO</span> <span class="k">has</span> ${<span class="n">newState</span>.<span class="n">memberCount</span>} <span class="n">members</span>`)
+)
+</pre></div>
+</td></tr></table>
+
+</li>
+<li>
+<p><em><strong>search()</strong></em> <sup>[3]</sup>: static method which can be called from the Entity class and is used to search for the entities on the subgraph.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>context</strong>: must be provided with an <code>Arc</code> instance with subgraph details, so it knows which service to send the queries. </li>
+<li><strong>options</strong> (optional): <a href="#search-filters-and-observables">query filter options</a></li>
+<li><strong>apolloQueryOptions</strong> (optional): <a href="../querying/#optimizing-how-subscriptions-use-the-cache">apollo query options</a></li>
+</ul>
+<p>By default it will return an observable of <code>id(s)</code> of the subgraph Entity for the given filter query, but can be modified to fetch the <code>state()</code> using <code>apolloQueryOptions</code>.</p>
+<p>eg. To get all DAOs that are called <code>Foo</code>, you can do:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">DAO</span><span class="p">.</span><span class="k">search</span><span class="p">(</span>
+  <span class="n">arc</span><span class="p">,</span>
+  <span class="err">{</span><span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">name</span><span class="p">:</span> <span class="ss">&quot;Foo&quot;</span> <span class="err">}}</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>eg. To get current state of all DAOs that are called <code>Foo</code> ordered by <code>createdAt</code>, you can do:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">DAO</span><span class="p">.</span><span class="k">search</span><span class="p">(</span>
+  <span class="n">arc</span><span class="p">,</span> <span class="o">//</span> <span class="n">context</span>
+  <span class="err">{</span><span class="k">where</span><span class="p">:</span> 
+    <span class="err">{</span> <span class="n">name</span><span class="p">:</span> <span class="ss">&quot;Foo&quot;</span> <span class="err">}</span><span class="p">,</span>
+    <span class="n">orderBy</span><span class="p">:</span> <span class="ss">&quot;createdAt&quot;</span>
+  <span class="err">}</span><span class="p">,</span> <span class="o">//</span> <span class="k">options</span>
+  <span class="err">{</span><span class="n">fetchAllData</span><span class="p">:</span> <span class="k">true</span><span class="err">}</span> <span class="o">//</span> <span class="n">apolloQueryOptions</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+</li>
+</ul>
+<p><strong>Note:</strong></p>
+<ol>
+<li><code>staticState</code>, <code>setStaticState</code> and <code>fetchStaticState</code> is not available for all Entities consistantly and might be discontinued or restructured in future versions.</li>
+<li>There is a difference between <code>state().subscribe</code> and <code>state({subscribe: true})</code>. Refer <a href="../querying/#subscribe-to-apollo-cache-changes">Types of Subscriptions</a></li>
+<li>All queries return <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html">rxjs.Observable</a>. <a href="#search-filters-and-observables">See below</a> for further explanation.</li>
+</ol>
+<h2 id="search-filters-and-observables">Search filters and Observables<a class="headerlink" href="#search-filters-and-observables" title="Permanent link">&para;</a></h2>
+<p>The search functions are wrappers around graphql queries and standard <a href="../../subgraph/queries/">graphql syntax</a> can be used to filter and sort the queries, and for pagination:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Proposal</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">dao</span><span class="p">:</span> <span class="s1">&#39;0x1234..&#39;</span> <span class="err">}}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">scheme</span><span class="p">:</span> <span class="s1">&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;</span><span class="err">}}</span><span class="p">)</span>
+  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="k">where</span><span class="p">:</span> <span class="err">{</span> <span class="n">scheme_in</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;</span><span class="p">]</span><span class="err">}}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Paging</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="n">skip</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="k">first</span><span class="p">:</span> <span class="mi">100</span><span class="err">}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Sorting:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">(</span><span class="err">{</span> <span class="n">orderBy</span><span class="p">:</span> <span class="s1">&#39;createdAt&#39;</span><span class="p">,</span> <span class="n">orderDirection</span><span class="p">:</span> <span class="s1">&#39;desc&#39;</span><span class="err">}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>All these queries return an <a href="https://rxjs-dev.firebaseapp.com/guide/observable">rxjs <code>Observable</code></a> object.</p>
+<p>This observables return a stream of results. Every time the data in the query gets updated, the observable will emit a new result.</p>
+<p>Observables are very flexible. Typically, an observable will be used by creating a subscription as described below.
+Please refer to <a href="../querying/">Subscriptions section</a> for details on when and how to use it and the types of subscription.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">observable</span> <span class="o">=</span>  <span class="nv">dao</span>.<span class="nv">proposals</span><span class="ss">()</span> <span class="o">//</span> <span class="nv">all</span> <span class="nv">proposals</span> <span class="nv">in</span> <span class="nv">this</span> <span class="nv">dao</span>
+
+<span class="o">//</span> <span class="nv">a</span> <span class="nv">subscription</span>
+<span class="nv">const</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="nv">observable</span>.<span class="nv">subscribe</span><span class="ss">(</span>
+  <span class="ss">(</span><span class="k">next</span><span class="ss">)</span> <span class="o">=&gt;</span> <span class="nv">console</span>.<span class="nv">log</span><span class="ss">(</span>`<span class="nv">Now</span> <span class="nv">there</span> <span class="nv">are</span> ${<span class="k">next</span>.<span class="nv">length</span>} <span class="nv">proposals</span>`<span class="ss">)</span> <span class="o">//</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">called</span> <span class="nv">each</span> <span class="nv">time</span> <span class="nv">the</span> <span class="nv">data</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">qeury</span> <span class="nv">changes</span>
+<span class="ss">)</span>
+<span class="nv">subscription</span>.<span class="nv">unsubscribe</span><span class="ss">()</span> <span class="o">//</span> <span class="k">do</span> <span class="nv">not</span> <span class="nv">forget</span> <span class="nv">to</span> <span class="nv">unsubscribe</span>
+</pre></div>
+</td></tr></table>
+
+<p>If you are only interested in the first result, but do not want to get further updates when the data is changed, there is a helper function that returns a Promise
+with the first result</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">observable</span> <span class="o">=</span>  <span class="n">dao</span><span class="p">.</span><span class="n">proposals</span><span class="p">()</span> <span class="o">//</span> <span class="k">all</span> <span class="n">proposals</span> <span class="k">in</span> <span class="n">this</span> <span class="n">dao</span>
+<span class="n">const</span> <span class="n">proposals</span> <span class="o">=</span> <span class="n">await</span> <span class="n">observable</span><span class="p">.</span><span class="k">first</span><span class="p">()</span> <span class="o">//</span> <span class="k">returns</span> <span class="n">a</span> <span class="n">list</span> <span class="k">of</span> <span class="n">Proposal</span> <span class="n">instances</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="sending-transactions">Sending transactions<a class="headerlink" href="#sending-transactions" title="Permanent link">&para;</a></h2>
+<p>One of the purposes of the client library is to make help with interactions with the DAOstack Ethereum contracts.</p>
+<p>Here is how you create a proposal in a DAO  for a contribution reward</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">const</span> <span class="n">DAO</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DAO</span><span class="p">(</span><span class="s1">&#39;0x123DAOADDRESS&#39;</span><span class="p">)</span>
+<span class="n">const</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">dao</span><span class="p">.</span><span class="n">createProposal</span><span class="p">(</span><span class="err">{</span>
+  <span class="n">beneficiary</span><span class="p">:</span> <span class="s1">&#39;0xffcf8fdee72ac11b5c542428b35eef5769c409f0&#39;</span><span class="p">,</span>
+  <span class="n">ethReward</span><span class="p">:</span> <span class="n">toWei</span><span class="p">(</span><span class="s1">&#39;300&#39;</span><span class="p">),</span>
+  <span class="n">nativeTokenReward</span><span class="p">:</span> <span class="n">toWei</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),</span>
+  <span class="n">periodLength</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">periods</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">reputationReward</span><span class="p">:</span> <span class="n">toWei</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">),</span>
+  <span class="n">scheme</span><span class="p">:</span> <span class="s1">&#39;0xContributionRewardAddress&#39;</span> <span class="o">//</span> <span class="n">address</span> <span class="k">of</span> <span class="n">a</span> <span class="n">contribution</span> <span class="n">reward</span> <span class="n">scheme</span> <span class="n">that</span> <span class="k">is</span> <span class="n">registered</span> <span class="k">with</span> <span class="n">this</span> <span class="n">DAO</span>
+<span class="err">}</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>All functions that send a transaction to the blockchain (like <code>DAO.createProposal</code>, <code>Proposal.vote</code>, <code>Token.mint</code>, etc, etc) return an rxjs Observable. This observable returns a stream of updates about the state of the transaction: first when it is sent, then when it is mined and confirmed.</p>
+<p>You can subscribe to the transaction:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">tx</span>.<span class="n">subscribe</span>(
+  (<span class="k">next</span>) =&gt; {
+    <span class="n">console</span>.<span class="nb">log</span>(<span class="k">next</span>.<span class="k">state</span>) // <span class="n">sending</span>, <span class="n">sent</span>, <span class="o">or</span> <span class="n">mined</span>
+    <span class="k">if</span> (<span class="k">next</span>.<span class="n">stage</span> === <span class="n">ITransactionStage</span>.<span class="n">Mined</span>) {
+      <span class="n">console</span>.<span class="nb">log</span>(`<span class="n">This</span> <span class="n">transaction</span> <span class="k">has</span> ${<span class="k">next</span>.<span class="n">confirmations</span>} <span class="n">confirmations</span>`)
+      <span class="n">console</span>.<span class="nb">log</span>(<span class="k">next</span>.<span class="n">result</span>)
+    }
+  })
+</pre></div>
+</td></tr></table>
+
+<p>All operations also provide a convenience function <code>send()</code> that returns a promise that resolves when the transaction is mined</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nv">const</span> <span class="nv">voteTransaction</span> <span class="o">=</span> <span class="nv">await</span> <span class="nv">proposal</span>.<span class="nv">vote</span><span class="ss">(</span>...<span class="ss">)</span>.<span class="k">send</span><span class="ss">()</span>
+<span class="nv">const</span> <span class="nv">vote</span> <span class="o">=</span> <span class="nv">voteTransaction</span>.<span class="nb">result</span> <span class="o">//</span> <span class="nv">an</span> <span class="nv">instance</span> <span class="nv">of</span> <span class="nv">Vote</span>
+</pre></div>
+</td></tr></table>
+
+<p>For details, checkout complete <a href="https://daostack.github.io/client/docs/globals.html">API reference</a></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../GettingStarted/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Getting Started
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../querying/" title="Query, Observables & Subscriptions" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Query, Observables & Subscriptions
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/daostack/DAOstack-Hackers-Kit" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://daostack.slack.com" class="md-footer-social__link fa fa-slack"></a>
+    
+      <a href="https://t.me/daostackcommunity" class="md-footer-social__link fa fa-telegram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+    
+  </body>
+</html>
