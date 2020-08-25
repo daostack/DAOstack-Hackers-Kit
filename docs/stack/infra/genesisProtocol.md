@@ -8,7 +8,7 @@ In this article we will go through some technical details of Genesis Protocol
 
 Each DAO can set the following Genesis Protocol parameters according to organization's need, while setting the scheme parameters:
 
-  - **activationTime**: The point (represented in Unix time) in time when psroposing and voting are activated.
+  - **activationTime**: The point (represented in Unix time) in time when proposing and voting are activated.
   - **boostedVotePeriodLimit**: The length of time that voting is open for boosted proposals.
   - **daoBountyConst**: This is multiplied by the average downstake on boosted proposals to calculate how large the DAO’s automatic downstake should be.
   - **minimumDaoBounty**: The minimum amount of GEN a DAO will stake when automatically downstaking each proposal.
