@@ -1,0 +1,39 @@
+{
+  "name": "credeth",
+  "version": "1.0.0",
+  "description": "reputation system",
+  "main": "truffle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "truffle compile",
+    "dao-migrate": "./node_modules/.bin/daostack-migrate base",
+    "ganache-cli": "./node_modules/.bin/ganache-cli -p 8545 -i 15 --gasLimit 8000000",
+    "migrate:local": "truffle migrate --network=development --reset --all",
+    "migrate:kovan": "truffle migrate --network=kovan --reset --all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satyamakgec/CredEth.git"
+  },
+  "author": "Satyam Agrawal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/satyamakgec/CredEth/issues"
+  },
+  "homepage": "https://github.com/satyamakgec/CredEth#readme",
+  "devDependencies": {
+    "ganache-cli": "^6.5.1",
+    "truffle": "^5.0.30",
+    "truffle-hdwallet-provider": "^1.0.15"
+  },
+  "dependencies": {
+    "@daostack/arc": "^0.0.1-rc.23",
+    "@daostack/migration": "^0.0.1-rc.23-v1",
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "dotenv": "^8.0.0",
+    "openzeppelin-solidity": "^2.3.0",
+    "sol-merger": "^1.0.0",
+    "web3-provider-engine": "^15.0.0"
+  }
+}

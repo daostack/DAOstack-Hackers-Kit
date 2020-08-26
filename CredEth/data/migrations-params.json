@@ -1,0 +1,62 @@
+{
+    "orgName": "CredETH", 
+    "tokenName": "CredETH token", 
+    "tokenSymbol": "CRED",
+  
+    "ContributionReward": {
+      "voteParams": 0
+    },
+    "SchemeRegistrar": {
+      "voteRegisterParams": 0,
+      "voteRemoveParams": 0
+    },
+    "CustomSchemes": {
+      "CredEthScheme": {
+        "isUniversal": true,  
+        "params": [
+          { "voteParams": 0 },
+          "GenesisProtocolAddress",
+          "0x2a79BA9ebD1211E97af91a7F05d3bB3a085C3238"
+        ],
+        "permissions": "0x00000001"
+      }
+    },
+    "VotingMachinesParams": [
+        {
+        "boostedVotePeriodLimit": 600,
+        "daoBountyConst": 10,
+        "minimumDaoBounty": 100,
+        "queuedVotePeriodLimit": 1800,
+        "queuedVoteRequiredPercentage": 50,
+        "preBoostedVotePeriodLimit": 600,
+        "proposingRepReward": 5,
+        "quietEndingPeriod": 300,
+        "thresholdConst": 2000,
+        "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+        "votersReputationLossRatio": 1,
+        "activationTime": 0
+      }
+    ],
+    "schemes": {
+      "ContributionReward": true,
+      "GenericScheme": false,
+      "SchemeRegistrar": true,
+      "GlobalConstraintRegistrar": false,
+      "UpgradeScheme": false
+    },
+    "unregisterOwner": true,
+    "useUController": true,
+    "useDaoCreator": false,
+    "founders": [
+    {
+        "address": "0x1B2D2797A56c9eBa12aa821D643aB0dBa66C3772",
+        "tokens": 1000,
+        "reputation": 1000
+    },
+    {
+        "address": "0x735C5229B6EdC09650E2011b3cCB04de106b7961",
+        "tokens": 1000,
+        "reputation": 1000
+    }
+    ]
+  }
