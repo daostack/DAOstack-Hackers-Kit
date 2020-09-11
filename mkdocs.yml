@@ -1,8 +1,8 @@
 site_name: DAOstack Developer Portal
+version: v2.0
 repo_url: https://github.com/daostack/DAOstack-Hackers-Kit/
 repo_name: daostack/DAOstack-Hackers-Kit
 site_description: A platform for building DAOs
-docs_dir: docs
 markdown_extensions:
 - admonition
 - codehilite:
@@ -10,57 +10,39 @@ markdown_extensions:
 - toc:
     permalink: true
 theme:
-  name: 'material'
-  palette:
-    primary: 'black'
-    accent: 'pink'
+  name: readthedocs
   logo: 'images/daostack-logoW.svg'
 
-extra:
-  social:
-  - type: 'github'
-    link: 'https://github.com/daostack/DAOstack-Hackers-Kit'
-  - type: 'slack'
-    link: 'https://daostack.slack.com'
-  - type: 'telegram'
-    link: 'https://t.me/daostackcommunity'
-
 nav:
-- Home: 'index.md'
+- Home: 'daostack.md'
 - Stack:
   - Infra:
-    - Intro: 'stack/infra/infraIntro.md'
-    - Holographic Consensus: 'stack/infra/genesisProtocol.md'
-  - Arc: 'stack/arc/arcIntro.md'
-  - Client:
-    - Intro: 'stack/client/clientIntro.md'
-    - Getting Started: 'stack/client/GettingStarted.md'
-    - How To Use: 'stack/client/howToUseClient.md'
-    - Query, Observables & Subscriptions: 'stack/client/querying.md'
-    - Quick Example: 'stack/client/example.md'
-    - API Reference: 'https://daostack.github.io/client/docs/globals.html'
+    - Intro: 'stack/infra/intro.md'
+    - Holographic Consensus: 'stack/infra/holographic-consensus.md'
+  - Arc: 'stack/arc.md'
   - Subgraph:
-    - Intro: 'stack/subgraph/subgraphIntro.md'
+    - Intro: 'stack/subgraph/intro.md'
     - GraphQL queries: 'stack/subgraph/queries.md'
     - Entities: 'stack/subgraph/entities.md'
-  - DApps/Alchemy: 'stack/alchemy/alchemyIntro.md'
-- Migration: 'migration.md'
+  - Arc.js:
+    - Intro: 'stack/arcjs/intro.md'
+    - Getting Started: 'stack/arcjs/intro.md'
+    - How To Use: 'stack/arcjs/intro.md'
+    - Query, Observables & Subscriptions: 'stack/arcjs/intro.md'
+    - Quick Example: 'stack/arcjs/intro.md'
+  - Alchemy: 'stack/alchemy.md'
+- Plugins:
+  - NFT Manager: 'plugins/nft-manager.md'
+  - Funding Request: 'plugins/funding-request.md'
+  - Token Trade: 'plugins/token-trade.md'
 - Tutorials:
-    - Add features to Alchemy interface: 'gettingStarted/setupAlchemyDevMode.md'
-    - Setup Generic Scheme for a DAO: 'gettingStarted/setupGenericScheme.md'
-    - Add custom scheme to the DAO:
-      - Intro: 'gettingStarted/customScheme/intro.md'
-      - Arc:
-        - 'Non-Universal Scheme': 'gettingStarted/customScheme/developCustomNonUniScheme.md'
-        - 'Universal Scheme': 'gettingStarted/customScheme/developCustomUniScheme.md'
-      - Migration:
-        - Register scheme to new DAO: 'gettingStarted/customScheme/registerToNewDAO.md'
-        - Register scheme to existing DAO: 'gettingStarted/customScheme/registerToExistingDAO.md'
-      - 'Subgraph: enable cache for new scheme': 'gettingStarted/customScheme/subgraphForNewScheme.md'
-      - 'Client: interact with new Scheme': 'gettingStarted/customScheme/clientForNewScheme.md'
-    - Deploy a DAO: 'gettingStarted/deployDAO.md'
-- Hacker-kit: 'hackerkit.md'
-- Want to contribute?:
-    - Feature Requests: 'feature-requests.md'
-    - Propose to Genesis DAO: 'how-to-propose.md'
-- FAQ: 'FAQ.md'
+  - Test environment: 'tutorials/test-environment.md'
+  - Create your own DAO: 'tutorials/create-a-dao.md'
+  - Arc.react:  'tutorials/arc-react.md'
+  - Register a generic plugin:
+    - Intro: 'tutorials/register-a-plugin/intro.md'
+    - Arc: 'tutorials/register-a-plugin/arc.md'
+    - Migration: 'tutorials/register-a-plugin/migration.md'
+    - Test environment: 'tutorials/register-a-plugin/test-environment.md'
+    - Arc.js: 'tutorials/register-a-plugin/arcjs.md'
+    - Alchemy: 'tutorials/register-a-plugin/alchemy.md'

@@ -1,8 +1,0 @@
-.DS_Store
-*.swp
-site/*
-notes.md
-**node_modules*
-**.env
-**build*
-**abis*
