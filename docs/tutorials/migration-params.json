@@ -1,0 +1,85 @@
+{
+  "orgName": "DAOrecords",
+  "tokenName": "DAOrecords token",
+  "tokenSymbol": "TUNE",
+  "unregisterOwner": true,
+  "useUController": false,
+  "useDaoCreator": true,
+  "schemes": {
+    "ContributionReward": true,
+    "SchemeRegistrar": true
+  },
+  "VotingMachinesParams": [
+    {
+      "queuedVoteRequiredPercentage": 50,
+      "queuedVotePeriodLimit": 604800,
+      "thresholdConst": 1200,
+      "proposingRepReward": 0,
+      "minimumDaoBounty": 0.000001,
+      "boostedVotePeriodLimit": 129600,
+      "daoBountyConst": 1,
+      "activationTime": 0,
+      "preBoostedVotePeriodLimit": 43200,
+      "quietEndingPeriod": 86400,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 0
+    },
+    {
+      "queuedVoteRequiredPercentage": 50,
+      "queuedVotePeriodLimit": 2592000,
+      "thresholdConst": 1200,
+      "proposingRepReward": 0,
+      "minimumDaoBounty": 0.000001,
+      "boostedVotePeriodLimit": 345600,
+      "daoBountyConst": 1,
+      "activationTime": 0,
+      "preBoostedVotePeriodLimit": 86400,
+      "quietEndingPeriod": 172800,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 0
+    }
+  ],
+  "founders": [
+    {
+      "address": "0xa15Ca74e65bf72730811ABF95163E89aD9b9DFF6",
+      "tokens": 200,
+      "reputation": 100
+    },
+    {
+      "address": "0x1256E7992564AB22e332532472c916Bd8D1e1Ca7",
+      "tokens": 1600,
+      "reputation": 100
+    },
+    {
+      "address": "0xB2F4b16595e02A9721F97E3E30FB5Bbbf73F5F54",
+      "tokens": 0,
+      "reputation": 100
+    },
+    {
+      "address": "0x9a9C32A37e5c147159891E94d897F54C74Dba368",
+      "tokens": 0,
+      "reputation": 100
+    },
+    {
+      "address": "0x8C62dD796e13aD389aD0bfDA44BB231D317Ef6C6",
+      "tokens": 0,
+      "reputation": 100
+    },
+    {
+      "address": "0x5aaEFAd7e30E262aFf4588f1996c4F921c6fcECF",
+      "tokens": 0,
+      "reputation": 100
+    }
+  ],
+  "ContributionReward": [
+    {
+      "voteParams": 0
+    }
+  ],
+  "SchemeRegistrar": [
+    {
+      "voteRegisterParams": 1,
+      "voteRemoveParams": 1
+    }
+  ]
+}
