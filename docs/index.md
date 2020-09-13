@@ -3,7 +3,7 @@
 DAOstack provides everything you need to start managing your community without a centralized authority. Launch your DAO - Decentralized Autonomous Organization using Adaptive, Modular and Upgradable governance structures powered by, DAOstack, a software stack for building Dapps (decentralized apps), DAOs (Decentralized Autonomous Organizations), and DAO tools.
 
 <p float="center">
-  <img src="./images/infrastructure.png"/>
+  <img src="./assets/images/infrastructure.png"/>
 </p>
 
 A dApp build with DAOstack DAOs consists of:   

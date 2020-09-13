@@ -1,0 +1,75 @@
+{
+  "orgName": "DAOTest",
+  "tokenName": "DAOTest token",
+  "tokenSymbol": "TST",
+  "unregisterOwner": true,
+  "useUController": false,
+  "useDaoCreator": true,
+  "schemes": {
+    "ContributionReward": true,
+    "SchemeRegistrar": true
+  },
+  "VotingMachinesParams": [
+    {
+      "queuedVoteRequiredPercentage": 50,
+      "queuedVotePeriodLimit": 2592000,
+      "thresholdConst": 1200,
+      "proposingRepReward": 0,
+      "minimumDaoBounty": 150,
+      "boostedVotePeriodLimit": 345600,
+      "daoBountyConst": 10,
+      "activationTime": 0,
+      "preBoostedVotePeriodLimit": 86400,
+      "quietEndingPeriod": 172800,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 0
+    },
+    {
+      "queuedVoteRequiredPercentage": 50,
+      "queuedVotePeriodLimit": 5184000,
+      "thresholdConst": 1500,
+      "proposingRepReward": 0,
+      "minimumDaoBounty": 500,
+      "boostedVotePeriodLimit": 691200,
+      "daoBountyConst": 10,
+      "activationTime": 0,
+      "preBoostedVotePeriodLimit": 172800,
+      "quietEndingPeriod": 345600,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 0
+    }
+  ],
+  "founders": [
+    {
+      "address": "0xB1B7586656116D546033e3bAFF69BFcD6592225E",
+      "tokens": 100,
+      "reputation": 200
+    },
+    {
+      "address": "0xb6d39386f1fa19179dc2ca31684a7a69fabe5551",
+      "tokens": 0,
+      "reputation": 200
+    },
+    {
+      "address": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+      "tokens": 1,
+      "reputation": 200
+    },
+    {
+      "address": "0x3651539F2E119a27c606cF0cB615410eCDaAE62a",
+      "tokens": 500,
+      "reputation": 200
+    }
+  ],
+  "ContributionReward": [
+    {
+      "voteParams": 0
+    }
+  ],
+  "SchemeRegistrar": [
+    {
+      "voteRegisterParams": 1,
+      "voteRemoveParams": 1
+    }
+  ]
+}
