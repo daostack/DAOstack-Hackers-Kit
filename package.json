@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "deploy": "mkdocs gh-deploy -t readthedocs"
+  }
+}
