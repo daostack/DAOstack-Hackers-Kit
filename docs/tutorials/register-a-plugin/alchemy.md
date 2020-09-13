@@ -1,3 +1,5 @@
+# Registering a Plugin in Alchemy
+
 ## Registering the plugin's name
 
 In the `pluginUtils.ts` file, typically under `src/lib`, there's a `PLUGIN_NAMES` object: 
