@@ -1,20 +1,16 @@
 site_name: DAOstack Developer Portal
 version: v2.0
-repo_url: https://github.com/daostack/DAOstack-Hackers-Kit/
-repo_name: daostack/DAOstack-Hackers-Kit
+repo_url: https://github.com/dOrgTech/DAOstack-Hackers-Kit/
+repo_name: dOrgTech/DAOstack-Hackers-Kit
 site_description: A platform for building DAOs
-markdown_extensions:
-- admonition
-- codehilite:
-    linenums: true
-- toc:
-    permalink: true
+
 theme:
   name: readthedocs
   logo: 'images/daostack-logoW.svg'
 
 nav:
-- Home: 'daostack.md'
+- Home: 'index.md'
+- Arc 2.0: 'arc2-overview.md'
 - Stack:
   - Infra:
     - Intro: 'stack/infra/intro.md'
