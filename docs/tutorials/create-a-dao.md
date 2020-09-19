@@ -6,11 +6,11 @@ When you create a DAO, it create an instance of the multiple components defined 
 
 Deploying a DAO with this tool consists of three steps which are:
 
-1- Setting the DAO name and symbol  
+1- Set the DAO name and symbol  
 2- Configure proposals parameters    
 3- Define the members of your organization 
 
-Let's go step by step and what every step does:
+Let's go step by step and what they are about:
 
 ### Setting the DAO name and symbol
 
