@@ -38,6 +38,7 @@ nav:
   - Register a generic plugin:
     - Intro: 'tutorials/register-a-plugin/intro.md'
     - Arc: 'tutorials/register-a-plugin/arc.md'
+    - Subgraph: 'tutorials/register-a-plugin/subgraph.md'
     - Migration: 'tutorials/register-a-plugin/migration.md'
     - Test environment: 'tutorials/register-a-plugin/test-environment.md'
     - Arc.js: 'tutorials/register-a-plugin/arcjs.md'
