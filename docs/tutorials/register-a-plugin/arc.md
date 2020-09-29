@@ -104,3 +104,17 @@ returns(bytes32 proposalId)
     );
 }
 ```
+
+In order to execute the proposal once it has passed, you need to implement an `executeProposal` method like this:
+```
+function executeProposal(bytes32 _proposalId, int256 _decision)
+external
+onlyVotingMachine(_proposalId)
+override
+returns(bool) {
+    ...
+}
+```
+In this you will define what happens once the proposal has been approved or rejected, based on the `_decision` parameter.
+
+At last, you will need to implement tests for this contract.
