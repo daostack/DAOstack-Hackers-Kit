@@ -37,3 +37,113 @@ So far, you have created a good interface to allow your users to create new prop
 
 2.- __Create the view of proposal summary for your Generic plugin__:
 
+Each plugin should have its `ProposalSummary` page along with its `CreateProposal` form. This summary will contain the relevant proposal information that will be shown after the proposal has been created.
+
+It follows a simple class based Component pattern. For example, `NFTManager`'s proposal summary looks like this:
+
+```tsx
+export default class ProposalSummaryNFTManager extends React.Component<IProps, null> {
+
+  public render(): RenderOutput {
+
+    const { proposalState, detailView, genericPluginInfo, transactionModal } = this.props;
+    let decodedCallData: any;
+    let decodedParams: any;
+
+    try {
+      decodedCallData = genericPluginInfo.decodeCallData(proposalState.callData);
+      // Fix for previous functions' failure to decode parameters
+      const web3 = new Web3();
+      decodedParams = web3.eth.abi.decodeParameters([...decodedCallData.action.abi.inputs.map((input: { type: any }) => input.type)], "0x" + proposalState.callData.slice(2 + 8));
+      decodedCallData.values = decodedParams;
+    } catch (err) {
+      if (err.message.match(/no action matching/gi)) {
+        return <div>Error: {err.message} </div>;
+      } else {
+        throw err;
+      }
+    }
+
+    const action = decodedCallData.action;
+    const proposalSummaryClass = classNames({
+      [css.detailView]: detailView,
+      [css.transactionModal]: transactionModal,
+      [css.proposalSummary]: true,
+      [css.withDetails]: true,
+    });
+
+    switch (action.id) {
+      case "sendNFT":
+        return (
+          <div className={proposalSummaryClass}>
+            {!detailView &&
+              <span className={css.summaryTitle}>
+                <strong>Send NFT </strong>
+                <img className={css.iconPadding} src="/assets/images/Icon/Transfer.svg" />
+                {decodedCallData.values[0]}
+              </span>
+            }
+            {detailView &&
+              <div className={css.summaryDetails}>
+                <div>
+                  <strong>Send NFT </strong>
+                  <img className={css.iconPadding} src="/assets/images/Icon/Transfer.svg" />
+                  <a href={linkToEtherScan(decodedCallData.values[0])} target="_blank" rel="noopener noreferrer">{decodedCallData.values[0]}</a>
+                </div>
+                <br />
+                <div>
+                  <strong>NFT Contract:</strong> <a href={linkToEtherScan(decodedCallData.values[1])} target="_blank" rel="noopener noreferrer">{decodedCallData.values[1]}</a>
+                </div>
+                <div>
+                  <strong>TokenID:</strong> {decodedCallData.values[2]}
+                </div>
+                <div>
+                  <strong>{i18next.t("Raw call data")}:</strong>
+                  {truncateWithEllipses(proposalState.callData, 66)}<CopyToClipboard value={proposalState.callData} />
+                </div>
+              </div>
+            }
+          </div>
+        );
+      default:
+        return "";
+    }
+  }
+}
+```
+
+Note that in the render there's a switch with the actions ids, this is the way to implement the views per action, also it is worth noting:
+
+* All labels and messages use `i18next`
+* Css is declared separately
+* There are already handy components like `AccountPopup` and `AccountProfileName` to display Account information consistently.
+
+## Registering the Proposal Summary Page
+
+In the `ProposalSummaryKnownGenericPlugin.tsx` file, typically under `src/components/Proposal/ProposalSummary`:
+
+```tsx
+export default class ProposalSummary extends React.Component<IProps, IState> {
+
+  ...
+
+  public render(): RenderOutput {
+
+    ...
+
+    const { proposalState, detailView, transactionModal, genericPluginInfo } = this.props;
+    if (genericPluginInfo.specs.name === "DutchX") {
+      return <ProposalSummaryDutchX {...this.props} />;
+    } else if (genericPluginInfo.specs.name === "Standard Bounties") {
+      return <ProposalSummaryStandardBounties {...this.props} />;
+    } else if (genericPluginInfo.specs.name === "CO2ken") {
+      return <ProposalSummaryCO2ken {...this.props} />;
+    } else if (genericPluginInfo.specs.name === "NFTManager") {
+      return <ProposalSummaryNFTManager {...this.props} />;
+    }
+
+    ...
+  }
+```
+
+Add a condition that will handle the case where the proposal's state name matches the new plugin's name. Inside this condition cast the `genericPluginInfo.spec.name` to the name you gave to your Plugin in the JSON created in the first step. Then return the `ProposalSummary` component created on the previous section, and pass as props `{...this.props}` which will be the accessed in your new Proposal Summary component.
