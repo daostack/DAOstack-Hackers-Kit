@@ -32,10 +32,10 @@ nav:
   - Funding Request: 'plugins/funding-request.md'
   - Token Trade: 'plugins/token-trade.md'
 - Tutorials:
-  - Test environment: 'tutorials/test-environment.md'
   - Create your own DAO: 'tutorials/create-a-dao.md'
   - Arc.react:  'tutorials/arc-react.md'
-  - Register a generic plugin:
+  - Register a generic plugin: 'tutorials/generic-plugin.md'
+  - Register a plugin in the stack:
     - Intro: 'tutorials/register-a-plugin/intro.md'
     - Arc: 'tutorials/register-a-plugin/arc.md'
     - Subgraph: 'tutorials/register-a-plugin/subgraph.md'

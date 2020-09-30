@@ -54,7 +54,7 @@ Here you will be able to add the addresses of whichever members you would like t
 The DAOcreator allows you to import/export the entire configuration of your DAO. In case you already have your set up but want to send it to someone or wait for another address.
 
 <p float="center">
-  <img src="../../assets/imports-test/import-config.gif"/>
+  <img src="../../assets/examples/import-config.gif"/>
 </p>
 
 You can get the `migration-params.json` file from the `Export configuration` button.
@@ -63,5 +63,5 @@ You can get the `migration-params.json` file from the `Export configuration` but
 On the Add members section, there is a button at the top right, that allows you to import a CSV with the members. You can check how to create this CSV in [this example](../../assets/imports-test/members.csv)
 
 <p float="center">
-  <img src="../../assets/imports-test/member-import.gif"/>
+  <img src="../../assets/examples/member-import.gif"/>
 </p>
