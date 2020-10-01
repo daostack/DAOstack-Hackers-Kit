@@ -12,20 +12,10 @@ nav:
 - Home: 'index.md'
 - Arc 2.0: 'arc2-overview.md'
 - Stack:
-  - Infra:
-    - Intro: 'stack/infra/intro.md'
-    - Holographic Consensus: 'stack/infra/holographic-consensus.md'
+  - Infra: stack/infra.md
   - Arc: 'stack/arc.md'
-  - Subgraph:
-    - Intro: 'stack/subgraph/intro.md'
-    - GraphQL queries: 'stack/subgraph/queries.md'
-    - Entities: 'stack/subgraph/entities.md'
-  - Arc.js:
-    - Intro: 'stack/arcjs/intro.md'
-    - Getting Started: 'stack/arcjs/intro.md'
-    - How To Use: 'stack/arcjs/intro.md'
-    - Query, Observables & Subscriptions: 'stack/arcjs/intro.md'
-    - Quick Example: 'stack/arcjs/intro.md'
+  - Subgraph: 'stack/subgraph.md'
+  - Arc.js: 'stack/arcjs.md'
   - Alchemy: 'stack/alchemy.md'
 - Plugins:
   - NFT Manager: 'plugins/nft-manager.md'

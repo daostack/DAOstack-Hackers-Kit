@@ -1,4 +1,14 @@
-# Developing
+
+# Arc.js
+
+Arc.js is a javascript library that provides a helpful set of tools to interact with the DAOstack ecosystem.
+
+In particular, the library provides an interface to
+
+- DAOstack contracts
+- DAOstack subgraph (an index of on-chain data).
+
+## Developing
 
 For development, it is useful to have local instances of Ganache (an ethereum node), IPFS (which is used to store data), an instance of The Graph with the DAOStack subgraph.
 The package is provided with convenient docker containers that provide  a  complete environment for testing and development:

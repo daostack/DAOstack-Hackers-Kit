@@ -10,7 +10,7 @@ Making it easier to develop on top of DAOstack, because it allows the developer 
 
 Before going forward with how to use the library in your application, we recommend reading the [architecture](https://github.com/dOrgTech/arc.react/blob/master/documentation/architecture.md) and [examples](https://github.com/dOrgTech/arc.react/blob/master/documentation/examples.md) docs so you have a preview of how the library works.
 
-Also, as this tutorial go, you can check the [api](https://github.com/dOrgTech/arc.react/blob/master/documentation/examples.md) documentation so you can see every component in depth.
+Also, as this tutorial go, you can check the [API](https://github.com/dOrgTech/arc.react/blob/master/documentation/examples.md) documentation so you can see every component in depth.
 
 To add this library into your react app you need to install it first:
 
