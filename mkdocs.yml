@@ -23,10 +23,9 @@ nav:
   - Token Trade: 'plugins/token-trade.md'
 - Tutorials:
   - Create your own DAO: 'tutorials/create-a-dao.md'
-  - Arc.react:  'tutorials/arc-react.md'
-  - Register a generic plugin: 'tutorials/generic-plugin.md'
-  - Register a plugin in the stack:
-    - Intro: 'tutorials/register-a-plugin/intro.md'
+  - Arc.react: 'tutorials/arc-react.md'
+  - Register a Generic Plugin: 'tutorials/generic-plugin.md'
+  - Register a Plugin in the Stack:
     - Arc: 'tutorials/register-a-plugin/arc.md'
     - Subgraph: 'tutorials/register-a-plugin/subgraph.md'
     - Migration: 'tutorials/register-a-plugin/migration.md'
