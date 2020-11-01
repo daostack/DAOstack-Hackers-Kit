@@ -8,7 +8,7 @@ First of all, you will need to add your new plugin in Arc. This means that you w
 
 Let's use as example the [`TrokenTrade`](https://github.com/daostack/arc/tree/master-2/contracts/schemes/TokenTrade.sol) plugin, to show how you should add your custom plugin:
 
-You need to create it in the folder [schemes](https://github.com/daostack/arc/tree/master/contracts/schemes).
+You need to create it in the folder [schemes](https://github.com/daostack/arc/tree/master-2/contracts/schemes).
 
 Your contract will need to inherit from `VotingMachineCallBacks` and `ProposalExecuteInterface`, this will allow your new plugin to interact with the GenesisProtocol. Example with the `TokenTrade` plugin:
 
