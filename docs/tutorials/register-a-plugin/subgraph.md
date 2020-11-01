@@ -107,3 +107,5 @@ export function handleNewTokenTradeProposal(
 ```
 
 - `src/domain/schema.graphql` - You will add your plugin proposal, i.e: `tokenTrade: TokenTradeProposal`, TokenTradeProposal has already been defined in the schema.graphql of your plugin
+
+Once you have finished the subgraph integration, you will need to contact daostack dev team to ask them to release a new `migration` package version. This is what will allow you to interact with your new plugin in the rest of the stack

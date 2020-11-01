@@ -105,16 +105,24 @@ returns(bytes32 proposalId)
 }
 ```
 
-In order to execute the proposal once it has passed, you need to implement an `executeProposal` method like this:
+IMPORTANT: The line `proposalsBlockNumber[proposalId] = block.number;` is necessary to add in the propose method!
+
+In order to execute the proposal once it has passed, you need to implement an `executeProposal` method like this (example from `TokenTrade.sol`):
 ```
 function executeProposal(bytes32 _proposalId, int256 _decision)
 external
 onlyVotingMachine(_proposalId)
 override
 returns(bool) {
-    ...
+    if (_decision == 1) {
+        proposals[_proposalId].passed = true;
+    }
+    proposals[_proposalId].decided = true;
+
+    emit ProposalExecuted(address(avatar), _proposalId, _decision);
+    return true;
 }
 ```
-In this you will define what happens once the proposal has been approved or rejected, based on the `_decision` parameter.
+In this you will define what happens once the proposal has been approved or rejected, based on the `_decision` parameter, execution logic should usually be separated into a different function, whereas this one should be used just to mark a proposal passed.
 
 At last, you will need to implement tests for this contract.
