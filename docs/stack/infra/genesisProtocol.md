@@ -2,7 +2,7 @@
 
 Genesis Protocol is an organization's voting machine implemented by DAOstack team. It leverages the **Holographic Consensus** mechanism for scaling the decentralized governance system.
 
-You can find details on design principals and high level overview [here](https://medium.com/daostack/holographic-consensus-part-1-116a73ba1e1c)
+You can find details on design principles and high level overview [here](https://medium.com/daostack/holographic-consensus-part-1-116a73ba1e1c)
 
 In this article we will go through some technical details of Genesis Protocol
 
