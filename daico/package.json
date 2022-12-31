@@ -35,7 +35,7 @@
     "truffle": "5.1.9"
   },
   "devDependencies": {
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.1"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }
